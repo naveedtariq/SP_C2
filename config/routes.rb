@@ -1,15 +1,15 @@
 SPC2::Application.routes.draw do
-  get "sessions/new"
 
-  get "users/new"
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
-  resources :users
-  resources :sessions
 
-  root :to => "users#new"
+
+  resources :users, :only => [:new, :create]
+  resources :sessions, :only => [:new, :create, :destroy]
+  resources :rides, :only => [:new, :create]
+  root :to => "rides#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,15 @@
+<% form_for :ride, :url => rides_path do |f| %>
+ <p>
+    Name: <%= f.text_field :name %>
+  </p>
+  <% for location in @ride.locations %>
+    <% fields_for "ride[location_attributes][]", location do |location_form| %>
+      <p>
+        Task: <%= location_form.text_field :name %>
+      </p>
+    <% end %>
+  <% end %>
+  <p><%= submit_tag "Create Ride" %></p>
+<% end %>
+
+

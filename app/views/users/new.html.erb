@@ -22,19 +22,27 @@
   </div>
 <div class="field">
     <%= f.label :about %>
-    <%= f.text_area :about, :size=> "35x8" %>
+    <%= f.text_area :about %>
   </div>
   <div class="field">
     <%= f.label :email %>
     <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
   </div>
 <div class="field">
     <%= f.label :gender %><br />
     <%= f.select :gender, GENDER %>
   </div>
  <div class="field">
-    <%= f.label :DOB %><br />
-    <%= f.date_select :dob %>
+    <%= f.label :Date_of_birth %><br />
+    <%= f.date_select :dob, :start_year => 100.years.ago.year %>
   </div>
 <div class="field">
     <%= f.label :phone %>
@@ -59,18 +67,6 @@
 <div class="field">
     <%= f.label :school %>
     <%= f.text_field :school %>
-  </div>
- <div class="field">
-    <%= f.label :deleted_at %><br />
-    <%= f.datetime_select :deleted_at %>
-  </div>
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
   </div>
   <div class="actions"><%= f.submit %></div>
 <% end %> 

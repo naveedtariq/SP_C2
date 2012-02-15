@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  min_seats: 1
+  max_seats: 1
+  price_per_seat: 1
+  description: MyString
+  start_time: 2012-02-15 18:45:55
+  arrival_time: 2012-02-15 18:45:55
+  flexibility: MyString
+
+two:
+  type: 
+  min_seats: 1
+  max_seats: 1
+  price_per_seat: 1
+  description: MyString
+  start_time: 2012-02-15 18:45:55
+  arrival_time: 2012-02-15 18:45:55
+  flexibility: MyString
