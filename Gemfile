@@ -6,7 +6,9 @@ gem 'rails', '3.2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+gem 'sorcery', "0.7.6"
+gem 'execjs', "1.3.0"
+gem 'therubyracer',"0.9.9", :platforms => :ruby
 gem 'json'
 
 # Gems used only for assets and not required
