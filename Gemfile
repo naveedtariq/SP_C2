@@ -14,7 +14,7 @@ end
 group :development, :test do
   gem 'sqlite3'
 end
-gem 'json'
+gem 'json', "1.6.5"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -28,7 +28,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', "2.0.0"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
