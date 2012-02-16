@@ -13,6 +13,15 @@ group :production do
 end
 group :development, :test do
   gem 'sqlite3'
+  gem "rspec-rails", "~> 2.6"
+end
+
+group :test do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem "guard"
+  gem "guard-rspec"
 end
 gem 'json', "1.6.5"
 
