@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216081612) do
+ActiveRecord::Schema.define(:version => 20120215142629) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(:version => 20120216081612) do
     t.string   "state"
     t.string   "country"
     t.integer  "zip"
+    t.integer  "ride_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "ride_id"
   end
 
   create_table "ride_participants", :force => true do |t|
@@ -35,17 +35,19 @@ ActiveRecord::Schema.define(:version => 20120216081612) do
   end
 
   create_table "rides", :force => true do |t|
-    t.string   "type"
-    t.integer  "min_seats"
-    t.integer  "max_seats"
+    t.integer  "available_seats"
     t.integer  "price_per_seat"
-    t.string   "description"
-    t.time     "start_time"
-    t.time     "arrival_time"
-    t.string   "flexibility"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "location_id"
+    t.string   "notes"
+    t.integer  "user_id"
+    t.string   "ride_type"
+    t.string   "to_city"
+    t.string   "from_city"
+    t.date     "departure_date"
+    t.time     "departure_time"
+    t.integer  "duration"
+    t.integer  "flexibility"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "users", :force => true do |t|

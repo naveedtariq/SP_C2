@@ -7,7 +7,11 @@ SPC2::Application.routes.draw do
 
   resources :users, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :rides, :only => [:new, :create]
+  resources :rides, :only => [:new, :create] do
+    collection do
+      get "search"
+    end
+  end
   root :to => "rides#index"
 
   # The priority is based upon order of creation:

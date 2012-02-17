@@ -1,66 +1,60 @@
-<%= form_for :ride, :url => root_url do |f| %>
+<div class="subnav">
+  <ul class="nav-pills nav">
+    <li class="active">
+      <%= link_to "Ride input page", new_ride_path %>
+    </li>
+    <li>
+      <%= link_to "Ride search page", search_rides_path %>
+    </li>
+  </ul>
+</div>
+
+<%= form_for @ride do |f| %>
   <div class="field">
-    <%= f.label :type %>
-    <%= f.text_field :type %>
+    <%= f.label :from_city %>
+    <%= f.select :from_city, CITY %>
   </div>
   <div class="field">
-    <%= f.label :min_seats %>
-    <%= f.text_field :min_seats %>
+    <%= f.label :to_city %>
+    <%= f.select :to_city, CITY %>
   </div>
   <div class="field">
-    <%= f.label :max_seats %>
-    <%= f.text_field :max_seats %>
+    <%= f.label :departure_date %>
+    <%= f.date_select :departure_date %>
   </div>
   <div class="field">
-    <%= f.label :price_per_seat %>
-    <%= f.text_field :price_per_seat %>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :start_time %>
-    <%= f.time_select :start_time %>
-  </div>
-  <div class="field">
-    <%= f.label :arrival_time %>
-    <%= f.time_select :arrival_time %>
+    <%= f.label :departure_time %>
+    <%= f.time_select :departure_time %>
   </div>
   <div class="field">
     <%= f.label :flexibility %>
     <%= f.text_field :flexibility %>
   </div>
-  <%= fields_for :location do |location_form| %>
+  <div class="field">
+    <%= f.label :duration %>
+    <%= f.text_field :duration %>
+  </div>
+  <div class="field">
+    <%= f.label :ride_type %>
+    <%= f.radio_button :ride_type, 'Sedon', :checked =>true %>
+    <%= f.label :ride_type, 'Sedon'%>
+    <%= f.radio_button :ride_type, 'Suv' %>
+    <%= f.label :ride_type, 'Suv' %>
+    <%= f.radio_button :ride_type, 'Van' %>
+    <%= f.label :ride_type, 'Van'%>
+  </div>
+  <div class="field">
+    <%= f.label :available_seats %>
+    <%= f.text_field :available_seats %>
+  </div>
+  <div class="field">
+    <%= f.label :price_per_seat %>
+    <%= f.text_field :price_per_seat  %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes  %>
+  </div>
 
-    <div class="field">
-      <%= location_form.label :name %>
-      <%= location_form.text_field :name %>
-    </div>
-    <div class="field">
-      <%= location_form.label :address1 %>
-      <%= location_form.text_field :address1 %>
-    </div>
-    <div class="field">
-      <%= location_form.label :address2 %>
-      <%= location_form.text_field :address2 %>
-    </div>
-    <div class="field">
-      <%= location_form.label :country  %>
-      <%= location_form.text_field :country %>
-    </div>
-    <div class="field">
-      <%= location_form.label :city %>
-      <%= location_form.text_field :city %>
-    </div>
-    <div class="field">
-      <%= location_form.label :state %>
-      <%= location_form.text_field :state %>
-    </div>
-    <div class="field">
-      <%= location_form.label :zip %>
-      <%= location_form.text_field :zip %>
-    </div>
-  <% end %>
-  <p><%= submit_tag "Create Ride" %></p>
+  <p><%= f.submit "Create Ride" %></p>
 <% end %>

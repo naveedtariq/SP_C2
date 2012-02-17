@@ -8,7 +8,7 @@ class CreateLocations < ActiveRecord::Migration
       t.string :state
       t.string :country
       t.integer :zip
-
+      t.integer :ride_id
       t.timestamps
     end
   end

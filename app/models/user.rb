@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :ride_participants
   has_many :rides, :through => :ride_participants
-
+  has_many :created_rides, :class_name => Ride
   validates_confirmation_of :password
   validates :password, :on => :create, :presence =>true
   validates :email, :presence =>true
