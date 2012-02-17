@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Signups", :js => true do
-  @user = Factory(:user)
   it "shows user form when user clicks on signup from login page" do
     visit login_path
     click_link "Sign up"
@@ -169,6 +168,7 @@ describe "Signups", :js => true do
   end
 
   it "Show Email has already been taken" do
+    @user = Factory(:user)
     visit signup_path
     fill_in "user_first_name", :with => "test"
     fill_in "user_last_name", :with => "test"

@@ -4,22 +4,23 @@
     <th>From City</th>
     <th>To City</th>
     <th>Departure date</th>
-    <th>Departure time</th>
     <th>Flexibility</th>
-    <th>Duration</th>
+    <th>Arrival</th>
     <th>Vehicle Type</th>
     <th>Available Seats</th>
     <th>Price per Seat</th>
     <th>Notes</th>
   </tr>
+  <% if @rides.empty? %>
+  <tr><td colspan="10">No records</td></tr>
+  <% end %>
   <%@rides.each do |ride| %>
     <tr align="center">
       <td><%= ride.from_city %></td>
       <td><%= ride.to_city %></td>
-      <td><%= ride.departure_date %></td>
-      <td><%= ride.departure_time %></td>
+      <td><%= ride.departure_datetime %></td>
       <td><%= ride.flexibility %></td>
-      <td><%= ride.duration %></td>
+      <td><%= ride.arrival_datetime %></td>
       <td><%= ride.ride_type %></td>
       <td><%= ride.available_seats%></td>
       <td><%= ride.price_per_seat%></td>
