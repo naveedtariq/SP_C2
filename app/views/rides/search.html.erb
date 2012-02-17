@@ -10,7 +10,7 @@
 </div>
 <br/>
 <h4> Search Query</h4>
-<%= form @ride do |f| :action => "/rides/search", :method => "get" %>
+<%= form_for @ride (:action => "/rides/search", :method=>'get') do |f| %>
   <div class="field">
     <%= f.label :from_city %>
     <%= f.select :from_city, CITY %>
