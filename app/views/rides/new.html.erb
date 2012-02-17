@@ -23,12 +23,14 @@
     });
     $( "#ride_flexibility" ).timepicker({
       timeFormat: 'mm',
-      showHour: false
+      showHour: false,
+      currentText: ""
+
     });
   });
 </script>
 <%= form_for @ride do |f| %>
-<% if @ride.errors.any? %>
+  <% if @ride.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>
       <ul>
@@ -52,7 +54,7 @@
   </div>
   <div class="field">
     <%= f.label :flexibility %>
-    <%= f.text_field :flexibility, :placeholder => "enter +/- minutes" %>
+    <%= f.text_field :flexibility, :placeholder => "enter ± minutes" %>
   </div>
   <div class="field">
     <%= f.label :estimated_arrival_date_and_time %>
@@ -60,14 +62,28 @@
   </div>
   <div class="field">
     <%= f.label :ride_type %>
-    <div class="">
-
-      <%= f.radio_button :ride_type, 'Sedon', :checked =>true %>
-      <%= f.label :ride_type, 'Sedon', :for => 'ride_ride_type_sedon'%>
-      <%= f.radio_button :ride_type, 'Suv' %>
-      <%= f.label :ride_type, 'Suv', :for => 'ride_ride_type_suv'%>
-      <%= f.radio_button :ride_type, 'Van' %>
-      <%= f.label :ride_type, 'Van', :for => 'ride_ride_type_van'%>
+    <div>
+      <table><tr>
+          <td>
+            <%= f.radio_button :ride_type, 'Sedon' %>
+          </td>
+          <td>
+            <%= f.label :ride_type, 'Sedon', :for => 'ride_ride_type_sedon'%>
+          </td>
+          <td>
+            <%= f.radio_button :ride_type, 'Suv' %>
+          </td>
+          <td>
+            <%= f.label :ride_type, 'Suv', :for => 'ride_ride_type_suv'%>
+          </td>
+          <td>
+            <%= f.radio_button :ride_type, 'Van' %>
+          </td>
+          <td>
+            <%= f.label :ride_type, 'Van', :for => 'ride_ride_type_van'%>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
   <div class="field">
@@ -76,7 +92,7 @@
   </div>
   <div class="field">
     <%= f.label :price_per_seat_in_dollars %>
-    <%= f.number_field :price_per_seat  %>$
+    <%= f.number_field :price_per_seat  %>
   </div>
   <div class="field">
     <%= f.label :notes %>

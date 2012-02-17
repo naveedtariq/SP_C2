@@ -1,22 +1,34 @@
 <div class="subnav">
   <ul class="nav-pills nav">
-    <li class="active">
+    <li>
       <%= link_to "Ride input page", new_ride_path %>
     </li>
-    <li>
+    <li class="active">
       <%= link_to "Ride search page", search_rides_path %>
     </li>
   </ul>
 </div>
 <br/>
 <h4> Search Query</h4>
-<%= form_for @ride do |f| :action => "/rides/search", :method => "get" %>
+<%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
   <div class="field">
     <%= f.label :from_city %>
-    <%= f.select :from_city, CITY %>
+    <%= f.text_field :from_city %>
   </div>
   <div class="field">
     <%= f.label :to_city %>
-    <%= f.select :to_city, CITY %>
+    <%= f.text_field :to_city %>
   </div>
+  
+  <%= f.submit "search" %>
+  <ul>
+    <% if @rides.blank? %>
+      <li> No ride found </li>
+    <% end %>
+    <% @rides.each do |ride| %>
+      <li>
+        <%= number_to_currency(ride.price_per_seat) %>, <%= ride.ride_type %>, <%= ride.available_seats %> available seats,leave (<%= ride.from_city %>@<%= ride.departure_datetime %>  ± <%= ride.flexibility || 0 %> mins), arrive( <%= ride.to_city %>@<%= ride.departure_datetime %> ± <%= ride.flexibility || 0 %> mins)
+      </li>
+    <% end %>
+  </ul>
 <%end%>
