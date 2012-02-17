@@ -18,6 +18,7 @@ class RidesController < ApplicationController
   end
 
   def search
-    
+    @ride = Ride.new(params[:ride])
+    @rides = Ride.search_rides(params[:ride])
   end
 end
