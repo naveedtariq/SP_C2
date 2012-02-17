@@ -42,12 +42,11 @@ ActiveRecord::Schema.define(:version => 20120215142629) do
     t.string   "ride_type"
     t.string   "to_city"
     t.string   "from_city"
-    t.date     "departure_date"
-    t.time     "departure_time"
-    t.integer  "duration"
+    t.datetime "departure_datetime"
+    t.datetime "arrival_datetime"
     t.integer  "flexibility"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "users", :force => true do |t|

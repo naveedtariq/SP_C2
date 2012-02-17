@@ -8,9 +8,8 @@ class CreateRides < ActiveRecord::Migration
       t.string :ride_type
       t.string :to_city
       t.string :from_city
-      t.date :departure_date
-      t.time :departure_time
-      t.integer :duration
+      t.datetime :departure_datetime
+      t.datetime :arrival_datetime
       t.integer :flexibility
       t.timestamps
     end
