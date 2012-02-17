@@ -1,2 +1,32 @@
-<h1>Rides#index</h1>
-<p>Find me in app/views/rides/index.html.erb</p>
+<h3> My Rides </h3>
+<table border="1" cellpadding="3">
+  <tr>
+    <th>From City</th>
+    <th>To City</th>
+    <th>Departure date</th>
+    <th>Flexibility</th>
+    <th>Arrival</th>
+    <th>Vehicle Type</th>
+    <th>Available Seats</th>
+    <th>Price per Seat</th>
+    <th>Notes</th>
+  </tr>
+  <% if @rides.empty? %>
+  <tr><td colspan="10">No records</td></tr>
+  <% end %>
+  <%@rides.each do |ride| %>
+    <tr align="center">
+      <td><%= ride.from_city %></td>
+      <td><%= ride.to_city %></td>
+      <td><%= ride.departure_datetime %></td>
+      <td><%= ride.flexibility %></td>
+      <td><%= ride.arrival_datetime %></td>
+      <td><%= ride.ride_type %></td>
+      <td><%= ride.available_seats%></td>
+      <td><%= ride.price_per_seat%></td>
+      <td><%= ride.notes%></td>
+    </tr>
+  <%end%>
+</table>
+<br/>
+<%= link_to 'New Ride', new_ride_path %>

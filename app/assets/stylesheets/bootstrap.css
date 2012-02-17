@@ -3363,3 +3363,13 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
+
+.nav-tabs  li, .nav-pills  li {
+  float: left !important;
+}
+.clear{
+  clear:both;
+}
+.left{
+  float:left;
+}

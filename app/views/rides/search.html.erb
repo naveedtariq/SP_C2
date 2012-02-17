@@ -1,0 +1,22 @@
+<div class="subnav">
+  <ul class="nav-pills nav">
+    <li class="active">
+      <%= link_to "Ride input page", new_ride_path %>
+    </li>
+    <li>
+      <%= link_to "Ride search page", search_rides_path %>
+    </li>
+  </ul>
+</div>
+<br/>
+<h4> Search Query</h4>
+<%= form_for @ride do |f| :action => "/rides/search", :method => "get" %>
+  <div class="field">
+    <%= f.label :from_city %>
+    <%= f.select :from_city, CITY %>
+  </div>
+  <div class="field">
+    <%= f.label :to_city %>
+    <%= f.select :to_city, CITY %>
+  </div>
+<%end%>

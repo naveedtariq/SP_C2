@@ -1,15 +1,87 @@
-<% form_for :ride, :url => rides_path do |f| %>
- <p>
-    Name: <%= f.text_field :name %>
-  </p>
-  <% for location in @ride.locations %>
-    <% fields_for "ride[location_attributes][]", location do |location_form| %>
-      <p>
-        Task: <%= location_form.text_field :name %>
-      </p>
-    <% end %>
+<%= javascript_include_tag    "jquery-1.7.1.min", "jquery-ui-1.8.17.custom.min", "time_picker" %>
+<%= stylesheet_link_tag    "jquery-ui-1.8.17.custom" %>
+<div class="clear"></div>
+<div class="subnav">
+  <ul class="nav-pills nav">
+    <li class="active">
+      <%= link_to "Ride input page", new_ride_path %>
+    </li>
+    <li>
+      <%= link_to "Ride search page", search_rides_path %>
+    </li>
+  </ul>
+</div>
+<script>
+  $(document).ready(function() {
+    $( "#ride_departure_datetime" ).datetimepicker({
+      dateFormat: "yy-mm-dd", 
+      timeFormat: "hh:mm:ss"
+    });
+    $( "#ride_arrival_datetime" ).datetimepicker({
+      dateFormat: "yy-mm-dd", 
+      timeFormat: "hh:mm:ss"
+    });
+    $( "#ride_flexibility" ).timepicker({
+      timeFormat: 'mm',
+      showHour: false
+    });
+  });
+</script>
+<%= form_for @ride do |f| %>
+<% if @ride.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @ride.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-  <p><%= submit_tag "Create Ride" %></p>
+  <div class="field">
+    <%= f.label :from_city %>
+    <%= f.text_field :from_city %>
+  </div>
+  <div class="field">
+    <%= f.label :to_city %>
+    <%= f.text_field :to_city %>
+  </div>
+  <div class="field">
+    <%= f.label :departure_date_and_time %>
+    <%= f.text_field :departure_datetime %>
+  </div>
+  <div class="field">
+    <%= f.label :flexibility %>
+    <%= f.text_field :flexibility, :placeholder => "enter +/- minutes" %>
+  </div>
+  <div class="field">
+    <%= f.label :estimated_arrival_date_and_time %>
+    <%= f.text_field :arrival_datetime %>
+  </div>
+  <div class="field">
+    <%= f.label :ride_type %>
+    <div class="">
+
+      <%= f.radio_button :ride_type, 'Sedon', :checked =>true %>
+      <%= f.label :ride_type, 'Sedon', :for => 'ride_ride_type_sedon'%>
+      <%= f.radio_button :ride_type, 'Suv' %>
+      <%= f.label :ride_type, 'Suv', :for => 'ride_ride_type_suv'%>
+      <%= f.radio_button :ride_type, 'Van' %>
+      <%= f.label :ride_type, 'Van', :for => 'ride_ride_type_van'%>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :available_seats %>
+    <%= f.number_field :available_seats %>
+  </div>
+  <div class="field">
+    <%= f.label :price_per_seat_in_dollars %>
+    <%= f.number_field :price_per_seat  %>$
+  </div>
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes  %>
+  </div>
+
+  <p><%= f.submit "Create Ride" %></p>
 <% end %>
-
-

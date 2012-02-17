@@ -55,7 +55,9 @@ describe User do
     {
       :password               => 'test password',
       :password_confirmation  => 'test password',
-      :email                  => 'test@tester.com'
+      :email                  => 'test@tester.com',
+      :first_name                  => 'test',
+      :last_name                  => 'me'
     }
   end
 end

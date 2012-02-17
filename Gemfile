@@ -21,7 +21,7 @@ group :test do
   gem "capybara"
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem "guard"
-  gem "guard-rspec"
+  gem "database_cleaner"
 end
 gem 'json', "1.6.5"
 

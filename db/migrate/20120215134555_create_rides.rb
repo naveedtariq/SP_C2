@@ -1,15 +1,16 @@
 class CreateRides < ActiveRecord::Migration
   def change
     create_table :rides do |t|
-      t.string :type
-      t.integer :min_seats
-      t.integer :max_seats
+      t.integer :available_seats
       t.integer :price_per_seat
-      t.string :description
-      t.time :start_time
-      t.time :arrival_time
-      t.string :flexibility
-
+      t.string :notes
+      t.integer :user_id
+      t.string :ride_type
+      t.string :to_city
+      t.string :from_city
+      t.datetime :departure_datetime
+      t.datetime :arrival_datetime
+      t.integer :flexibility
       t.timestamps
     end
   end
