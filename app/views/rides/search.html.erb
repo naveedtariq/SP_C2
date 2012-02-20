@@ -19,6 +19,27 @@
     <%= f.label :to_city %>
     <%= f.text_field :to_city %>
   </div>
+  <table><tr>
+          <td>
+            <%= f.radio_button :departure_datetime, 'all', :checked =>true %>
+          </td>
+          <td>
+            <%= f.label :departure_datetime, 'All', :for => 'ride_departure_datetime_all'%>
+          </td>
+          <td>
+            <%= f.radio_button :departure_datetime, 'this_week' %>
+          </td>
+          <td>
+            <%= f.label :departure_datetime, 'This Week', :for => 'ride_departure_datetime_this week'%>
+          </td>
+          <td>
+            <%= f.radio_button :departure_datetime , 'this_month' %>
+          </td>
+          <td>
+            <%= f.label :departure_datetime, 'This Month', :for => 'ride_departure_datetime_this month'%>
+          </td>
+        </tr>
+      </table>
   
   <%= f.submit "search" %>
   <ul>
@@ -27,7 +48,7 @@
     <% end %>
     <% @rides.each do |ride| %>
       <li>
-        <%= number_to_currency(ride.price_per_seat) %>, <%= ride.ride_type %>, <%= ride.available_seats %> available seats,leave (<%= ride.from_city %>@<%= ride.departure_datetime %>  ± <%= ride.flexibility || 0 %> mins), arrive( <%= ride.to_city %>@<%= ride.departure_datetime %> ± <%= ride.flexibility || 0 %> mins)
+        <%= number_to_currency(ride.price_per_seat) %>, <%= ride.departure_datetime %>, <%= ride.available_seats %> available seats,leave (<%= ride.from_city %>@<%= ride.departure_datetime %>  ± <%= ride.flexibility || 0 %> mins), arrive( <%= ride.to_city %>@<%= ride.departure_datetime %> ± <%= ride.flexibility || 0 %> mins)
       </li>
     <% end %>
   </ul>
