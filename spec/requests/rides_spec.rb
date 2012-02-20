@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Rides" do
+describe "Rides", :js => true do
   it "Show the form for the Rides Input With no wrong input" do
    
     visit login_path
@@ -74,7 +74,7 @@ describe "Rides" do
     current_path.should eq(rides_path)
   end
 
-    it "Should show Flexibilty is not a number if no flexibilty is se" do
+    it "Should show Flexibilty is not a number if flexibilty is not a number" do
     visit login_path
     @user = Factory(:user)
     fill_in "email", :with => @user.email
@@ -87,7 +87,7 @@ describe "Rides" do
     fill_in "ride_from_city", :with => "test"
     fill_in "ride_to_city", :with => "test"
     fill_in "ride_departure_datetime", :with => "2012-02-17 23:44:52"
-    fill_in "ride_flexibility", :with => ""
+    fill_in "ride_flexibility", :with => "adf"
     fill_in "ride_arrival_datetime", :with => "2012-02-17 23:44:52"
     choose('ride_ride_type_sedon')
     fill_in "ride_available_seats", :with => "21"

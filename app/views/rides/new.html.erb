@@ -3,6 +3,9 @@
 <div class="clear"></div>
 <div class="subnav">
   <ul class="nav-pills nav">
+    <li>
+      <%= link_to "My Ride", rides_path %>
+    </li>
     <li class="active">
       <%= link_to "Ride input page", new_ride_path %>
     </li>
@@ -13,19 +16,9 @@
 </div>
 <script>
   $(document).ready(function() {
-    $( "#ride_departure_datetime" ).datetimepicker({
-      dateFormat: "yy-mm-dd", 
-      timeFormat: "hh:mm:ss"
-    });
-    $( "#ride_arrival_datetime" ).datetimepicker({
-      dateFormat: "yy-mm-dd", 
-      timeFormat: "hh:mm:ss"
-    });
-    $( "#ride_flexibility" ).timepicker({
-      timeFormat: 'mm',
-      showHour: false,
-      currentText: ""
-
+    $( "#ride_departure_date" ).datepicker({
+      dateFormat: "yy-mm-dd",
+       minDate: 0, maxDate: "+1Y" 
     });
   });
 </script>
@@ -42,23 +35,28 @@
   <% end %>
   <div class="field">
     <%= f.label :from_city %>
-    <%= f.text_field :from_city %>
+    <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
   </div>
+
   <div class="field">
     <%= f.label :to_city %>
-    <%= f.text_field :to_city %>
+    <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
   </div>
   <div class="field">
-    <%= f.label :departure_date_and_time %>
-    <%= f.text_field :departure_datetime %>
+    <%= f.label :departure_date %>
+    <%= f.text_field :departure_date %>
+  </div>
+  <div class="field">
+    <%= f.label :departure_time %>
+    <%= f.time_select :departure_time, {:minute_step => 15} %>
+  </div>
+  <div class="field">
+    <%= f.label :duration %>
+    <%= f.select :duration_in_minutes, (15..180).step(5).collect{|t| [time_to_minutes(t), t]} %>
   </div>
   <div class="field">
     <%= f.label :flexibility %>
-    <%= f.text_field :flexibility, :placeholder => "enter ± minutes" %>
-  </div>
-  <div class="field">
-    <%= f.label :estimated_arrival_date_and_time %>
-    <%= f.text_field :arrival_datetime %>
+    <%= f.select :flexibility_in_minutes, (5..30).step(5).collect{|t| ["#{t} mins", t]}, :include_blank => "select ± minutes" %>
   </div>
   <div class="field">
     <%= f.label :ride_type %>
@@ -88,7 +86,7 @@
   </div>
   <div class="field">
     <%= f.label :available_seats %>
-    <%= f.number_field :available_seats %>
+    <%= f.select :available_seats, 1..4 %>
   </div>
   <div class="field">
     <%= f.label :price_per_seat_in_dollars %>

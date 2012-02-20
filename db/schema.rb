@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215142629) do
+ActiveRecord::Schema.define(:version => 20120220154150) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -40,13 +40,14 @@ ActiveRecord::Schema.define(:version => 20120215142629) do
     t.string   "notes"
     t.integer  "user_id"
     t.string   "ride_type"
-    t.string   "to_city"
-    t.string   "from_city"
-    t.datetime "departure_datetime"
-    t.datetime "arrival_datetime"
-    t.integer  "flexibility"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "duration_in_minutes"
+    t.date     "departure_date"
+    t.time     "departure_time"
+    t.integer  "to_location_id"
+    t.integer  "from_location_id"
+    t.integer  "flexibility_in_minutes"
   end
 
   create_table "users", :force => true do |t|

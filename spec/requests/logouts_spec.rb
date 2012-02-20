@@ -11,6 +11,6 @@ describe "Logouts" do
   current_path.should eq(root_path)
   click_link('Log out')
   page.should have_content("Logged out!")
-  current_path.should eq(root_path)
+  current_path.should eq(login_path)
   end
 end

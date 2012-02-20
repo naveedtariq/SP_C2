@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Searches" do
+describe "Searches", :js => true do
 
     it "Show no Result found When searching city path not exist " do
     visit login_path

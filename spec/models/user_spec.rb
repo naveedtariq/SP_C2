@@ -36,20 +36,20 @@ describe User do
     test_user.should_not be_valid
   end
 
-  it "could have many rides" do
-    @user.save!
-    @ride = Ride.create!
-    @user.rides << @ride
-    @user.rides.first.should eq @ride
-  end
-
-  it "could have many rides participants" do
-    @user.save!
-    @ride = Ride.create!
-    @user.rides << @ride
-    @ride_participant = RideParticipant.where :user_id => @user.id, :ride_id => @ride.id
-    @ride_participant.first.should eq(@user.ride_participants.first)
-  end
+#  it "could have many rides" do
+#    @user.save!
+#    @ride = Ride.create!
+#    @user.rides << @ride
+#    @user.rides.first.should eq @ride
+#  end
+#
+#  it "could have many rides participants" do
+#    @user.save!
+#    @ride = Ride.create!
+#    @user.rides << @ride
+#    @ride_participant = RideParticipant.where :user_id => @user.id, :ride_id => @ride.id
+#    @ride_participant.first.should eq(@user.ride_participants.first)
+#  end
 
   def valid_post_hash
     {

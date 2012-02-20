@@ -1,11 +1,25 @@
+<div class="subnav">
+  <ul class="nav-pills nav">
+    <li class="active">
+      <%= link_to "My Ride", rides_path %>
+    </li>
+    <li>
+      <%= link_to "Ride input page", new_ride_path %>
+    </li>
+    <li>
+      <%= link_to "Ride search page", search_rides_path %>
+    </li>
+  </ul>
+</div>
 <h3> My Rides </h3>
 <table border="1" cellpadding="3">
   <tr>
-    <th>From City</th>
-    <th>To City</th>
+    <th>From</th>
+    <th>To</th>
     <th>Departure date</th>
+    <th>Departure time</th>
     <th>Flexibility</th>
-    <th>Arrival</th>
+    <th>Duration</th>
     <th>Vehicle Type</th>
     <th>Available Seats</th>
     <th>Price per Seat</th>
@@ -16,18 +30,16 @@
   <% end %>
   <%@rides.each do |ride| %>
     <tr align="center">
-      <td><%= ride.from_city %></td>
-      <td><%= ride.to_city %></td>
-      <td><%= ride.departure_datetime %></td>
-      <td><%= ride.flexibility %></td>
-      <td><%= ride.arrival_datetime %></td>
+      <td><%= ride.from_location.name %></td>
+      <td><%= ride.to_location.name %></td>
+      <td><%= ride.departure_date %></td>
+      <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+      <td><%= ride.flexibility_in_minutes %> mins</td>
+      <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
       <td><%= ride.ride_type %></td>
-      <td><%= ride.available_seats%></td>
-      <td><%= ride.price_per_seat%></td>
+      <td><%= ride.available_seats %></td>
+      <td><%= number_to_currency(ride.price_per_seat)%></td>
       <td><%= ride.notes%></td>
     </tr>
   <%end%>
 </table>
-<br/>
-<%= link_to 'New Ride', new_ride_path %> | 
-<%= link_to 'Search Rides', search_rides_path %>
