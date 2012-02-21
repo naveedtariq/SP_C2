@@ -7,6 +7,7 @@ gem 'rails', '3.2.1'
 
 gem 'sorcery', "0.7.6"
 gem 'execjs', "1.3.0"
+gem 'paperclip'
 gem 'therubyracer',"0.9.9", :platforms => :ruby
 group :production do
   gem "pg"

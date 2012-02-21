@@ -1,6 +1,14 @@
+<%= javascript_include_tag    "jquery.min", "jquery.password_strength" %>
+<%= stylesheet_link_tag    "password_v" %>
 <h1>Sign Up</h1>
+  <script>
+    
+$(document).ready(function() {
+ $('#user_password').password_strength();
+});
+</script>
 
-<%= form_for @user do |f| %>
+<%= form_for @user, :html => { :multipart => true } do |f| %>
   <% if @user.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>
@@ -12,15 +20,15 @@
     </div>
   <% end %>
 
-<div class="field">
+  <div class="field">
     <%= f.label :first_name %>
     <%= f.text_field :first_name %>
   </div>
-<div class="field">
+  <div class="field">
     <%= f.label :last_name %>
     <%= f.text_field :last_name %>
   </div>
-<div class="field">
+  <div class="field">
     <%= f.label :about %>
     <%= f.text_area :about %>
   </div>
@@ -31,42 +39,47 @@
   <div class="field">
     <%= f.label :password %>
     <%= f.password_field :password %>
+    <span class="password_strength"></span>
   </div>
   <div class="field">
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
-<div class="field">
+  <div class="field">
     <%= f.label :gender %><br />
     <%= f.select :gender, GENDER %>
   </div>
- <div class="field">
+  <div class="field">
     <%= f.label :Date_of_birth %><br />
     <%= f.date_select :dob, :start_year => 100.years.ago.year %>
   </div>
-<div class="field">
+  <div class="field">
     <%= f.label :phone %>
     <%= f.text_field :phone %>
   </div>
-<div class="field">
+  <div class="field">
     <%= f.label :city %>
     <%= f.text_field :city %>
   </div>
-<div class="field">
+  <div class="field">
     <%= f.label :town %>
     <%= f.text_field :town %>
   </div>
-<div class="field">
+  <div class="field">
     <%= f.label :work %>
     <%= f.text_field :work %>
   </div>
-<div class="field">
+  <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
-<div class="field">
+  <div class="field">
     <%= f.label :school %>
     <%= f.text_field :school %>
+  </div>
+  <div class="field">
+    <%= f.label :photo, "Image Upload" %><br />
+    <%= f.file_field :photo %>
   </div>
   <div class="actions"><%= f.submit %></div>
 <% end %> 

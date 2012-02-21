@@ -2,11 +2,11 @@ class Ride < ActiveRecord::Base
   has_many :ride_participants
   has_many :users, :through => :ride_participants
   belongs_to :user
-  validates :from_location_id, :to_location_id, :available_seats, :price_per_seat, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true
+  validates  :available_seats, :price_per_seat, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true
   validate :departure_date_inclusion
   def departure_date_inclusion
-    errors.add(:departure_date, "Departure date must be within a year") if(self.departure_date > (Date.today+1.year))
-    errors.add(:departure_date, "Departure date can't be before today") if(self.departure_date < (Date.today))
+    errors.add(:departure_date, "Departure date must be within a year") if(self.departure_date && (self.departure_date > (Date.today+1.year)))
+    errors.add(:departure_date, "Departure date can't be before today") if(self.departure_date && (self.departure_date < (Date.today)))
   end
   attr_accessor :departure, "all"
   validates_numericality_of :available_seats, :greater_than => 0
