@@ -1,4 +1,4 @@
-<%= javascript_include_tag    "jquery-1.7.1.min", "jquery-ui-1.8.17.custom.min", "time_picker" %>
+<%= javascript_include_tag    "jquery-1.7.1.min", "jquery-ui-1.8.17.custom.min" %>
 <%= stylesheet_link_tag    "jquery-ui-1.8.17.custom" %>
 <div class="clear"></div>
 <div class="subnav">
@@ -18,7 +18,7 @@
   $(document).ready(function() {
     $( "#ride_departure_date" ).datepicker({
       dateFormat: "yy-mm-dd",
-       minDate: 0, maxDate: "+1Y" 
+      minDate: 0, maxDate: "+1Y" 
     });
   });
 </script>
@@ -48,11 +48,18 @@
   </div>
   <div class="field">
     <%= f.label :departure_time %>
-    <%= f.time_select :departure_time, {:minute_step => 15} %>
+    <%= f.time_select :departure_time, {:minute_step => 15}, :class => "duration-change" %>
   </div>
   <div class="field">
     <%= f.label :duration %>
-    <%= f.select :duration_in_minutes, (15..180).step(5).collect{|t| [time_to_minutes(t), t]} %>
+    <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>
+ : 
+    <%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
+  </div>
+  <div id="div-estimated-arrival-time" class="field display_none" style="border: 1px solid; padding: 5px; margin: 5px 0px 5px 0px">
+    <span>
+      Estimated arrival time is <span id="estimated-arrival-time"></span>
+    </span>
   </div>
   <div class="field">
     <%= f.label :flexibility %>

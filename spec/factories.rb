@@ -6,15 +6,20 @@ Factory.define :user do |f|
   f.last_name "test"
   f.photo_file_name "/home/devsinc/Desktop/apple-logo.jpg"
 end
+Factory.define :location do |f|
+  f.sequence(:name) { |n| "foo#{n}" }
+end
 Factory.define :ride do |f|
-  f.sequence(:to_city) { |n| "foo#{n}" }
-  f.sequence(:from_city) { |n| "foo#{n}" }
+  l = Factory(:location)
+  f.to_location_id l.id
+  l = Factory(:location)
+  f.from_location_id l.id
   f.available_seats 3
   f.price_per_seat 3
-  f.departure_datetime Time.now
-  f.arrival_datetime Time.now
+  f.departure_date SpClock.date
+  f.departure_time SpClock.time
+  f.duration_in_minutes 15
   f.ride_type "Sudon"
 end
-
 
 

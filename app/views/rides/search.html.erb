@@ -22,60 +22,63 @@
     <%= f.label :to_city %>
     <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
   </div>
-  <table><tr>
-          <td>
-            <%= f.radio_button :departure, 'all', :checked =>true %>
-          </td>
-          <td>
-            <%= f.label :departure, 'All', :for => 'ride_departure_all'%>
-          </td>
-          <td>
-            <%= f.radio_button :departure, 'this_week' %>
-          </td>
-          <td>
-            <%= f.label :departure, 'This Week', :for => 'ride_departure_this_week'%>
-          </td>
-          <td>
-            <%= f.radio_button :departure , 'this_month' %>
-          </td>
-          <td>
-            <%= f.label :departure, 'This Month', :for => 'ride_departure_this_month'%>
-          </td>
-        </tr>
-      </table>
-  
+  <table>
+    <tr>
+      <td>
+        <%= f.radio_button :departure, 'all', :checked =>true %>
+      </td>
+      <td>
+        <%= f.label :departure, 'All', :for => 'ride_departure_all'%>
+      </td>
+      <td>
+        <%= f.radio_button :departure, 'first_option' %>
+      </td>
+      <td>
+        <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option"%>
+      </td>
+      <td>
+        <%= f.radio_button :departure , 'second_option' %>
+      </td>
+      <td>
+        <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option'%>
+      </td>
+    </tr>
+  </table>
+
   <%= f.submit "search" %>
   <table border="1" cellpadding="3">
-  <tr>
-    <th>Offered by</th>
-    <th>From</th>
-    <th>To</th>
-    <th>Departure date</th>
-    <th>Departure time</th>
-    <th>Flexibility</th>
-    <th>Duration</th>
-    <th>Vehicle Type</th>
-    <th>Available Seats</th>
-    <th>Price per Seat</th>
-    <th>Notes</th>
-  </tr>
-  <% if @rides.empty? %>
-  <tr><td colspan="10">No records</td></tr>
-  <% end %>
-  <%@rides.each do |ride| %>
-    <tr align="center">
-      <td><%= "#{ride.user.first_name} #{ride.user.last_name}" %></td>
-      <td><%= ride.from_location.name %></td>
-      <td><%= ride.to_location.name %></td>
-      <td><%= ride.departure_date %></td>
-      <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
-      <td><%= ride.flexibility_in_minutes %> mins</td>
-      <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
-      <td><%= ride.ride_type %></td>
-      <td><%= ride.available_seats %></td>
-      <td><%= number_to_currency(ride.price_per_seat)%></td>
-      <td><%= ride.notes%></td>
+    <tr>
+      <th>Offered by</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Departure date</th>
+      <th>Departure time</th>
+      <th>Arrival time</th>
+      <th>Flexibility</th>
+      <th>Duration</th>
+      <th>Vehicle Type</th>
+      <th>Available Seats</th>
+      <th>Price per Seat</th>
+      <th>Notes</th>
     </tr>
-  <%end%>
-</table>
+    <% if @rides.empty? %>
+      <tr><td colspan="11">No records</td></tr>
+    <% end %>
+    <%@rides.each do |ride| %>
+      <tr align="center">
+        <td><%= ride.user && "#{ride.user.first_name} #{ride.user.last_name}" %></td>
+        <td><%= ride.from_location && ride.from_location.name %></td>
+        <td><%= ride.to_location && ride.to_location.name %></td>
+        <td><%= ride.departure_date %></td>
+        <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+        <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z")  %></td>
+        <td><%= ride.flexibility_in_minutes %> mins</td>
+        <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+        <td><%= ride.ride_type %></td>
+        <td><%= ride.available_seats %></td>
+        <td><%= number_to_currency(ride.price_per_seat)%></td>
+        <td><%= ride.notes%></td>
+      </tr>
+    <%end%>
+  </table>
 <%end%>

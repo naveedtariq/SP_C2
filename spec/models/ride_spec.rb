@@ -30,12 +30,13 @@ describe Ride do
 
   def valid_post_hash
     {
-      :from_city => "testcity",
-      :to_city => "testcity2",
+      :from_location_id => Location.first.id,
+      :to_location_id => Location.last.id,
       :available_seats => 2,
       :price_per_seat => 2,
-      :departure_datetime => Time.now,
-      :arrival_datetime => Time.now,
+      :departure_date => SpClock.date,
+      :departure_time => SpClock.time,
+      :duration_in_minutes => 15,
       :ride_type => "sudan"
     }
   end
@@ -45,7 +46,8 @@ describe Ride do
       :password_confirmation  => 'test password',
       :email                  => 'test@tester.com',
       :first_name                  => 'test',
-      :last_name                  => 'me'
+      :last_name                  => 'me',
+      :photo => File.open("#{Rails.root}/spec/data/dont_delete.png"), 
     }
   end
 end

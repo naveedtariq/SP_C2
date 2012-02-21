@@ -4,11 +4,30 @@ class Ride < ActiveRecord::Base
   belongs_to :user
   validates  :available_seats, :price_per_seat, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true
   validate :departure_date_inclusion
+  validate :from_and_to_location
+  def from_and_to_location
+    errors.add(:from_location_id, "can't be same as destination") if(self.from_location_id == self.to_location_id)
+  end
   def departure_date_inclusion
-    errors.add(:departure_date, "Departure date must be within a year") if(self.departure_date && (self.departure_date > (Date.today+1.year)))
-    errors.add(:departure_date, "Departure date can't be before today") if(self.departure_date && (self.departure_date < (Date.today)))
+    errors.add(:departure_date, "must be within a year") if(self.departure_date && (self.departure_date > (SpClock.date + 1.year)))
+    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (SpClock.date)))
   end
   attr_accessor :departure, "all"
+  def duration_hours
+    self.duration_in_minutes && (self.duration_in_minutes / 60)
+  end
+  def duration_minutes
+    self.duration_in_minutes && (self.duration_in_minutes % 60)
+  end
+  def duration_hours=(dur_hr)
+    self.duration_in_minutes ||= 0
+    self.duration_in_minutes = (dur_hr.to_i*60) + self.duration_in_minutes
+  end
+  def duration_minutes=(dur_min)
+    self.duration_in_minutes ||= 0
+    self.duration_in_minutes = dur_min.to_i + self.duration_in_minutes
+  end
+  
   validates_numericality_of :available_seats, :greater_than => 0
   validates_numericality_of :price_per_seat, :greater_than_or_equal_to => 0
   validates_numericality_of :flexibility_in_minutes, :greater_than_or_equal_to => 0, :allow_nil => true
@@ -24,14 +43,12 @@ class Ride < ActiveRecord::Base
       end
     end
     departure_date = params && params.delete(:departure) 
-#    return self.all if params.blank?
-#    departure_date = params.delete(:departure_datetime)
     rides = self.where(params)
-    if departure_date && ["this_week", "this_month"].include?(departure_date)
-      if departure_date == "this_week"
-        dep_date = Date.today + 1.week
-      elsif departure_date == "this_month"
-        dep_date = Date.today + 1.month
+    if departure_date && ["first_option", "second_option"].include?(departure_date)
+      if departure_date == "first_option"
+        dep_date = SpClock.date + SEARCH_OPTION_ONE_IN_DAYS.days
+      elsif departure_date == "second_option"
+        dep_date = SpClock.date + SEARCH_OPTION_TWO_IN_DAYS.days
       end  
       rides = rides.scoped_departure(dep_date)
     end
