@@ -1,0 +1,6 @@
+development:
+  storage: local
+test:
+  storage: local
+production:
+  storage: s3

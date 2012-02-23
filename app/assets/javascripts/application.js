@@ -13,3 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+$(document).ready(function(){
+  $(".duration-change").change(function(){
+    $("#div-estimated-arrival-time").show();
+    departure_minutes = parseInt($("#ride_departure_time_5i").val());
+    duration_minutes = parseInt($("#ride_duration_minutes").val());
+    departure_hours = parseInt($("#ride_departure_time_4i").val());
+    duration_hours = parseInt($("#ride_duration_hours").val());
+    end_minutes = departure_minutes + duration_minutes;
+    end_hours = (departure_hours + duration_hours + (parseInt(end_minutes/60)))%24;
+    end_minutes = end_minutes % 60
+    $("#estimated-arrival-time").text(end_hours + ":" + end_minutes);
+  });
+});

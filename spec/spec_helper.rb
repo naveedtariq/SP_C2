@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 require 'database_cleaner'
+require 'csv'    
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -25,14 +26,34 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = false
   config.before :each do
-
     DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start 
+    DatabaseCleaner.clean
     load "#{Rails.root}/db/seeds.rb"
-    DatabaseCleaner.start
+
+    csv_text = File.read("#{Rails.root}/spec/data/user.csv")
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      row = row.to_hash.with_indifferent_access
+      u = User.new(row.to_hash.symbolize_keys)
+      u.photo = File.open("#{Rails.root}/spec/data/dont_delete.png")
+      u.save!
+    end
+    csv_text = File.read("#{Rails.root}/spec/data/ride.csv")
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      row = row.to_hash.with_indifferent_access
+      Ride.create!(row.to_hash.symbolize_keys)
+    end
+    csv_text = File.read("#{Rails.root}/spec/data/location.csv")
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      row = row.to_hash.with_indifferent_access
+      Location.create!(row.to_hash.symbolize_keys)
+    end
   end
 
   config.after do
-    DatabaseCleaner.clean
   end
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of

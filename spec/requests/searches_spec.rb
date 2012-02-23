@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Searches", :js => true do
 
-    it "Show no Result found When searching city path not exist " do
+  it "Show no Result found When searching city path not exist " do
     visit login_path
     @user = Factory(:user)
     fill_in "email", :with => @user.email
@@ -10,15 +10,15 @@ describe "Searches", :js => true do
     click_button ('Log in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
-    click_link ('Search Rides')
+    click_link ('Ride search page')
     current_path.should eq(search_rides_path)
-    fill_in "ride_from_city", :with => "test"
-    fill_in "ride_to_city", :with => "test"
+    select(Location.first.name, :from => "ride_from_location_id")
+    select(Location.last.name, :from => "ride_to_location_id")
     click_button ('search')
-    page.should have_content("No ride found")
+    page.should have_content("No records")
     current_path.should eq(search_rides_path)
   end
-    it "Show no Result found When searching city path not exist " do
+  it "Show no Result found When searching city path not exist " do
     visit login_path
     @user = Factory(:user)
     fill_in "email", :with => @user.email
@@ -26,37 +26,17 @@ describe "Searches", :js => true do
     click_button ('Log in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
-    click_link ('Search Rides')
+    click_link ('Ride search page')
     current_path.should eq(search_rides_path)
     ride = Factory(:ride)
-    fill_in "ride_from_city", :with => ride.from_city
-    fill_in "ride_to_city", :with => ride.to_city
+    select(Location.first.name, :from => "ride_from_location_id")
+    select(Location.last.name, :from => "ride_to_location_id")
     click_button ('search')
-    page.should_not have_content("No ride found")
-    page.should have_content(ride.from_city)
-    current_path.should eq(search_rides_path)
-  end
-
-    it "Show the records When searching city path by all " do
-    visit login_path
-    @user = Factory(:user)
-    fill_in "email", :with => @user.email
-    fill_in "password", :with => "secret"
-    click_button ('Log in')
-    page.should have_content("Logged in!")
-    current_path.should eq(root_path)
-    click_link ('Search Rides')
-    current_path.should eq(search_rides_path)
-    ride = Factory(:ride)
-    fill_in "ride_from_city", :with => ride.from_city
-    fill_in "ride_to_city", :with => ride.to_city
-    choose('ride_departure_datetime_all')
-    click_button ('search')
-    page.should have_content(ride.from_city)
+    page.should have_content(Location.first.name)
     current_path.should eq(search_rides_path)
   end
 
-    it "Show the records When searching city path by week " do
+  it "Show the records When searching city path by all " do
     visit login_path
     @user = Factory(:user)
     fill_in "email", :with => @user.email
@@ -64,18 +44,18 @@ describe "Searches", :js => true do
     click_button ('Log in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
-    click_link ('Search Rides')
+    click_link ('Ride search page')
     current_path.should eq(search_rides_path)
     ride = Factory(:ride)
-    fill_in "ride_from_city", :with => ride.from_city
-    fill_in "ride_to_city", :with => ride.to_city
-    choose('ride_departure_datetime_this_week')
+    select(Location.first.name, :from => "ride_from_location_id")
+    select(Location.last.name, :from => "ride_to_location_id")
+    choose('ride_departure_all')
     click_button ('search')
-    page.should have_content(ride.from_city)
+    page.should have_content(Location.first.name)
     current_path.should eq(search_rides_path)
   end
 
-      it "Show the records When searching city path by month " do
+  it "Show the records When searching city path by week " do
     visit login_path
     @user = Factory(:user)
     fill_in "email", :with => @user.email
@@ -83,14 +63,35 @@ describe "Searches", :js => true do
     click_button ('Log in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
-    click_link ('Search Rides')
+    click_link ('Ride search page')
     current_path.should eq(search_rides_path)
     ride = Factory(:ride)
-    fill_in "ride_from_city", :with => ride.from_city
-    fill_in "ride_to_city", :with => ride.to_city
-    choose('ride_departure_datetime_this_month')
+    select(Location.first.name, :from => "ride_from_location_id")
+    select(Location.last.name, :from => "ride_to_location_id")
+    choose('ride_departure_first_option')
     click_button ('search')
-    page.should have_content(ride.from_city)
+    page.should have_content(Location.first.name)
     current_path.should eq(search_rides_path)
+
+  end
+
+  it "Show the records When searching city path by month " do
+    visit login_path
+    @user = Factory(:user)
+    fill_in "email", :with => @user.email
+    fill_in "password", :with => "secret"
+    click_button ('Log in')
+    page.should have_content("Logged in!")
+    current_path.should eq(root_path)
+    click_link ('Ride search page')
+    current_path.should eq(search_rides_path)
+    ride = Factory(:ride)
+    select(Location.first.name, :from => "ride_from_location_id")
+    select(Location.last.name, :from => "ride_to_location_id")
+    choose('ride_departure_second_option')
+    click_button ('search')
+    page.should have_content(Location.first.name)
+    current_path.should eq(search_rides_path)
+
   end
 end

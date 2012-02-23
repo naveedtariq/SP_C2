@@ -10,4 +10,12 @@ module ApplicationHelper
       "#{(t%60)} minutes"
     end
   end
+  def to_minutes(t)
+    if t == 0
+      "00"
+    else
+      "#{t}"
+    end
+    
+  end
 end

@@ -57,7 +57,8 @@ describe User do
       :password_confirmation  => 'test password',
       :email                  => 'test@tester.com',
       :first_name                  => 'test',
-      :last_name                  => 'me'
+      :last_name                  => 'me',
+      :photo => File.open("#{Rails.root}/spec/data/dont_delete.png"), 
     }
   end
 end
