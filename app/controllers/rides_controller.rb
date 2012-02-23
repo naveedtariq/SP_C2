@@ -10,7 +10,7 @@ class RidesController < ApplicationController
   def create
     @ride = current_user.created_rides.build(params[:ride])
     if @ride.save
-      flash[:notice] = "Successfully created ride."
+      flash[:notice] = "Successfully created ride"
       redirect_to root_url
     else
       render :action => 'new'
@@ -20,5 +20,9 @@ class RidesController < ApplicationController
   def search
     @ride = Ride.new(params[:ride])
     @rides = Ride.search_rides(params[:ride])
+  end
+
+  def show
+    @ride = Ride.find(params[:id])
   end
 end

@@ -1,4 +1,4 @@
-<%= javascript_include_tag    "jquery-1.7.1.min", "jquery-ui-1.8.17.custom.min", "time_picker" %>
+<%= javascript_include_tag    "jquery-1.7.1.min", "jquery-ui-1.8.17.custom.min","time_picker"%>
 <%= stylesheet_link_tag    "jquery-ui-1.8.17.custom" %>
 <div class="clear"></div>
 <div class="subnav">
@@ -18,7 +18,7 @@
   $(document).ready(function() {
     $( "#ride_departure_date" ).datepicker({
       dateFormat: "yy-mm-dd",
-       minDate: 0, maxDate: "+1Y" 
+       minDate: 0, maxDate: "+1Y"
     });
   });
 </script>
@@ -89,8 +89,8 @@
     <%= f.select :available_seats, 1..4 %>
   </div>
   <div class="field">
-    <%= f.label :price_per_seat_in_dollars %>
-    <%= f.number_field :price_per_seat  %>
+    <%= f.label :total_price %>
+    <%= f.number_field :total_price  %>
   </div>
   <div class="field">
     <%= f.label :notes %>
