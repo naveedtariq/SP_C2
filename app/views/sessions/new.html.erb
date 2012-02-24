@@ -14,3 +14,91 @@
   </div>
   <div class="actions"><%= submit_tag "Log in" %></div>
 <% end %>
+<div>
+      <button id="login">Login With Facebook Test</button>
+      <button id="logout">Logout From Facebook</button>
+      <button id="disconnect">Disconnect FB</button>
+</div>
+
+<div id="user-info" style="display: none;"></div>
+
+<div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script>
+      // initialize the library with the API key
+      FB.init({ apiKey: '238758426215870' });
+
+      // fetch the status on load
+      FB.getLoginStatus(handleSessionResponse);
+
+      $('#login').bind('click', function() {
+        //FB.login(handleSessionResponse);
+	 	FB.login(function(response) {
+			if (response.authResponse) {
+			    // alert('Welcome!  Fetching your information.... ');
+				var image = '';
+				
+				FB.api('/me', function (response) {
+					
+							$('#user-info').html('<h1>Welcome ' + response.name + '!</h1>').show('fast');
+							
+					//$('#user-info').html('<img src="' + response.pic + '">' + response.name).show('fast');
+
+				  // the FQL query: Get the link of the image, that is the first in the album "Profile pictures" of this user.
+				  //var query = FB.Data.query('select src_big from photo where pid in (select cover_pid from album where owner={0} and name="Profile Pictures")', response.id);
+				  //query.wait(function (rows) {
+
+				    //the image link
+				    //image = rows.src_big;
+					//alert(image);
+				  //});
+				});
+				//alert(image);
+			     //FB.api('/me', function(response) {
+			     //  alert('Good to see you, ' + response.name + '.');
+				//	$('#user-info').html('<img src="' + response.pic + '">' + response.name).show('fast');
+			     //});
+			   //} else {
+			    //alert('User cancelled login or did not fully authorize.');
+			   }
+	   		//andleSessionResponse(response);
+	 	}, {scope: 'email'});
+      });
+
+      $('#logout').bind('click', function() {
+        FB.logout(handleSessionResponse);
+      });
+
+      $('#disconnect').bind('click', function() {
+        FB.api({ method: 'Auth.revokeAuthorization' }, function(response) {
+          clearDisplay();
+        });
+      });
+
+      // no user, clear display
+      function clearDisplay() {
+        $('#user-info').hide('fast');
+      }
+
+      // handle a session response from any of the auth related calls
+      function handleSessionResponse(response) {
+        return;
+		// if we dont have a session, just hide the user info
+        if (!response.authResponse) {
+          clearDisplay();
+          return;
+        }
+
+        // if we have a session, query for the user's profile picture and name
+        FB.api(
+          {
+            method: 'fql.query',
+            query: 'SELECT name, pic FROM profile WHERE id=' + FB.getSession().uid
+          },
+          function(response) {
+            var user = response[0];
+            $('#user-info').html('<img src="' + user.pic + '">' + user.name).show('fast');
+          }
+        );
+      }
+    </script>
