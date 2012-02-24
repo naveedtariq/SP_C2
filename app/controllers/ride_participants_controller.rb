@@ -15,6 +15,16 @@ class RideParticipantsController < ApplicationController
       render :action => 'new'
     end
   end
+  def accept
+    @ride_participant = @ride.ride_participants.find(params[:id])
+    @ride_participant.update_attribute(:role, ROLES_FOR_RIDES[:confirmed])
+    return redirect_to dashboard_path
+  end
+  def deny
+    @ride_participant = @ride.ride_participants.find(params[:id])
+    @ride_participant.update_attribute(:role, ROLES_FOR_RIDES[:rejected])
+    return redirect_to dashboard_path
+  end
   private
   def load_ride
     @ride = Ride.find(params[:ride_id])

@@ -22,10 +22,6 @@
       $("#btn-book-ride").hide();
       $(".info_view").show();
     });
-
-    $("#ride_participant_number_of_seats").change(function() {
-      alert($('#ride_participant_number_of_seats option:selected').html());
-    });
   });
 </script>
 <table border="1" cellpadding="3">
@@ -105,7 +101,7 @@
 </div>
 <div class="profile">
   <% if @ride.owner.present? %>
-    <%= image_tag @ride.owner.photo.url(:small) %><br/>
+    <%#= image_tag @ride.owner.photo.url(:small) %><br/>
     <b><%= @ride.owner.first_name%></b><br/><br/>
     City: &nbsp; &nbsp; &nbsp;<%= @ride.owner.city%><br/>
     Town: &nbsp; &nbsp; &nbsp<%= @ride.owner.town%><br/>

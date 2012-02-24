@@ -23,7 +23,4 @@ class RidesController < ApplicationController
     @rides = Ride.search_rides(params[:ride])
   end
 
-  def show
-    @ride = Ride.find(params[:id])
-  end
 end

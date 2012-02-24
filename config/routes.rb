@@ -7,11 +7,16 @@ SPC2::Application.routes.draw do
 
   resources :users, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :rides, :only => [:index, :new, :create, :show] do
+  resources :rides, :only => [:index, :new, :create] do
     collection do
       get "search"
     end
-    resources :ride_participants, :only => [:new, :create]
+    resources :ride_participants, :only => [:new, :create] do 
+      member do
+        get "accept"
+        get "deny"
+      end
+    end
   end
   resource :dashboard, :only => [:show]
   root :to => "rides#index"

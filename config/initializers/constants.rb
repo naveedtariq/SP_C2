@@ -10,5 +10,6 @@ ROLES_FOR_RIDES = {
     :pending => 2,
     :confirmed => 3,
     :abandoned => 4,
-    :expired => 5
+    :expired => 5,
+    :rejected => 6
 }

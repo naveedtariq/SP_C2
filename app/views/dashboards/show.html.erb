@@ -1,6 +1,116 @@
-<%#
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-%>
+<ul class="nav-pills nav">
+  <li>
+    <%= link_to "My Ride", rides_path %>
+  </li>
+  <li>
+    <%= link_to "Ride input page", new_ride_path %>
+  </li>
+  <li>
+    <%= link_to "Ride search page", search_rides_path %>
+  </li>
+  <li class="active">
+    <%= link_to "My Dashboard", dashboard_path %>
+  </li>
+</ul>
+<br/>
+<h4> Current Rides</h4>
+<table border="1" cellpadding="3">
+  <tr>
+    <th>Offered by</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Departure date</th>
+    <th>Departure time</th>
+    <th>Arrival time</th>
+    <th>Flexibility</th>
+    <th>Duration</th>
+    <th>Vehicle Type</th>
+    <th>Available Seats</th>
+    <th>Total Price</th>
+    <th>Notes</th>
+  </tr>
+  <% if @ride_participants.empty? %>
+    <tr><td colspan="12">No records</td></tr>
+  <% end %>
+  <% @ride_participants.each do |ride_participant| %>
+    <% ride = ride_participant.ride %>
+    <tr align="center">
+      <td><%= ride.owner && "#{ride.owner.first_name} #{ride.owner.last_name}" %></td>
+      <td><%= ride.from_location && ride.from_location.name %></td>
+      <td><%= ride.to_location && ride.to_location.name %></td>
+      <td><%= ride.departure_date %></td>
+      <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+      <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z")  %></td>
+      <td><%= ride.flexibility_in_minutes %> mins</td>
+      <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+      <td><%= ride.ride_type %></td>
+      <td><%= ride.remaining_seats %></td>
+      <td><%= number_to_currency(ride.total_price)%></td>
+      <td><%= ride.notes%></td>
+    </tr>
+    <tr>
+      <td colspan="12">
+        <% case ride_participant.role  %>
+        <% when ROLES_FOR_RIDES[:owner] %>
+          <% if ride.ride_participants.pending_participants.blank? %>
+            No requests so far.
+          <% else %>
+            <ul>
+              <% ride.ride_participants.pending_participants.each do |participant| %>
+                <li>Status: ride requested by <%= participant.user.first_name %> <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant) %> or <%= link_to "Deny", deny_ride_ride_participant_path(ride, participant) %>; <%= distance_of_time_in_words(SpClock.time, (participant.created_at+1.day)) %> left to respond </li>
+              <% end %>
+            </ul>
+          <% end %>
+        <% when ROLES_FOR_RIDES[:pending] %>
+          Status: still pending; <%= distance_of_time_in_words(SpClock.time, (ride_participant.created_at+1.day)) %> left in expiry
+        <% when ROLES_FOR_RIDES[:confirmed] %>
+          Status: confirmed by <%= ride_participant.owner.first_name %>; 
+        <% when ROLES_FOR_RIDES[:expired] %>
+          Status: your ride was not accepted within 24 hours, <%= link_to "post your ride", new_ride_path %>
+        <% when ROLES_FOR_RIDES[:rejected] %>
+          Status: your ride was not accepted, <%= link_to "post your ride", new_ride_path %>
+        <% end %>
+      </td>
+    </tr>
+  <%end%>
+</table>
 
-This is a Dashboard
+<hr/>
+<h4> Past Rides</h4>
+<table border="1" cellpadding="3">
+  <tr>
+    <th>Offered by</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Departure date</th>
+    <th>Departure time</th>
+    <th>Arrival time</th>
+    <th>Flexibility</th>
+    <th>Duration</th>
+    <th>Vehicle Type</th>
+    <th>Available Seats</th>
+    <th>Total Price</th>
+    <th>Notes</th>
+  </tr>
+  <% if @past_rides.empty? %>
+    <tr><td colspan="12">No records</td></tr>
+  <% end %>
+  <% @past_rides.each do |ride_participant| %>
+    <% ride = ride_participant.ride %>
+    <tr align="center">
+      <td><%= ride.owner && "#{ride.owner.first_name} #{ride.owner.last_name}" %></td>
+      <td><%= ride.from_location && ride.from_location.name %></td>
+      <td><%= ride.to_location && ride.to_location.name %></td>
+      <td><%= ride.departure_date %></td>
+      <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+      <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z")  %></td>
+      <td><%= ride.flexibility_in_minutes %> mins</td>
+      <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+      <td><%= ride.ride_type %></td>
+      <td><%= ride.remaining_seats %></td>
+      <td><%= number_to_currency(ride.total_price)%></td>
+      <td><%= ride.notes%></td>
+    </tr>
+  <% end %>
+
+</table>
