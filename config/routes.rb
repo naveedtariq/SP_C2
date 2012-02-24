@@ -11,7 +11,9 @@ SPC2::Application.routes.draw do
     collection do
       get "search"
     end
+    resources :ride_participants, :only => [:new, :create]
   end
+  resource :dashboard, :only => [:show]
   root :to => "rides#index"
 
   # The priority is based upon order of creation:

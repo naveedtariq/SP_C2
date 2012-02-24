@@ -69,7 +69,7 @@
   <% end %>
   <%@rides.each do |ride| %>
     <tr align="center">
-      <td><%= link_to 'Select', ride %></td>
+      <td><%= link_to 'Select', new_ride_ride_participant_path(ride) %></td>
       <td><%= ride.owner && "#{ride.owner.first_name} #{ride.owner.last_name}" %></td>
       <td><%= ride.from_location && ride.from_location.name %></td>
       <td><%= ride.to_location && ride.to_location.name %></td>
@@ -79,7 +79,7 @@
       <td><%= ride.flexibility_in_minutes %> mins</td>
       <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
       <td><%= ride.ride_type %></td>
-      <td><%= ride.available_seats %></td>
+      <td><%= ride.remaining_seats %></td>
       <td><%= number_to_currency(ride.total_price)%></td>
       <td><%= ride.notes%></td>
     </tr>

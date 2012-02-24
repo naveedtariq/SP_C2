@@ -34,7 +34,7 @@ class Ride < ActiveRecord::Base
   belongs_to :to_location, :class_name => Location
   belongs_to :from_location, :class_name => Location
   #accepts_nested_attributes_for :location
-  # attr_accessible :from_city, :to_city, :departure_date, :departure_time, :flexibility, :duration, :ride_type, :available_seats, :total_price, :notes
+ # attr_accessible :from_city, :to_city, :departure_date, :departure_time, :flexibility, :duration, :ride_type, :available_seats, :total_price, :notes
   def self.search_rides(params)
     unless params.blank?
       params.each do |param|
@@ -53,12 +53,25 @@ class Ride < ActiveRecord::Base
     end
     rides
   end
+  def ride_participants_owners
+    if self.ride_participants.blank?
+      self.ride_participants
+    else
+      self.ride_participants.owners
+    end
+  end
   def make_owner!(user)
-    riders = self.ride_participants.owners
+    riders = self.ride_participants_owners
     riders.update_all(:role => ROLES_FOR_RIDES[:abandoned])
     self.users << user
   end
   def owner
     User.find_by_id(self.ride_participants.owner && self.ride_participants.owner.user_id)
+  end
+  def remaining_seats
+    self.available_seats - booked_seats
+  end
+  def booked_seats
+    self.ride_participants.where(:role => [ROLES_FOR_RIDES[:pending], ROLES_FOR_RIDES[:confirmed]]).sum(:number_of_seats)
   end
 end

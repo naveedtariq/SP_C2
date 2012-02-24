@@ -22,6 +22,10 @@
       $("#btn-book-ride").hide();
       $(".info_view").show();
     });
+
+    $("#ride_participant_number_of_seats").change(function() {
+      alert($('#ride_participant_number_of_seats option:selected').html());
+    });
   });
 </script>
 <table border="1" cellpadding="3">
@@ -38,7 +42,7 @@
     <th>Total Price</th>
     <th>Notes</th>
   </tr>
-  <tr align="center">     
+  <tr align="center">
     <td><%= @ride.owner && "#{@ride.owner.first_name} #{@ride.owner.last_name}" %></td>
     <td><%= @ride.from_location.name %></td>
     <td><%= @ride.to_location.name %></td>
@@ -47,8 +51,8 @@
     <td><%= @ride.flexibility_in_minutes %> mins</td>
     <td><%= time_to_minutes(@ride.duration_in_minutes) %></td>
     <td><%= @ride.ride_type %></td>
-    <td><%= @ride.available_seats %></td>
-    <td><%= number_to_currency(@ride.total_price)%></td>
+    <td><%= @ride.remaining_seats %></td>
+    <td><%= number_to_currency(@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats))%></td>
     <td><%= @ride.notes%></td>
   </tr>
 </table>
@@ -56,22 +60,46 @@
 <div class="left_bag">
   <div class="seat_view">
     <br/>
-    <%= form_for @ride_participants do |f| %>
-      <% ts=@ride.available_seats %>
-      <% tp=@ride.total_price %>
-      <%= select_tag "available_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%>
+    <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride) do |f| %>
+      <% ts=@ride.remaining_seats %>
+      <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
+      <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%>
       <br/>
-      Total = $<span id="price"><%=  @ride.total_price %></span><br/><br/>
+      <div class="price_view">Total = $<span id="price"><%=  @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span></div><br/><br/>
       <input type="button" value="Book Ride" id="btn-book-ride"/>
     </div><br/>
 
     <div class="info_view" style="display: none">
       <br/>
-      <b>Contact Info and Options</b>
-  <%= f.label :phone,"Enter your phone number" %><br/>
-  <%= f.text_field :phone %>
+      <b>Contact Info and Options</b><br/><br/>
+      <%= f.label :phone,"Enter your phone number" %>
+      <%= f.text_field :phone %>
       <br/>
-       <p><%= f.submit "Booking Ride" %></p>
+      <div>
+        <br/>Prefered method of communication<br/><br/>
+        <table><tr>
+            <td>
+              <%= f.radio_button :mode_of_communications, 'Sms text' %>
+            </td>
+            <td>
+              <%= f.label :mode_of_communications, 'Sms text', :for => 'ride_paticipant_mode_of_communications_sms_text'%>
+            </td>
+            <td>
+              <%= f.radio_button :mode_of_communications, 'Phone call' %>
+            </td>
+            <td>
+              <%= f.label :mode_of_communications, 'Phone call', :for => 'ride_paticipant_mode_of_communications_phone_call'%>
+            </td>
+            <td>
+              <%= f.radio_button :mode_of_communications, 'Email' %>
+            </td>
+            <td>
+              <%= f.label :mode_of_communications, 'Email', :for => 'ride_paticipant_mode_of_communications_email'%>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p><%= f.submit "Booking Ride" %></p>
     </div>
   <%end%>
 </div>
