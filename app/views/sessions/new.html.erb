@@ -32,7 +32,37 @@
       FB.getLoginStatus(handleSessionResponse);
 
       $('#login').bind('click', function() {
-        FB.login(handleSessionResponse);
+        //FB.login(handleSessionResponse);
+	 	FB.login(function(response) {
+			if (response.authResponse) {
+			    // alert('Welcome!  Fetching your information.... ');
+				var image = '';
+				
+				FB.api('/me', function (response) {
+					
+							$('#user-info').html('<h1>Welcome ' + response.name + '!</h1>').show('fast');
+							
+					//$('#user-info').html('<img src="' + response.pic + '">' + response.name).show('fast');
+
+				  // the FQL query: Get the link of the image, that is the first in the album "Profile pictures" of this user.
+				  //var query = FB.Data.query('select src_big from photo where pid in (select cover_pid from album where owner={0} and name="Profile Pictures")', response.id);
+				  //query.wait(function (rows) {
+
+				    //the image link
+				    //image = rows.src_big;
+					//alert(image);
+				  //});
+				});
+				//alert(image);
+			     //FB.api('/me', function(response) {
+			     //  alert('Good to see you, ' + response.name + '.');
+				//	$('#user-info').html('<img src="' + response.pic + '">' + response.name).show('fast');
+			     //});
+			   //} else {
+			    //alert('User cancelled login or did not fully authorize.');
+			   }
+	   		//andleSessionResponse(response);
+	 	}, {scope: 'email'});
       });
 
       $('#logout').bind('click', function() {
@@ -52,8 +82,9 @@
 
       // handle a session response from any of the auth related calls
       function handleSessionResponse(response) {
-        // if we dont have a session, just hide the user info
-        if (!response.session) {
+        return;
+		// if we dont have a session, just hide the user info
+        if (!response.authResponse) {
           clearDisplay();
           return;
         }
