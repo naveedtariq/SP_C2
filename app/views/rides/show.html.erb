@@ -16,14 +16,12 @@
   </ul>
 </div>
 <br/>
-
 <script>
   $("Book Ride").click(function () {
     $("input#button").hide();
     $(".info_view").show();
   });
 </script>
-
 <table border="1" cellpadding="3">
   <tr>
     <th>Offered by</th>
@@ -38,10 +36,8 @@
     <th>Total Price</th>
     <th>Notes</th>
   </tr>
-
-
-  <tr align="center">
-    <td><%= "#{@ride.user.first_name} #{@ride.user.last_name}" %></td>
+  <tr align="center">     
+    <td><%= @ride.owner && "#{@ride.owner.first_name} #{@ride.owner.last_name}" %></td>
     <td><%= @ride.from_location.name %></td>
     <td><%= @ride.to_location.name %></td>
     <td><%= @ride.departure_date %></td>
@@ -58,34 +54,33 @@
 <div class="left_bag">
   <div class="seat_view">
     <br/>
-    <%   ts=@ride.available_seats %>
-    <%   tp=@ride.total_price %>
-    <%= select_tag "available_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (tp/i).to_s + ' each ', i] })%>
+    <% ts=@ride.available_seats %>
+    <% tp=@ride.total_price %>
+    <%= select_tag "available_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%>
     <br/>
-    Total = $<%=  @ride.total_price %><br/><br/>
+    Total = $<span id="price"><%=  @ride.total_price %></span><br/><br/>
     <input type="button" value="Book Ride" id="button"/>
   </div><br/>
 
   <div class="info_view" style="display: none">
     <br/>
     <b>Contact Info and Options</b>
-    <%#= form_for @user do |f| %>
-      <%#*<div class="field">%>
-        <%#= f.label :phone,"Enter your phone number" %><br/>
-        <%#= f.text_field :phone %>
-      <%#*</div>%>
-    <%#end%>
+<%#= form_for @user do |f| %>
+<%#*<div class="field">%>
+<%#= f.label :phone,"Enter your phone number" %><br/>
+<%#= f.text_field :phone %>
+<%#*</div>%>
+<%#end%>
     <br/>
-
   </div>
-
 </div>
-
 <div class="profile">
-  <%= image_tag @ride.user.photo.url(:small) %><br/>
-  <b><%= @ride.user.first_name%></b><br/><br/>
-  City: &nbsp; &nbsp; &nbsp;<%= @ride.user.city%><br/>
-  Town: &nbsp; &nbsp; &nbsp<%= @ride.user.town%><br/>
-  School: &nbsp; &nbsp; &nbsp<%= @ride.user.school%><br/>
+  <% if @ride.owner.present? %>
+    <%= image_tag @ride.owner.photo.url(:small) %><br/>
+    <b><%= @ride.owner.first_name%></b><br/><br/>
+    City: &nbsp; &nbsp; &nbsp;<%= @ride.owner.city%><br/>
+    Town: &nbsp; &nbsp; &nbsp<%= @ride.owner.town%><br/>
+    School: &nbsp; &nbsp; &nbsp<%= @ride.owner.school%><br/>
+  <% end %>
 </div>
 <div class="clear"></div>

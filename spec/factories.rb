@@ -15,7 +15,7 @@ Factory.define :ride do |f|
   l = Factory(:location)
   f.from_location_id l.id
   f.available_seats 3
-  f.price_per_seat 3
+  f.total_price 3
   f.departure_date SpClock.date
   f.departure_time SpClock.time
   f.duration_in_minutes 15
