@@ -33,7 +33,7 @@ describe Ride do
       :from_location_id => Location.first.id,
       :to_location_id => Location.last.id,
       :available_seats => 2,
-      :price_per_seat => 2,
+      :total_price => 2,
       :departure_date => SpClock.date,
       :departure_time => SpClock.time,
       :duration_in_minutes => 15,

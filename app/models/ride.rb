@@ -1,7 +1,6 @@
 class Ride < ActiveRecord::Base
   has_many :ride_participants
   has_many :users, :through => :ride_participants
-  belongs_to :user
   validates  :available_seats, :total_price, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true
   validate :departure_date_inclusion
   validate :from_and_to_location
@@ -53,5 +52,13 @@ class Ride < ActiveRecord::Base
       rides = rides.scoped_departure(dep_date)
     end
     rides
+  end
+  def make_owner!(user)
+    riders = self.ride_participants.owners
+    riders.update_all(:role => ROLES_FOR_RIDES[:abandoned])
+    self.users << user
+  end
+  def owner
+    User.find_by_id(self.ride_participants.owner && self.ride_participants.owner.user_id)
   end
 end

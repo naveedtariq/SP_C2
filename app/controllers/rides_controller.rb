@@ -8,8 +8,9 @@ class RidesController < ApplicationController
   end
 
   def create
-    @ride = current_user.created_rides.build(params[:ride])
+    @ride = Ride.new(params[:ride])
     if @ride.save
+      @ride.make_owner!(current_user)
       flash[:notice] = "Successfully created ride"
       redirect_to root_url
     else

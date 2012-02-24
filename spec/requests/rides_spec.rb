@@ -18,7 +18,7 @@ describe "Rides", :js =>true do
     fill_in "ride_notes", :with => "test"
     click_button ('Create Ride')
     #page.should have_content("Successfully created ride")
-    current_path.should eq(rides_path)
+    current_path.should eq(root_path)
   end
   it "From and to location can't be the same" do
     visit login_path
@@ -32,7 +32,7 @@ describe "Rides", :js =>true do
     current_path.should eq(new_ride_path)
     fill_in "ride_departure_date", :with => SpClock.date
     choose('ride_ride_type_sedon')
-    fill_in "ride_price_per_seat", :with => "12"
+    fill_in "ride_total_price", :with => "12"
     fill_in "ride_notes", :with => "test"
     click_button ('Create Ride')
     page.should have_content("From location can't be same as destination")

@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
 
   has_many :ride_participants
   has_many :rides, :through => :ride_participants
-  has_many :created_rides, :class_name => Ride
+  def created_rides
+    Ride.where(:id => self.ride_participants.owners.pluck(:ride_id))
+  end
   validates_confirmation_of :password
   validates :password, :on => :create, :presence =>true
   validates :email, :presence =>true
