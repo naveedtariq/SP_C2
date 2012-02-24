@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 
 gem 'sorcery', '0.7.6'
 gem 'rails', '3.2.1'
-gem 'carrierwave'
-gem 'fog'
-gem 'aws-s3'
-gem 'rmagick'
+gem "fog"
+gem "aws-s3"
+gem "rmagick"
+gem "carrierwave"
 gem 'json'
 gem 'jquery-rails'
 
