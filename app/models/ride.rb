@@ -35,7 +35,7 @@ class Ride < ActiveRecord::Base
   belongs_to :to_location, :class_name => Location
   belongs_to :from_location, :class_name => Location
   #accepts_nested_attributes_for :location
-  # attr_accessible :from_city, :to_city, :departure_date, :departure_time, :flexibility, :duration, :ride_type, :available_seats, :price_per_seat, :notes
+  # attr_accessible :from_city, :to_city, :departure_date, :departure_time, :flexibility, :duration, :ride_type, :available_seats, :total_price, :notes
   def self.search_rides(params)
     unless params.blank?
       params.each do |param|
