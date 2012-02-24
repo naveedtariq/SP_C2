@@ -73,7 +73,7 @@
   <%@rides.each do |ride| %>
     <tr align="center">
       <td><%= link_to 'Select', new_ride_ride_participant_path(ride) %></td>
-      <td><%= ride.owner && "#{ride.owner.first_name} #{ride.owner.last_name}" %></td>
+      <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
       <td><%= ride.from_location && ride.from_location.name %></td>
       <td><%= ride.to_location && ride.to_location.name %></td>
       <td><%= ride.departure_date %></td>

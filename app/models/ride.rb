@@ -72,6 +72,6 @@ class Ride < ActiveRecord::Base
     self.available_seats - booked_seats
   end
   def booked_seats
-    self.ride_participants.where(:role => [ROLES_FOR_RIDES[:pending], ROLES_FOR_RIDES[:confirmed]]).sum(:number_of_seats)
+    self.ride_participants.pending_or_confirmed.sum(:number_of_seats)
   end
 end

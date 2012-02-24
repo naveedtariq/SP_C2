@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
       self.ride_participants.owners
     end
   end
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
   validates_confirmation_of :password
   validates :password, :on => :create, :presence =>true
   validates :email, :presence =>true
