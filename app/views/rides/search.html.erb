@@ -47,40 +47,8 @@
 
   <%= f.submit "search" %>
   <table border="1" cellpadding="3">
-<<<<<<< HEAD
-  <tr>
-    <th>Pick</th>
-    <th>Offered by</th>
-    <th>From</th>
-    <th>To</th>
-    <th>Departure date</th>
-    <th>Departure time</th>
-    <th>Flexibility</th>
-    <th>Duration</th>
-    <th>Vehicle Type</th>
-    <th>Available Seats</th>
-    <th>Total Price</th>
-    <th>Notes</th>
-  </tr>
-  <% if @rides.empty? %>
-  <tr><td colspan="10">No records</td></tr>
-  <% end %>
-  <%@rides.each do |ride| %>
-    <tr align="center">
-      <td><%= link_to 'Select', ride %></td>
-      <td><%= "#{ride.user.first_name} #{ride.user.last_name}" %></td>
-      <td><%= ride.from_location.name %></td>
-      <td><%= ride.to_location.name %></td>
-      <td><%= ride.departure_date %></td>
-      <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
-      <td><%= ride.flexibility_in_minutes %> mins</td>
-      <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
-      <td><%= ride.ride_type %></td>
-      <td><%= ride.available_seats %></td>
-      <td><%= number_to_currency(ride.total_price)%></td>
-      <td><%= ride.notes%></td>
-=======
     <tr>
+      <th>Pick</th>
       <th>Offered by</th>
       <th>From</th>
       <th>To</th>
@@ -91,15 +59,15 @@
       <th>Duration</th>
       <th>Vehicle Type</th>
       <th>Available Seats</th>
-      <th>Price per Seat</th>
+      <th>Total Price</th>
       <th>Notes</th>
->>>>>>> 6e5241b585adc4a2e768c3ec7346b7550ebc8ad9
     </tr>
     <% if @rides.empty? %>
       <tr><td colspan="11">No records</td></tr>
     <% end %>
     <%@rides.each do |ride| %>
       <tr align="center">
+        <td><%= link_to 'Select', ride %></td>
         <td><%= ride.user && "#{ride.user.first_name} #{ride.user.last_name}" %></td>
         <td><%= ride.from_location && ride.from_location.name %></td>
         <td><%= ride.to_location && ride.to_location.name %></td>
@@ -110,7 +78,7 @@
         <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
         <td><%= ride.ride_type %></td>
         <td><%= ride.available_seats %></td>
-        <td><%= number_to_currency(ride.price_per_seat)%></td>
+        <td><%= number_to_currency(ride.total_price)%></td>
         <td><%= ride.notes%></td>
       </tr>
     <%end%>
