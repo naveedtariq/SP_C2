@@ -2,7 +2,7 @@ class Ride < ActiveRecord::Base
   has_many :ride_participants
   has_many :users, :through => :ride_participants
   belongs_to :user
-  validates  :available_seats, :price_per_seat, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true
+  validates  :available_seats, :total_price, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true
   validate :departure_date_inclusion
   validate :from_and_to_location
   def from_and_to_location
@@ -29,7 +29,7 @@ class Ride < ActiveRecord::Base
   end
   
   validates_numericality_of :available_seats, :greater_than => 0
-  validates_numericality_of :price_per_seat, :greater_than_or_equal_to => 0
+  validates_numericality_of :total_price, :greater_than_or_equal_to => 0
   validates_numericality_of :flexibility_in_minutes, :greater_than_or_equal_to => 0, :allow_nil => true
   scope :scoped_departure, lambda{ |date_departure| where("departure_date < ?", date_departure)}
   belongs_to :to_location, :class_name => Location

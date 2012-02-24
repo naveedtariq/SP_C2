@@ -1,0 +1,91 @@
+<%= javascript_include_tag "jquery-1.7.1.min" %>
+<div class="subnav">
+  <ul class="nav-pills nav">
+    <li>
+      <%= link_to "My Ride", rides_path %>
+    </li>
+    <li>
+      <%= link_to "Ride input page", new_ride_path %>
+    </li>
+    <li>
+      <%= link_to "Ride search page", search_rides_path %>
+    </li>
+    <li class="active">
+      <%= link_to "<<< Back to search results", search_rides_path %>
+    </li>
+  </ul>
+</div>
+<br/>
+
+<script>
+  $("input#button").click(function () {
+    $("input#button").hide();
+    $(".info_view").show();
+  });
+</script>
+
+<table border="1" cellpadding="3">
+  <tr>
+    <th>Offered by</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Departure date</th>
+    <th>Departure time</th>
+    <th>Flexibility</th>
+    <th>Duration</th>
+    <th>Vehicle Type</th>
+    <th>Available Seats</th>
+    <th>Total Price</th>
+    <th>Notes</th>
+  </tr>
+
+
+  <tr align="center">
+    <td><%= "#{@ride.user.first_name} #{@ride.user.last_name}" %></td>
+    <td><%= @ride.from_location.name %></td>
+    <td><%= @ride.to_location.name %></td>
+    <td><%= @ride.departure_date %></td>
+    <td><%= @ride.departure_time.strftime("%H:%M %Z") %></td>
+    <td><%= @ride.flexibility_in_minutes %> mins</td>
+    <td><%= time_to_minutes(@ride.duration_in_minutes) %></td>
+    <td><%= @ride.ride_type %></td>
+    <td><%= @ride.available_seats %></td>
+    <td><%= number_to_currency(@ride.total_price)%></td>
+    <td><%= @ride.notes%></td>
+  </tr>
+</table>
+
+<div class="left_bag">
+  <div class="seat_view">
+    <br/>
+    <%   ts=@ride.available_seats %>
+    <%   tp=@ride.total_price %>
+    <%= select_tag "available_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (tp/i).to_s + ' each ', i] })%>
+    <br/>
+    Total = $<%=  @ride.total_price %><br/><br/>
+    <input type="button" value="Book Ride" id="button"/>
+  </div><br/>
+
+  <div class="info_view" style="display: none">
+    <br/>
+    <b>Contact Info and Options</b>
+    <%#= form_for @user do |f| %>
+      <%#*<div class="field">%>
+        <%#= f.label :phone,"Enter your phone number" %><br/>
+        <%#= f.text_field :phone %>
+      <%#*</div>%>
+    <%#end%>
+    <br/>
+
+  </div>
+
+</div>
+
+<div class="profile">
+  <%= image_tag @ride.user.photo.url(:small) %><br/>
+  <b><%= @ride.user.first_name%></b><br/><br/>
+  City: &nbsp; &nbsp; &nbsp;<%= @ride.user.city%><br/>
+  Town: &nbsp; &nbsp; &nbsp<%= @ride.user.town%><br/>
+  School: &nbsp; &nbsp; &nbsp<%= @ride.user.school%><br/>
+</div>
+<div class="clear"></div>

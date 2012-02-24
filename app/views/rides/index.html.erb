@@ -22,7 +22,7 @@
     <th>Duration</th>
     <th>Vehicle Type</th>
     <th>Available Seats</th>
-    <th>Price per Seat</th>
+    <th>Total Price</th>
     <th>Notes</th>
   </tr>
   <% if @rides.empty? %>
@@ -38,7 +38,7 @@
       <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
       <td><%= ride.ride_type %></td>
       <td><%= ride.available_seats %></td>
-      <td><%= number_to_currency(ride.price_per_seat)%></td>
+      <td><%= number_to_currency(ride.total_price)%></td>
       <td><%= ride.notes%></td>
     </tr>
   <%end%>

@@ -3373,3 +3373,20 @@ a.thumbnail:hover {
 .left{
   float:left;
 }
+
+.profile{
+    margin-left: 400px;
+}
+
+.seat_view{
+    float: left;
+    width: 300px;
+}
+.info_view{
+    float: left;
+    width: 300px;
+}
+.left_bag{
+    float: left;
+    width: 300px;
+}

@@ -7,7 +7,7 @@ SPC2::Application.routes.draw do
 
   resources :users, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :rides, :only => [:index, :new, :create] do
+  resources :rides, :only => [:index, :new, :create, :show] do
     collection do
       get "search"
     end
