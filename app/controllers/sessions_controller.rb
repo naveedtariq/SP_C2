@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
+  layout "session"
   def new
-
+	@facebook_api_key = FB_CONFIG['api_key']
   end
 
   def create

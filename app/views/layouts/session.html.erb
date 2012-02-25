@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
   <head>
-    <title>SPC2</title>
+    <title>SPC2 - Sign in</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "jquery.min", "jquery-ui.min" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -16,27 +15,20 @@
             <ul class="nav">
               <% if current_user %>
                 <li>Logged in as <%= current_user.email %>.</li>
-                <li><%= link_to "Log out", logout_path %></li>
+                <li><%= link_to "Sign out", logout_path %></li>
               <% else %>
-                <li><%= link_to "Sign up", signup_path %> </li>
-                <li><%= link_to "Log in", login_path  %></li>
+                <li><%= link_to "Create Account", signup_path %> </li>
+                <li><%= link_to "Sign in", login_path  %></li>
               <% end %>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
-      <section id="code">
-        <% flash.each do |name, msg| %>
-          <%= content_tag :div, msg, :id => "flash_#{name}" %>
-        <% end %>
-      </section>
-    </div>
-    <div class="container">
-      <section id="forms">
-        <%= yield %>
-      </section>
-    </div>
+	<div class="container">
+		<div class="content">
+			<%= yield %>
+		</div>
+	</div>     
   </body>
 </html>

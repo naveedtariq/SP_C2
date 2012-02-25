@@ -1,0 +1,11 @@
+defaults: &defaults
+  api_key: '238758426215870'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
