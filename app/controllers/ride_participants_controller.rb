@@ -7,7 +7,7 @@ class RideParticipantsController < ApplicationController
   def create
     @ride_participant = @ride.ride_participants.build(params[:ride_participant])
     @ride_participant.role = ROLES_FOR_RIDES[:pending]
-    @ride_participant.user_id = current_user
+    @ride_participant.user_id = current_user.id
     if @ride_participant.save
       flash[:notice] = "Successfully Booked "
       redirect_to dashboard_path

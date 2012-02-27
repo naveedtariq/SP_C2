@@ -57,7 +57,7 @@
           <% else %>
             <ul>
               <% ride.ride_participants.pending_participants.each do |participant| %>
-                <li>Status: ride requested by <%= participant.user.full_name %> <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant) %> or <%= link_to "Deny", deny_ride_ride_participant_path(ride, participant) %>; <%= ((participant.created_at+1.day)-SpClock.time.to_i).strftime("%H:%M")  %> left to respond </li>
+                <li>Status: ride requested by <%= participant.user.full_name %> <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant) %> or <%= link_to "Deny", deny_ride_ride_participant_path(ride, participant) %>; <%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M")  %> left to respond </li>
               <% end %>
               <% ride.ride_participants.confirmed_participants.each do |participant| %>
                 <li>Status: ride confirmed for <%= participant.user.full_name %>, contact info: phone <%= participant.phone %>, email: <%= participant.user.email %>; preference: <%= participant.mode_of_communications %></li>
@@ -65,7 +65,7 @@
             </ul>
           <% end %>
         <% when ROLES_FOR_RIDES[:pending] %>
-          Status: still pending; <%= ((ride_participant.created_at+1.day)-SpClock.time.to_i).strftime("%H:%M")  %> left in expiry
+          Status: still pending; <%= ((ride_participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M")  %> left in expiry
         <% when ROLES_FOR_RIDES[:confirmed] %>
           Status: confirmed by <%= ride_participant.owner.full_name %>; 
         <% when ROLES_FOR_RIDES[:expired] %>
