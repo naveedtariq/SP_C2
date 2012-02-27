@@ -165,7 +165,6 @@ describe "Rides", :js =>true do
     current_path.should eq(dashboard_path)
     click_link ('Accept')
     current_path.should eq(accept_ride_ride_participant_path)
-
   end
 
 #    it "Should show New Ride Successfully Created", :js => true do
@@ -184,4 +183,6 @@ describe "Rides", :js =>true do
 #    click_button ('Create Ride')
 #    current_path.should eq(root_path)
 #  end
+
+
 end

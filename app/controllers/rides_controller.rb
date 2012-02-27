@@ -28,4 +28,22 @@ class RidesController < ApplicationController
     @ride = Ride.new(clone_ride.attributes)
     return render :action => "new"
   end
+
+  def edit
+    @ride = Ride.find(params[:id])
+  end
+  def update
+    @ride = Ride.find(params[:id])
+    if @ride.update_attributes(params[:ride])
+      redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
+    else
+      render :action => "new"
+    end
+  end
+
+  def destroy
+    @destroy_ride=Ride.find(params[:id])
+    @destroy_ride.destroy
+    redirect_to(dashboard_path, :notice => 'Ride was successfully destroy.')
+  end
 end

@@ -74,4 +74,5 @@ class Ride < ActiveRecord::Base
   def booked_seats
     self.ride_participants.pending_or_confirmed.sum(:number_of_seats)
   end
+
 end

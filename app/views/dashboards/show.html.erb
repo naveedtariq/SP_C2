@@ -53,7 +53,7 @@
         <% case ride_participant.role  %>
         <% when ROLES_FOR_RIDES[:owner] %>
           <% if ride.ride_participants.pending_or_confirmed.blank? %>
-            No requests so far.
+            No requests so far. <%= link_to "Modify ride", edit_ride_path(ride) %>
           <% else %>
             <ul>
               <% ride.ride_participants.pending_participants.each do |participant| %>

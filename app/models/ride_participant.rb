@@ -12,16 +12,20 @@ class RideParticipant < ActiveRecord::Base
   scope :role_wise, order("role ASC")
   scope :current_rides, lambda {
     joins(:ride).
-    where("rides.departure_date >= #{SpClock.date}")
+    where("rides.departure_date >= ?", SpClock.date)
   }
   scope :past_rides, lambda {
     joins(:ride).
-    where("rides.departure_date < #{SpClock.date}")
+    where("rides.departure_date < ?", SpClock.date)
   }
   def self.owner
     self.owners.first
   end
   def owner
     self.ride.owner
+  end
+
+  def confirmed_participants
+    self.find(:role =>[:confirmed])
   end
 end
