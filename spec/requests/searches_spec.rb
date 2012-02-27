@@ -7,7 +7,7 @@ describe "Searches", :js => true do
     @user = Factory(:user)
     fill_in "email", :with => @user.email
     fill_in "password", :with => "secret"
-    click_button ('Log in')
+    click_button ('Sign in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
     click_link ('Ride search page')
@@ -23,7 +23,7 @@ describe "Searches", :js => true do
     @user = Factory(:user)
     fill_in "email", :with => @user.email
     fill_in "password", :with => "secret"
-    click_button ('Log in')
+    click_button ('Sign in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
     click_link ('Ride search page')
@@ -41,7 +41,7 @@ describe "Searches", :js => true do
     @user = Factory(:user)
     fill_in "email", :with => @user.email
     fill_in "password", :with => "secret"
-    click_button ('Log in')
+    click_button ('Sign in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
     click_link ('Ride search page')
@@ -60,7 +60,7 @@ describe "Searches", :js => true do
     @user = Factory(:user)
     fill_in "email", :with => @user.email
     fill_in "password", :with => "secret"
-    click_button ('Log in')
+    click_button ('Sign in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
     click_link ('Ride search page')
@@ -80,7 +80,7 @@ describe "Searches", :js => true do
     @user = Factory(:user)
     fill_in "email", :with => @user.email
     fill_in "password", :with => "secret"
-    click_button ('Log in')
+    click_button ('Sign in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
     click_link ('Ride search page')

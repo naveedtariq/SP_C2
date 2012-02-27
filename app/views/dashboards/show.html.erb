@@ -53,7 +53,7 @@
         <% case ride_participant.role  %>
         <% when ROLES_FOR_RIDES[:owner] %>
           <% if ride.ride_participants.pending_or_confirmed.blank? %>
-            No requests so far. <%= link_to "Modify ride", edit_ride_path(ride) %>
+            No requests so far. 
           <% else %>
             <ul>
               <% ride.ride_participants.pending_participants.each do |participant| %>
@@ -64,10 +64,11 @@
               <% end %>
             </ul>
           <% end %>
+            <span class="right"> <%= link_to "Modify ride", edit_ride_path(ride) %> | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %></span>
         <% when ROLES_FOR_RIDES[:pending] %>
-          Status: still pending; <%= ((ride_participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M")  %> left in expiry
+          Status: still pending; <%= ((ride_participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M")  %> left in expiry | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
         <% when ROLES_FOR_RIDES[:confirmed] %>
-          Status: confirmed by <%= ride_participant.owner.full_name %>; 
+          Status: confirmed by <%= ride_participant.owner.full_name %>; <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
         <% when ROLES_FOR_RIDES[:expired] %>
           Status: your ride was not accepted within 24 hours, <%= link_to "post your ride", clone_ride_path( ride) %>
         <% when ROLES_FOR_RIDES[:rejected] %>
@@ -115,5 +116,5 @@
       <td><%= ride.notes%></td>
     </tr>
   <% end %>
-
 </table>
+      <%= will_paginate @past_rides, :param_name => "past_rides_page" %>

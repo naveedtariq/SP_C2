@@ -10,13 +10,13 @@ SPC2::Application.routes.draw do
   resources :rides, :only => [:index, :new, :create, :edit, :update] do
     collection do
       get "search"
-      
     end
     member do
         get "clone"
       end
     resources :ride_participants, :only => [:new, :create] do 
       member do
+        get "cancel"
         get "accept"
         get "deny"
       end

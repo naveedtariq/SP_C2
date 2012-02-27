@@ -8,6 +8,7 @@ gem "rmagick"
 gem "carrierwave"
 gem 'json'
 gem 'jquery-rails'
+gem 'will_paginate', "~> 3.0.3"
 
 group :production do
   gem 'therubyracer', :platforms => :ruby

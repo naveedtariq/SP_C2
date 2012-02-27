@@ -1,5 +1,6 @@
 class RideParticipantsController < ApplicationController
-  before_filter :load_ride
+  before_filter :load_ride, :only => [:new, :create, :cancel]
+  before_filter :secure_load_ride, :only => [:accept, :deny]
   def new
     @ride_participant = @ride.ride_participants.build
   end
@@ -25,8 +26,18 @@ class RideParticipantsController < ApplicationController
     @ride_participant.update_attribute(:role, ROLES_FOR_RIDES[:rejected])
     return redirect_to dashboard_path
   end
+  def cancel
+    @ride_participant = @ride.ride_participants.where({:id => params[:id], :user_id => current_user.id}).first
+    @ride_participant.cancel!
+    @ride.cancel! if @ride.ride_participants.active_participants.blank?
+    return redirect_to dashboard_path
+  end
+  
   private
   def load_ride
     @ride = Ride.find(params[:ride_id])
+  end
+  def secure_load_ride
+    @ride = current_user.rides.find(params[:ride_id])
   end
 end

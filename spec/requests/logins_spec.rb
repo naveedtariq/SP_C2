@@ -6,7 +6,7 @@ describe "Logins", :js => true do
     visit login_path
     fill_in "email", :with => @user.email
     fill_in "password", :with => "secret"
-    click_button ('Log in')
+    click_button ('Sign in')
     page.should have_content("Logged in!")
     current_path.should eq(root_path)
     
@@ -17,7 +17,7 @@ describe "Logins", :js => true do
     visit login_path
     fill_in "email", :with => @user.email
     fill_in "password", :with => ""
-    click_button ('Log in')
+    click_button ('Sign in')
     page.should have_content("Email or password was invalid")
     current_path.should eq(sessions_path)
   end

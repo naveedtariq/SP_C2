@@ -99,17 +99,13 @@
     </div>
   <%end%>
 </div>
+<% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
 <div class="profile">
-  <% if @ride.owner.present? %>
     <%#= image_tag @ride.owner.photo.url(:small) %><br/>
-    <b><%= @ride.owner.first_name%></b><br/><br/>
-    City: &nbsp; &nbsp; &nbsp;<%= @ride.owner.city%><br/>
-    Town: &nbsp; &nbsp; &nbsp<%= @ride.owner.town%><br/>
-    School: &nbsp; &nbsp; &nbsp<%= @ride.owner.school%><br/>
-  <% end %>
+    <b><%= rider.user.first_name%></b><br/><br/>
+    City: <%= rider.user.city%><br/>
+    Town: <%= rider.user.town%><br/>
+    School: <%= rider.user.school%><br/>
 </div>
-<div class="main-profile">
-
-  <%= @ride.ride_participants.confirmed_participants %>
-  </div>
+<% end %>
 <div class="clear"></div>

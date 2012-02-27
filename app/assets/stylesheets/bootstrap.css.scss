@@ -2671,6 +2671,22 @@ button.btn.small, input[type="submit"].btn.small {
   border: 1px solid #ddd;
   border-left-width: 0;
 }
+.pagination span {
+  float: left;
+  padding: 0 14px;
+  line-height: 34px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+}
+.pagination em {
+  float: left;
+  padding: 0 14px;
+  line-height: 34px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+}
 .pagination a:hover, .pagination .active a {
   background-color: #f5f5f5;
 }
@@ -2678,7 +2694,18 @@ button.btn.small, input[type="submit"].btn.small {
   color: #999999;
   cursor: default;
 }
-.pagination .disabled a, .pagination .disabled a:hover {
+.pagination .current{
+  float: left;
+  color: #999999;
+  cursor: default;
+}
+.pagination .previous_page span, .disabled a, .pagination .disabled a:hover {
+  color: #999999;
+  background-color: transparent;
+  cursor: default;
+}
+.pagination .previous_page{
+  float: left;  
   color: #999999;
   background-color: transparent;
   cursor: default;
@@ -3396,3 +3423,6 @@ a.thumbnail:hover {
     border: 1px;
 
 }
+.right{
+    float: right;
+  }

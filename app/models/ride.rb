@@ -31,6 +31,8 @@ class Ride < ActiveRecord::Base
   validates_numericality_of :total_price, :greater_than_or_equal_to => 0
   validates_numericality_of :flexibility_in_minutes, :greater_than_or_equal_to => 0, :allow_nil => true
   scope :scoped_departure, lambda{ |date_departure| where("departure_date < ?", date_departure)}
+  scope :active, where( :status => STATUS_FOR_RIDES[:active] )
+  scope :current_rides, where("departure_date >= ?", SpClock.date)
   belongs_to :to_location, :class_name => Location
   belongs_to :from_location, :class_name => Location
   #accepts_nested_attributes_for :location
@@ -51,7 +53,7 @@ class Ride < ActiveRecord::Base
       end  
       rides = rides.scoped_departure(dep_date)
     end
-    rides
+    rides.current_rides.active
   end
   def ride_participants_owners
     if self.ride_participants.blank?
@@ -59,6 +61,12 @@ class Ride < ActiveRecord::Base
     else
       self.ride_participants.owners
     end
+  end
+  def change_owner!
+    riders = self.ride_participants_owners
+    riders.update_all(:role => ROLES_FOR_RIDES[:abandoned])
+    rider = self.ride_participants.pending_or_confirmed.first
+    rider.update_attribute(:role, ROLES_FOR_RIDES[:owner] ) unless rider.blank?
   end
   def make_owner!(user)
     riders = self.ride_participants_owners
@@ -74,5 +82,19 @@ class Ride < ActiveRecord::Base
   def booked_seats
     self.ride_participants.pending_or_confirmed.sum(:number_of_seats)
   end
-
+  def active_participants
+    self.ride_participants.active_participants.pluck("users.first_name").join(", ")
+  end
+  def modify!(params, user_id)
+    if self.ride_participants.pending_or_confirmed.blank?
+      self.update_attributes!(params)
+    else 
+      User.find(user_id).rides << Ride.create!(params)
+      self.change_owner!
+    end
+  end
+  def cancel!
+    self.status = STATUS_FOR_RIDES[:canceled]
+    self.save!
+  end
 end

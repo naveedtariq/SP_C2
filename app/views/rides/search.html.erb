@@ -19,11 +19,11 @@
 <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
   <div class="field">
     <%= f.label :from_city %>
-    <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
+    <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
   </div>
   <div class="field">
     <%= f.label :to_city %>
-    <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
+    <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
   </div>
   <table>
     <tr>
@@ -54,7 +54,7 @@
 <table border="1" cellpadding="3">
   <tr>
     <th>Pick</th>
-    <th>Offered by</th>
+    <th>Riders</th>
     <th>From</th>
     <th>To</th>
     <th>Departure date</th>
@@ -73,7 +73,7 @@
   <%@rides.each do |ride| %>
     <tr align="center">
       <td><%= link_to 'Select', new_ride_ride_participant_path(ride) %></td>
-      <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
+      <td><%= ride.active_participants %></td>
       <td><%= ride.from_location && ride.from_location.name %></td>
       <td><%= ride.to_location && ride.to_location.name %></td>
       <td><%= ride.departure_date %></td>
@@ -88,3 +88,4 @@
     </tr>
   <%end%>
 </table>
+  <%= will_paginate @rides %>

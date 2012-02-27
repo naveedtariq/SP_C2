@@ -11,5 +11,12 @@ ROLES_FOR_RIDES = {
     :confirmed => 3,
     :abandoned => 4,
     :expired => 5,
-    :rejected => 6
+    :rejected => 6,
+    :canceled => 7
+}
+PAST_RIDES_PER_PAGE = 5
+SEARCH_RIDES_PER_PAGE = 20
+STATUS_FOR_RIDES = {
+  :active => 1,
+  :canceled => 2
 }

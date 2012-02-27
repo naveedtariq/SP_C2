@@ -8,15 +8,16 @@ class RideParticipant < ActiveRecord::Base
   scope :pending_participants, where(:role => ROLES_FOR_RIDES[:pending])
   scope :confirmed_participants, where(:role => ROLES_FOR_RIDES[:confirmed])
   scope :pending_or_confirmed, where(:role => [ROLES_FOR_RIDES[:confirmed], ROLES_FOR_RIDES[:pending]])
+  scope :active_participants,lambda{ joins(:user).where(:role => [ROLES_FOR_RIDES[:confirmed], ROLES_FOR_RIDES[:pending], ROLES_FOR_RIDES[:owner]])}
   scope :owners, where(:role => ROLES_FOR_RIDES[:owner])
   scope :role_wise, order("role ASC")
   scope :current_rides, lambda {
     joins(:ride).
-    where("rides.departure_date >= ?", SpClock.date)
+      where("rides.departure_date >= ?", SpClock.date)
   }
   scope :past_rides, lambda {
     joins(:ride).
-    where("rides.departure_date < ?", SpClock.date)
+      where("rides.departure_date < ?", SpClock.date)
   }
   def self.owner
     self.owners.first
@@ -27,5 +28,12 @@ class RideParticipant < ActiveRecord::Base
 
   def confirmed_participants
     self.find(:role =>[:confirmed])
+  end
+  def cancel!
+    if self.role == ROLES_FOR_RIDES[:owner]
+      self.ride.change_owner!
+    end
+    self.role = ROLES_FOR_RIDES[:canceled]
+    self.save!
   end
 end

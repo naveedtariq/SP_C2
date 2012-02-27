@@ -1,7 +1,8 @@
 class RidesController < ApplicationController
   before_filter :require_login
+  before_filter :secure_ride_load, :only => [:edit, :update]
   def index
-    @rides = current_user.created_rides
+    @rides = current_user.created_rides.active
   end
   def new
     @ride= Ride.new
@@ -20,7 +21,7 @@ class RidesController < ApplicationController
 
   def search
     @ride = Ride.new(params[:ride])
-    @rides = Ride.search_rides(params[:ride])
+    @rides = Ride.search_rides(params[:ride]).paginate(:page => params[:page], :per_page => SEARCH_RIDES_PER_PAGE)
   end
 
   def clone
@@ -28,22 +29,17 @@ class RidesController < ApplicationController
     @ride = Ride.new(clone_ride.attributes)
     return render :action => "new"
   end
-
-  def edit
-    @ride = Ride.find(params[:id])
-  end
   def update
-    @ride = Ride.find(params[:id])
-    if @ride.update_attributes(params[:ride])
+    if @ride.valid?(params[:ride])
+      @ride.modify!(params[:ride], current_user)
       redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
     else
       render :action => "new"
     end
   end
 
-  def destroy
-    @destroy_ride=Ride.find(params[:id])
-    @destroy_ride.destroy
-    redirect_to(dashboard_path, :notice => 'Ride was successfully destroy.')
+  private
+  def secure_ride_load
+    @ride = current_user.rides.find(params[:id])
   end
 end
