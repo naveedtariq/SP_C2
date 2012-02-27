@@ -23,4 +23,9 @@ class RidesController < ApplicationController
     @rides = Ride.search_rides(params[:ride])
   end
 
+  def clone
+    clone_ride = Ride.find(params[:id])
+    @ride = Ride.new(clone_ride.attributes)
+    return render :action => "new"
+  end
 end

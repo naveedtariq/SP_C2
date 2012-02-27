@@ -36,7 +36,7 @@ RSpec.configure do |config|
     csv.each do |row|
       row = row.to_hash.with_indifferent_access
       u = User.new(row.to_hash.symbolize_keys)
-      u.photo = File.open("#{Rails.root}/spec/data/dont_delete.png")
+     # u.photo = File.open("#{Rails.root}/spec/data/dont_delete.png")
       u.save!
     end
     csv_text = File.read("#{Rails.root}/spec/data/ride.csv")

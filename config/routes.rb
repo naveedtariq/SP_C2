@@ -11,6 +11,9 @@ SPC2::Application.routes.draw do
     collection do
       get "search"
     end
+    member do
+        get "clone"
+      end
     resources :ride_participants, :only => [:new, :create] do 
       member do
         get "accept"
