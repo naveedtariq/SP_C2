@@ -30,27 +30,7 @@ RSpec.configure do |config|
     DatabaseCleaner.start 
     DatabaseCleaner.clean
     load "#{Rails.root}/db/seeds.rb"
-
-#    csv_text = File.read("#{Rails.root}/spec/data/user.csv")
-#    csv = CSV.parse(csv_text, :headers => true)
-#    csv.each do |row|
-#      row = row.to_hash.with_indifferent_access
-#      u = User.new(row.to_hash.symbolize_keys)
-#     # u.photo = File.open("#{Rails.root}/spec/data/dont_delete.png")
-#      u.save!
-#    end
-#    csv_text = File.read("#{Rails.root}/spec/data/ride.csv")
-#    csv = CSV.parse(csv_text, :headers => true)
-#    csv.each do |row|
-#      row = row.to_hash.with_indifferent_access
-#      Ride.create!(row.to_hash.symbolize_keys)
-#    end
-#    csv_text = File.read("#{Rails.root}/spec/data/location.csv")
-#    csv = CSV.parse(csv_text, :headers => true)
-#    csv.each do |row|
-#      row = row.to_hash.with_indifferent_access
-#      Location.create!(row.to_hash.symbolize_keys)
-#    end
+    system "rake db:populate RAILS_ENV=test"
   end
 
   config.after do

@@ -154,7 +154,6 @@ describe "Rides", :js =>true do
     click_link ('Ride search page')
     current_path.should eq(search_rides_path)
     click_link ('Select')
-    current_path.should eq('/rides/1/ride_participants/new')
     click_button ('Book Ride')
     fill_in "ride_participant_phone", :with => "4552254"
     choose("ride_participant_mode_of_communications_phone_call")
@@ -203,7 +202,6 @@ describe "Rides", :js =>true do
     click_link ('Ride search page')
     current_path.should eq(search_rides_path)
     click_link ('Select')
-    current_path.should eq('/rides/1/ride_participants/new')
     click_button ('Book Ride')
     fill_in "ride_participant_phone", :with => "4552254"
     choose("ride_participant_mode_of_communications_phone_call")
@@ -268,7 +266,6 @@ describe "Rides", :js =>true do
     click_link ('My Dashboard')
     current_path.should eq(dashboard_path)
     click_link ('Modify ride')
-    current_path.should eq("/rides/1/edit")
     click_button ('Create Ride')
     current_path.should eq(dashboard_path)
     page.should have_content("Ride was successfully updated.")
