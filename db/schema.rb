@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(:version => 20120227202728) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.string   "photoS3"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

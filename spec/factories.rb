@@ -22,4 +22,3 @@ Factory.define :ride do |f|
   f.ride_type "Sudon"
 end
 
-
