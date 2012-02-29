@@ -58,7 +58,7 @@ describe User do
       :email                  => 'test@tester.com',
       :first_name                  => 'test',
       :last_name                  => 'me',
-      :photo => File.open("#{Rails.root}/spec/data/dont_delete.png"), 
+      #:photo => File.open("#{Rails.root}/spec/data/dont_delete.png"),
     }
   end
 end

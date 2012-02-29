@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
 
   authenticates_with_sorcery!
-  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :about, :gender, :dob, :phone, :city, :town, :work, :title, :school, :photo
+  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :about, :gender, :dob, :phone, :city, :town, :work, :title, :school, :photo, :user_image
 
-  mount_uploader :photo, PhotoUploader
+  mount_uploader :user_image, UserImageUploader
 
   has_many :ride_participants
   has_many :rides, :through => :ride_participants

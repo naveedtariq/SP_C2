@@ -4,6 +4,7 @@ class AddAttachmentPhotoToUser < ActiveRecord::Migration
     add_column :users, :photo_content_type, :string
     add_column :users, :photo_file_size, :integer
     add_column :users, :photo_updated_at, :datetime
+    
   end
 
   def self.down

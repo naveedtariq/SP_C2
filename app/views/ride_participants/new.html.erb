@@ -101,7 +101,7 @@
 </div>
 <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
 <div class="profile">
-    <%#= image_tag @ride.owner.photo.url(:small) %><br/>
+    <%= image_tag rider.owner.user_image.url.to_s %><br/>
     <b><%= rider.user.first_name%></b><br/><br/>
     City: <%= rider.user.city%><br/>
     Town: <%= rider.user.town%><br/>

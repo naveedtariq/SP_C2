@@ -1,9 +1,9 @@
 CarrierWave.configure do |config|
   config.fog_credentials = {
           :provider               => 'AWS',
-          :aws_access_key_id      => 'AKIAIG64WP67VSEF3NQA',
-          :aws_secret_access_key  => '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',
+          :aws_access_key_id      => 'AKIAIEYXZ2W34JXX5D7Q',
+          :aws_secret_access_key  => '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',
       }
-      config.fog_directory  = 'spc2dev'
+      config.fog_directory  = 'sp404'
       config.fog_public     = true
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227202728) do
+ActiveRecord::Schema.define(:version => 20120229062634) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -73,10 +73,7 @@ ActiveRecord::Schema.define(:version => 20120227202728) do
     t.string   "title"
     t.string   "school"
     t.datetime "deleted_at"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
+    t.string   "user_image"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
