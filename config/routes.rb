@@ -10,6 +10,7 @@ SPC2::Application.routes.draw do
   resources :rides, :only => [:index, :new, :create, :edit, :update] do
     collection do
       get "search"
+      get "searchclone"
     end
     member do
         get "clone"

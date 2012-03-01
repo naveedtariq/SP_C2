@@ -3428,7 +3428,12 @@ a.thumbnail:hover {
   }
 .city-option-same{
 color: #FF0000;
+position: absolute;
 }
 .validation-error{
     border: 1px solid red;
+}
+
+.subnav{
+margin-top: 50px;
 }

@@ -91,9 +91,9 @@
             <h3 class="headline first">
               Depaturing TODAY
               </h3>
-            <% if @rides.empty? %>
-                No Records Found
-                <%end%>
+            <%# if @rides.empty? %>
+                <%#*No Records Found%>
+                <%#end%>
            <%@rides.each do |ride| %>
             <div class="entry">
               <div class="price_box">
@@ -136,6 +136,3 @@
       </div>
     </div>
 </div>
-
-
-

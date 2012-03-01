@@ -98,4 +98,7 @@ class Ride < ActiveRecord::Base
     self.status = STATUS_FOR_RIDES[:canceled]
     self.save!
   end
+  def per_price_seat
+    self.total_price/remaining_seats
+  end
 end

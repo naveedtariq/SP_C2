@@ -38,6 +38,9 @@ class RidesController < ApplicationController
     end
   end
 
+    def searchclone
+    @ride = Ride.new(params[:ride])
+    end
   private
   def secure_ride_load
     @ride = current_user.rides.find(params[:id])
