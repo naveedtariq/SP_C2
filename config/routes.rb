@@ -24,7 +24,7 @@ SPC2::Application.routes.draw do
     end
   end
   resource :dashboard, :only => [:show]
-  root :to => "rides#index"
+  root :to => "rides#search"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,37 +1,20 @@
 <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
-<%#*<div class="subnav">%>
-  <%#*<ul class="nav-pills nav">%>
-    <%#*<li>%>
-      <%#= link_to "My Ride", rides_path %>
-    <%#*</li>%>
-    <%#*<li>%>
-      <%#= link_to "Ride input page", new_ride_path %>
-    <%#*</li>%>
-    <%#*<li class="active">%>
-      <%#= link_to "Ride search page", search_rides_path %>
-    <%#*</li>%>
-    <%#*<li>%>
-      <%#= link_to "My Dashboard", dashboard_path %>
-    <%#*</li>%>
-  <%#*</ul>%>
-<%#*</div>%>
-<%#*<br/>%>
-                        <%#*From Here New Eddition%>
+
 <script type="text/javascript">
   $(document).ready(function() {
-          $('#ride_to_location_id').change(function() {
-            if ($(this).val() == $('#ride_from_location_id').val()) {
-                $(".city-option-same").show();
-                $('#ride_to_location_id').addClass("validation-error");
-                $('#ride_from_location_id').addClass("validation-error");
-                $("#btn-search").attr("disabled", "disabled");
-            } else {
-                 $(".city-option-same").hide();
-                $('#ride_to_location_id').removeClass("validation-error");
-                $('#ride_from_location_id').removeClass("validation-error");
-                $("#btn-search").removeAttr("disabled");
-            }
-        });
+    $('#ride_to_location_id').change(function() {
+      if ($(this).val() == $('#ride_from_location_id').val()) {
+        $(".city-option-same").show();
+        $('#ride_to_location_id').addClass("validation-error");
+        $('#ride_from_location_id').addClass("validation-error");
+        $("#btn-search").attr("disabled", "disabled");
+      } else {
+        $(".city-option-same").hide();
+        $('#ride_to_location_id').removeClass("validation-error");
+        $('#ride_from_location_id').removeClass("validation-error");
+        $("#btn-search").removeAttr("disabled");
+      }
+    });
   });
 </script>
 <div id="search_run">
@@ -40,10 +23,10 @@
       <ul id="top_nav">
         <li>
           <a id="post_ride" class="button post km_click_event_by_text" href="#">Post a ride</a>
-          </li>
-        </ul>
-      </div>
+        </li>
+      </ul>
     </div>
+  </div>
 
   <div id="content_wrapper" class="new_style">
     <div id="content_container" class="clearfix">
@@ -51,90 +34,90 @@
         <div id="head">
           <div class="search">
             <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
-            <div class="text_input">
-              <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----"%>
+              <div class="text_input">
+                <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----"%>
               </div>
-            <div class="text_input">
-              <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
+              <div class="text_input">
+                <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
               </div>
-            <div class="text_input">
+              <div class="text_input">
                 <table>
                   <tr>
                     <td>
                       <%= f.radio_button :departure, 'all', :checked =>true %>
-                      </td>
+                    </td>
                     <td>
                       <%= f.label :departure, 'All', :for => 'ride_departure_all'%>
-                      </td>
-                     <td>
-                       <%= f.radio_button :departure, 'first_option' %>
-                      </td>
-                     <td>
-                       <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option"%>
-                      </td>
-                     <td>
-                       <%= f.radio_button :departure , 'second_option' %>
-                      </td>
-                     <td>
-                       <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option'%>
-                      </td>
-                    </tr>
+                    </td>
+                    <td>
+                      <%= f.radio_button :departure, 'first_option' %>
+                    </td>
+                    <td>
+                      <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option"%>
+                    </td>
+                    <td>
+                      <%= f.radio_button :departure , 'second_option' %>
+                    </td>
+                    <td>
+                      <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option'%>
+                    </td>
+                  </tr>
                 </table>
               </div>
-            <%= f.submit "search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
+              <%= f.submit "search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
             <% end %>
-            </div>
-            <div class="city-option-same" style="display: none"> From and To City can't same </div>
           </div>
+          <div class="city-option-same" style="display: none"> From and To City can't same </div>
+        </div>
         <div id="results">
           <div class="ride_list">
             <h3 class="headline first">
               Depaturing TODAY
-              </h3>
+            </h3>
             <% if @rides.empty? %>
-                No Records Found
-                <%end%>
-           <%@rides.each do |ride| %>
-            <div class="entry">
-              <div class="price_box">
-                <div class="seats">
-                  <span class="count"><%= ride.remaining_seats %></span>
-                  <span class="left">seats left</span>
+              No Records Found
+            <%end%>
+            <%@rides.each do |ride| %>
+              <div class="entry">
+                <div class="price_box">
+                  <div class="seats">
+                    <span class="count"><%= ride.remaining_seats %></span>
+                    <span class="left">seats left</span>
                   </div>
-                <p><b><%= number_to_currency(ride.per_price_seat)%></b> / seat</p>
+                  <p><b><%= number_to_currency(ride.per_price_seat)%></b> / seat</p>
                 </div>
-              <div class="userpic">
-                <div class="username"><%= ride.owner.first_name%></div>
-                <%= image_tag ride.owner.user_image.url.to_s %>
-                <span class="driver"></span>
+                <div class="userpic">
+                  <div class="username"><%= ride.owner.first_name%></div>
+                  <%= image_tag ride.owner.user_image.url.to_s %>
+                  <span class="driver"></span>
                 </div>
-              <div class="inner_content ">
-                <h3>
-                  <span class="inner">
-                    <%= ride.from_location && ride.from_location.name %>
+                <div class="inner_content ">
+                  <h3>
+                    <span class="inner">
+                      <%= ride.from_location && ride.from_location.name %>
                       <span class="trip_type round_trip"></span>
-                    <%= ride.to_location && ride.to_location.name %>
+                      <%= ride.to_location && ride.to_location.name %>
                     </span>
                   </h3>
-                <h4>Departs <%= ride.departure_time.strftime("%H:%M %Z") %></h4>
+                  <h4>Departs <%= ride.departure_time.strftime("%H:%M %Z") %></h4>
                 </div>
               </div>
             <%end%>
-                <div id="action">
-                  <div class="item postride">
-                    <h2>Didn't find what you were looking for?</h2>
-                    <p>Post a ride as a driver or passenger and get notified when new matches are found!</p>
-                    <a class="button post" href="#">Post a ride</a>
-                  </div>
-                 </div>
-            </div>
-          <div class="page_list">
-              <%= will_paginate @rides %>
+            <div id="action">
+              <div class="item postride">
+                <h2>Didn't find what you were looking for?</h2>
+                <p>Post a ride as a driver or passenger and get notified when new matches are found!</p>
+                <a class="button post" href="#">Post a ride</a>
+              </div>
             </div>
           </div>
-       </div>
+          <div class="page_list">
+            <%= will_paginate @rides %>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 </div>
 
 

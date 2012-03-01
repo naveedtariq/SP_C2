@@ -4418,7 +4418,7 @@ a.skip:hover {
   width: 100%;
   height: 327px;
   position: absolute;
-  top: 0px;
+  top: 100px;
   left: 0px;
 }
 /* line 26,  */
@@ -4447,6 +4447,10 @@ a.skip:hover {
   -webkit-animation-timing-function: ease-out-quad;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-duration: 0.5s;
+}
+.radio-buttons input{
+}
+.radio-buttons label{
 }
 /* line 47,  */
 #static_splash2 #content #routes .box {
@@ -4492,7 +4496,6 @@ a.skip:hover {
   font-family: inherit;
   font-size: 16px !important;
   /* adding important to override the datepicker font-size */
-  width: 260px;
   color: #7F7F7F;
 }
 /* line 492 */

@@ -22,6 +22,7 @@ class RidesController < ApplicationController
   def search
     @ride = Ride.new(params[:ride])
     @rides = Ride.search_rides(params[:ride]).paginate(:page => params[:page], :per_page => SEARCH_RIDES_PER_PAGE)
+    return render(:action => "search_home") if params[:ride].blank?
   end
 
   def clone
@@ -38,9 +39,6 @@ class RidesController < ApplicationController
     end
   end
 
-    def searchclone
-    @ride = Ride.new(params[:ride])
-    end
   private
   def secure_ride_load
     @ride = current_user.rides.find(params[:id])
