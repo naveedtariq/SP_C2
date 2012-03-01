@@ -18,7 +18,7 @@ class UserImageUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
    def default_url
-     "/assets/" + [version_name, "no-image.jpeg"].compact.join('_')
+     "/assets/" + [version_name, "no-image.gif"].compact.join('_')
    end
 
     # for heroku we need to use tmp folder to get access to uploaded file
