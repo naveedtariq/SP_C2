@@ -3,8 +3,8 @@
 GENDER = ["Male", "Female"]
 #RIDETYPE=["Sedon", "Suv", "Van"]
 IMAGE_SIZE="10"
-SEARCH_OPTION_ONE_IN_DAYS = 4
-SEARCH_OPTION_TWO_IN_DAYS = 17
+SEARCH_OPTION_ONE_IN_DAYS = 15
+SEARCH_OPTION_TWO_IN_DAYS = 30
 ROLES_FOR_RIDES = {
     :owner => 1,
     :pending => 2,

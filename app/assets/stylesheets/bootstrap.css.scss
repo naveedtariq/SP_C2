@@ -18,6 +18,7 @@ hgroup,
 nav,
 section {
   display: block;
+  margin-top: 59px;
 }
 audio, canvas, video {
   display: inline-block;
@@ -527,7 +528,7 @@ textarea {
 }
 label {
   display: block;
-  margin-bottom: 5px;
+  margin: 5px;
   color: #333333;
 }
 input,

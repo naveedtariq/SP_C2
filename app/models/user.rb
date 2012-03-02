@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   authenticates_with_sorcery!
-  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :about, :gender, :dob, :phone, :city, :town, :work, :title, :school, :photo, :user_image
+  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :about, :gender, :dob, :phone, :city, :town, :work, :title, :school, :photo, :user_image, :number_of_friends
 
   mount_uploader :user_image, UserImageUploader
 

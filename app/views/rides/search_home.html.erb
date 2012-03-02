@@ -2,43 +2,44 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#ride_to_location_id').change(function() {
-      if ($(this).val() == $('#ride_from_location_id').val()) {
-        $(".city-option-same").show();
-        $('#ride_to_location_id').addClass("validation-error");
-        $('#ride_from_location_id').addClass("validation-error");
-        $("#btn-search").attr("disabled", "disabled");
-      } else {
-        $(".city-option-same").hide();
-        $('#ride_to_location_id').removeClass("validation-error");
-        $('#ride_from_location_id').removeClass("validation-error");
-        $("#btn-search").removeAttr("disabled");
+      if($(this).val() != ""){
+        if ($(this).val() == $('#ride_from_location_id').val()) {
+          $(".city-option-same").show();
+          $('#ride_to_location_id').addClass("validation-error");
+          $('#ride_from_location_id').addClass("validation-error");
+          $("#btn-search").attr("disabled", "disabled");
+        } else {
+          $(".city-option-same").hide();
+          $('#ride_to_location_id').removeClass("validation-error");
+          $('#ride_from_location_id').removeClass("validation-error");
+          $("#btn-search").removeAttr("disabled");
+        }
+      }
+    });
+    $('#ride_from_location_id').change(function() {
+      if($(this).val() != ""){
+        if ($(this).val() == $('#ride_to_location_id').val()) {
+          $(".city-option-same").show();
+          $('#ride_to_location_id').addClass("validation-error");
+          $('#ride_from_location_id').addClass("validation-error");
+          $("#btn-search").attr("disabled", "disabled");
+        } else {
+          $(".city-option-same").hide();
+          $('#ride_to_location_id').removeClass("validation-error");
+          $('#ride_from_location_id').removeClass("validation-error");
+          $("#btn-search").removeAttr("disabled");
+        }
       }
     });
   });
 </script>
 <div class="clear"></div>
-<div class="subnav">
-  <ul class="nav-pills nav">
-    <li>
-      <%= link_to "My Ride", rides_path %>
-    </li>
-    <li class="active">
-      <%= link_to "Ride input page", new_ride_path %>
-    </li>
-    <li>
-      <%= link_to "Ride search page", search_rides_path %>
-    </li>
-    <li>
-      <%= link_to "My Dashboard", dashboard_path %>
-    </li>
-  </ul>
-</div>
 <div id="static_splash2">
-  <div id="header_wrap">
+  <div id="header_wrap" style="margin-top: 22px;">
     <div id="header">
       <ul id="top_nav">
         <li>
-          <a id="post_ride" class="button post km_click_event_by_text" href="#">Post a ride</a>
+          <a id="post_ride" class="button post km_click_event_by_text" href="<%= new_ride_path %>">Post a ride</a>
         </li>
       </ul>
     </div>
@@ -78,7 +79,7 @@
             </div>
           <% end %>
         </div>
-        <div class="city-option-same" style="font-weight: bold;color: red; display: none"> From and To City can't same </div>
+        <div class="city-option-same" style="font-weight: bold;color: red; display: none"> From and To City can't be the same </div>
       </div>
       <div id="content">
         <div id="results" class="subsection">

@@ -15,3 +15,9 @@ a:hover{
   margin-right: 10px;
   position: relative;
 }
+.search-tble{
+  margin-bottom: 15px;
+}
+.search-tble th{
+  padding: 7px;
+}

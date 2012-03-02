@@ -10,7 +10,25 @@
   </head>  
 <%#*<body data-twttr-rendered="true" id="static_splash2" class="public>%>
   <body data-twttr-rendered="true">
-
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <%= link_to "SP404", root_path, :class => "brand" %>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <% if current_user %>
+                <li>Logged in as <%= current_user.email %>.</li>
+                <li><%= link_to "Log out", logout_path %></li>
+              <% else %>
+                <li><%= link_to "Sign up", signup_path %> </li>
+                <li><%= link_to "Log in", login_path  %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clear"> </div>
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     <% end %>

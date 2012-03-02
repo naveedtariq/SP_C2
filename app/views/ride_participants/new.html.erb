@@ -9,23 +9,24 @@
 <div class="container">
   <section id="forms">
 
-
-    <div class="subnav">
-      <ul class="nav-pills nav">
-        <li>
-          <%= link_to "My Ride", rides_path %>
-        </li>
-        <li>
-          <%= link_to "Ride input page", new_ride_path %>
-        </li>
-        <li>
-          <%= link_to "Ride search page", search_rides_path %>
-        </li>
-        <li class="active">
-          <%= link_to "<<< Back to search results", search_rides_path %>
-        </li>
-      </ul>
-    </div>
+    <% if current_user %>
+      <div class="subnav">
+        <ul class="nav-pills nav">
+          <li>
+            <%= link_to "My Ride", rides_path %>
+          </li>
+          <li>
+            <%= link_to "Ride input page", new_ride_path %>
+          </li>
+          <li>
+            <%= link_to "Ride search page", search_rides_path %>
+          </li>
+          <li class="active">
+            <%= link_to "<<< Back to search results", search_rides_path %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
     <br/>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -35,7 +36,7 @@
         });
       });
     </script>
-    <table border="1" cellpadding="3">
+    <table border="1" cellpadding="3" class="search-tble">
       <tr>
         <th>Offered by</th>
         <th>From</th>
@@ -67,7 +68,7 @@
     <div class="left_bag">
       <div class="seat_view">
         <br/>
-        <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride) do |f| %>
+        <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride),:html => {:class => "book-ride-child-window"} do |f| %>
           <% ts=@ride.remaining_seats %>
           <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
           <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%>
@@ -106,7 +107,11 @@
               </tr>
             </table>
           </div>
-          <p><%= f.submit "Booking Ride" %></p>
+          <% if current_user.blank? %>
+            <input type="button" id="book-ride-child-window" value="Book Ride"></input>
+          <% else %>
+            <p><%= f.submit "Book Ride" %></p>
+          <% end %>
         </div>
       <%end%>
     </div>
@@ -117,6 +122,7 @@
         City: <%= rider.user.city%><br/>
         Town: <%= rider.user.town%><br/>
         School: <%= rider.user.school%><br/>
+        Number of Friends: <%= rider.user.number_of_friends %><br/>
       </div>
     <% end %>
     <div class="clear"></div>

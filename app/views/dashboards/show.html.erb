@@ -8,6 +8,7 @@
 <div class="container">
   <section id="forms">
 
+    <% if current_user %>
 
     <ul class="nav-pills nav">
       <li>
@@ -23,6 +24,7 @@
         <%= link_to "My Dashboard", dashboard_path %>
       </li>
     </ul>
+    <% end %>
     <br/>
     <h4> Current Rides</h4>
     <table border="1" cellpadding="3">

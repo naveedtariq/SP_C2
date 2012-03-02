@@ -5,7 +5,11 @@ SPC2::Application.routes.draw do
   get "signup" => "users#new", :as => "signup"
 
 
-  resources :users, :only => [:new, :create]
+  resources :users, :only => [:new, :create] do
+    collection do
+      get "logged_in"
+    end
+  end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :rides, :only => [:index, :new, :create, :edit, :update] do
     collection do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120229062634) do
+ActiveRecord::Schema.define(:version => 20120302193427) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(:version => 20120229062634) do
     t.string   "country"
     t.integer  "zip"
     t.integer  "ride_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "request_loggers", :force => true do |t|
+    t.text     "params"
+    t.string   "user_agent"
+    t.string   "request_ip"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -57,8 +65,8 @@ ActiveRecord::Schema.define(:version => 20120229062634) do
     t.string   "email"
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "first_name"
@@ -74,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120229062634) do
     t.string   "school"
     t.datetime "deleted_at"
     t.string   "user_image"
+    t.integer  "number_of_friends",            :default => 0
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

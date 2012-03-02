@@ -9,6 +9,8 @@
   <section id="forms">
 
     <div class="clear"></div>
+        <% if current_user %>
+
     <div class="subnav">
       <ul class="nav-pills nav">
         <li>
@@ -25,6 +27,7 @@
         </li>
       </ul>
     </div>
+    <% end %>
     <%= render "form" %>
   </section>
 </div>

@@ -6789,7 +6789,7 @@ a.skip:hover {
 }
 /* line 159, */
 #search_run #content #results .page_list .pagination {
-  float: right;
+  float: left;
 }
 /* line 166, */
 #search_run #content #results .page_list .pagination a,

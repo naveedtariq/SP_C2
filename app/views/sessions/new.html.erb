@@ -1,3 +1,8 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#child_toolbar").val(window.toolbar.visible);
+  });
+</script>
 <div class="row">
 	<div class="span12">
 		<%= form_tag sessions_path :class => 'form-horizontal' do %>
@@ -14,6 +19,7 @@
 				<div class="controls">
 					<%= password_field_tag :password ,nil, :class => 'input-xlarge' %>
 				</div>
+        <%= hidden_field_tag :child_toolbar  %>
 			</div>
 			<div class="control-group">
 				<%= check_box_tag :remember_me, 1, params[:remember_me], :class => 'pull-left', :style => 'margin-right:5px;' %>

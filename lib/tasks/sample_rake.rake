@@ -26,7 +26,7 @@ namespace :db do
     csv.each do |row|
       row = row.to_hash.with_indifferent_access
       u = User.new(row.to_hash.symbolize_keys)
-      if u.gender === "male"
+      if u.gender && u.gender.downcase! === "male"
         u.user_image = male_images[(SecureRandom.random_number * male_images.size).to_i]
       else
         u.user_image = female_images[(SecureRandom.random_number * female_images.size).to_i]

@@ -1,5 +1,5 @@
 class RidesController < ApplicationController
-  before_filter :require_login
+  before_filter :require_login, :only => [:create, :clone, :index, :update]
   before_filter :secure_ride_load, :only => [:edit, :update]
   def index
     @rides = current_user.created_rides.active
@@ -22,7 +22,7 @@ class RidesController < ApplicationController
   def search
     @ride = Ride.new(params[:ride])
     @rides = Ride.search_rides(params[:ride]).paginate(:page => params[:page], :per_page => SEARCH_RIDES_PER_PAGE)
-    return render(:action => "search_home") if params[:ride].blank?
+    return render(:action => "search_home") if params[:commit].blank?
   end
 
   def clone
