@@ -14,11 +14,24 @@ namespace :db do
     csv_text = File.read("#{Rails.root}/spec/data/user.csv")
     puts "dumping users"
     csv = CSV.parse(csv_text, :headers => true)
+
+    male_images = []
+    female_images = []
+    path = "#{Rails.root}/spec/data/male/"
+    Dir::foreach(path) { |f| male_images << File.open(path + "#{f}") if f[f.size-4..f.size-1] === "jpeg" }
+    path = "#{Rails.root}/spec/data/female/"
+    Dir::foreach(path) { |f| female_images << File.open(path + "#{f}") if f[f.size-4..f.size-1] === "jpeg" }
+   
+
     csv.each do |row|
       row = row.to_hash.with_indifferent_access
-      u = User.create!(row.to_hash.symbolize_keys)
-      puts "first name --> #{u.first_name}"
-      # u.photo = File.open("#{Rails.root}/spec/data/dont_delete.png")
+      u = User.new(row.to_hash.symbolize_keys)
+      if u.gender === "male"
+        u.user_image = male_images[(SecureRandom.random_number * male_images.size).to_i]
+      else
+        u.user_image = female_images[(SecureRandom.random_number * female_images.size).to_i]
+      end
+      u.save!
     end
     puts "dumping locations"
 
