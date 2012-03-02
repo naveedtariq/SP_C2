@@ -8,23 +8,23 @@
     <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
     <%= csrf_meta_tags %>
   </head>  
-  <%#*<body data-twttr-rendered="true" id="static_splash2" class="public>%>
+<%#*<body data-twttr-rendered="true" id="static_splash2" class="public>%>
   <body data-twttr-rendered="true">
 
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     <% end %>
     <%= yield %>
-    
-        <div id="footer">
-        <a class="km_click_event_by_text" href="http://www.shareshuttle.com/about">About & Safety</a>
-        <a class="km_click_event_by_text" href="http://www.shareshuttle.com/howitworks">How It Works</a>
-                <a class="km_click_event_by_text" href="http://www.shareshuttle.com/terms">Terms &amp; Privacy</a>
-                <span>
-           
-        </span>
-                <span id="copyright">¬© 2012 ShareShuttle</a></span>
-</div>
-     
+
+    <div id="footer">
+      <a class="km_click_event_by_text" href="http://www.shareshuttle.com/about">About & Safety</a>
+      <a class="km_click_event_by_text" href="http://www.shareshuttle.com/howitworks">How It Works</a>
+      <a class="km_click_event_by_text" href="http://www.shareshuttle.com/terms">Terms &amp; Privacy</a>
+      <span>
+
+      </span>
+      <span id="copyright">¬© 2012 ShareShuttle</a></span>
+    </div>
+
   </body>
 </html>

@@ -1,18 +1,30 @@
-<div class="clear"></div>
-<div class="subnav">
-  <ul class="nav-pills nav">
-    <li>
-      <%= link_to "My Ride", rides_path %>
-    </li>
-    <li class="active">
-      <%= link_to "Ride input page", new_ride_path %>
-    </li>
-    <li>
-      <%= link_to "Ride search page", search_rides_path %>
-    </li>
-    <li>
-      <%= link_to "My Dashboard", dashboard_path %>
-    </li>
-  </ul>
+<div class="container">
+  <section id="code">
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+  </section>
 </div>
-<%= render "form" %>
+<div class="container">
+  <section id="forms">
+
+    <div class="clear"></div>
+    <div class="subnav">
+      <ul class="nav-pills nav">
+        <li>
+          <%= link_to "My Ride", rides_path %>
+        </li>
+        <li class="active">
+          <%= link_to "Ride input page", new_ride_path %>
+        </li>
+        <li>
+          <%= link_to "Ride search page", search_rides_path %>
+        </li>
+        <li>
+          <%= link_to "My Dashboard", dashboard_path %>
+        </li>
+      </ul>
+    </div>
+    <%= render "form" %>
+  </section>
+</div>
