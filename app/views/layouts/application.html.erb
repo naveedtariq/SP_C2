@@ -8,7 +8,8 @@
     <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
     <%= csrf_meta_tags %>
   </head>  
-  <body data-twttr-rendered="true" id="static_splash2" class="public">
+  <%#*<body data-twttr-rendered="true" id="static_splash2" class="public>%>
+  <body data-twttr-rendered="true">
 
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>

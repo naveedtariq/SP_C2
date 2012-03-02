@@ -6931,3 +6931,183 @@ button.nobutton:hover {
     padding-top: 10px;
     
 }
+
+/*----------------- My Ride -----------------------------*/
+
+form#new_ride .step_container {
+	border-bottom: 1px solid #C0C0C0;
+	margin-bottom: 15px;
+}
+
+.newAddRideStyle form#new_ride .step_container {
+	border-bottom: none;
+	padding-bottom:11px;
+	background:transparent url('/assets/step1.png') bottom center no-repeat;
+	margin-bottom: 21px;
+	/*margin-left:40px;*/
+	width:930px;
+}
+
+.newAddRideStyle form#new_ride .step_container.clearfix span{
+	width:290px;
+	text-align:center;
+}
+
+form#new_ride .step_container span {
+	color: #C0C0C0;
+	float: left;
+	padding: 10px;
+	width: 190px;
+}
+
+form#new_ride .step_container span.active {
+	color: #333333;
+	background-color: #F2F2F2;
+}
+
+.newAddRideStyle form#new_ride .step_container span.active {
+	color: #29598e;
+ 	background-color:transparent;
+}
+
+form#new_ride dt.backrow {
+	padding-top: 3px;
+}
+
+form#new_ride a.back {
+	font-weight: normal;
+}
+
+form#new_ride dd {
+	width: 450px;
+}
+
+form#new_ride fieldset {
+	border-bottom: 0;
+}
+
+form#new_ride dd em {
+	font-size: 12px;
+	margin: 0 5px 0 10px;
+}
+
+form#new_ride dd button {
+	margin-left: 0;
+}
+
+/* =---------------My Again Changes -------------------------------------------------------*/
+
+form.new_ride fieldset {
+	border-bottom: 1px solid #D5DFE1;
+	margin-bottom: 20px;
+}
+
+form.new_ride dl {
+	display: block;
+}
+
+form.new_ride dt {
+	clear: both;
+	display: block;
+	float: left;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 20px;
+	margin-right: 16px;
+	padding: 8px 0 2px 0;
+	text-align: right;
+	width: 160px;
+}
+
+form.new_ride dt p.subtext {
+	font-weight: normal;
+}
+
+form.new_ride dd {
+	display:inline-block;
+	float: left;
+	font-size: 11px;
+	padding-bottom: 16px;
+	width: 400px;
+}
+
+form.new_ride dd.selection {
+	padding-top: 6px;
+}
+
+form.new_ride dd.slim {
+	width: 150px;
+}
+
+form.new_ride dd p {
+	clear: both;
+	float: left;
+	font-size: 11px;
+	line-height: 15px;
+	margin-top: 5px;
+}
+
+form.new_ride dd input,
+form.new_ride dd textarea, .zdialog textarea {
+	background: #FFFFFF url('/assets/bg_input_text.gif') top repeat-x;
+	border: 1px solid #C1D5E8;
+	float: left;
+	font-size: 16px;
+	height: 24px;
+	line-height: 1.3em;
+	padding: 4px 3px 3px 3px;
+	width: 378px;
+}
+
+
+/*----------------------------- New Change of Ride Step 2 --------------------------------*/
+
+form#new_ride #step_2 label, form#new_ride #step_2, form#new_ride #step_2 .timetable th,
+form#new_ride #step_2 select {
+    font-size: 14px;
+}
+
+
+form#new_ride #step_2 .timetable th {
+  width: 120px;
+}
+
+form#new_ride #step_2 dd table label {
+    padding-top: 1px;
+}
+
+form#new_ride #step_2 dt {
+    padding-top: 5px !important;
+}
+
+form.new_ride dd input,
+form.new_ride dd textarea, .zdialog textarea {
+	background: #FFFFFF url('/assets/bg_input_text.gif') top repeat-x;
+	border: 1px solid #C1D5E8;
+	float: left;
+	font-size: 16px;
+	height: 24px;
+	line-height: 1.3em;
+	padding: 4px 3px 3px 3px;
+	width: 378px;
+}
+
+form.new_ride dd input.slim {
+	width: 110px;
+}
+
+form.new_ride dd p {
+	clear: both;
+	float: left;
+	font-size: 11px;
+	line-height: 15px;
+	margin-top: 5px;
+}
+
+.newAddRideStyle #new_ride button.confirm {
+	background: #6ea953 url('/assets/bg_button_confirm.gif') top repeat-x scroll;
+	border: 1px solid #2f571c;
+	border-bottom-color: #284d17;
+	color: #FFFFFF;
+	padding:5px 15px;
+}

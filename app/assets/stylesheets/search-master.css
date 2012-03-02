@@ -10719,3 +10719,116 @@ a.skip:hover {
     margin-right: 10px;
     position: relative;
 }
+
+
+#content_wrapper {
+    margin: 0 auto;
+    width: 990px;
+}
+
+/*.clearfix span {
+    text-align: center;
+    width: 290px;
+}*/
+
+/*.add_ride fieldset{
+        border-bottom: 0 none;
+}
+
+.newAddRideStyle form#new_ride #add_ride .step_container span.active {
+    background-color: transparent;
+    color: #29598E;
+}
+
+.newAddRideStyle form#new_ride #add_ride .step_container.clearfix span {
+    text-align: center;
+    width: 290px;
+}
+
+form#new_ride #add_ride .step_container span {
+    color: #C0C0C0;
+    float: left;
+    padding: 10px;
+    width: 190px;
+}
+
+.newAddRideStyle form#new_ride #add_ride .step_container.clearfix span .right {
+    text-align: right !important;
+}
+
+.newAddRideStyle form#new_ride #add_ride .step_container {
+    background: url("/assets/step1.png") no-repeat scroll center bottom transparent;
+    border-bottom: medium none;
+    margin-bottom: 21px;
+    padding-bottom: 11px;
+    width: 930px;
+}
+
+form#new_ride #add_ride.standard dt {
+    clear: both;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-right: 16px;
+    padding: 8px 0 2px;
+    text-align: right;
+    width: 160px;
+}
+form#new_ride #add_ride.standard dt
+{
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: right;
+}
+
+form#new_ride #add_ride.standard dd selection {
+    padding-top: 6px;
+}
+
+form#new_ride #add_ride.standard dd {
+    display: inline-block;
+    float: left;
+    font-size: 11px;
+    padding-bottom: 16px;
+    width: 400px;
+}
+
+.newAddRideStyle form#new_ride #add_ride.standard dd #driverselect .bigradio input.radio {
+    background-image: none;
+    border: 0 none;
+    height: auto;
+    margin-top: 4px;
+    padding: 0;
+    width: auto;
+}
+
+.newAddRideStyle form#new_ride #add_ride.standard dd .bigradio label {
+    font-weight: 700;
+    margin-top: 65px !important;
+    padding: 0 0 0 10px !important;
+}
+
+.newAddRideStyle form#new_ride #add_ride #step_1 label {
+    font-size: 1.1em;
+}
+
+
+
+ .newAddRideStyle form#new_ride #add_ride.standard dd .bigradio {
+    border: 1px solid #DDDDDD;
+    float: left;
+    height: 90px;
+    overflow: hidden;
+    padding-left: 47px;
+    width: 160px;
+}
+
+.newAddRideStyle form#new_ride #add_ride.standard #driverselect {
+    background-image: url("/assets/icon-driver.jpg");
+    background-position: 50% 9px;
+    background-repeat: no-repeat;
+    margin-right: 15px;
+}*/

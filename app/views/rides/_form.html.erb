@@ -1,93 +1,250 @@
-
+<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
 <script type="text/javascript">
   $(document).ready(function() {
     $( "#ride_departure_date" ).datepicker({
       dateFormat: "yy-mm-dd",
       minDate: 0, maxDate: "+1Y"
     });
+
+    $("#addride-whereto-button-step1").click(function() {
+     if(!($('#ride_ride_type_sedon').is(':checked')||$('#ride_ride_type_van').is(':checked'))) {
+       $(".ride-type-check").show();
+     }
+     else{
+       $(".ride-type-check").hide();
+       $(".check-step1").hide();
+       $(".check-step2").show();
+
+
+
+     }
+    });
+
+       $('#ride_to_location_id').change(function() {
+      if ($(this).val() == $('#ride_from_location_id').val()) {
+        $(".city-option-same").show();
+        $('#ride_to_location_id').addClass("validation-error");
+        $('#ride_from_location_id').addClass("validation-error");
+        $("#addride-whereto-button-step1").attr("disabled", "disabled");
+      } else {
+        $(".city-option-same").hide();
+        $('#ride_to_location_id').removeClass("validation-error");
+        $('#ride_from_location_id').removeClass("validation-error");
+        $("#addride-whereto-button-step1").removeAttr("disabled");
+      }
+    });
+
+       $("#addride-whereto-button-step2").click(function() {
+        if($('#ride_departure_date').val().length > 1){
+          $(".check-step2").hide();
+          $(".check-step3").show();
+        }
+        else{
+          $(".date-check-step2").show()
+        }
+    });
   });
 </script>
-<%= form_for @ride do |f| %>
-  <% if @ride.errors.any? %>
-    <div class="error_messages">
+<div class="search_run">
+  <div class="header_wrap">
+    <div class="header">
+      <ul id="top_nav">
+        <li>
+          <a id="post_ride" class="button post km_click_event_by_text" href="#">Post a ride</a>
+          </li>
+        </ul>
+      </div>
+   </div>
+  <div id="content_wrapper" class="new_style">
+    <div id="content_container" class="clearfix">
+      <div id="wide_column_left" class="newAddRideStyle">
+          <%= form_for @ride do |f| %>
+             <% if @ride.errors.any? %>
+            <div class="error_messages">
       <h2>Form is invalid</h2>
       <ul>
         <% for message in @ride.errors.full_messages %>
-          <li><%= message %></li>
+        <li><%= message%></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :from_city %>
-    <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
-  </div>
+            <div class="check-step1" style="display: block">
+            <fieldset id="step_1">
+              <div class="step_container clearfix">
+                <span class="active left"><b>1. Where To?</b></span>
+                <span><b>2. What Time?</b></span>
+                <span class="right"><b>3. What Else?</b></span>
+               </div>
+              <dl>
+                <dt><label>I Am Taking:</label></dt>
+                <dd class="selection" id="who">
+                  <div class="bigradio" id="driverselect">
+                    <%= f.radio_button :ride_type, 'Sedon' %><%= f.label :ride_type, 'A Sedon', :for => 'ride_ride_type_sedon'%>
+                   </div>
+                  <div class="bigradio" id="passengerselect">
+                   <%= f.radio_button :ride_type, 'Van' %><%= f.label :ride_type, 'A Van', :for => 'ride_ride_type_van'%>
+                   </div>
+                 </dd>
+                 <dt><div class="ride-type-check" style="display: none">No Ride Type Selected</div></dt>
+                <dt><label for="s">Starting From</label></dt>
+                <dd>
+                 <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
+                 </dd>
+                <dt><label for="e">Going To</label></dt>
+                <dd>
+                 <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
+                  <div class="city-option-same" style="display: none"> From and To City can't same </div>
+                  <p>Only the closest crossstreets are shown in your listing (e.g. 1st &amp; Main)</p>
+                 </dd>
+                <dt>&nbsp;</dt>
+                <dd class="changestep"><span class="errormsg"></span> <button id="addride-whereto-button-step1" type="button" class="confirm clickaway_confirm"><span>Next Step</span> <img src="./post_files/forward-arrow-white.png"></button></dd>
+                 </dl>
+            </fieldset>
+              </div>
 
-  <div class="field">
-    <%= f.label :to_city %>
-    <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
-  </div>
-  <div class="field">
-    <%= f.label :departure_date %>
-    <%= f.text_field :departure_date %>
-  </div>
-  <div class="field">
-    <%= f.label :departure_time %>
-    <%= f.time_select :departure_time, {:minute_step => 15}, :class => "duration-change" %>
-  </div>
-  <div class="field">
-    <%= f.label :duration %>
-    <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>
- :
-    <%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
-  </div>
-  <div id="div-estimated-arrival-time" class="field display_none" style="border: 1px solid; padding: 5px; margin: 5px 0px 5px 0px">
-    <span>
-      Estimated arrival time is <span id="estimated-arrival-time"></span>
-    </span>
-  </div>
-  <div class="field">
-    <%= f.label :flexibility %>
-    <%= f.select :flexibility_in_minutes, (5..30).step(5).collect{|t| ["#{t} mins", t]}, :include_blank => "select ± minutes" %>
-  </div>
-  <div class="field">
-    <%= f.label :ride_type %>
-    <div>
-      <table><tr>
-          <td>
-            <%= f.radio_button :ride_type, 'Sedon' %>
-          </td>
-          <td>
-            <%= f.label :ride_type, 'Sedon', :for => 'ride_ride_type_sedon'%>
-          </td>
-          <td>
-            <%= f.radio_button :ride_type, 'Suv' %>
-          </td>
-          <td>
-            <%= f.label :ride_type, 'Suv', :for => 'ride_ride_type_suv'%>
-          </td>
-          <td>
-            <%= f.radio_button :ride_type, 'Van' %>
-          </td>
-          <td>
-            <%= f.label :ride_type, 'Van', :for => 'ride_ride_type_van'%>
-          </td>
-        </tr>
-      </table>
+        <div class="check-step2" style="display: none">
+          <fieldset id="step_2" class="" style="">
+                <div class="step_container clearfix" style="background-image: url(/assets/step2.png); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: 50% 100%; background-repeat: no-repeat no-repeat; ">
+                  <span class="left"><b>1. Where To?</b></span>
+                  <span class="active"><b>2. What Time?</b></span>
+                  <span class="right"><b>3. What Else?</b></span>
+                  </div>
+                <dl>
+                  <div id="singletripwrapper">
+                   <div id="there_one_time">
+                     <%= f.label :departure_date %>
+                     <%= f.text_field :departure_date %>
+                     <div class="date-check-step2" style="display:none">Departure Date can't be blank</div>
+                     </div>
+                    <div id="there_one_time">
+                     <%= f.label :departure_time %>
+                     <%= f.time_select :departure_time, {:minute_step => 15}, :class => "duration-change" %>
+                    </div>
+                    <div id="there_one_time">
+                     <%= f.label :duration %>
+                     <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>:
+                     <%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
+                    </div>
+                  </div>
+                <dd class="changestep"><span class="errormsg"></span> <button id="addride-whereto-button-step2" type="button" class="confirm clickaway_confirm">
+                  <span>Next Step</span>
+                    <img src="./post_files/forward-arrow-white.png">
+                    </button>
+                 </dd>
+                  </dl>
+</fieldset>
+          </div>
+        <div class="check-step3" style="display: none">
+          <fieldset id="step_3" class="" style="">
+            <div class="step_container clearfix" style="background-image: url(/assets/step3.png); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: 50% 100%; background-repeat: no-repeat no-repeat; ">
+              <span class="left"><b>1. Where To?</b></span>
+              <span><b>2. What Time?</b></span>
+	      <span class="active right"><b>3. What Else?</b></span>
+              </div>
+            <dl>
+              <dt><%= f.label :total_price, "Total Ride Price?" %></dt>
+	    <dd>
+              <span id="dollarsign">$</span><%= f.number_field :total_price  %>
+             </dd>
+	    <dt class="seats-visibility"><%= f.label :available_seats, "Number of available seats" %></dt>
+	    <dd class="seats-visibility">
+                  <%= f.select :available_seats, 1..4 %>
+              </dd>
+	    <dt><%= f.label :notes, "Notes" %></dt>
+	    <dd><%= f.text_area :notes, :size => "30x3" %></dd>
+	 </dl>
+	 </fieldset>
+          <%= f.submit "Create Ride" %>
+        </div>
+
+<%end%>
+              
     </div>
+    </div>
+</div>
   </div>
-  <div class="field">
-    <%= f.label :available_seats %>
-    <%= f.select :available_seats, 1..4 %>
-  </div>
-  <div class="field">
-    <%= f.label :total_price %>
-    <%= f.number_field :total_price  %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %>
-    <%= f.text_area :notes  %>
-  </div>
+<%#= form_for @ride do |f| %>
+  <%# if @ride.errors.any? %>
+    <%#*<div class="error_messages">%>
+      <%#*<h2>Form is invalid</h2>%>
+      <%#*<ul>%>
+        <%# for message in @ride.errors.full_messages %>
+          <%#*<li><%= message %>
+        <%# end %>
+      <%#*</ul>%>
+    <%#*</div>%>
+  <%# end %>
+  <%#*<div class="field">%>
+    <%#= f.label :from_city %>
+    <%#= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
+  <%#*</div>%>
 
-  <p><%= f.submit "Create Ride" %></p>
-<% end %>
+  <%#*<div class="field">%>
+    <%#= f.label :to_city %>
+    <%#= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] } %>
+  <%#*</div>%>
+  <%#*<div class="field">%>
+    <%#= f.label :departure_date %>
+    <%#= f.text_field :departure_date %>
+  <%#*</div>%>
+  <%#*<div class="field">%>
+    <%#= f.label :departure_time %>
+    <%#= f.time_select :departure_time, {:minute_step => 15}, :class => "duration-change" %>
+  <%#*</div>%>
+  <%#*<div class="field">%>
+    <%#= f.label :duration %>
+    <%#= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>
+ <%#*:%>
+    <%#= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
+  <%#*</div>%>
+  <%#*<div id="div-estimated-arrival-time" class="field display_none" style="border: 1px solid; padding: 5px; margin: 5px 0px 5px 0px">%>
+    <%#*<span>%>
+      <%#*Estimated arrival time is <span id="estimated-arrival-time"></span>%>
+    <%#*</span>%>
+  <%#*</div>%>
+  <%#*<div class="field">%>
+    <%#= f.label :flexibility %>
+    <%#= f.select :flexibility_in_minutes, (5..30).step(5).collect{|t| ["#{t} mins", t]}, :include_blank => "select ± minutes" %>
+  <%#*</div>%>
+  <%#*<div class="field">%>
+    <%#= f.label :ride_type %>
+    <%#*<div>%>
+      <%#*<table><tr>%>
+          <%#*<td>%>
+            <%#= f.radio_button :ride_type, 'Sedon' %>
+          <%#*</td>%>
+          <%#*<td>%>
+            <%#= f.label :ride_type, 'Sedon', :for => 'ride_ride_type_sedon'%>
+          <%#*</td>%>
+          <%#*<td>%>
+            <%#= f.radio_button :ride_type, 'Suv' %>
+          <%#*</td>%>
+          <%#*<td>%>
+            <%#= f.label :ride_type, 'Suv', :for => 'ride_ride_type_suv'%>
+          <%#*</td>%>
+          <%#*<td>%>
+            <%#= f.radio_button :ride_type, 'Van' %>
+          <%#*</td>%>
+          <%#*<td>%>
+            <%#= f.label :ride_type, 'Van', :for => 'ride_ride_type_van'%>
+          <%#*</td>%>
+        <%#*</tr>%>
+      <%#*</table>%>
+    <%#*</div>%>
+  <%#*</div>%>
+  <%#*<div class="field">%>
+    <%#= f.label :available_seats %>
+    <%#= f.select :available_seats, 1..4 %>
+  <%#*</div>%>
+  <%#*<div class="field">%>
+    <%#= f.label :total_price %>
+    <%#= f.number_field :total_price  %>
+  <%#*</div>%>
+  <%#*<div class="field">%>
+    <%#= f.label :notes %>
+    <%#= f.text_area :notes  %>
+  <%#*</div>%>
+
+  <%#= f.submit "Create Ride" %>
+<%# end %>
