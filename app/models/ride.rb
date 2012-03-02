@@ -99,6 +99,6 @@ class Ride < ActiveRecord::Base
     self.save!
   end
   def per_price_seat
-    self.total_price/remaining_seats
+    self.total_price/remaining_seats if remaining_seats > 0
   end
 end
