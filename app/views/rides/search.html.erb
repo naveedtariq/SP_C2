@@ -117,6 +117,7 @@
               </div>
             <%end%>
             <%@rides.each do |ride| %>
+            <a href="<%= new_ride_ride_participant_path(ride) %>">
               <div class="entry">
                 <div class="price_box">
                   <div class="seats">
@@ -141,6 +142,7 @@
                   <h4>Departs <%= ride.departure_time.strftime("%H:%M %Z") %></h4>
                 </div>
               </div>
+              </a>
             <%end%>
             <div id="action">
               <div class="item postride">
