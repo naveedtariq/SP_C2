@@ -18,9 +18,9 @@ namespace :db do
     male_images = []
     female_images = []
     path = "#{Rails.root}/spec/data/male/"
-    Dir::foreach(path) { |f| male_images << File.open(path + "#{f}") if f[f.size-4..f.size-1] === "jpg" }
+    Dir::foreach(path) { |f| male_images << File.open(path + "#{f}") if f[f.size-3..f.size-1] === "jpg" }
     path = "#{Rails.root}/spec/data/female/"
-    Dir::foreach(path) { |f| female_images << File.open(path + "#{f}") if f[f.size-4..f.size-1] === "jpg" }
+    Dir::foreach(path) { |f| female_images << File.open(path + "#{f}") if f[f.size-3..f.size-1] === "jpg" }
    
 
     csv.each_with_index do |row, index|
