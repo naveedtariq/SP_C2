@@ -23,7 +23,7 @@ namespace :db do
     Dir::foreach(path) { |f| female_images << File.open(path + "#{f}") if f[f.size-4..f.size-1] === "jpeg" }
    
 
-    csv.each do |row|
+    csv.each_with_index do |row, index|
       row = row.to_hash.with_indifferent_access
       u = User.new(row.to_hash.symbolize_keys)
       if u.gender && u.gender.downcase! === "male"
@@ -31,6 +31,7 @@ namespace :db do
       else
         u.user_image = female_images[(SecureRandom.random_number * female_images.size).to_i]
       end
+      puts "(#{index}) name ---> #{u.full_name}, gender --> #{u.gender}"
       u.save!
     end
     puts "dumping locations"
@@ -53,7 +54,7 @@ namespace :db do
       ride = Ride.new(row.to_hash.symbolize_keys)
       user = ((users.delete_at(rand(users.size-1)+1)) || User.last)
       ride.save!
-      puts "ride departure date --> #{ride.departure_date}"
+      puts "(#{index}) ride departure date --> #{ride.departure_date}"
 
       ride.users << user
       unless added_users.blank?

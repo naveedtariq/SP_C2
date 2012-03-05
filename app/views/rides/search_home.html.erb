@@ -31,6 +31,15 @@
         }
       }
     });
+
+      $( "#ride_departure" ).datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+
+    $('.ride-scroll').animate({
+    scrollTop: $('.ride-scroll').get(0).scrollHeight
+}, 100000);
+
   });
 </script>
 <div class="clear"></div>
@@ -51,26 +60,19 @@
       <div id="content">
         <div id="routes">
           <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
-
             <div class="box">
-              <div class="text_input"> 
-                <label for="search_s" class="pin start"></label>
-                <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----Driving From -----"%>
-              </div>
-              <div class="text_input"> 
+              <div class="text_input">
+                 <label for="search_s" class="pin start"></label>
+                 <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----Driving From -----"%>
+               </div>
+              <div class="text_input">
                 <label for="search_e" class="pin end"></label>
                 <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----Driving To -----"%>
-              </div>
-              <div class="left-with-margin">
-                <%= f.radio_button :departure, 'all', :checked =>true, :class => "left-with-margin" %>
-                <%= f.label :departure, 'All', :for => 'ride_departure_all', :class => "left-with-margin"%>
-                <%= f.radio_button :departure, 'first_option', :class => "left-with-margin" %>
-                <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option", :class => "left-with-margin"%>
-                <%= f.radio_button :departure , 'second_option', :class => "left-with-margin" %>
-                <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option', :class => "left-with-margin"%>
-              </div>
-              <%= f.submit "Search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
+               </div>
+               <%= f.submit "Search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
             </div>
+        
+
             <div class="heading">
               <h1 style="color:white;">Share a Direct Ride<br /></h1>
               <p>
@@ -87,7 +89,7 @@
             <h3 class="headline first">
               Latest Rides
             </h3>
-            <ul><%@rides.each do |ride| %>
+            <ul class="ride-scroll"><%@rides.each do |ride| %>
                 <li style="top: 0px;">
                   <a class="km_click_event_by_href" href="<%= new_ride_ride_participant_path(ride) %>">
                     <div class="price_box"> 
@@ -109,3 +111,4 @@
       </div>
     </div>
   </div>
+</div>

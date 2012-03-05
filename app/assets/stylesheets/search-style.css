@@ -7065,6 +7065,7 @@ form.new_ride dd textarea, .zdialog textarea {
 form#new_ride #step_2 label, form#new_ride #step_2, form#new_ride #step_2 .timetable th,
 form#new_ride #step_2 select {
     font-size: 14px;
+    width: 105px;
 }
 
 

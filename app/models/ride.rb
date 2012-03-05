@@ -37,7 +37,7 @@ class Ride < ActiveRecord::Base
   belongs_to :to_location, :class_name => Location
   belongs_to :from_location, :class_name => Location
   #accepts_nested_attributes_for :location
- # attr_accessible :from_city, :to_city, :departure_date, :departure_time, :flexibility, :duration, :ride_type, :available_seats, :total_price, :notes
+  # attr_accessible :from_city, :to_city, :departure_date, :departure_time, :flexibility, :duration, :ride_type, :available_seats, :total_price, :notes
   def self.search_rides(params)
     unless params.blank?
       params.each do |param|
@@ -54,7 +54,7 @@ class Ride < ActiveRecord::Base
       end  
       rides = rides.scoped_departure(dep_date)
     end
-    rides.current_rides.active.ordered_rides
+    rides.current_rides.active.ordered_rides.includes(:ride_participants)
   end
   def ride_participants_owners
     if self.ride_participants.blank?
@@ -99,6 +99,8 @@ class Ride < ActiveRecord::Base
     self.save!
   end
   def per_price_seat
-    self.total_price/remaining_seats if remaining_seats > 0
+    if remaining_seats > 0
+      self.total_price/remaining_seats
+    end
   end
 end
