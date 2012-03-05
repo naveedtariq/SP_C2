@@ -20,6 +20,16 @@
       }
     });
 
+      $("#addride-whereto-button-step2-back").click(function() {
+        $(".check-step2").hide();
+        $(".check-step1").show();
+    });
+
+          $("#addride-whereto-button-step3-back").click(function() {
+        $(".check-step3").hide();
+        $(".check-step2").show();
+    });
+
     $('#ride_to_location_id').change(function() {
       if($(this).val() != ""){
         if ($(this).val() == $('#ride_from_location_id').val()) {
@@ -123,20 +133,25 @@
                 <div id="singletripwrapper">
                   <div id="there_one_time">
                     <%= f.label :departure_date %>
-                    <%= f.text_field :departure_date %>
+                    <% t=Time.now%>
+                    <%= f.text_field :departure_date, :value => t.strftime("%m/%d/%Y")%>
+                    <%= image_tag ("icon_calendar.png"), :class => "ui-datepicker-trigger" %>
                     <div class="date-check-step2" style="display:none; color: red">Departure Date can't be blank</div>
                   </div>
                   <div id="there_one_time">
                     <%= f.label :departure_time %>
-                    <%= f.time_select :departure_time, {:minute_step => 15}, :class => "duration-change" %>
+                    <%= f.time_select :departure_time, :minute_step => 15, :ampm => true %>
                   </div>
                   <div id="there_one_time">
                     <%= f.label :duration %>
-                    <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>:
-                    <%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
+                    hrs<%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>
+                    min<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
                   </div>
                 </div>
-                <dd class="changestep"><span class="errormsg"></span> <button id="addride-whereto-button-step2" type="button" class="confirm clickaway_confirm">
+                <dd class="changestep"><span class="errormsg"></span><button id="addride-whereto-button-step2-back" type="button" class="confirm clickaway_confirm">
+                    <span>Back Step</span>
+                  </button>
+                    <button id="addride-whereto-button-step2" type="button" class="confirm clickaway_confirm">
                     <span>Next Step</span>
                   </button>
                 </dd>
@@ -153,7 +168,7 @@
               <dl>
                 <dt><%= f.label :total_price, "Total Ride Price?" %></dt>
                 <dd>
-                  <span id="dollarsign">$</span><%= f.number_field :total_price  %>
+                  <span id="dollarsign">$</span><%= f.number_field :total_price %>
                 </dd>
                 <dt class="seats-visibility"><%= f.label :available_seats, "Number of available seats" %></dt>
                 <dd class="seats-visibility">
@@ -162,6 +177,10 @@
                 <dt><%= f.label :notes, "Notes" %></dt>
                 <dd><%= f.text_area :notes, :size => "30x3" %></dd>
               </dl>
+                 <dd class="changestep"><span class="errormsg"></span><button id="addride-whereto-button-step3-back" type="button" class="confirm clickaway_confirm">
+                    <span>Back Step</span>
+                  </button>
+                </dd>
             </fieldset>
             <%= f.submit "Create Ride" %>
           </div>

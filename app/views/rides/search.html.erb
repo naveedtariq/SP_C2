@@ -32,6 +32,10 @@
         }
       }
     });
+
+    $( "#ride_departure" ).datepicker({
+      dateFormat: "yy-mm-dd"
+    });
   });
 </script>
 <div class="clear"></div>
@@ -69,41 +73,21 @@
     <div id="content_container" class="clearfix">
       <div id="content">
         <div id="head">
-          <div class="search">
-            <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
+          <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
+            <div class="search">
               <div class="text_input">
                 <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----"%>
               </div>
               <div class="text_input">
                 <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
               </div>
-              <div class="text_input">
-                <table>
-                  <tr>
-                    <td>
-                      <%= f.radio_button :departure, 'all', :checked =>true %>
-                    </td>
-                    <td>
-                      <%= f.label :departure, 'All', :for => 'ride_departure_all'%>
-                    </td>
-                    <td>
-                      <%= f.radio_button :departure, 'first_option' %>
-                    </td>
-                    <td>
-                      <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option"%>
-                    </td>
-                    <td>
-                      <%= f.radio_button :departure , 'second_option' %>
-                    </td>
-                    <td>
-                      <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option'%>
-                    </td>
-                  </tr>
-                </table>
+              <div class="text_input datetime">
+                <label class="datetime_icon" for="search_date"></label>
+                <%= f.text_field :departure %>
               </div>
               <%= f.submit "search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
           <div class="city-option-same" style="display: none"> From and To City can't be the same </div>
         </div>
         <div id="results">
@@ -118,27 +102,35 @@
             <%end%>
             <%@rides.each do |ride| %>
               <div class="entry">
-                <div class="price_box">
-                  <div class="seats">
-                    <span class="count"><%= ride.remaining_seats %></span>
-                    <span class="left">seats left</span>
-                  </div>
-                  <p><b><%= number_to_currency(ride.per_price_seat)%></b> / seat</p>
-                </div>
                 <div class="userpic">
-                  <div class="username"><%= ride.owner.first_name%></div>
+                  <div class="username"><%= ride.owner.first_name%>&nbsp; <%= ride.owner.last_name.chars.first %></div>
                   <%= image_tag ride.owner.user_image.url.to_s %>
                   <span class="driver"></span>
                 </div>
-                <div class="inner_content ">
-                  <h3>
-                    <span class="inner">
-                      <%= ride.from_location && ride.from_location.name %>
-                      <span class="trip_type round_trip"></span>
-                      <%= ride.to_location && ride.to_location.name %>
-                    </span>
-                  </h3>
-                  <h4>Departs <%= ride.departure_time.strftime("%H:%M %Z") %></h4>
+                <div class="price_box">
+                  <div class="seats">
+                    <%  if ride.remaining_seats==0 %>
+                      <span class="count1">SOLD OUT</span>
+
+                    <%else%>
+                      <span class="count"><%= ride.remaining_seats %></span>
+                      <span class="left">seats left</span>
+                    <%end%>
+                  </div>
+                  <p><b><%= number_to_currency(ride.per_price_seat)%></b> / seat</p>
+                </div>
+                <div class="inner_content">
+                  <div class="info-rides">
+                    <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.from_location && ride.from_location.name %></span></p></div>
+                    <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p></div>
+                  </div>
+                  <div class="ride-image"><%= image_tag ("van.jpg") %><%= ride.ride_type %></div>
+                  <div class="participant-pic"><%ride.ride_participants.active_participants.role_wise.each do |rider| %>
+                      <div class="riders-pics">
+                        <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
+                        <%= image_tag rider.owner.user_image.url.to_s %>
+                        <span class="driver"></span>
+                      </div><%end%></div>
                 </div>
               </div>
             <%end%>
