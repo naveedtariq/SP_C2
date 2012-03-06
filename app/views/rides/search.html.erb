@@ -107,11 +107,6 @@
               <% end %>
               <a href="<%= new_ride_ride_participant_path(ride)%>" <% if ride.remaining_seats==0 %> onclick="return false" <%end%> >
                 <div class="entry">
-                  <div class="userpic">
-                    <div class="username"><%= ride.owner.first_name%>&nbsp; <%= ride.owner.last_name.chars.first %></div>
-                    <%= image_tag ride.owner.user_image.url.to_s %>
-                    <span class="driver"></span>
-                  </div>
                   <%  if ride.remaining_seats==0 %>
                     <div class="price_box">
                       <div class="seats">
@@ -133,13 +128,23 @@
                       <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.from_location && ride.from_location.name %></span></p></div>
                       <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p></div>
                     </div>
-                    <div class="ride-image"><% if ride.ride_type=="Sedon"%><%= image_tag ("sedon.jpg") %><%else%><%= image_tag ("van.jpg")%><%end%><%= ride.ride_type %></div>
-                    <div class="participant-pic"><%ride.ride_participants.active_participants.role_wise.each do |rider| %>
+                    <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase}.jpg") %><%= ride.ride_type %></div>
+                    <div class="participant-pic">
+                      <%ride.ride_participants.active_participants.role_wise.select("user_id, ride_participants.created_at").uniq.each do |rider| %>
                         <div class="riders-pics">
                           <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
-                          <%= image_tag rider.owner.user_image.url.to_s %>
+                          <%= image_tag rider.user.user_image.url.to_s %>
                           <span class="driver"></span>
-                        </div><%end%></div>
+                        </div>
+                      <%end%>
+                      <% ride.remaining_seats.times do %>
+                        <div class="riders-pics">
+                          <div class="riders-info">open&nbsp;seat</div>
+                          <%= image_tag "no-image.gif" %>
+                          <span class="driver"></span>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </a>
@@ -155,19 +160,19 @@
           <div class="page_list">
             <span class="showing">
               Showing <%= number_of_records(params[:page], SEARCH_RIDES_PER_PAGE) %> - <%= number_of_records(params[:page], SEARCH_RIDES_PER_PAGE, SEARCH_RIDES_PER_PAGE) %> of <strong><%= @count %> results</strong>
-              </span>
+            </span>
             <div class="pagination">
               <span class="first_page">
                 <span>« Prev</span>
-                </span>
-             
-            <%= will_paginate @rides, :previous_label => "<", :next_label => ">" %>
+              </span>
+
+              <%= will_paginate @rides, :previous_label => "<", :next_label => ">" %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 
 

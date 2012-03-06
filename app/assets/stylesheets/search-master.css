@@ -1184,7 +1184,8 @@ for the purpose of displaying the new bookit module in private networks */
   float: left;
   vertical-align: top;
   padding-top: 15px;
-  width: 725px;
+  width: 89%;
+float: left;
   margin-left:10px;
   height: 100px;
 }
@@ -1295,7 +1296,7 @@ for the purpose of displaying the new bookit module in private networks */
   text-align: center;
   border: 1px solid #7a8494;
   padding: 5px;
-  width: 75px;
+  width: 8%;
   height: 65px;
   background-color: #fff;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.5)), color-stop(100%, rgba(255, 255, 255, 0.8)));
@@ -10873,7 +10874,7 @@ form#new_ride #add_ride.standard dd {
 }
 
 .inner-info-line1{
-width: 300px;
+width: 320px;
 }
 
 span.info-line1{
@@ -10896,8 +10897,6 @@ width:300px;
 
 .ride-image{
 position: relative;
-margin-left:305px;
-margin-top: -95px;
 text-align: center;
 height: 100px;
 float: left;
@@ -10915,15 +10914,12 @@ width: 85px;
 }
 
 .participant-pic{
-width:300px;
-margin-left:420px;
-margin-top: -109px;
-position: absolute;
+float:right;
 height:80px;
 }
 
 .info-rides{
-width: 302px;
+float: left;
 height: 95px;
 }
 
