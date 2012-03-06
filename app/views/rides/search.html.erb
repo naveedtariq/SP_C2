@@ -130,7 +130,7 @@
                     </div>
                     <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase}.jpg") %><%= ride.ride_type %></div>
                     <div class="participant-pic">
-                      <%ride.ride_participants.active_participants.role_wise.select("user_id, ride_participants.created_at").uniq.each do |rider| %>
+                      <%ride.ride_participants.active_participants.role_wise.each do |rider| %>
                         <div class="riders-pics">
                           <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
                           <%= image_tag rider.user.user_image.url.to_s %>

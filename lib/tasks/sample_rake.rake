@@ -26,13 +26,13 @@ namespace :db do
     csv.each_with_index do |row, index|
       row = row.to_hash.with_indifferent_access
       u = User.new(row.to_hash.symbolize_keys)
-#      if u.gender && u.gender.downcase == "male"
-#        puts "in males directory"
-#        u.user_image = male_images[(SecureRandom.random_number * male_images.size).to_i]
-#      else
-#        puts "in females directory"
-#        u.user_image = female_images[(SecureRandom.random_number * female_images.size).to_i]
-#      end
+      if u.gender && u.gender.downcase == "male"
+        puts "in males directory"
+        u.user_image = male_images[(SecureRandom.random_number * male_images.size).to_i]
+      else
+        puts "in females directory"
+        u.user_image = female_images[(SecureRandom.random_number * female_images.size).to_i]
+      end
       puts "(#{index}) name ---> #{u.full_name}, gender --> #{u.gender}"
       u.save!
     end
