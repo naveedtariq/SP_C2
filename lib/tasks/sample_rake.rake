@@ -9,7 +9,7 @@ require 'csv'
 namespace :db do
   desc 'Populates database with generated sample data'
   
-  task :populate => :environment do
+  task :populate => :environment do 
     puts "started dumping"
     csv_text = File.read("#{Rails.root}/spec/data/user.csv")
     puts "dumping users"
@@ -34,6 +34,8 @@ namespace :db do
       puts "(#{index}) name ---> #{u.full_name}, gender --> #{u.gender}"
       u.save!
     end
+
+
     puts "dumping locations"
 
     csv_text = File.read("#{Rails.root}/spec/data/location.csv")

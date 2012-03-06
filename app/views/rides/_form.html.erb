@@ -147,6 +147,10 @@
                     hrs<%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>
                     min<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
                   </div>
+                  <div id="there_one_time">
+                    <%= f.label :flexibility %>
+                    <%= f.select :flexibility_in_minutes, (5..30).step(5).collect{|t| ["#{t} mins", t]}, :include_blank => "select ± minutes" %>
+                  </div>
                 </div>
                 <dd class="changestep"><span class="errormsg"></span><button id="addride-whereto-button-step2-back" type="button" class="confirm clickaway_confirm">
                     <span>Back Step</span>
@@ -172,7 +176,7 @@
                 </dd>
                 <dt class="seats-visibility"><%= f.label :available_seats, "Number of available seats" %></dt>
                 <dd class="seats-visibility">
-                  <%= f.select :available_seats, 1..4 %>
+                  <%= f.select :available_seats, 1..2 %>
                 </dd>
                 <dt><%= f.label :notes, "Notes" %></dt>
                 <dd><%= f.text_area :notes, :size => "30x3" %></dd>
@@ -180,9 +184,9 @@
                  <dd class="changestep"><span class="errormsg"></span><button id="addride-whereto-button-step3-back" type="button" class="confirm clickaway_confirm">
                     <span>Back Step</span>
                   </button>
+                   <div class="ride-btn"><%= f.submit "Create Ride", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; width: 103px; font-size: 13px; float: right; height: 29px; margin-right: -121px; margin-top: -30px;"%></div>
                 </dd>
             </fieldset>
-            <%= f.submit "Create Ride" %>
           </div>
 
         <%end%>

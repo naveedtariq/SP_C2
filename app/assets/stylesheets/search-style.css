@@ -415,6 +415,7 @@ h3, strong {
 #content_wrapper {
 	margin: 0 auto;
 	width: 990px;
+	position: relative;
 }
 
 #content_container {
@@ -2258,7 +2259,7 @@ form#search_filters button {
 }
 
 .pagination a {
-	border: 1px solid #DDD;
+	border: 0px solid #DDD;
 	padding: 2px 6px;
 }
 .pagination a:hover {

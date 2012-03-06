@@ -1,4 +1,5 @@
 <%= javascript_include_tag "jquery-1.7.1.min" %>
+<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui", "bootstrap" %>
 <div class="container">
   <section id="code">
     <% flash.each do |name, msg| %>
@@ -47,10 +48,10 @@
                 </div>
                 <div class="inner_content">
                   <div class="info-rides">
-                    <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= @ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;<%= @ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= @ride.from_location && @ride.from_location.name %></span></p></div>
-                    <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (@ride.departure_time + @ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;<%= @ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= @ride.to_location && @ride.to_location.name %></span></p></div>
+                    <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= @ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= @ride.from_location && @ride.from_location.name %></span></p></div>
+                    <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (@ride.departure_time + @ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= @ride.to_location && @ride.to_location.name %></span></p></div>
                   </div>
-                  <div class="ride-image"><%= image_tag ("van.jpg") %><%= @ride.ride_type %></div>
+                  <div class="ride-image"><% if @ride.ride_type=="Sedon"%><%= image_tag ("sedon.jpg") %><%else%><%= image_tag ("van.jpg")%><%end%><%= @ride.ride_type %></div>
                 </div>
               </div>
 
@@ -68,7 +69,11 @@
           <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%>
           <br/>
           <div class="price_view">Total = $<span id="price"><%=  @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span></div><br/><br/>
-          <input type="button" value="Book Ride" id="btn-book-ride"/>
+            <dd class="changestep"><span class="errormsg"></span>
+              <button id="btn-book-ride" type="button" class="confirm clickaway_confirm">
+                <span>Book It!</span>
+                </button>
+             </dd>
         </div><br/>
 
         <div class="info_view" style="display: none">
@@ -104,27 +109,30 @@
           <% if current_user.blank? %>
             <input type="button" id="book-ride-child-window" value="Book Ride"></input>
           <% else %>
-            <p><%= f.submit "Book Ride"%></p>
+            <dd class="changestep"><span class="errormsg"></span>
+              <%= f.submit "Book Ride", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "%>
+            </dd>
           <%end %>
         </div>
       <%end%>
     </div>
 
-     <div class="show-one-ride">
-     <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
-
-      <div class="profile">
-       <div class="one-user-pic">
+     <div class="profiles-sec" style="position: relative; width: 765px; margin-left: 266px; height: 313px;">
+       <ul style="width: 760px; margin-left: 0px; height: 307px;" >
+      <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
+      <li style="margin-left: 30px; margin-top: 0px; padding-top: 10px; width: 140px; height: 230px; float:left;">
+      <div class="profile" style="margin-left: 0px; margin-top: 0px; padding-top: 10px; width: 135px; height: 225px;">
+       <div class="one-user-pic" style="position: absolute;">
         <div class="one-user-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
           <%= image_tag rider.owner.user_image.url.to_s %><br/>
-          </div>
-           City: <%= rider.user.city%>
-           Town: <%= rider.user.town%>
-           School: <%= rider.user.school%>
-           Number of Friends: <%= rider.user.number_of_friends%>
-        
-      </div>
-    <% end %>
+          </div><br/>
+          <div class="all-riders" style="postion: relative; width: 132px; margin-top: 77px;">
+           City: <%= rider.user.city%><br/>
+           Town: <%= rider.user.town%><br/>
+           School: <%= rider.user.school%><br/>
+           Number of Friends: <%= rider.user.number_of_friends%><br/></div>
+      </div></li>
+    <% end %></ul>
      </div>
-      </div>
+      </div></div>
 
