@@ -9,7 +9,7 @@ require 'csv'
 namespace :db do
   desc 'Populates database with generated sample data'
   
-  task :populate => :environment do
+  task :populate => :environment do 
     puts "started dumping"
     csv_text = File.read("#{Rails.root}/spec/data/user.csv")
     puts "dumping users"
@@ -18,9 +18,9 @@ namespace :db do
     male_images = []
     female_images = []
     path = "#{Rails.root}/spec/data/male/"
-    Dir::foreach(path) { |f| male_images << File.open(path + "#{f}") if f[f.size-4..f.size-1] === "jpeg" }
+    Dir::foreach(path) { |f| male_images << File.open(path + "#{f}") if f[f.size-3..f.size-1] === "jpg" }
     path = "#{Rails.root}/spec/data/female/"
-    Dir::foreach(path) { |f| female_images << File.open(path + "#{f}") if f[f.size-4..f.size-1] === "jpeg" }
+    Dir::foreach(path) { |f| female_images << File.open(path + "#{f}") if f[f.size-3..f.size-1] === "jpg" }
    
 
     csv.each_with_index do |row, index|
@@ -34,6 +34,8 @@ namespace :db do
       puts "(#{index}) name ---> #{u.full_name}, gender --> #{u.gender}"
       u.save!
     end
+
+
     puts "dumping locations"
 
     csv_text = File.read("#{Rails.root}/spec/data/location.csv")

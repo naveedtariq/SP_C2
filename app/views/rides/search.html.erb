@@ -82,8 +82,8 @@
                 <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
               </div>
               <div class="text_input datetime">
-                <label class="datetime_icon" for="search_date"></label>
-                <%= f.text_field :departure %>
+                <%= f.text_field(:departure,{:value => SpClock.date, :style=>"height: 30px;"}) %>
+                <%= image_tag ("icon_calendar.png"), :style=>"margin-left: -21px; margin-top: 10px; float: left; position: absolute; " %>
               </div>
               <%= f.submit "search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
             </div>
@@ -92,48 +92,56 @@
         </div>
         <div id="results">
           <div class="ride_list">
-            <h3 class="headline first">
-              Search Results
-            </h3>
             <% if @rides.empty? %>
-              <div class="entry">
+              <h3 class="headline first">
                 No Records Found
-              </div>
+              </h3>
             <%end%>
+            <% last_date = [] %>
             <%@rides.each do |ride| %>
-            <a href="<%= new_ride_ride_participant_path(ride) %>">
-              <div class="entry">
-                <div class="userpic">
-                  <div class="username"><%= ride.owner.first_name%>&nbsp; <%= ride.owner.last_name.chars.first %></div>
-                  <%= image_tag ride.owner.user_image.url.to_s %>
-                  <span class="driver"></span>
-                </div>
-                <div class="price_box">
-                  <div class="seats">
-                    <%  if ride.remaining_seats==0 %>
-                      <span class="count1">SOLD OUT</span>
-
-                    <%else%>
-                      <span class="count"><%= ride.remaining_seats %></span>
-                      <span class="left">seats left</span>
-                    <%end%>
+              <% unless last_date.include? ride.departure_date  %>
+                <h3 class="headline first">
+                  <%= ride.departure_date.strftime("Departing %A, %B #{ride.departure_date.day.ordinalize}") %>
+                </h3>
+                <% last_date << ride.departure_date %>
+              <% end %>
+              <a href="<%= new_ride_ride_participant_path(ride)%>" <% if ride.remaining_seats==0 %> onclick="return false" <%end%> >
+                <div class="entry">
+                  <div class="userpic">
+                    <div class="username"><%= ride.owner.first_name%>&nbsp; <%= ride.owner.last_name.chars.first %></div>
+                    <%= image_tag ride.owner.user_image.url.to_s %>
+                    <span class="driver"></span>
                   </div>
-                  <p><b><%= number_to_currency(ride.per_price_seat)%></b> / seat</p>
-                </div>
-                <div class="inner_content">
-                  <div class="info-rides">
-                    <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.from_location && ride.from_location.name %></span></p></div>
-                    <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p></div>
+                  <%  if ride.remaining_seats==0 %>
+                    <div class="price_box">
+                      <div class="seats">
+                        <span class="count1">SOLD OUT</span>
+                      </div>
+                      <p><b><%= number_to_currency(ride.total_price/ride.available_seats)%></b> / seat</p>
+                    </div>
+                  <%else%>
+                    <div class="price_box">
+                      <div class="seats">
+                        <span class="count"><%= ride.remaining_seats %></span>
+                        <span class="left">seats left</span>
+                      </div>
+                      <p><b><%= number_to_currency(ride.per_price_seat)%></b> / seat</p>
+                    </div>
+                  <%end%>
+                  <div class="inner_content">
+                    <div class="info-rides">
+                      <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.from_location && ride.from_location.name %></span></p></div>
+                      <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p></div>
+                    </div>
+                    <div class="ride-image"><% if ride.ride_type=="Sedon"%><%= image_tag ("sedon.jpg") %><%else%><%= image_tag ("van.jpg")%><%end%><%= ride.ride_type %></div>
+                    <div class="participant-pic"><%ride.ride_participants.active_participants.role_wise.each do |rider| %>
+                        <div class="riders-pics">
+                          <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
+                          <%= image_tag rider.owner.user_image.url.to_s %>
+                          <span class="driver"></span>
+                        </div><%end%></div>
                   </div>
-                  <div class="ride-image"><%= image_tag ("van.jpg") %><%= ride.ride_type %></div>
-                  <div class="participant-pic"><%ride.ride_participants.active_participants.role_wise.each do |rider| %>
-                      <div class="riders-pics">
-                        <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
-                        <%= image_tag rider.owner.user_image.url.to_s %>
-                        <span class="driver"></span>
-                      </div><%end%></div>
                 </div>
-              </div>
               </a>
             <%end%>
             <div id="action">
@@ -145,7 +153,15 @@
             </div>
           </div>
           <div class="page_list">
-            <%= will_paginate @rides %>
+            <span class="showing">
+              Showing <%= number_of_records(params[:page], SEARCH_RIDES_PER_PAGE) %> - <%= number_of_records(params[:page], SEARCH_RIDES_PER_PAGE, SEARCH_RIDES_PER_PAGE) %> of <strong><%= @count %> results</strong>
+              </span>
+            <div class="pagination">
+              <span class="first_page">
+                <span>« Prev</span>
+                </span>
+             
+            <%= will_paginate @rides, :previous_label => "<", :next_label => ">" %>
           </div>
         </div>
       </div>

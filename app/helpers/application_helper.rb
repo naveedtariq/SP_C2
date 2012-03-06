@@ -18,4 +18,11 @@ module ApplicationHelper
     end
     
   end
+  def number_of_records(page, per_page, offset = 1)
+    if page.blank?
+      "1"
+    else
+      (((page.to_i-1) * per_page.to_i) + offset).to_s
+    end
+  end
 end

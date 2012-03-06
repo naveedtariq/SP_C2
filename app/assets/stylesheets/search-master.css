@@ -6791,10 +6791,10 @@ a.skip:hover {
 }
 /* line 159, */
 #search_run #content #results .page_list .pagination {
-  float: left;
+  float: right;
 }
 /* line 166, */
-#search_run #content #results .page_list .pagination a,
+#search_runrch_run #content #results .page_list .pagination a,
 #search_run #content #results .page_list .pagination .current_page,
 #search_run #content #results .page_list .pagination .first_page,
 #search_run #content #results .page_list .pagination .last_page,
@@ -6803,7 +6803,7 @@ a.skip:hover {
   margin: 0;
   border: none;
   padding: 0px 4px;
-  float: left;
+  float: none;
   margin: 0 2px;
 }
 /* line 174, */
@@ -10726,6 +10726,7 @@ a.skip:hover {
 #content_wrapper {
     margin: 0 auto;
     width: 990px;
+position:relative;
 }
 
 /*.clearfix span {
@@ -10973,7 +10974,7 @@ height: 35px;
     float: right;
     height: 75px;
     overflow: hidden;
-    position: relative;
+    position: absolute;
     width: 75px;
     margin-right: 5px;
    /* margin-top: -150px;*/
@@ -10991,3 +10992,29 @@ height: 35px;
     width: 56px;
     
 }
+
+#search_run.profiles-sec{
+    margin-left: 315px;
+    width: 320px;
+    float: left;
+    position: relative;
+}
+.profile{
+    border: 1px dashed;
+    float: none;
+    height: 171px;
+    margin-left: 300px;
+    margin-top: 5px;
+    padding-top: 10px;
+    position: relative;
+    width: 110px;
+}
+.text_input datetime#ride_departure{
+height: 35px;
+}
+
+#search_run #content #head form.search .text_input .ride-date {
+height: 15px;
+margin-left: 15px;
+}
+

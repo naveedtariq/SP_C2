@@ -9,6 +9,7 @@ class RidesController < ApplicationController
   end
 
   def create
+    return render :json => params[:ride]
     @ride = Ride.new(params[:ride])
     if @ride.save
       @ride.make_owner!(current_user)
@@ -22,6 +23,7 @@ class RidesController < ApplicationController
   def search
     @ride = Ride.new(params[:ride])
     @rides = Ride.search_rides(params[:ride]).paginate(:page => params[:page], :per_page => SEARCH_RIDES_PER_PAGE)
+    @count = Ride.search_rides(params[:ride]).count
     return render(:action => "search_home") if params[:commit].blank?
   end
 
