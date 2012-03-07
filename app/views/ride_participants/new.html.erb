@@ -10,24 +10,60 @@
 <div class="container">
   <section id="forms">
 
-    <% if current_user %>
-      <div class="subnav">
-        <ul class="nav-pills nav">
-          <li class="active">
-            <%= link_to "<<< Back to search results", search_rides_path %>
-          </li>
-        </ul>
-      </div>
-    <% end %>
     <br/>
     <script type="text/javascript">
       $(document).ready(function(){
+        
+        var logged_in = <%= logged_in? %>;
+        
         $("#btn-book-ride").click(function () {
           $("#btn-book-ride").hide();
           $(".info_view").show();
         });
+
+        $("#new_ride_participant").submit(function() {
+          if($('input#ride_participant_phone').val().length < 1){
+            $(".phone-check1").show();
+          }
+
+          else if($('input#ride_participant_phone').val().length != 10){
+            $(".phone-check").show();
+          }
+         
+          else if(!($('input#ride_participant_phone').val().match(/[0-9]{10}/))){
+            $(".phone-check2").show();
+          }
+          else if(!($('input#ride_participant_mode_of_communications_sms_text').is(':checked')||$('#ride_participant_mode_of_communications_phone_call').is(':checked')||$('#ride_participant_mode_of_communications_email').is(':checked'))) {
+            $(".method-type-check").show();
+          }
+          else{
+            if(logged_in)
+              return true;
+            else{
+              <%#*$("#book-ride-child-window").click();%>
+              <%#*setInterval( function check_login(){%>
+          <%#*$.ajax({%>
+            <%#*url: "/users/logged_in",%>
+            <%#*success: function(data){%>
+      
+              <%#*if(data == "true"){%>
+                <%#*logged_in = true;%>
+                <%#*$(".book-ride-child-window").submit();%>
+              <%#*}%>
+            <%#*}%>
+          <%#*});%>
+        <%#*}, 5000 );%>
+              window.open('/login','Ratting','width=1080,height=700,left=150,top=200,toolbar=0,status=0,scrollbars=1');
+              return false;
+            }
+          }
+          return false;
+        });
+        
+
       });
     </script>
+    <%#*<input type="button" style="display: none;" id="book-ride-child-window" value="Book Ride" />%>
 
     <div id="search_run">
       <div id="content_wrapper" class="new_style">
@@ -80,8 +116,11 @@
             <br/>
             <b>Contact Info and Options</b><br/><br/>
             <%= f.label :phone,"Enter your phone number" %>
-            <%= f.text_field :phone %>
+            <%= f.text_field :phone%>
             <br/>
+            <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must be up to 10 digits</div>
+            <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
+            <div class="phone-check2" style="display: none; color: red; font-weight: bold;">Phone should be without dashes</div>
             <div>
               <br/>Prefered method of communication<br/><br/>
               <table><tr>
@@ -105,19 +144,16 @@
                   </td>
                 </tr>
               </table>
+              <div class="method-type-check" style="display: none; color: red; font-weight: bold;">No Method Selected</div>
             </div>
-            <% if current_user.blank? %>
-              <input type="button" id="book-ride-child-window" value="Book Ride"></input>
-            <% else %>
-              <dd class="changestep"><span class="errormsg"></span>
-                <%= f.submit "Book Ride", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "%>
-                
-              </dd>
-            <%end %>
+            <dd class="changestep"><span class="errormsg"></span>
+              <%= f.submit "Book Ride", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "%>
+            </dd>
+  <%#end %>
           </div>
         <%end%>
       </div>
-            <%= link_to "Back to search results", "#{search_rides_path}?#{params[:return_url]}" %>
+      <%= link_to "Back to search results", "#{search_rides_path}?#{params[:return_url]}" %>
 
       <div class="profiles-sec" style="position: relative; width: 765px; margin-left: 266px; height: 313px;">
         <ul style="width: 760px; margin-left: 0px; height: 307px;" >
@@ -133,10 +169,9 @@
                   Town: <%= rider.user.town%><br/>
                   School: <%= rider.user.school%><br/>
                   Number of Friends: <%= rider.user.number_of_friends%><br/></div>
-              </div>
-            </li>
-          <% end %>
-        </ul>
+              </div></li>
+          <% end %></ul>
       </div>
-    </div></div>
+    </div>
+</div>
 

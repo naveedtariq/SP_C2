@@ -7,11 +7,11 @@ class SessionsController < ApplicationController
   def create
     user = login(params[:email], params[:password], params[:remember_me])
     if user
-      if params[:child_toolbar] == "false"
-        return render :action => "created"
-      else
+#      if params[:child_toolbar] == "false"
+#        return render :action => "created"
+#      else
         redirect_back_or_to root_url, :notice => "Logged in!"
-      end
+#      end
     else
       flash.now.alert = "Email or password was invalid."
       render "new"

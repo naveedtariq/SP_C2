@@ -1,5 +1,5 @@
 class RideParticipantsController < ApplicationController
-  before_filter :require_login, :only => [:create, :accept, :deny, :cancel]
+  before_filter :require_login1, :only => [:create, :accept, :deny, :cancel]
   before_filter :load_ride, :only => [:new, :create, :cancel]
   before_filter :secure_load_ride, :only => [:accept, :deny]
   def new

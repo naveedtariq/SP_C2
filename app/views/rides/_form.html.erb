@@ -10,22 +10,22 @@
       if(!($('#ride_ride_type_sedon').is(':checked')||$('#ride_ride_type_van').is(':checked'))) {
         $(".ride-type-check").show();
       }
+      else if(($('#ride_to_location_id').val()=="") || ($('#ride_from_location_id').val()=="")){
+        $(".city-check").show();
+      }
       else{
         $(".ride-type-check").hide();
         $(".check-step1").hide();
         $(".check-step2").show();
-
-
-
       }
     });
 
-      $("#addride-whereto-button-step2-back").click(function() {
+        $("#addride-whereto-button-step2-back").click(function() {
         $(".check-step2").hide();
         $(".check-step1").show();
     });
 
-          $("#addride-whereto-button-step3-back").click(function() {
+        $("#addride-whereto-button-step3-back").click(function() {
         $(".check-step3").hide();
         $(".check-step2").show();
     });
@@ -38,6 +38,7 @@
           $('#ride_from_location_id').addClass("validation-error");
           $("#addride-whereto-button-step1").attr("disabled", "disabled");
         } else {
+          $(".city-check").hide();
           $(".city-option-same").hide();
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
@@ -54,6 +55,7 @@
           $("#addride-whereto-button-step1").attr("disabled", "disabled");
         } else {
           $(".city-option-same").hide();
+          $(".city-check").hide();
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
           $("#addride-whereto-button-step1").removeAttr("disabled");
@@ -62,14 +64,41 @@
     });
 
     $("#addride-whereto-button-step2").click(function() {
-      if($('#ride_departure_date').val().length > 1){
-        $(".check-step2").hide();
-        $(".check-step3").show();
+      if($('#ride_departure_date').val()==""){
+          $(".date-check-step2").show()
+      }
+      else if ($('#ride_duration_minutes').val()==0){
+        $(".check-duration").show();
+      }
+      else if ($('#ride_flexibility_in_minutes').val()==""){
+        $(".check-flexibility").show();
       }
       else{
-        $(".date-check-step2").show()
+            $(".check-step2").hide();
+            $(".check-step3").show();
       }
     });
+
+    /* ------------ Price Check -----------------*/
+      $("#new_ride").submit(function() {
+      if($('input#ride_total_price').val() > 200){
+        $(".total-price-check").show().fadeOut(5000);
+        return false;
+      }
+      else if($('input#ride_total_price').val() < 0){
+        $(".total-price-check1").show().fadeOut(5000);
+        return false;
+      }
+      else if($('input#ride_total_price').val()==""){
+        $(".total-price-check2").show().fadeOut(5000);
+        return false;
+      }
+       else{
+        return true;
+      }
+    });
+
+
   });
 </script>
 <div class="search_run">
@@ -99,9 +128,11 @@
                 <dt><label>I Am Taking:</label></dt>
                 <dd class="selection" id="who">
                   <div class="bigradio" id="driverselect">
+                    <div class="ride-image"><%= image_tag ("sedon.jpg")%></div>
                     <%= f.radio_button :ride_type, 'Sedon', :style=>"width: 13px" %><%= f.label :ride_type, 'A Sedon', :for => 'ride_ride_type_sedon'%>
                   </div>
                   <div class="bigradio" id="passengerselect">
+                    <div class="ride-image"><%= image_tag ("van.jpg")%></div>
                     <%= f.radio_button :ride_type, 'Van', :style=>"width: 13px"  %><%= f.label :ride_type, 'A Van', :for => 'ride_ride_type_van'%>
                   </div>
                 </dd>
@@ -114,6 +145,7 @@
                 <dd>
                   <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "-----select city-----" %>
                   <div class="city-option-same" style="display: none"> From and To City can't same </div>
+                  <div class="city-check" style="display: none; color: red; font-weight: bold;">Select City</div>
                   <p>Only the closest crossstreets are shown in your listing (e.g. 1st &amp; Main)</p>
                 </dd>
                 <dt>&nbsp;</dt>
@@ -134,7 +166,7 @@
                   <div id="there_one_time">
                     <%= f.label :departure_date %>
                     <% t=Time.now%>
-                    <%= f.text_field :departure_date, :value => t.strftime("%m/%d/%Y")%>
+                    <%= f.text_field :departure_date, :value => SpClock.date %>
                     <%= image_tag ("icon_calendar.png"), :class => "ui-datepicker-trigger" %>
                     <div class="date-check-step2" style="display:none; color: red">Departure Date can't be blank</div>
                   </div>
@@ -146,10 +178,12 @@
                     <%= f.label :duration %>
                     hrs<%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>
                     min<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
+                    <div class="check-duration" style="display: none; color: red;">Select Some duration</div>
                   </div>
                   <div id="there_one_time">
                     <%= f.label :flexibility %>
                     <%= f.select :flexibility_in_minutes, (5..30).step(5).collect{|t| ["#{t} mins", t]}, :include_blank => "select ± minutes" %>
+                    <div class="check-flexibility" style="display: none; color: red;">Select Some Flexibility</div>
                   </div>
                 </div>
                 <dd class="changestep"><span class="errormsg"></span><button id="addride-whereto-button-step2-back" type="button" class="confirm clickaway_confirm">
@@ -174,6 +208,9 @@
                 <dd>
                   <span id="dollarsign">$</span><%= f.number_field :total_price %>
                 </dd>
+                <div class="total-price-check" style="display: none; color: red; ">Price should not be greater than $200</div>
+                <div class="total-price-check1" style="display: none; color: red; ">Price should be positive </div>
+                <div class="total-price-check2" style="display: none; color: red; ">Price field can't be empty </div>
                 <dt class="seats-visibility"><%= f.label :available_seats, "Number of available seats" %></dt>
                 <dd class="seats-visibility">
                   <%= f.select :available_seats, 1..2 %>
@@ -184,7 +221,7 @@
                  <dd class="changestep"><span class="errormsg"></span><button id="addride-whereto-button-step3-back" type="button" class="confirm clickaway_confirm">
                     <span>Back Step</span>
                   </button>
-                   <div class="ride-btn"><%= f.submit "Post Ride", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; width: 103px; font-size: 13px; float: right; height: 29px; margin-right: -121px; margin-top: -30px;"%></div>
+                   <div class="ride-btn"><%= f.submit "Post Ride", ({:class=>"ride-check-btn", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; width: 103px; font-size: 13px; float: right; height: 29px; margin-right: -121px; margin-top: -30px;"})%></div>
                 </dd>
             </fieldset>
           </div>

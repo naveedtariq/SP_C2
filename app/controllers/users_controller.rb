@@ -12,6 +12,6 @@ class UsersController < ApplicationController
     end
   end
   def logged_in
-    return render :text => (logged_in?)
+    return render :text => current_user.present?
   end
 end

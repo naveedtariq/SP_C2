@@ -1,5 +1,5 @@
 class RidesController < ApplicationController
-  before_filter :require_login, :only => [:create, :clone, :index, :update]
+  before_filter :require_login1, :only => [:create, :clone, :index, :update]
   before_filter :secure_ride_load, :only => [:edit, :update]
   def index
     @rides = current_user.created_rides.active
