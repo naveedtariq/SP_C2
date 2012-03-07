@@ -9,7 +9,7 @@ class RidesController < ApplicationController
   end
 
   def create
-    return render :json => params[:ride]
+   # return render :json => params[:ride]
     @ride = Ride.new(params[:ride])
     if @ride.save
       @ride.make_owner!(current_user)

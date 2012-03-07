@@ -32,15 +32,28 @@
         }
       }
     });
+      $("#ride_departure_specify_date").click(function(){
+       $("input#ride_departure").removeAttr("disabled");
+      });
+      $("#ride_departure_all").click(function(){
+       $("input#ride_departure").attr("disabled", "disabled");
+      });
+      $("#ride_departure_first_option").click(function(){
+       $("input#ride_departure").attr("disabled", "disabled");
+      });
+      $("#ride_departure_second_option").click(function(){
+       $("input#ride_departure").attr("disabled", "disabled");
+      });
+
 
     $( "#ride_departure" ).datepicker({
       dateFormat: "yy-mm-dd"
     });
   });
 </script>
+<%=params[:ride] %>
 <div class="clear"></div>
 <% if current_user %>
-
   <div class="subnav">
     <ul class="nav-pills nav">
       <li>
@@ -82,8 +95,36 @@
                 <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
               </div>
               <div class="text_input datetime">
-                <%= f.text_field(:departure,{:value => SpClock.date, :style=>"height: 30px;"}) %>
+                <%= f.text_field(:departure,{:value => SpClock.date, :disabled=>"disabled", :style=>"height: 30px; width: 120px;" }) %>
                 <%= image_tag ("icon_calendar.png"), :style=>"margin-left: -21px; margin-top: 10px; float: left; position: absolute; " %>
+                                <table>
+                  <tr>
+                    <td>
+                      <%= f.radio_button :departure, 'specify_date' %>
+                    </td>
+                    <td>
+                      <%= f.label :departure, 'Specify Date', :for => 'ride_departure_specify_date'%>
+                    </td>
+                    <td>
+                      <%= f.radio_button :departure, 'all', :checked =>true %>
+                    </td>
+                    <td>
+                      <%= f.label :departure, 'All', :for => 'ride_departure_all'%>
+                    </td>
+                    <td>
+                      <%= f.radio_button :departure, 'first_option' %>
+                    </td>
+                    <td>
+                      <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option"%>
+                    </td>
+                    <td>
+                      <%= f.radio_button :departure , 'second_option' %>
+                    </td>
+                    <td>
+                      <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option'%>
+                    </td>
+                  </tr>
+                </table>
               </div>
               <%= f.submit "search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
             </div>
@@ -117,10 +158,9 @@
                   <%else%>
                     <div class="price_box">
                       <div class="seats">
-                        <span class="count"><%= ride.remaining_seats %></span>
-                        <span class="left">seats left</span>
+                        <span class="count"><%= number_to_currency(ride.total_price/ride.available_seats)%></span>
                       </div>
-                      <p><b><%= number_to_currency(ride.per_price_seat)%></b> / seat</p>
+                      <p><b><%= ride.duration_in_minutes%>min</b></p>
                     </div>
                   <%end%>
                   <div class="inner_content">
@@ -140,7 +180,7 @@
                       <% ride.remaining_seats.times do %>
                         <div class="riders-pics">
                           <div class="riders-info">open&nbsp;seat</div>
-                          <%= image_tag "no-image.gif" %>
+                          <%= image_tag "car_seat_icon.gif" %>
                           <span class="driver"></span>
                         </div>
                       <% end %>

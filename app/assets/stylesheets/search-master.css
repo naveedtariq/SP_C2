@@ -1328,7 +1328,7 @@ float: left;
 /* line 437 */
 .ride_list .entry .price_box .count {
   float: left;
-  font-size: 34px;
+  font-size: 18px;
   line-height: 34px;
   width: 21px;
   text-align: left;
@@ -10926,7 +10926,7 @@ height: 95px;
 .riders-pics{
     border: 2px solid #1199EA;
     border-radius: 4px 4px 4px 4px;
-    float: right;
+    float: left;
     height: 75px;
     overflow: hidden;
     position: relative;
