@@ -105,7 +105,7 @@
                 </h3>
                 <% last_date << ride.departure_date %>
               <% end %>
-              <a href="<%= new_ride_ride_participant_path(ride)%>" <% if ride.remaining_seats==0 %> onclick="return false" <%end%> >
+              <a href="<%= new_ride_ride_participant_path(ride, :return_url => request.query_string )%>" <% if ride.remaining_seats==0 %> onclick="return false" <%end%> >
                 <div class="entry">
                   <%  if ride.remaining_seats==0 %>
                     <div class="price_box">
