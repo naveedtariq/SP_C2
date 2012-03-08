@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120302193427) do
+ActiveRecord::Schema.define(:version => 20120308222128) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -30,8 +30,11 @@ ActiveRecord::Schema.define(:version => 20120302193427) do
     t.text     "params"
     t.string   "user_agent"
     t.string   "request_ip"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "request_url"
+    t.string   "referer"
+    t.text     "cookie_string"
   end
 
   create_table "ride_participants", :force => true do |t|

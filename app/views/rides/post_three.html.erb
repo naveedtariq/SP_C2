@@ -1,0 +1,73 @@
+<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#new_ride").submit(function() {
+      if($('input#ride_total_price').val() > 200){
+        $(".total-price-check").show();
+        return false;
+      }
+      else if($('input#ride_total_price').val() < 1){
+        $(".total-price-check1").show();
+        return false;
+      }
+      else if($('input#ride_total_price').val()==""){
+        $(".total-price-check2").show();
+        return false;
+      }
+      else{
+        return true;
+      }
+    });
+  });
+</script>
+<div class="search_run">
+  <div id="content_wrapper" class="new_style" style="margin-top: 59px;">
+    <div id="content_container" class="clearfix">
+      <div id="wide_column_left" class="newAddRideStyle">
+        <%= form_for @ride, :url => posted_rides_path(:step => "3") do |f| %>
+          <% if @ride.errors.any? %>
+            <div class="error_messages">
+              <h2>Form is invalid</h2>
+              <ul>
+                <% for message in @ride.errors.full_messages %>
+                  <li><%= message%></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= hidden_field_tag :next_step, "create_ride" %>
+          <div class="check-step3" style="display: block">
+            <fieldset id="step_3" class="" style="">
+              <div class="step_container clearfix" style="background-image: url(/assets/step3.png); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: 50% 100%; background-repeat: no-repeat no-repeat; ">
+                <span class="left"><b>1. Where To?</b></span>
+                <span><b>2. What Time?</b></span>
+                <span class="active right"><b>3. What Else?</b></span>
+              </div>
+              <dl>
+                <dt><%= f.label :total_price, "Total Ride Price?" %></dt>
+                <dd>
+                  <span id="dollarsign">$</span><%= f.number_field :total_price %>
+                </dd>
+                <div class="total-price-check" style="display: none; color: red; ">Price should not be greater than $200</div>
+                <div class="total-price-check1" style="display: none; color: red; ">Price should be positive </div>
+                <div class="total-price-check2" style="display: none; color: red; ">Price field can't be empty </div>
+                <dt class="seats-visibility"><%= f.label :available_seats, "Number of available seats" %></dt>
+                <dd class="seats-visibility">
+                  <%= f.select :available_seats, 1..2 %>
+                </dd>
+                <dt><%= f.label :notes, "Notes" %></dt>
+                <dd><%= f.text_area :notes, :size => "30x3" %></dd>
+              </dl>
+              <dd class="changestep"><span class="errormsg"></span>
+                <a href="<%=post_one_rides_path%>" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953;"><span>Back Step</span></a>
+
+                <div class="ride-btn"><%= f.submit "Post Ride", ({:class=>"ride-check-btn", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; width: 103px; font-size: 13px; float: right; height: 29px; margin-right: -121px; margin-top: -30px;"})%></div>
+              </dd>
+            </fieldset>
+          </div>
+        <%end%>
+
+      </div>
+    </div>
+  </div>
+</div>

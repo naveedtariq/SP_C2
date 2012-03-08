@@ -60,7 +60,7 @@
   <div id="content_wrapper" class="new_style" style="margin-top: 59px;">
     <div id="content_container" class="clearfix">
       <div id="wide_column_left" class="newAddRideStyle">
-        <%= form_for @ride, :url => post_one_rides_path do |f| %>
+        <%= form_for @ride, :url => posted_rides_path do |f| %>
           <% if @ride.errors.any? %>
             <div class="error_messages">
               <h2>Form is invalid</h2>
@@ -83,7 +83,7 @@
                 <dt><label>I Am Taking:</label></dt>
                 <dd class="selection" id="who">
                   <div class="bigradio" id="driverselect">
-                    <div class="ride-image"><%= image_tag ("sedon.jpg")%></div>
+                    <div class="ride-image"><%= image_tag ("sedan.jpg")%></div>
                     <%= f.radio_button :ride_type, 'Sedon', :style=>"width: 13px" %><%= f.label :ride_type, 'A Sedon', :for => 'ride_ride_type_sedon'%>
                   </div>
                   <div class="bigradio" id="passengerselect">

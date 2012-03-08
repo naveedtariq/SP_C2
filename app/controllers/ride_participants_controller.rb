@@ -1,21 +1,28 @@
 class RideParticipantsController < ApplicationController
-  before_filter :require_login1, :only => [:create, :accept, :deny, :cancel]
-  before_filter :load_ride, :only => [:new, :create, :cancel]
+  before_filter :require_login, :only => [:create_participant, :accept, :deny, :cancel]
+  before_filter :load_ride, :only => [:new, :create, :cancel, :create_participant]
   before_filter :secure_load_ride, :only => [:accept, :deny]
   def new
     @ride_participant = @ride.ride_participants.build
   end
-  
-  def create
-    @ride_participant = @ride.ride_participants.build(params[:ride_participant])
+  def create_participant
+    @ride_participant = @ride.ride_participants.build(retrieve_participant)
     @ride_participant.role = ROLES_FOR_RIDES[:pending]
     @ride_participant.user_id = current_user.id
     if @ride_participant.save
+      clear_participant
       flash[:notice] = "Successfully Booked "
       redirect_to dashboard_path
     else
       render :action => 'new'
     end
+  end
+  def create
+    
+    @ride_participant = @ride.ride_participants.build(params[:ride_participant])
+    store_ride_participants(@ride_participant)
+    return redirect_to create_participant_ride_ride_participants_path(@ride)
+    
   end
   def accept
     @ride_participant = @ride.ride_participants.find(params[:id])

@@ -29,7 +29,7 @@
   <div id="content_wrapper" class="new_style" style="margin-top: 59px;">
     <div id="content_container" class="clearfix">
       <div id="wide_column_left" class="newAddRideStyle">
-        <%= form_for @ride, :url => post_one_rides_path(:step => "2") do |f| %>
+        <%= form_for @ride, :url => posted_rides_path(:step => "2") do |f| %>
           <% if @ride.errors.any? %>
             <div class="error_messages">
               <h2>Form is invalid</h2>
@@ -40,7 +40,7 @@
               </ul>
             </div>
           <% end %>
-                 <%= hidden_field_tag :next_step, "new" %>
+                 <%= hidden_field_tag :next_step, "post_three" %>
  <div class="check-step2" style="display: block">
             <fieldset id="step_2" class="" style="">
               <div class="step_container clearfix" style="background-image: url(/assets/step2.png); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: 50% 100%; background-repeat: no-repeat no-repeat; ">
@@ -52,8 +52,7 @@
                 <div id="singletripwrapper">
                   <div id="there_one_time">
                     <%= f.label :departure_date %>
-                    <% t=Time.now%>
-                    <%= f.text_field :departure_date, :value => SpClock.date %>
+                    <%= f.text_field :departure_date %>
                     <%= image_tag ("icon_calendar.png"), :class => "ui-datepicker-trigger" %>
                     <div class="date-check-step2" style="display:none; color: red">Departure Date can't be blank</div>
                   </div>

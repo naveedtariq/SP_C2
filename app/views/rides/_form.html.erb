@@ -3,15 +3,15 @@
   $(document).ready(function() {
       $("#new_ride").submit(function() {
       if($('input#ride_total_price').val() > 200){
-        $(".total-price-check").show().fadeOut(5000);
+        $(".total-price-check").show();
         return false;
       }
-      else if($('input#ride_total_price').val() < 0){
-        $(".total-price-check1").show().fadeOut(5000);
+      else if($('input#ride_total_price').val() < 1){
+        $(".total-price-check1").show();
         return false;
       }
       else if($('input#ride_total_price').val()==""){
-        $(".total-price-check2").show().fadeOut(5000);
+        $(".total-price-check2").show();
         return false;
       }
        else{

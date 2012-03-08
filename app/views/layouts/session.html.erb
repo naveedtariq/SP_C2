@@ -7,6 +7,9 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <% if production? %>
+      <%= GOOGLE_ANALYTICS %>
+    <% end %>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">

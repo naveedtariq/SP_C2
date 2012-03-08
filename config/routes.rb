@@ -15,14 +15,19 @@ SPC2::Application.routes.draw do
     collection do
       get "search"
       get "searchclone"
-      post "post_ride"
       post "post_one"
+      post "posted"
+      get "create_ride"
+      get "post_one" => "rides#posted_one"
       post "post_two"
     end
     member do
-        get "clone"
-      end
+      get "clone"
+    end
     resources :ride_participants, :only => [:new, :create] do 
+      collection do
+        get "create_participant"
+      end
       member do
         get "cancel"
         get "accept"

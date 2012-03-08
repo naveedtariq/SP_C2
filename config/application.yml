@@ -4,3 +4,4 @@ test:
   storage: file
 production:
   storage: fog
+  
