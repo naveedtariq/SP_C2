@@ -1,6 +1,6 @@
 development:
-  storage: local
+  storage: file
 test:
-  storage: local
+  storage: file
 production:
-  storage: s3
+  storage: fog
