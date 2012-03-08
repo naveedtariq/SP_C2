@@ -10,7 +10,7 @@
   </head>  
   <body data-twttr-rendered="true">
     <% if production? %>
-      <%= GOOGLE_ANALYTICS %>
+      <%= raw GOOGLE_ANALYTICS %>
     <% end %>
     <div class="clear"> </div>
     <% flash.each do |name, msg| %>
