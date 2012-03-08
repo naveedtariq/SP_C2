@@ -15,6 +15,9 @@ SPC2::Application.routes.draw do
     collection do
       get "search"
       get "searchclone"
+      post "post_ride"
+      post "post_one"
+      post "post_two"
     end
     member do
         get "clone"

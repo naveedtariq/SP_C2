@@ -1,0 +1,86 @@
+<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $( "#ride_departure_date" ).datepicker({
+      dateFormat: "yy-mm-dd",
+      minDate: 0, maxDate: "+1Y"
+    });
+
+    $("#new_ride").submit(function(){
+      if($('#ride_departure_date').val()==""){
+        $(".date-check-step2").show()
+        return false;
+      }
+      else if ($('#ride_duration_minutes').val()==0 && $('#ride_duration_hours').val()==0){
+        $(".check-duration").show();
+        return false;
+      }
+      else if ($('#ride_flexibility_in_minutes').val()==""){
+        $(".check-flexibility").show();
+        return false;
+      }
+      else{
+          return true;
+      }
+    });
+ });
+</script>
+<div class="search_run">
+  <div id="content_wrapper" class="new_style" style="margin-top: 59px;">
+    <div id="content_container" class="clearfix">
+      <div id="wide_column_left" class="newAddRideStyle">
+        <%= form_for @ride, :url => post_one_rides_path(:step => "2") do |f| %>
+          <% if @ride.errors.any? %>
+            <div class="error_messages">
+              <h2>Form is invalid</h2>
+              <ul>
+                <% for message in @ride.errors.full_messages %>
+                  <li><%= message%></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+                 <%= hidden_field_tag :next_step, "new" %>
+ <div class="check-step2" style="display: block">
+            <fieldset id="step_2" class="" style="">
+              <div class="step_container clearfix" style="background-image: url(/assets/step2.png); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: 50% 100%; background-repeat: no-repeat no-repeat; ">
+                <span class="left"><b>1. Where To?</b></span>
+                <span class="active"><b>2. What Time?</b></span>
+                <span class="right"><b>3. What Else?</b></span>
+              </div>
+              <dl>
+                <div id="singletripwrapper">
+                  <div id="there_one_time">
+                    <%= f.label :departure_date %>
+                    <% t=Time.now%>
+                    <%= f.text_field :departure_date, :value => SpClock.date %>
+                    <%= image_tag ("icon_calendar.png"), :class => "ui-datepicker-trigger" %>
+                    <div class="date-check-step2" style="display:none; color: red">Departure Date can't be blank</div>
+                  </div>
+                  <div id="there_one_time">
+                    <%= f.label :departure_time %>
+                    <%= f.time_select :departure_time, :minute_step => 15, :ampm => true %>
+                  </div>
+                  <div id="there_one_time">
+                    <%= f.label :duration %>
+                    hrs<%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>
+                    min<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
+                    <div class="check-duration" style="display: none; color: red;">Select Some duration</div>
+                  </div>
+                  <div id="there_one_time">
+                    <%= f.label :flexibility %>
+                    <%= f.select :flexibility_in_minutes, (5..30).step(5).collect{|t| ["#{t} mins", t]}, :include_blank => "select ± minutes" %>
+                    <div class="check-flexibility" style="display: none; color: red;">Select Some Flexibility</div>
+                  </div>
+                </div>
+                <dd class="changestep"><span class="errormsg"></span><a href="<%=new_ride_path%>" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953;"><span>Back Step</span></a>
+                  <%= f.submit "Next", ({:class=>"ride-check-btn", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; width: 103px; font-size: 13px; float: right; height: 29px; margin-right: -121px; margin-top: 0px;"})%>
+                </dd>
+              </dl>
+            </fieldset>
+          </div>
+         <%end%>
+      </div>
+    </div>
+  </div>
+</div>

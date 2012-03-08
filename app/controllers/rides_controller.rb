@@ -5,11 +5,13 @@ class RidesController < ApplicationController
     @rides = current_user.created_rides.active
   end
   def new
-    @ride= Ride.new
+    cookies[:ride] ||= Ride.new.attributes
+    @ride= Ride.new(cookies[:ride])
+    render :action => "post_ride"
   end
 
   def create
-   # return render :json => params[:ride]
+    # return render :json => params[:ride]
     @ride = Ride.new(params[:ride])
     if @ride.save
       @ride.make_owner!(current_user)
@@ -39,6 +41,18 @@ class RidesController < ApplicationController
     else
       render :action => "new"
     end
+  end
+
+  def post_one
+    return redirect_to new_ride_path if cookies[:ride].blank?
+    @ride = Ride.new(cookies[:ride])
+    @ride.attributes.merge!(params[:ride])
+    cookies[:ride] = @ride.attributes
+    return render :action => params[:next_step]
+  end
+
+  def post_two
+    @ride = Ride.new(params[:ride])
   end
 
   private
