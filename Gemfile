@@ -35,4 +35,5 @@ group :assets do
 	gem 'uglifier'
 end
 
+gem 'geocoder'
 
