@@ -18,6 +18,12 @@
         return true;
       }
     });
+      $("input#ride_total_price").change(function(){
+        if($(this).val() < 200)
+         $(".total-price-check").hide();
+        if($(this).val() > 0)
+        $(".total-price-check1").hide();
+       });
   });
 </script>
 <div class="search_run">
