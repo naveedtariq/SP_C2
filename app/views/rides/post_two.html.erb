@@ -72,7 +72,7 @@
                 <div id="singletripwrapper">
                   <div id="there_one_time">
                     <%= f.label :departure_date %>
-                    <%= f.text_field :departure_date %>
+                    <%= f.text_field :departure_date, :value => (f.object.departure_date || SpClock.date) %>
                     <%= image_tag ("icon_calendar.png"), :class => "ui-datepicker-trigger" %>
                     <div class="date-check-step2" style="display:none; color: red">Departure Date can't be blank</div>
                   </div>

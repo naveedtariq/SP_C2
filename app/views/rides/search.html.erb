@@ -52,24 +52,6 @@
   });
 </script>
 <div class="clear"></div>
-<% if current_user %>
-  <div class="subnav">
-    <ul class="nav-pills nav">
-      <li>
-        <%= link_to "My Ride", rides_path %>
-      </li>
-      <li class="active">
-        <%= link_to "Ride input page", new_ride_path %>
-      </li>
-      <li>
-        <%= link_to "Ride search page", search_rides_path %>
-      </li>
-      <li>
-        <%= link_to "My Dashboard", dashboard_path %>
-      </li>
-    </ul>
-  </div>
-<% end %>
 <div id="search_run">
   <div id="header_wrap"  style="margin-top: 22px;">
     <div id="header">
@@ -94,12 +76,12 @@
                 <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
               </div>
               <div class="text_input datetime">
-                <%= f.text_field(:departure_date,{:value => ( @ride.departure_date || SpClock.date), :style=>"height: 30px; width: 120px;" }) %>
+                <%= f.text_field(:departure_date,{:value => ( @ride.departure_date || SpClock.date),:disabled => ((@ride.departure != "specify_date")?("disabled"):()), :style=>"height: 30px; width: 120px;" }) %>
                 <%= image_tag ("icon_calendar.png"), :style=>"margin-left: -21px; margin-top: 10px; float: left; position: absolute; " %>
                                 <table>
                   <tr>
                     <td>
-                      <%= f.radio_button :departure, 'specify_date', :checked =>true  %>
+                      <%= f.radio_button :departure, 'specify_date'  %>
                     </td>
                     <td>
                       <%= f.label :departure, 'Specify Date', :for => 'ride_departure_specify_date'%>

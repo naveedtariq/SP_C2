@@ -23,6 +23,7 @@ class RidesController < ApplicationController
 
   def search
     @ride = Ride.new(params[:ride])
+    @ride.departure = params[:ride] && params[:ride]["departure"] || "all"
     @rides = Ride.search_rides(params[:ride]).paginate(:page => params[:page], :per_page => SEARCH_RIDES_PER_PAGE)
     @count = Ride.search_rides(params[:ride]).count
     return render(:action => "search_home") if params[:commit].blank?
@@ -43,8 +44,8 @@ class RidesController < ApplicationController
   end
 
   def posted
-  return redirect_to new_ride_path if cookies[:ride].blank?
-@ride = Ride.new(retrieve_ride)
+    return redirect_to new_ride_path if cookies[:ride].blank?
+    @ride = Ride.new(retrieve_ride)
     @ride.attributes = params[:ride]
     store_ride(@ride)
     return render :action => params[:next_step] unless params[:step] == "3"
@@ -53,12 +54,12 @@ class RidesController < ApplicationController
   def create_ride
     @ride = Ride.create!(retrieve_ride)
     clear_ride
-      @ride.make_owner!(current_user)
-      flash[:notice] = "Successfully created ride"
-      redirect_to root_url
+    @ride.make_owner!(current_user)
+    flash[:notice] = "Successfully created ride"
+    redirect_to root_url
   end
   def posted_one
- return redirect_to new_ride_path if cookies[:ride].blank?
+    return redirect_to new_ride_path if cookies[:ride].blank?
     @ride = Ride.new(retrieve_ride)
     return render :action => "post_two"
   end

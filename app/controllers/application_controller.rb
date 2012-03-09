@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     Hash[str.gsub(/{|}|\"/,"").split(",").map{|m| m.strip.split("=>") }]
   end
   def create_or_store_ride(ride)
-    cookies[:ride] ||= ride.attributes.to_s
+    cookies[:ride] ||= ride.attributes.to_s.gsub!("nil","")
   end
   def store_ride(ride)
     ride_departure_date = ride.departure_date.to_s
