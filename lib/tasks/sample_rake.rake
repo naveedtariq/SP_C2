@@ -12,7 +12,6 @@ namespace :db do
   task :populate => :environment do 
     puts "started dumping"
     csv_text = File.read("#{Rails.root}/spec/data/user.csv")
-if false
     puts "dumping users"
     csv = CSV.parse(csv_text, :headers => true)
 
@@ -37,8 +36,6 @@ if false
       puts "(#{index}) name ---> #{u.full_name}, gender --> #{u.gender}"
       u.save!
     end
-
-end
     puts "dumping locations"
 
     csv_text = File.read("#{Rails.root}/spec/data/location.csv")
