@@ -36,7 +36,9 @@ class Ride < ActiveRecord::Base
   scope :scoped_departure, lambda{ |date_departure| where("departure_date < ?", date_departure)}
   scope :active, where( :status => STATUS_FOR_RIDES[:active] )
   scope :current_rides, where("departure_date >= ?", SpClock.date)
-  scope :ordered_rides, order("departure_date ASC")
+  scope :orderby_date, order("departure_date ASC")
+  scope :orderby_time, order("departure_time ASC")
+  scope :orderby_price, order("total_price ASC")
   belongs_to :to_location, :class_name => Location
   belongs_to :from_location, :class_name => Location
   #accepts_nested_attributes_for :location
@@ -57,7 +59,7 @@ class Ride < ActiveRecord::Base
       end  
       rides = rides.scoped_departure(dep_date)
     end
-    rides.current_rides.active.ordered_rides.includes(:ride_participants)
+    rides.current_rides.active.orderby_date.orderby_time.orderby_price.includes(:ride_participants)
   end
   def ride_participants_owners
     if self.ride_participants.blank?

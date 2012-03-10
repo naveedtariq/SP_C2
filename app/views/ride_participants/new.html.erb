@@ -71,7 +71,7 @@
             <div id="results">
               <div class="ride_list">
                 <h3 class="headline first">
-                  Search Results
+                  <%= @ride.departure_date.strftime("Departing %A, %B #{@ride.departure_date.day.ordinalize}") %>
                 </h3>
                 <div class="entry">
                   <div class="price_box">
