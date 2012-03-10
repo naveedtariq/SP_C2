@@ -93,14 +93,22 @@
                 <li style="top: 0px;">
                   <a class="km_click_event_by_href" href="<%= new_ride_ride_participant_path(ride) %>">
                     <div class="price_box"> 
+                      <% if ride.remaining_seats > 0 %>
                       <h1><%= number_to_currency(ride.per_price_seat)%></h1>
                       <p>per seat</p>
+                      <% else %>
+                        <h1>Sold out</h1>
+                      <% end %>
                     </div>
                     <%= image_tag ride.owner.user_image.url.to_s %>
                     <h1><%= ride.from_location && ride.from_location.name %><span class="trip_type"></span><%= ride.to_location && ride.to_location.name %></h1>
                     <p>
                       <span class="driver"></span>
+                      <% if ride.remaining_seats > 0 %>
                       <%= ride.owner.first_name%> / <%= ride.remaining_seats %> seats left
+                      <% else %>
+                        Sold out
+                      <% end %>
                     </p>
                   </a>
                 </li>
