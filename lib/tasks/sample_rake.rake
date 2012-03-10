@@ -12,6 +12,7 @@ namespace :db do
   task :populate => :environment do 
     puts "started dumping"
     csv_text = File.read("#{Rails.root}/spec/data/user.csv")
+if false
     puts "dumping users"
     csv = CSV.parse(csv_text, :headers => true)
 
@@ -37,7 +38,7 @@ namespace :db do
       u.save!
     end
 
-
+end
     puts "dumping locations"
 
     csv_text = File.read("#{Rails.root}/spec/data/location.csv")
@@ -56,15 +57,15 @@ namespace :db do
     csv.each_with_index  do |row, index|
       row = row.to_hash.with_indifferent_access
       ride = Ride.new(row.to_hash.symbolize_keys)
-      user = ((users.delete_at(rand(users.size-1)+1)) || User.last)
+      user = ((users.delete_at(rand(users.size-1))) || User.last)
       ride.save!
       puts "(#{index}) ride with id ==>#{ride.id} departure date --> #{ride.departure_date} owned by #{user.full_name}"
 
       ride.users << user
       unless added_users.blank?
-        if(index % 3) == 0
-          added_user = added_users.delete_at(rand(added_users.size-1)+1)
-          "====> this ride has a pending participant #{added_user.full_name}"
+        if((index.to_i % 3) == 0)
+          added_user = added_users.delete_at(rand(added_users.size-1))
+          puts "====> this ride has a pending participant #{added_user.full_name}"
           ride.ride_participants.create!(:role => ROLES_FOR_RIDES[:pending], :user_id => (added_user.id), :number_of_seats => 1, :phone => "234234", :mode_of_communications => "phone" )
         end
       end
