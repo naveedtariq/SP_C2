@@ -58,12 +58,13 @@ namespace :db do
       ride = Ride.new(row.to_hash.symbolize_keys)
       user = ((users.delete_at(rand(users.size-1)+1)) || User.last)
       ride.save!
-      puts "(#{index}) ride departure date --> #{ride.departure_date}"
+      puts "(#{index}) ride with id ==>#{ride.id} departure date --> #{ride.departure_date} owned by #{user.full_name}"
 
       ride.users << user
       unless added_users.blank?
         if(index % 3) == 0
           added_user = added_users.delete_at(rand(added_users.size-1)+1)
+          "====> this ride has a pending participant #{added_user.full_name}"
           ride.ride_participants.create!(:role => ROLES_FOR_RIDES[:pending], :user_id => (added_user.id), :number_of_seats => 1, :phone => "234234", :mode_of_communications => "phone" )
         end
       end
