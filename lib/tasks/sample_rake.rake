@@ -14,7 +14,7 @@ namespace :db do
     csv_text = File.read("#{Rails.root}/spec/data/user.csv")
     puts "dumping users"
     csv = CSV.parse(csv_text, :headers => true)
-
+if false
     male_images = []
     female_images = []
     path = "#{Rails.root}/spec/data/male/"
@@ -35,6 +35,7 @@ namespace :db do
       end
       puts "(#{index}) name ---> #{u.full_name}, gender --> #{u.gender}"
       u.save!
+    end
     end
     puts "dumping locations"
 
