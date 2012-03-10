@@ -164,7 +164,7 @@
               <div class="profile" style="margin-left: 0px; margin-top: 0px; padding-top: 10px; width: 135px; height: 225px;">
                 <div class="one-user-pic" style="position: absolute;">
                   <div class="one-user-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
-                  <%= image_tag rider.user_image.url.to_s %><br/>
+                  <%= image_tag rider.user.user_image.url.to_s %><br/>
                 </div><br/>
                 <div class="all-riders" style="postion: relative; width: 132px; margin-top: 77px;">
                   City: <%= rider.user.city%><br/>
