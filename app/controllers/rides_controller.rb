@@ -44,7 +44,7 @@ class RidesController < ApplicationController
   end
 
   def posted
-    return redirect_to new_ride_path if cookies[:ride].blank?
+    #return redirect_to new_ride_path if cookies[:ride].blank?
     @ride = Ride.new(retrieve_ride)
     @ride.attributes = params[:ride]
     store_ride(@ride)
@@ -52,6 +52,7 @@ class RidesController < ApplicationController
     return redirect_to create_ride_rides_path
   end
   def create_ride
+    return render :action => "404error_ride"
     @ride = Ride.create!(retrieve_ride)
     clear_ride
     @ride.make_owner!(current_user)

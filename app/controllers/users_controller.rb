@@ -6,12 +6,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to login_path, :notice => "Signed up!"
+      render :action => "404error_user"
+      #redirect_to login_path, :notice => "Signed up!"
     else
       render :new
     end
   end
   def logged_in
-    return render :text => current_user.present?
+    render :action => "404error_user"
+    #return render :text => current_user.present?
   end
 end
