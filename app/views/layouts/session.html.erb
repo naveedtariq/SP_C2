@@ -5,10 +5,16 @@
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+    <% if production? &&  KISSMETRICS_TOGGLE=="ON"%>
+      <%= raw KISSMETRICS %>
+     <% end %>
   </head>
   <body>
-    <% if production? %>
+    <% if production? && (GOOGLE_ANALYTICS_TOGGLE=="ON" && MIXPANEL_TOGGLE=="ON" && GETCLICKY_TOGGLE=="ON" && CRAZYEGG_TOGGLE=="ON")%>
       <%= raw GOOGLE_ANALYTICS %>
+      <%= raw MIXPANEL %>
+      <%= raw GETCLICKY %>
+      <%= raw CRAZYEGG %>
     <% end %>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
