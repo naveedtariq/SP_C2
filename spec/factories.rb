@@ -4,7 +4,7 @@ Factory.define :user do |f|
   f.password_confirmation "secret"
   f.first_name "test"
   f.last_name "test"
-  f.photo_file_name "/home/devsinc/Desktop/apple-logo.jpg"
+#  f.photo_file_name "/home/devsinc/Desktop/apple-logo.jpg"
 end
 Factory.define :location do |f|
   f.sequence(:name) { |n| "foo#{n}" }
