@@ -13,11 +13,19 @@
      <% end %>
   </head>  
   <body data-twttr-rendered="true">
-    <% if production? && (GOOGLE_ANALYTICS_TOGGLE=="ON" && MIXPANEL_TOGGLE=="ON" && GETCLICKY_TOGGLE=="ON" && CRAZYEGG_TOGGLE=="ON")%>
-      <%= raw GOOGLE_ANALYTICS %>
-      <%= raw MIXPANEL %>
-      <%= raw GETCLICKY %>
-      <%= raw CRAZYEGG %>
+    <% if production? %>
+      <% if GOOGLE_ANALYTICS_TOGGLE=="ON"%>
+        <%= raw GOOGLE_ANALYTICS %>
+      <% end %>
+      <% if MIXPANEL_TOGGLE=="ON"%>
+        <%= raw MIXPANEL %>
+      <% end %>
+      <% if GETCLICKY_TOGGLE=="ON"%>
+        <%= raw GETCLICKY %>
+      <% end %>
+      <% if CRAZYEGG_TOGGLE=="ON"%>
+        <%= raw CRAZYEGG %>
+      <% end %>
     <% end %>
     <div class="clear"> </div>
     <% flash.each do |name, msg| %>
