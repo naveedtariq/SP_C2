@@ -36,6 +36,13 @@ SPC2::Application.routes.draw do
     end
   end
   resource :dashboard, :only => [:show]
+  resources :footers do
+    collection do
+      get "terms"
+      get "how_it_works"
+      get "about"
+     end
+     end
   root :to => "rides#search"
 
   # The priority is based upon order of creation:

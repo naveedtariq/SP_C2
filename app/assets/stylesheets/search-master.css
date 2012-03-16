@@ -1292,6 +1292,7 @@ float: left;
 }
 /* line 416 */
 .ride_list .entry .price_box {
+  margin-top: 15px;
   float: left;
   text-align: center;
   border: 1px solid #7a8494;
@@ -10886,6 +10887,7 @@ width:300px;
 
 p.inner-l1{
 color: #C0C0C0;
+padding-top: 15px;
 }
 
 span.info-line11{
@@ -10916,6 +10918,7 @@ width: 85px;
 .participant-pic{
 float:left;
 height:80px;
+margin-left:10px;
 }
 
 .info-rides{
@@ -10927,11 +10930,12 @@ height: 95px;
     border: 2px solid #1199EA;
     border-radius: 4px 4px 4px 4px;
     float: left;
-    height: 75px;
+    height: 100px;
     overflow: hidden;
     position: relative;
-    width: 75px;
-    margin-right: 5px;
+    width: 100px;
+    margin-right: 10px;
+    margin-left: 10px;
    /* margin-top: -150px;*/
 }
 
@@ -10944,7 +10948,7 @@ height: 95px;
     padding: 2px 17px 2px 2px;
     position: absolute;
     vertical-align: bottom;
-    width: 56px;
+    width: 81px;
     
 }
 

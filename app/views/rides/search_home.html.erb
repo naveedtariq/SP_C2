@@ -62,7 +62,8 @@
           <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
             <div class="box">
               <div class="text_input">
-                 <label for="search_s" class="pin start"></label>
+                 <%= hidden_field_tag :search_posted, "true" %>
+          <label for="search_s" class="pin start"></label>
                  <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----Driving From -----"%>
                </div>
               <div class="text_input">

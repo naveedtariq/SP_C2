@@ -26,7 +26,7 @@ class RidesController < ApplicationController
     @ride.departure = params[:ride] && params[:ride]["departure"] || "all"
     @rides = Ride.search_rides(params[:ride]).paginate(:page => params[:page], :per_page => SEARCH_RIDES_PER_PAGE)
     @count = Ride.search_rides(params[:ride]).count
-    return render(:action => "search_home") if params[:commit].blank?
+    return render(:action => "search_home") if params[:search_posted].blank?
   end
 
   def clone

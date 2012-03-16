@@ -8,12 +8,18 @@
           $(".city-option-same").show();
           $('#ride_to_location_id').addClass("validation-error");
           $('#ride_from_location_id').addClass("validation-error");
-          $("#btn-search").attr("disabled", "disabled");
+          $("input#ride_departure_date").attr("disabled", "disabled");
+          $("#ride_departure_all").attr("disabled", "disabled");
+          $("#ride_departure_first_option").attr("disabled", "disabled");
+          $("#ride_departure_second_option").attr("disabled", "disabled");
         } else {
           $(".city-option-same").hide();
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
-          $("#btn-search").removeAttr("disabled");
+          $("input#ride_departure_date").removeAttr("disabled", "disabled");
+          $("#ride_departure_all").removeAttr("disabled", "disabled");
+          $("#ride_departure_first_option").removeAttr("disabled", "disabled");
+          $("#ride_departure_second_option").removeAttr("disabled", "disabled");
         }
       }
     });
@@ -23,38 +29,70 @@
           $(".city-option-same").show();
           $('#ride_to_location_id').addClass("validation-error");
           $('#ride_from_location_id').addClass("validation-error");
-          $("#btn-search").attr("disabled", "disabled");
+          $("input#ride_departure_date").attr("disabled", "disabled");
+          $("#ride_departure_all").attr("disabled", "disabled");
+          $("#ride_departure_first_option").attr("disabled", "disabled");
+          $("#ride_departure_second_option").attr("disabled", "disabled");
         } else {
           $(".city-option-same").hide();
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
-          $("#btn-search").removeAttr("disabled");
+          $("input#ride_departure_date").removeAttr("disabled", "disabled");
+          $("#ride_departure_all").removeAttr("disabled", "disabled");
+          $("#ride_departure_first_option").removeAttr("disabled", "disabled");
+          $("#ride_departure_second_option").removeAttr("disabled", "disabled");
         }
       }
     });
-      $("#ride_departure_specify_date").click(function(){
-       $("input#ride_departure_date").removeAttr("disabled");
-      });
-      $("#ride_departure_all").click(function(){
+      $("#btnAll").click(function(){
        $("input#ride_departure_date").attr("disabled", "disabled");
       });
-      $("#ride_departure_first_option").click(function(){
+      $("#btn14").click(function(){
        $("input#ride_departure_date").attr("disabled", "disabled");
       });
-      $("#ride_departure_second_option").click(function(){
+      $("#btn30").click(function(){
        $("input#ride_departure_date").attr("disabled", "disabled");
       });
 
 
     $( "#ride_departure_date" ).datepicker({
       dateFormat: "yy-mm-dd"
+
     });
+
+    $("input#ride_departure_date").change(function(){
+      if($(this).val().length != 0)
+        $("#ride_departure_all").removeAttr("checked", "checked");
+        $("#ride_departure_first_option").removeAttr("checked", "checked");
+        $("#ride_departure_second_option").removeAttr("checked", "checked");
+      $("#search-form").submit();
+     });
+
+    $("#btnAll").click(function(){
+      $("#ride_departure_all").attr("checked", "checked");
+      $("#search-form").submit();
+      return true;
+    });
+
+    $("#btn14").click(function(){
+      $("#ride_departure_first_option").attr("checked", "checked");
+      $("#search-form").submit();
+     return true;
+    });
+
+    $("#btn30").click(function(){
+     $("#ride_departure_second_option").attr("checked", "checked");
+     $("#search-form").submit();
+      return true;
+    });
+
   });
 </script>
 <div class="clear"></div>
 <div id="search_run">
   <div id="header_wrap"  style="margin-top: 22px;">
     <div id="header">
+      <%= image_tag "shareshuttle_logo_sm.png", :class=>"left" %>
       <ul id="top_nav">
         <li>
           <a id="post_ride" class="button post km_click_event_by_text" href="<%= new_ride_path %>">Post a ride</a>
@@ -67,25 +105,17 @@
     <div id="content_container" class="clearfix">
       <div id="content">
         <div id="head">
-          <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
-            <div class="search">
-              <div class="text_input">
-                <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----"%>
-              </div>
-              <div class="text_input">
-                <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
-              </div>
-              <div class="text_input datetime">
-                <%= f.text_field(:departure_date,{:value => ( @ride.departure_date || SpClock.date),:disabled => ((@ride.departure != "specify_date")?("disabled"):()), :style=>"height: 30px; width: 120px;" }) %>
-                <%= image_tag ("icon_calendar.png"), :style=>"margin-left: -21px; margin-top: 10px; float: left; position: absolute; " %>
-                                <table>
+          <%= form_for :ride, :url => search_rides_path, :method => "get", :html => {:id => "search-form"} do |f| %>
+          <div id="schedule-container">
+            <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----"%>
+            <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
+            <%= f.text_field(:departure_date, :style=>"height: 27px; margin-top: 0px; border-radius: 5px 5px 5px 5px; height: 25px; vertical-align: top; width: 110px;" ) %>
+                <%= image_tag ("calendar_input_icon.png"), :style=>"margin-left: -24px; margin-top: 6px; float: left; position: absolute; " %>
+            <input type="button" id="btnAll" value="All" name="ride[departure]" class="form-post"/>
+            <input type="button" id="btn14" value="Next 14 Days" />
+            <input type="button" id="btn30" value="Next 30 Days" />
+              <table style="display: none;">
                   <tr>
-                    <td>
-                      <%= f.radio_button :departure, 'specify_date'  %>
-                    </td>
-                    <td>
-                      <%= f.label :departure, 'Specify Date', :for => 'ride_departure_specify_date'%>
-                    </td>
                     <td>
                       <%= f.radio_button :departure, 'all'%>
                     </td>
@@ -106,9 +136,8 @@
                     </td>
                   </tr>
                 </table>
-              </div>
-              <%= f.submit "search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
-            </div>
+            <%= hidden_field_tag :search_posted, "true" %>
+      </div>
           <% end %>
           <div class="city-option-same" style="display: none"> From and To City can't be the same </div>
         </div>

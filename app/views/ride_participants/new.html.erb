@@ -87,6 +87,22 @@
                       <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (@ride.departure_time + @ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= @ride.to_location && @ride.to_location.name %></span></p></div>
                     </div>
                     <div class="ride-image"><% if @ride.ride_type=="Sedon"%><%= image_tag ("sedon.jpg") %><%else%><%= image_tag ("van.jpg")%><%end%><%= @ride.ride_type %></div>
+                    <div class="participant-pic">
+                      <%@ride.ride_participants.active_participants.role_wise.each do |rider| %>
+                        <div class="riders-pics">
+                          <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
+                          <%= image_tag rider.user.user_image.url.to_s %>
+                          <span class="driver"></span>
+                        </div>
+                      <%end%>
+                      <% @ride.remaining_seats.times do %>
+                        <div class="riders-pics">
+                          <div class="riders-info">open&nbsp;seat</div>
+                          <%= image_tag "car_seat_icon.gif" %>
+                          <span class="driver"></span>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
 
