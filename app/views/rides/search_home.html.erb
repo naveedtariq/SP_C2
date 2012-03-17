@@ -46,7 +46,8 @@
 <div id="static_splash2">
   <div id="header_wrap" style="margin-top: 22px;">
     <div id="header">
-      <ul id="top_nav">
+        <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+    <ul id="top_nav">
         <li>
           <a id="post_ride" class="button post km_click_event_by_text" href="<%= new_ride_path %>">Post a ride</a>
         </li>
