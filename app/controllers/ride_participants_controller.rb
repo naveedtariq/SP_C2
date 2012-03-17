@@ -1,11 +1,12 @@
 class RideParticipantsController < ApplicationController
-  before_filter :require_login, :only => [:create_participant, :accept, :deny, :cancel]
+  before_filter :require_login, :only => [:accept, :deny, :cancel]
   before_filter :load_ride, :only => [:new, :create, :cancel, :create_participant]
   before_filter :secure_load_ride, :only => [:accept, :deny]
   def new
     @ride_participant = @ride.ride_participants.build
   end
   def create_participant
+   return render :action => "404error_rideparticipant"
     @ride_participant = @ride.ride_participants.build(retrieve_participant)
     @ride_participant.role = ROLES_FOR_RIDES[:pending]
     @ride_participant.user_id = current_user.id

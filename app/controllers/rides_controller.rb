@@ -1,5 +1,5 @@
 class RidesController < ApplicationController
-  before_filter :require_login, :only => [:create, :create_ride, :clone, :index, :update]
+  before_filter :require_login, :only => [:create, :clone, :index, :update]
   before_filter :secure_ride_load, :only => [:edit, :update]
   def index
     @rides = current_user.created_rides.active
@@ -52,7 +52,7 @@ class RidesController < ApplicationController
     return redirect_to create_ride_rides_path
   end
   def create_ride
-#    return render :action => "404error_ride"
+   return render :action => "404error_ride"
     @ride = Ride.create!(retrieve_ride)
     clear_ride
     @ride.make_owner!(current_user)
@@ -60,7 +60,7 @@ class RidesController < ApplicationController
     redirect_to root_url
   end
   def posted_one
-    return redirect_to new_ride_path if cookies[:ride].blank?
+#    return redirect_to new_ride_path if cookies[:ride].blank?
     @ride = Ride.new(retrieve_ride)
     return render :action => "post_two"
   end
