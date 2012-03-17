@@ -15,8 +15,8 @@ test:
   host: localhost
 
 production:
-  adapter: mysql
-  database: db/production.mysql
+  adapter: sqlite3
+  database: db/development.mysql
   timeout: 5000
   username: root
   password: ""
