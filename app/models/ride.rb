@@ -12,7 +12,7 @@ class Ride < ActiveRecord::Base
   end
   def departure_date_inclusion
     errors.add(:departure_date, "must be within a year") if(self.departure_date && (self.departure_date > (SpClock.date + 1.year)))
-    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (SpClock.date)))
+#    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (SpClock.date)))
   end
   attr_accessor :departure, "all"
   def duration_hours

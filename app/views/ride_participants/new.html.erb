@@ -1,69 +1,70 @@
 <%= javascript_include_tag "jquery-1.7.1.min" %>
 <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui", "bootstrap" %>
-<div class="container">
-  <section id="code">
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    <% end %>
-  </section>
-</div>
-<div class="container">
-  <section id="forms">
+<script type="text/javascript">
+  $(document).ready(function(){
 
-    <br/>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        
-        $("#btn-book-ride").click(function () {
-          $("#btn-book-ride").hide();
-          $(".info_view").show();
-        });
+    $("#btn-book-ride").click(function () {
+      $("#btn-book-ride").hide();
+      $(".info_view").show();
+    });
 
-        $("#new_ride_participant").submit(function() {
-          if($('input#ride_participant_phone').val().length < 1){
-            $(".phone-check1").show();
-          }
+    $("#new_ride_participant").submit(function() {
+      if($('input#ride_participant_phone').val().length < 1){
+        $(".phone-check1").show();
+      }
 
-          else if($('input#ride_participant_phone').val().length != 10){
-            $(".phone-check").show();
-          }
-         
-          else if(!($('input#ride_participant_phone').val().match(/[0-9]{10}/))){
-            $(".phone-check2").show();
-          }
-          else if(!($('input#ride_participant_mode_of_communications_sms_text').is(':checked')||$('#ride_participant_mode_of_communications_phone_call').is(':checked')||$('#ride_participant_mode_of_communications_email').is(':checked'))) {
-            $(".method-type-check").show();
-          }
-          else{
-              return true;
-          }
-          return false;
-        });
+      else if($('input#ride_participant_phone').val().length != 10){
+        $(".phone-check").show();
+      }
 
-      $("input#ride_participant_mode_of_communications_sms_text").click(function(){
-        $(".method-type-check").hide();
-      });
+      else if(!($('input#ride_participant_phone').val().match(/[0-9]{10}/))){
+        $(".phone-check2").show();
+      }
+      else if(!($('input#ride_participant_mode_of_communications_sms_text').is(':checked')||$('#ride_participant_mode_of_communications_phone_call').is(':checked')||$('#ride_participant_mode_of_communications_email').is(':checked'))) {
+        $(".method-type-check").show();
+      }
+      else{
+        return true;
+      }
+      return false;
+    });
 
-      $("#ride_participant_mode_of_communications_phone_call").click(function(){
-        $(".method-type-check").hide();
-      });
+    $("input#ride_participant_mode_of_communications_sms_text").click(function(){
+      $(".method-type-check").hide();
+    });
 
-      $("#ride_participant_mode_of_communications_email").click(function(){
-        $(".method-type-check").hide();
-      });
+    $("#ride_participant_mode_of_communications_phone_call").click(function(){
+      $(".method-type-check").hide();
+    });
 
-      $("input#ride_participant_phone").change(function(){
-        if($(this).val() != "")
-         $(".phone-check1").hide();
-        if($(this).val().length == 10)
-         $(".phone-check").hide();
-       if($(this).val().match(/[0-9]{10}/))
-         $(".phone-check2").hide();
-      });
+    $("#ride_participant_mode_of_communications_email").click(function(){
+      $(".method-type-check").hide();
+    });
 
-});
-    </script>
+    $("input#ride_participant_phone").change(function(){
+      if($(this).val() != "")
+        $(".phone-check1").hide();
+      if($(this).val().length == 10)
+        $(".phone-check").hide();
+      if($(this).val().match(/[0-9]{10}/))
+        $(".phone-check2").hide();
+    });
 
+  });
+</script>
+
+<div id="container">
+  <div id="header_wrap" style="margin-top: 22px;">
+    <div id="header">
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+      <a id="post_ride" class="button post km_click_event_by_text right" href="<%= new_ride_path %>">Post a ride</a>
+      <div style="clear:both"></div>
+    </div>
+  </div>
+
+  <div id="trip-container" style="height:auto;overflow: none;width:auto;">
+    <%= link_to "Back to search results", "#{search_rides_path}?#{params[:return_url]}", :class => "button post km_click_event_by_text", :id => "A1" %>
+    <h2><b>Ride Details</b></h2>
     <div id="search_run">
       <div id="content_wrapper" class="new_style">
         <div id="content_container" class="clearfix">
@@ -111,22 +112,21 @@
           </div>
         </div>
       </div>
-      <div class="left_bag">
-        <div class="seat_view">
-          <br/>
-          <% ts=@ride.remaining_seats %>
-            <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
-            <% if ts> 0 %>
-            
-          <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride),:html => {:class => "book-ride-child-window"} do |f| %>
-            <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%>
-            <br/>
-            <div class="price_view">Total = $<span id="price"><%=  @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span></div><br/><br/>
-            <dd class="changestep"><span class="errormsg"></span>
-              <button id="btn-book-ride" type="button" class="confirm clickaway_confirm">
-                <span>Book It!</span>
-              </button>
-            </dd><br/>
+    </div>
+
+    <div id="divPrice">
+      <% ts=@ride.remaining_seats %>
+      <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
+      <% if ts> 0 %>
+
+        <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride),:html => {:class => "book-ride-child-window"} do |f| %>
+          <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%><br /><a id="how" href="/footers/how_it_works" >How it works?</a><br /><br />
+
+          <dd class="changestep"><span class="errormsg"></span>
+            <button id="btn-book-ride" type="button" class="button post km_click_event_by_text">
+              <span>Book this ad!</span>
+            </button>
+          </dd><br/>
 
           <div class="info_view" style="display: none">
             <br/>
@@ -138,7 +138,7 @@
             <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
             <div class="phone-check2" style="display: none; color: red; font-weight: bold;">Phone should be without dashes</div>
             <div>
-              <br/>Prefered method of communication<br/><br/>
+              <br/>Preferred method of communication<br/><br/>
               <table><tr>
                   <td>
                     <%= f.radio_button :mode_of_communications, 'sms_text' %>
@@ -165,31 +165,34 @@
             <dd class="changestep"><span class="errormsg"></span>
               <%= f.submit "Book Ride", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "%>
             </dd>
-          </div>
-        <%end%>
-            <% else %>
-            <span>Sold out</span>
-            <% end %>
-      </div>
-      <%= link_to "Back to search results", "#{search_rides_path}?#{params[:return_url]}" %>
+          <% end %><div class="price_view">Total = $<span id="price"><%=  @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span></div><br/><br/>
 
-      <div class="profiles-sec" style="position: relative; width: 765px; margin-left: 266px; height: 313px;">
-        <ul style="width: 760px; margin-left: 0px; height: 307px;" >
-          <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
-            <li style="margin-left: 30px; margin-top: 0px; padding-top: 10px; width: 140px; height: 230px; float:left;">
-              <div class="profile" style="margin-left: 0px; margin-top: 0px; padding-top: 10px; width: 135px; height: 225px;">
-                <div class="one-user-pic" style="position: absolute;">
-                  <div class="one-user-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
-                  <%= image_tag rider.user.user_image.url.to_s %><br/>
-                </div><br/>
-                <div class="all-riders" style="postion: relative; width: 132px; margin-top: 77px;">
-                  City: <%= rider.user.city%><br/>
-                  Town: <%= rider.user.town%><br/>
-                  School: <%= rider.user.school%><br/>
-                  Number of Friends: <%= rider.user.number_of_friends%><br/></div>
-              </div></li>
-          <% end %></ul>
-      </div>
+        </div>
+      <% else %>
+        <span>Sold out</span>
+      <% end %>
     </div>
-</div>
+    <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
+
+      <div class="profiles left">
+        <%= image_tag rider.user.user_image.url.to_s %>
+
+        <div class="info-right left">
+          <b><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></b><br />
+          City: <%= rider.user.city%><br/>
+          Town: <%= rider.user.town%><br/>
+          School: <%= rider.user.school%><br/>
+          Number of Friends: <%= rider.user.number_of_friends%><br/>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+    <% end %>
+
+
+
+    </div>
+
+
+    <br/>
+
 

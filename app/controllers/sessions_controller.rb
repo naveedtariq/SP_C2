@@ -10,8 +10,8 @@ class SessionsController < ApplicationController
 #      if params[:child_toolbar] == "false"
 #        return render :action => "created"
 #      else
-          render :action => "404error_user"
-        #redirect_back_or_to root_url, :notice => "Logged in!"
+#          render :action => "404error_user"
+        redirect_back_or_to root_url, :notice => "Logged in!"
 #      end
     else
       flash.now.alert = "Email or password was invalid."

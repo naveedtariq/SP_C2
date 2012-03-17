@@ -52,7 +52,7 @@ class RidesController < ApplicationController
     return redirect_to create_ride_rides_path
   end
   def create_ride
-    return render :action => "404error_ride"
+#    return render :action => "404error_ride"
     @ride = Ride.create!(retrieve_ride)
     clear_ride
     @ride.make_owner!(current_user)

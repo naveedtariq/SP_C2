@@ -44,15 +44,15 @@
         }
       }
     });
-      $("#btnAll").click(function(){
-       $("input#ride_departure_date").attr("disabled", "disabled");
-      });
-      $("#btn14").click(function(){
-       $("input#ride_departure_date").attr("disabled", "disabled");
-      });
-      $("#btn30").click(function(){
-       $("input#ride_departure_date").attr("disabled", "disabled");
-      });
+    $("#btnAll").click(function(){
+      $("input#ride_departure_date").attr("disabled", "disabled");
+    });
+    $("#btn14").click(function(){
+      $("input#ride_departure_date").attr("disabled", "disabled");
+    });
+    $("#btn30").click(function(){
+      $("input#ride_departure_date").attr("disabled", "disabled");
+    });
 
 
     $( "#ride_departure_date" ).datepicker({
@@ -63,10 +63,10 @@
     $("input#ride_departure_date").change(function(){
       if($(this).val().length != 0)
         $("#ride_departure_all").removeAttr("checked", "checked");
-        $("#ride_departure_first_option").removeAttr("checked", "checked");
-        $("#ride_departure_second_option").removeAttr("checked", "checked");
+      $("#ride_departure_first_option").removeAttr("checked", "checked");
+      $("#ride_departure_second_option").removeAttr("checked", "checked");
       $("#search-form").submit();
-     });
+    });
 
     $("#btnAll").click(function(){
       $("#ride_departure_all").attr("checked", "checked");
@@ -77,12 +77,12 @@
     $("#btn14").click(function(){
       $("#ride_departure_first_option").attr("checked", "checked");
       $("#search-form").submit();
-     return true;
+      return true;
     });
 
     $("#btn30").click(function(){
-     $("#ride_departure_second_option").attr("checked", "checked");
-     $("#search-form").submit();
+      $("#ride_departure_second_option").attr("checked", "checked");
+      $("#search-form").submit();
       return true;
     });
 
@@ -92,7 +92,7 @@
 <div id="search_run">
   <div id="header_wrap"  style="margin-top: 22px;">
     <div id="header">
-      <%= image_tag "shareshuttle_logo_sm.png", :class=>"left" %>
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
       <ul id="top_nav">
         <li>
           <a id="post_ride" class="button post km_click_event_by_text" href="<%= new_ride_path %>">Post a ride</a>
@@ -106,38 +106,38 @@
       <div id="content">
         <div id="head">
           <%= form_for :ride, :url => search_rides_path, :method => "get", :html => {:id => "search-form"} do |f| %>
-          <div id="schedule-container">
-            <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----"%>
-            <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
-            <%= f.text_field(:departure_date, :style=>"height: 27px; margin-top: 0px; border-radius: 5px 5px 5px 5px; height: 25px; vertical-align: top; width: 110px;" ) %>
-                <%= image_tag ("calendar_input_icon.png"), :style=>"margin-left: -24px; margin-top: 6px; float: left; position: absolute; " %>
-            <input type="button" id="btnAll" value="All" name="ride[departure]" class="form-post"/>
-            <input type="button" id="btn14" value="Next 14 Days" />
-            <input type="button" id="btn30" value="Next 30 Days" />
+            <div id="schedule-container">
+              <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----"%>
+              <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----select city -----" %>
+              <%= f.text_field(:departure_date, :style=>"height: 27px; margin-top: 0px; border-radius: 5px 5px 5px 5px; height: 25px; vertical-align: top; width: 110px;" ) %>
+              <%= image_tag ("calendar_input_icon.png"), :style=>"margin-left: -24px; margin-top: 6px; float: left; position: absolute; " %>
+              <input type="button" id="btnAll" value="All" name="ride[departure]" class="form-post"/>
+              <input type="button" id="btn14" value="Next 14 Days" />
+              <input type="button" id="btn30" value="Next 30 Days" />
               <table style="display: none;">
-                  <tr>
-                    <td>
-                      <%= f.radio_button :departure, 'all'%>
-                    </td>
-                    <td>
-                      <%= f.label :departure, 'All', :for => 'ride_departure_all'%>
-                    </td>
-                    <td>
-                      <%= f.radio_button :departure, 'first_option' %>
-                    </td>
-                    <td>
-                      <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option"%>
-                    </td>
-                    <td>
-                      <%= f.radio_button :departure , 'second_option' %>
-                    </td>
-                    <td>
-                      <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option'%>
-                    </td>
-                  </tr>
-                </table>
-            <%= hidden_field_tag :search_posted, "true" %>
-      </div>
+                <tr>
+                  <td>
+                    <%= f.radio_button :departure, 'all'%>
+                  </td>
+                  <td>
+                    <%= f.label :departure, 'All', :for => 'ride_departure_all'%>
+                  </td>
+                  <td>
+                    <%= f.radio_button :departure, 'first_option' %>
+                  </td>
+                  <td>
+                    <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option"%>
+                  </td>
+                  <td>
+                    <%= f.radio_button :departure , 'second_option' %>
+                  </td>
+                  <td>
+                    <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option'%>
+                  </td>
+                </tr>
+              </table>
+              <%= hidden_field_tag :search_posted, "true" %>
+            </div>
           <% end %>
           <div class="city-option-same" style="display: none"> From and To City can't be the same </div>
         </div>
@@ -223,6 +223,7 @@
       </div>
     </div>
   </div>
+</div>
 
 
 

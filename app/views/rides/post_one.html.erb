@@ -9,23 +9,23 @@
     $("#new_ride").submit(function() {
       if(!($('#ride_ride_type_sedon').is(':checked')||$('#ride_ride_type_van').is(':checked'))) {
         $(".ride-type-check").show();
-         return false;
+        return false;
       }
       else if(($('#ride_to_location_id').val()=="") || ($('#ride_from_location_id').val()=="")){
         $(".city-check").show();
-         return false;
+        return false;
       }
       else{
-          return true;
+        return true;
       }
     });
-      $("#ride_ride_type_sedon").click(function(){
-       $(".ride-type-check").hide();
-      });
+    $("#ride_ride_type_sedon").click(function(){
+      $(".ride-type-check").hide();
+    });
 
-      $("#ride_ride_type_van").click(function(){
-       $(".ride-type-check").hide();
-      });
+    $("#ride_ride_type_van").click(function(){
+      $(".ride-type-check").hide();
+    });
 
     $('#ride_to_location_id').change(function() {
       if($(this).val() != ""){
@@ -60,64 +60,62 @@
         }
       }
     });
-});
+  });
 </script>
-<div class="search_run">
-
-  <div id="content_wrapper" class="new_style" style="margin-top: 59px;">
-    <div id="content_container" class="clearfix">
-      <div id="wide_column_left" class="newAddRideStyle">
-        <%= form_for @ride, :url => posted_rides_path do |f| %>
-          <% if @ride.errors.any? %>
-            <div class="error_messages">
-              <h2>Form is invalid</h2>
-              <ul>
-                <% for message in @ride.errors.full_messages %>
-                  <li><%= message%></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-        <%= hidden_field_tag :next_step, "post_two" %>
-           <div class="check-step1" style="display: block">
-            <fieldset id="step_1">
-              <div class="step_container clearfix">
-                <span class="active left"><b>1. Where To?</b></span>
-                <span><b>2. What Time?</b></span>
-                <span class="right"><b>3. What Else?</b></span>
-              </div>
-              <dl>
-                <dt><label>I Am Taking:</label></dt>
-                <dd class="selection" id="who">
-                  <div class="bigradio" id="driverselect">
-                    <div class="ride-image"><%= image_tag ("sedan.jpg")%></div>
-                    <%= f.radio_button :ride_type, 'Sedon', :style=>"width: 13px" %><%= f.label :ride_type, 'A Sedon', :for => 'ride_ride_type_sedon'%>
-                  </div>
-                  <div class="bigradio" id="passengerselect">
-                    <div class="ride-image"><%= image_tag ("van.jpg")%></div>
-                    <%= f.radio_button :ride_type, 'Van', :style=>"width: 13px"  %><%= f.label :ride_type, 'A Van', :for => 'ride_ride_type_van'%>
-                  </div>
-                </dd>
-                <dt><div class="ride-type-check" style="display: none; color: red; font-weight: bold;">No Ride Type Selected</div></dt>
-                <dt><label for="s">Starting From</label></dt>
-                <dd>
-                  <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "-----select city-----" %>
-                </dd>
-                <dt><label for="e">Going To</label></dt>
-                <dd>
-                  <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "-----select city-----" %>
-                  <div class="city-option-same" style="display: none"> From and To City can't same </div>
-                  <div class="city-check" style="display: none; color: red; font-weight: bold;">Select City</div>
-                  <p>Only the closest crossstreets are shown in your listing (e.g. 1st &amp; Main)</p>
-                </dd>
-                <dt>&nbsp;</dt>
-                <dd class="changestep"><span class="errormsg"></span><%= f.submit "Next", ({:class=>"ride-check-btn", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; width: 103px; font-size: 13px; float: right; height: 29px; margin-right: -121px; margin-top: -30px;"})%></dd>
-              </dl>
-            </fieldset>
-          </div>
-        <%end%>
-
-      </div>
+<div id="container">
+  <div id="header_wrap" style="margin-top: 22px;">
+    <div id="header">
+            <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+      <div style="clear:both"></div>
     </div>
   </div>
-</div>
+
+  <ul id="scale">
+    <li class="active">1. Where To?</li>
+    <li>2. What Time?</li>
+    <li class="last">3. What Else?</li>
+  </ul>
+  <%= form_for @ride, :url => posted_rides_path do |f| %>
+    <% if @ride.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @ride.errors.full_messages %>
+            <li><%= message%></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= hidden_field_tag :next_step, "post_two" %>
+
+    <div style="clear:both"></div>
+    <div id="leftContainer" style="width:600px; float:left;">
+      <div id="fromCity" class="left col">
+        From:<br />
+        <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "-----select city-----" %><br /><br />
+
+        <img alt="sedon" src="/assets/sedan.jpg" height="40px" width="140px" /><br />
+        <%= f.radio_button :ride_type, 'Sedon'%><%= f.label :ride_type, 'I am taking a Sedon', :for => 'ride_ride_type_sedon'%>
+      </div>
+
+      <div id="toCity" class="left col">
+        To:<br />
+        <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "-----select city-----" %><br /><br />
+        <div class="city-option-same" style="display: none"> From and To City can't same </div>
+        <div class="city-check" style="display: none; color: red; font-weight: bold;">Select City</div>
+        <img alt="Van" src="/assets/van.jpg" height="40px" width="140px" /><br />
+        <%= f.radio_button :ride_type, 'Van'  %><%= f.label :ride_type, 'I am taking a Van', :for => 'ride_ride_type_van'%>
+        <div class="ride-type-check" style="display: none; color: red; font-weight: bold;">No Ride Type Selected</div>
+        <div style="clear:both"></div>
+      </div>
+      <div style="clear:both"></div>
+
+      <div>
+        <input type="submit" value="Next Step" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn" />
+
+      </div>
+
+    </div>
+
+<% end %>
+  </div>

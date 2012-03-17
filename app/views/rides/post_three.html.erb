@@ -18,62 +18,68 @@
         return true;
       }
     });
-      $("input#ride_total_price").change(function(){
-        if($(this).val() < 200)
-         $(".total-price-check").hide();
-        if($(this).val() > 0)
+    $("input#ride_total_price").change(function(){
+      if($(this).val() < 200)
+        $(".total-price-check").hide();
+      if($(this).val() > 0)
         $(".total-price-check1").hide();
-       });
+    });
   });
 </script>
-<div class="search_run">
-  <div id="content_wrapper" class="new_style" style="margin-top: 59px;">
-    <div id="content_container" class="clearfix">
-      <div id="wide_column_left" class="newAddRideStyle">
-        <%= form_for @ride, :url => posted_rides_path(:step => "3") do |f| %>
-          <% if @ride.errors.any? %>
-            <div class="error_messages">
-              <h2>Form is invalid</h2>
-              <ul>
-                <% for message in @ride.errors.full_messages %>
-                  <li><%= message%></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-          <%= hidden_field_tag :next_step, "create_ride" %>
-          <div class="check-step3" style="display: block">
-            <fieldset id="step_3" class="" style="">
-              <div class="step_container clearfix" style="background-image: url(/assets/step3.png); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: 50% 100%; background-repeat: no-repeat no-repeat; ">
-                <span class="left"><b>1. Where To?</b></span>
-                <span><b>2. What Time?</b></span>
-                <span class="active right"><b>3. What Else?</b></span>
-              </div>
-              <dl>
-                <dt><%= f.label :total_price, "Total Ride Price?" %></dt>
-                <dd>
-                  <span id="dollarsign">$</span><%= f.number_field :total_price %>
-                </dd>
-                <div class="total-price-check" style="display: none; color: red; ">Price should not be greater than $200</div>
-                <div class="total-price-check1" style="display: none; color: red; ">Price should be positive </div>
-                <div class="total-price-check2" style="display: none; color: red; ">Price field can't be empty </div>
-                <dt class="seats-visibility"><%= f.label :available_seats, "Number of available seats" %></dt>
-                <dd class="seats-visibility">
-                  <%= f.select :available_seats, 1..2 %>
-                </dd>
-                <dt><%= f.label :notes, "Notes" %></dt>
-                <dd><%= f.text_area :notes, :size => "30x3" %></dd>
-              </dl>
-              <dd class="changestep"><span class="errormsg"></span>
-                <a href="<%=post_one_rides_path%>" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953;"><span>Back Step</span></a>
-
-                <div class="ride-btn"><%= f.submit "Post Ride", ({:class=>"ride-check-btn", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; width: 103px; font-size: 13px; float: right; height: 29px; margin-right: -121px; margin-top: -30px;"})%></div>
-              </dd>
-            </fieldset>
-          </div>
-        <%end%>
-
-      </div>
+<div id="container">
+  <div id="header_wrap" style="margin-top: 22px;">
+    <div id="header">
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+      <div style="clear:both"></div>
     </div>
   </div>
+
+  <ul id="scale">
+    <li>1. Where To?</li>
+    <li>2. What Time?</li>
+    <li class="last active">3. What Else?</li>
+  </ul>
+  <div style="clear:both"></div>
+  <%= form_for @ride, :url => posted_rides_path(:step => "3") do |f| %>
+    <% if @ride.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @ride.errors.full_messages %>
+            <li><%= message%></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= hidden_field_tag :next_step, "create_ride" %>
+
+    <div id="leftContainer" style="width:600px; float:left; margin-top:50px;">
+
+      <div class="left" style="margin-right:40px;">
+        <p><b>Total Ride Price One Way</b></p>
+        <%= f.number_field :total_price %>
+        <div class="total-price-check" style="display: none; color: red; margin-bottom: -6px; ">Price should not be greater than $200</div>
+        <div class="total-price-check1" style="display: none; color: red; margin-bottom: -6px; ">Price should be positive </div>
+        <div class="total-price-check2" style="display: none; color: red; margin-bottom: -6px; ">Price field can't be empty </div>
+      </div>
+      <div class="left" style="margin-right:20px;">
+        <p><b>Number of available seats</b></p>
+        <%= f.select :available_seats, 1..2, {:style => "width: 110px"} %>
+      </div>
+      <div class="left" style="margin-right:20px;">
+        <p><b>Notes</b></p>
+        <%= f.text_area :notes, :size => "30x3" %>
+      </div>
+
+
+
+      <div style="clear:both">
+        <a href="<%=post_one_rides_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
+        <input type="submit" value="Post Ride" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn"/>
+      </div>
+
+    </div>
+
+  <%end%>
+
 </div>

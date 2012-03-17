@@ -20,86 +20,93 @@
         return false;
       }
       else{
-          return true;
+        return true;
       }
     });
 
-        $('#ride_duration_minutes').change(function() {
-          if($(this).val() != 0)
-            $(".check-duration").hide();
-        });
+    $('#ride_duration_minutes').change(function() {
+      if($(this).val() != 0)
+        $(".check-duration").hide();
+    });
 
-        $('#ride_duration_hours').change(function() {
-          if($(this).val() != 0)
-            $(".check-duration").hide();
-        });
+    $('#ride_duration_hours').change(function() {
+      if($(this).val() != 0)
+        $(".check-duration").hide();
+    });
 
-        $('#ride_flexibility_in_minutes').change(function() {
-          if($(this).val() != "")
-            $(".check-flexibility").hide();
-        });
+    $('#ride_flexibility_in_minutes').change(function() {
+      if($(this).val() != "")
+        $(".check-flexibility").hide();
+    });
 
-      $("input#ride_departure_date").change(function(){
-        if($(this).val() != "")
-          $(".date-check-step2").hide();
-        });
- });
+    $("input#ride_departure_date").change(function(){
+      if($(this).val() != "")
+        $(".date-check-step2").hide();
+    });
+  });
 </script>
-<div class="search_run">
-  <div id="content_wrapper" class="new_style" style="margin-top: 59px;">
-    <div id="content_container" class="clearfix">
-      <div id="wide_column_left" class="newAddRideStyle">
-        <%= form_for @ride, :url => posted_rides_path(:step => "2") do |f| %>
-          <% if @ride.errors.any? %>
-            <div class="error_messages">
-              <h2>Form is invalid</h2>
-              <ul>
-                <% for message in @ride.errors.full_messages %>
-                  <li><%= message%></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-                 <%= hidden_field_tag :next_step, "post_three" %>
- <div class="check-step2" style="display: block">
-            <fieldset id="step_2" class="" style="">
-              <div class="step_container clearfix" style="background-image: url(/assets/step2.png); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: 50% 100%; background-repeat: no-repeat no-repeat; ">
-                <span class="left"><b>1. Where To?</b></span>
-                <span class="active"><b>2. What Time?</b></span>
-                <span class="right"><b>3. What Else?</b></span>
-              </div>
-              <dl>
-                <div id="singletripwrapper">
-                  <div id="there_one_time">
-                    <%= f.label :departure_date %>
-                    <%= f.text_field :departure_date, :value => (f.object.departure_date || SpClock.date) %>
-                    <%= image_tag ("icon_calendar.png"), :class => "ui-datepicker-trigger" %>
-                    <div class="date-check-step2" style="display:none; color: red">Departure Date can't be blank</div>
-                  </div>
-                  <div id="there_one_time">
-                    <%= f.label :departure_time %>
-                    <%= f.time_select :departure_time, :minute_step => 15, :ampm => true %>
-                  </div>
-                  <div id="there_one_time">
-                    <%= f.label :duration %>
-                    hrs<%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change"} %>
-                    min<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change"} %>
-                    <div class="check-duration" style="display: none; color: red;">Select Some duration</div>
-                  </div>
-                  <div id="there_one_time">
-                    <%= f.label :flexibility %>
-                    <%= f.select :flexibility_in_minutes, (5..30).step(5).collect{|t| ["#{t} mins", t]}, :include_blank => "select ± minutes" %>
-                    <div class="check-flexibility" style="display: none; color: red;">Select Some Flexibility</div>
-                  </div>
-                </div>
-                <dd class="changestep"><span class="errormsg"></span><a href="<%=new_ride_path%>" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953;"><span>Back Step</span></a>
-                  <%= f.submit "Next", ({:class=>"ride-check-btn", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; width: 103px; font-size: 13px; float: right; height: 29px; margin-right: -121px; margin-top: 0px;"})%>
-                </dd>
-              </dl>
-            </fieldset>
-          </div>
-         <%end%>
-      </div>
+
+<div id="container">
+  <div id="header_wrap" style="margin-top: 22px;">
+    <div id="header">
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+      <div style="clear:both"></div>
     </div>
   </div>
+
+  <ul id="scale">
+    <li>1. Where To?</li>
+    <li class="active">2. What Time?</li>
+    <li class="last">3. What Else?</li>
+  </ul>
+  <div style="clear:both"></div>
+  <%= form_for @ride, :url => posted_rides_path(:step => "2") do |f| %>
+    <% if @ride.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @ride.errors.full_messages %>
+            <li><%= message%></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= hidden_field_tag :next_step, "post_three" %>
+
+    <div id="leftContainer" style="width:600px; float:left; margin-top:50px;">
+
+      <div class="left" style="margin-right:20px;">
+        <p><b>Depart</b></p>
+        <%= f.text_field :departure_date, :value => (f.object.departure_date || SpClock.date) %>
+        <div class="date-check-step2" style="display:none; color: red; margin-bottom: -6px">Departure Date can't be blank</div>
+      </div>
+
+      <div class="left" style="margin-right:20px;">
+        <p><b>Time</b></p>
+        <%= f.time_select :departure_time, {:minute_step => 15, :ampm => true}, {:style => "width:110px"} %>
+
+      </div>
+
+      <div class="left" style="margin-right:20px;">
+        <p><b>Flexibility</b></p>
+        <%= f.select :flexibility_in_minutes, ((5..30).step(5).collect{|t| ["#{t} mins", t]}), {:include_blank => "± minutes"}, {:style => "width:110px"} %>
+        <div class="check-flexibility" style="display: none; color: red;">Select Some Flexibility</div>
+      </div>
+
+      <div class="left" style="margin-right:20px;">
+        <p><b>Trip Duration</b></p>
+        <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change", :style => "width:110px"} %>
+        :<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change", :style => "width:110px"} %>
+        <div class="check-duration" style="display: none; color: red;">Select Some duration</div>
+
+      </div>
+
+      <div style="clear:both">
+        <a href="<%=new_ride_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
+        <input type="submit" value="Next Step" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn"/>
+      </div>
+
+    </div>
+  <% end %>
 </div>
+

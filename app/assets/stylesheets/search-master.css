@@ -10856,7 +10856,7 @@ form#new_ride #add_ride.standard dd {
     line-height: 34px;
     padding: 0 25px;
     position: absolute;
-    right: 20px;
+    right: 181px;
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
     width: 137px;
@@ -10930,10 +10930,10 @@ height: 95px;
     border: 2px solid #1199EA;
     border-radius: 4px 4px 4px 4px;
     float: left;
-    height: 100px;
+    height: 93px;
     overflow: hidden;
     position: relative;
-    width: 100px;
+    width: 75px;
     margin-right: 10px;
     margin-left: 10px;
    /* margin-top: -150px;*/

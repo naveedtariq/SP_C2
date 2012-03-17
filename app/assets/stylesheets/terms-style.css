@@ -27,12 +27,7 @@ input[type=button]:hover
 {
     background:#FFE58F;
 }
-#trip-container
-{
-    margin:25px 0 0 0;
-    overflow-y:scroll;
-    height:400px;
-}
+
  h1
 {
     font:bold 13px Arial;
