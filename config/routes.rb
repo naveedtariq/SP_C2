@@ -10,7 +10,11 @@ SPC2::Application.routes.draw do
       get "logged_in"
     end
   end
-  resources :sessions, :only => [:new, :create, :destroy]
+  resources :sessions, :only => [:new, :create, :destroy] do
+    collection do
+      get "temp_redirect"
+    end
+  end
   resources :rides, :only => [:index, :new, :create, :edit, :update] do
     collection do
       get "search"

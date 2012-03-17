@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 #  layout "session"
   def new
-    return render :action => "404error_user"
+    return render :action => "404error_user", :layout => false
     @facebook_api_key = FB_CONFIG['api_key']
   end
 
@@ -23,5 +23,9 @@ class SessionsController < ApplicationController
   def destroy
     logout
     redirect_to login_path, :notice => "Logged out!"
+  end
+  def temp_redirect
+    session[:user_id] = User.first && User.first.id
+    return redirect_to session[:return_to_url]
   end
 end
