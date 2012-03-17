@@ -93,6 +93,7 @@
                         <div class="riders-pics">
                           <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
                           <%= image_tag rider.user.user_image.url.to_s %>
+                          
                           <span class="driver"></span>
                         </div>
                       <%end%>
@@ -175,8 +176,9 @@
     <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
 
       <div class="profiles left">
-        <%= image_tag rider.user.user_image.url.to_s %>
-
+                               <div class="riders-pics">
+   <%= image_tag rider.user.user_image.url.to_s %>
+                               </div>
         <div class="info-right left">
           <b><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></b><br />
           City: <%= rider.user.city%><br/>
