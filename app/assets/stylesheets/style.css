@@ -1,4 +1,4 @@
-﻿#container
+#container
 {
    width:960px;
    margin:0 auto;
@@ -35,7 +35,6 @@ input[type=button]:hover
 #trip-container
 {
     margin:25px 0 0 0;
-    overflow-y:scroll;
     height:400px;
 }
  h1
