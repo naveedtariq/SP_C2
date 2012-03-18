@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     RequestLogger.create!(:params => request.inspect, :request_url => request.url, :user_agent => request.user_agent, :ip_address => request.remote_ip, :referer => request.referer, :cookie_string => request.cookies)
   end
   def not_authenticated
-    redirect_to login_url, :alert => "First login to access this page."
+    redirect_to login_url
   end
   def production?
     Rails.env == "production"

@@ -57,7 +57,7 @@
 
       <div class="left" style="margin-right:40px;">
         <p><b>Total Ride Price One Way</b></p>
-        <%= f.number_field :total_price %>
+        $<%= f.number_field :total_price %>
         <div class="total-price-check" style="display: none; color: red; margin-bottom: -6px; ">Price should not be greater than $200</div>
         <div class="total-price-check1" style="display: none; color: red; margin-bottom: -6px; ">Price should be positive </div>
         <div class="total-price-check2" style="display: none; color: red; margin-bottom: -6px; ">Price field can't be empty </div>
@@ -74,7 +74,7 @@
 
 
       <div style="clear:both">
-        <a href="<%=post_one_rides_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
+        <a href="<%=post_one_rides_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: white; border-style: solid; border-width: 1px; color: black; background: none repeat scroll 0% 0% transparent; width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
         <input type="submit" value="Post Ride" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn"/>
       </div>
 

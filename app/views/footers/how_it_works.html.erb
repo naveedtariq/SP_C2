@@ -2,9 +2,9 @@
 <div id="container">
   <div id="header_wrap" style="margin-top: 22px;">
     <div id="header">
-        <%= image_tag "shareshuttle_logo_sm.png", :class=>"left" %>
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
         <a id="post_ride" class="button post km_click_event_by_text right" href="<%= new_ride_path%>">Post a Ride</a>
-        <a style="background:#6EA953; margin-right:12px;" class="button post km_click_event_by_text right" href="<%= rides_path %>">View Rides</a>
+      <a style="background:#6EA953; margin-right:12px;" class="button post km_click_event_by_text right" href="/rides/search?utf8=✓&search_posted=true&ride%5Bfrom_location_id%5D=&ride%5Bto_location_id%5D=&commit=Search">View Rides</a>
         <div style="clear:both"></div>
     </div>
   </div>

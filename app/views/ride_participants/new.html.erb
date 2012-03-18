@@ -121,18 +121,18 @@
       <% if ts> 0 %>
 
         <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride),:html => {:class => "book-ride-child-window"} do |f| %>
-          <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%><br /><a id="how" href="/footers/how_it_works" >How it works?</a><br /><br />
+          <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%><br /><a style="margin: 0px;" id="how" href="/footers/how_it_works" >How it works?</a><br /><br />
+          <div class="price_view">Total = $<span id="price"><%=  @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span></div><br/>
+          <dd style="margin-left: 0px;" class="changestep"><span class="errormsg"></span>
 
-          <dd class="changestep"><span class="errormsg"></span>
-            <button id="btn-book-ride" type="button" class="button post km_click_event_by_text">
-              <span>Book this ad!</span>
+            <button id="btn-book-ride" type="button" style = "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+              <span>Join this ride</span>
             </button>
-          </dd><br/>
+          </dd>
 
           <div class="info_view" style="float: none; display: none">
-            <br/>
-            <b>Contact Info and Options</b><br/><br/>
-            <%= f.label :phone,"Enter your phone number" %>
+            <b>Please fill out to complete booking</b><br/>
+            <%= f.label :phone,"Enter your phone number", :style => "margin-left: 0px;" %>
             <%= f.text_field :phone%>
             <br/>
             <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must be up to 10 digits</div>
@@ -163,10 +163,10 @@
               </table>
               <div class="method-type-check" style="display: none; color: red; font-weight: bold;">No Method Selected</div>
             </div>
-            <dd class="changestep"><span class="errormsg"></span>
+            <dd class="changestep" style="margin-left: 0px;"><span class="errormsg"></span>
               <%= f.submit "Book Ride", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "%>
             </dd>
-          <% end %><div class="price_view">Total = $<span id="price"><%=  @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span></div><br/><br/>
+          <% end %>
 
         </div>
       <% else %>
@@ -176,15 +176,14 @@
     <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
 
       <div class="profiles left">
-                               <div class="riders-pics">
+                               <div class="riders-pics" style="height: auto;">
    <%= image_tag rider.user.user_image.url.to_s %>
                                </div>
         <div class="info-right left">
           <b><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></b><br />
-          City: <%= rider.user.city%><br/>
-          Town: <%= rider.user.town%><br/>
-          School: <%= rider.user.school%><br/>
-          Number of Friends: <%= rider.user.number_of_friends%><br/>
+          Currently city: <%= rider.user.city%><br/>
+          Education: <%= rider.user.school%><br/>
+          Facebook connected (<%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}"%>)<br/>
         </div>
         <div style="clear:both"></div>
       </div>

@@ -88,7 +88,7 @@
       </div>
 
       <div class="left" style="margin-right:20px;">
-        <p><b>Flexibility</b></p>
+        <p><b>Depart time flexibility</b></p>
         <%= f.select :flexibility_in_minutes, ((5..30).step(5).collect{|t| ["#{t} mins", t]}), {:include_blank => "± minutes"}, {:style => "width:110px"} %>
         <div class="check-flexibility" style="display: none; color: red;">Select Some Flexibility</div>
       </div>
@@ -96,13 +96,13 @@
       <div class="left" style="margin-right:20px;">
         <p><b>Trip Duration</b></p>
         <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change", :style => "width:110px"} %>
-        :<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change", :style => "width:110px"} %>
+        hrs:<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change", :style => "width:110px"} %>mins
         <div class="check-duration" style="display: none; color: red;">Select Some duration</div>
 
       </div>
 
       <div style="clear:both">
-        <a href="<%=new_ride_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
+        <a href="<%=new_ride_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: white; border-style: solid; border-width: 1px; color: black; background: none repeat scroll 0% 0% transparent; width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
         <input type="submit" value="Next Step" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn"/>
       </div>
 

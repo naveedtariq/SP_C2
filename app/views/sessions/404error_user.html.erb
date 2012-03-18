@@ -46,15 +46,16 @@
             <li>lorem ipsum lorem ipsum</li>
             <li>lorem ipsum lorem ipsum</li>
         </ul><br />
-        <div>Don't have facebook or linked in account?  Click<a href="#">Here</a></div>
+        <div>Don't have facebook or linked in account?  Click <a href="<%= temp_redirect_sessions_path %>">Here</a></div>
     </div>
    </div>
 
 
   <div id="footer">
-    <a><span>About &amp; Safety</span></a>
-    <a><span>How it works</span></a>
-    <a><span>Terms &amp; Privacy</span></a>
+    <a class="km_click_event_by_text" href="<%= about_footers_path %>">About & Safety</a>
+      <a class="km_click_event_by_text" href="<%= how_it_works_footers_path %>">How It Works</a>
+      <a class="km_click_event_by_text" href="<%= terms_footers_path %>">Terms &amp; Privacy</a>
+
   </div>
   </div>
 </body>
