@@ -57,16 +57,18 @@
 
       <div class="left" style="margin-right:40px;">
         <p><b>Total Ride Price One Way</b></p>
-        $<%= f.number_field :total_price %>
-        <div class="total-price-check" style="display: none; color: red; margin-bottom: -6px; ">Price should not be greater than $200</div>
-        <div class="total-price-check1" style="display: none; color: red; margin-bottom: -6px; ">Price should be positive </div>
-        <div class="total-price-check2" style="display: none; color: red; margin-bottom: -6px; ">Price field can't be empty </div>
+        $<%= f.number_field :total_price, {:style => "height: 26px; width: 110px;"} %>
+        <div class="total-price-check" style="display: none; color: red; margin-bottom: -25px; ">Price should not be greater than $200</div>
+        <div class="total-price-check1" style="display: none; color: red; margin-bottom: -25px; ">Price should be positive </div>
+        <div class="total-price-check2" style="display: none; color: red; margin-bottom: -25px; ">Price field can't be empty </div>
       </div>
       <div class="left" style="margin-right:20px;">
         <p><b>Number of available seats</b></p>
         <%= f.select :available_seats, 1..2, {:style => "width: 110px"} %>
       </div>
+      <br/>
       <div class="left" style="margin-right:20px;">
+        <br/>
         <p><b>Notes</b></p>
         <%= f.text_area :notes, :size => "30x3" %>
       </div>

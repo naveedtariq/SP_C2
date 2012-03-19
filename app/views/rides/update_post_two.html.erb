@@ -1,0 +1,112 @@
+<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $( "#ride_departure_date" ).datepicker({
+      dateFormat: "yy-mm-dd",
+      minDate: 0, maxDate: "+1Y"
+    });
+
+    $("#new_ride").submit(function(){
+      if($('#ride_departure_date').val()==""){
+        $(".date-check-step2").show()
+        return false;
+      }
+      else if ($('#ride_duration_minutes').val()==0 && $('#ride_duration_hours').val()==0){
+        $(".check-duration").show();
+        return false;
+      }
+      else if ($('#ride_flexibility_in_minutes').val()==""){
+        $(".check-flexibility").show();
+        return false;
+      }
+      else{
+        return true;
+      }
+    });
+
+    $('#ride_duration_minutes').change(function() {
+      if($(this).val() != 0)
+        $(".check-duration").hide();
+    });
+
+    $('#ride_duration_hours').change(function() {
+      if($(this).val() != 0)
+        $(".check-duration").hide();
+    });
+
+    $('#ride_flexibility_in_minutes').change(function() {
+      if($(this).val() != "")
+        $(".check-flexibility").hide();
+    });
+
+    $("input#ride_departure_date").change(function(){
+      if($(this).val() != "")
+        $(".date-check-step2").hide();
+    });
+  });
+</script>
+
+<div id="container">
+  <div id="header_wrap" style="margin-top: 22px;">
+    <div id="header">
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+      <div style="clear:both"></div>
+    </div>
+  </div>
+
+  <ul id="scale">
+    <li>1. Where To?</li>
+    <li class="active">2. What Time?</li>
+    <li class="last">3. What Else?</li>
+  </ul>
+  <div style="clear:both"></div>
+  <%= form_for @ride do |f| %>
+    <% if @ride.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @ride.errors.full_messages %>
+            <li><%= message%></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= hidden_field_tag :next_step, "update_post_three" %>
+
+    <div id="leftContainer" style="width:600px; float:left; margin-top:50px;">
+
+      <div class="left" style="margin-right:20px;">
+        <p><b>Depart</b></p>
+        <%= f.text_field :departure_date, :value => (f.object.departure_date || SpClock.date) %>
+        <div class="date-check-step2" style="display:none; color: red; margin-bottom: -6px">Departure Date can't be blank</div>
+      </div>
+
+      <div class="left" style="margin-right:20px;">
+        <p><b>Time</b></p>
+        <%= f.time_select :departure_time, {:minute_step => 15, :ampm => true}, {:style => "width:110px"} %>
+
+      </div>
+
+      <div class="left" style="margin-right:20px;">
+        <p><b>Departure flexibility</b></p>
+        <%= f.select :flexibility_in_minutes, ((5..30).step(5).collect{|t| ["#{t} mins", t]}), {:include_blank => "± minutes"}, {:style => "width:110px"} %>
+        <div class="check-flexibility" style="display: none; color: red;">Select Some Flexibility</div>
+      </div>
+
+      <div class="left" style="margin-right:20px;">
+        <p><b>Trip Duration</b></p>
+        <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change", :style => "width:110px"} %>
+        hrs:<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change", :style => "width:110px"} %>mins
+        <div class="check-duration" style="display: none; color: red;">Select Some duration</div>
+
+      </div>
+
+      <div style="clear:both">
+        <a href="<%=edit_ride_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: white; border-style: solid; border-width: 1px; color: black; background: none repeat scroll 0% 0% transparent; width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
+        <input type="submit" value="Next Step" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn"/>
+      </div>
+
+    </div>
+  <% end %>
+</div>
+

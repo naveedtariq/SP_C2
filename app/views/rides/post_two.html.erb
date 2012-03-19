@@ -88,7 +88,7 @@
       </div>
 
       <div class="left" style="margin-right:20px;">
-        <p><b>Depart time flexibility</b></p>
+        <p><b>Departure flexibility</b></p>
         <%= f.select :flexibility_in_minutes, ((5..30).step(5).collect{|t| ["#{t} mins", t]}), {:include_blank => "± minutes"}, {:style => "width:110px"} %>
         <div class="check-flexibility" style="display: none; color: red;">Select Some Flexibility</div>
       </div>

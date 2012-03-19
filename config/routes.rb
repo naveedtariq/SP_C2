@@ -24,6 +24,10 @@ SPC2::Application.routes.draw do
       get "create_ride"
       get "post_one" => "rides#posted_one"
       post "post_two"
+      get "update_post_two"
+      get "update_post_three"
+       put "posted" => "rides#updated"
+#     put "updated"
     end
     member do
       get "clone"

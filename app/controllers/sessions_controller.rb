@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 #  layout "session"
   def new
-    return render :action => "404error_user", :layout => false
+    #return render :action => "404error_user", :layout => false
     @facebook_api_key = FB_CONFIG['api_key']
   end
 

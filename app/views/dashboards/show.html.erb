@@ -1,3 +1,8 @@
+<%= stylesheet_link_tag "terms-style" %>
+<div id="container">
+  <div id="header">
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+  </div>
 <div class="container">
   <section id="code">
     <% flash.each do |name, msg| %>
@@ -12,13 +17,10 @@
 
     <ul class="nav-pills nav">
       <li>
-        <%= link_to "My Ride", rides_path %>
-      </li>
-      <li>
         <%= link_to "Ride input page", new_ride_path %>
       </li>
       <li>
-        <%= link_to "Ride search page", search_rides_path %>
+        <a href="/rides/search?utf8=✓&search_posted=true&ride%5Bfrom_location_id%5D=&ride%5Bto_location_id%5D=&commit=Search">Ride search page</a>
       </li>
       <li class="active">
         <%= link_to "My Dashboard", dashboard_path %>

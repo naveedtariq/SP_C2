@@ -17,6 +17,9 @@ class ApplicationController < ActionController::Base
   def create_or_store_ride(ride)
     cookies[:ride] ||= ride.attributes.to_s.gsub!("nil","")
   end
+  def create_ride_cookie(ride)
+    cookies[:ride] = ride.attributes.to_s.gsub!("nil","")
+  end
   def store_ride(ride)
     ride_departure_date = ride.departure_date.to_s
     ride_attributes = ride.attributes
