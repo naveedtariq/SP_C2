@@ -7,7 +7,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
 #      render :action => "404error_user"
-      redirect_to login_path, :notice => "Signed up!"
+      login(params[:user][:email], params[:user][:password])
+      redirect_to dashboard_path, :notice => "Signed up!"
     else
       render :new
     end

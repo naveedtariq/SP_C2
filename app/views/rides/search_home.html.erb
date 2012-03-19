@@ -43,11 +43,13 @@
   });
 </script>
 <div class="clear"></div>
+
 <div id="static_splash2">
+
   <div id="header_wrap" style="margin-top: 22px;">
     <div id="header">
         <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
-    <ul id="top_nav">
+      <ul id="top_nav">
         <li>
           <a id="post_ride" class="button post km_click_event_by_text" href="<%= new_ride_path %>">Post a ride</a>
         </li>
@@ -65,18 +67,18 @@
               <div class="text_input">
                  <%= hidden_field_tag :search_posted, "true" %>
           <label for="search_s" class="pin start"></label>
-                 <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----Driving From -----"%>
+                 <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "--- select from ---"%>
                </div>
               <div class="text_input">
                 <label for="search_e" class="pin end"></label>
-                <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "----Driving To -----"%>
+                <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "--- select to ---"%>
                </div>
                <%= f.submit "Search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
             </div>
         
 
             <div class="heading">
-              <h1 style="color:white;">Share a Direct Ride<br /></h1>
+              <h1 style="color:white;background: transparent;">Share a Direct Ride<br /></h1>
               <p>
                 Find others from your neighborhood <br/>and take a car together.<br />
               </p>

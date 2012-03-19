@@ -10,7 +10,11 @@ SPC2::Application.routes.draw do
       get "logged_in"
     end
   end
-  resources :sessions, :only => [:new, :create, :destroy]
+  resources :sessions, :only => [:new, :create, :destroy] do
+    collection do
+      get "temp_redirect"
+    end
+  end
   resources :rides, :only => [:index, :new, :create, :edit, :update] do
     collection do
       get "search"
@@ -20,6 +24,10 @@ SPC2::Application.routes.draw do
       get "create_ride"
       get "post_one" => "rides#posted_one"
       post "post_two"
+      get "update_post_two"
+      get "update_post_three"
+       put "posted" => "rides#updated"
+#     put "updated"
     end
     member do
       get "clone"

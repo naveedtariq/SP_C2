@@ -40,7 +40,7 @@
     <li class="last active">3. What Else?</li>
   </ul>
   <div style="clear:both"></div>
-  <%= form_for @ride, :url => posted_rides_path(:step => "3") do |f| %>
+  <%= form_for @ride do |f| %>
     <% if @ride.errors.any? %>
       <div class="error_messages">
         <h2>Form is invalid</h2>
@@ -51,13 +51,13 @@
         </ul>
       </div>
     <% end %>
-    <%= hidden_field_tag :next_step, "create_ride" %>
+    <%= hidden_field_tag :next_step, "updated" %>
 
     <div id="leftContainer" style="width:600px; float:left; margin-top:50px;">
 
       <div class="left" style="margin-right:40px;">
         <p><b>Total Ride Price One Way</b></p>
-        $<%= f.number_field :total_price, {:style => "height: 26px; width: 110px;"} %>
+        $<%= f.number_field :total_price, {:style => "height: 26px; "}%>
         <div class="total-price-check" style="display: none; color: red; margin-bottom: -25px; ">Price should not be greater than $200</div>
         <div class="total-price-check1" style="display: none; color: red; margin-bottom: -25px; ">Price should be positive </div>
         <div class="total-price-check2" style="display: none; color: red; margin-bottom: -25px; ">Price field can't be empty </div>
@@ -66,7 +66,6 @@
         <p><b>Number of available seats</b></p>
         <%= f.select :available_seats, 1..2, {:style => "width: 110px"} %>
       </div>
-      <br/>
       <div class="left" style="margin-right:20px;">
         <br/>
         <p><b>Notes</b></p>
@@ -76,7 +75,7 @@
 
 
       <div style="clear:both">
-        <a href="<%=post_one_rides_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: white; border-style: solid; border-width: 1px; color: black; background: none repeat scroll 0% 0% transparent; width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
+        <a href="<%=update_post_two_rides_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: white; border-style: solid; border-width: 1px; color: black; background: none repeat scroll 0% 0% transparent; width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
         <input type="submit" value="Post Ride" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn"/>
       </div>
 

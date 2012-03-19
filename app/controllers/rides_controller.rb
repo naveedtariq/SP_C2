@@ -9,6 +9,12 @@ class RidesController < ApplicationController
     @ride= Ride.new(retrieve_ride)
     render :action => "post_one"
   end
+#  def edit
+#    create_ride_cookie(@ride)
+#    return render :json => retrieve_ride
+#    @ride.attributes = retrieve_ride
+#    render :action => "post_one"
+#  end
 
   def create
     @ride = Ride.new(params[:ride])
@@ -37,12 +43,25 @@ class RidesController < ApplicationController
   def update
     if @ride.valid?(params[:ride])
       @ride.modify!(params[:ride], current_user)
+      return render :action => params[:next_step] unless params[:step] == "3"
       redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
     else
       render :action => "new"
     end
   end
+  def updated
+#    hash = retrieve_ride
+#    @ride = Ride.find hash[:id]
+#    @ride.attributes = hash
+#    @ride.attributes = params[:ride]
+#    store_ride(@ride)
+#    return render :action => params[:next_step] unless params[:step] == "3"
+#    return redirect_to update_ride_rides_path
 
+
+       @ride.modify!(params[:ride], current_user)
+       redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
+  end
   def posted
     #return redirect_to new_ride_path if cookies[:ride].blank?
     @ride = Ride.new(retrieve_ride)
@@ -52,7 +71,7 @@ class RidesController < ApplicationController
     return redirect_to create_ride_rides_path
   end
   def create_ride
-#    return render :action => "404error_ride"
+    #return render :action => "404error_ride", :layout => false
     @ride = Ride.create!(retrieve_ride)
     clear_ride
     @ride.make_owner!(current_user)
@@ -60,7 +79,7 @@ class RidesController < ApplicationController
     redirect_to root_url
   end
   def posted_one
-    return redirect_to new_ride_path if cookies[:ride].blank?
+    #    return redirect_to new_ride_path if cookies[:ride].blank?
     @ride = Ride.new(retrieve_ride)
     return render :action => "post_two"
   end
@@ -68,6 +87,7 @@ class RidesController < ApplicationController
     @ride = Ride.new(params[:ride])
   end
 
+  
   private
   def secure_ride_load
     @ride = current_user.rides.find(params[:id])

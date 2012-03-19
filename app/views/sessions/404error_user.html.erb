@@ -1,21 +1,63 @@
-<%= stylesheet_link_tag "404"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connect</title>
+    <link rel="Stylesheet" type="text/css" href="/assets/style.css" />
+    <link href="/assets/application-login.css" media="all" rel="stylesheet" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#why').click(function () {
+                $('ul#info').toggle();
+            });
+        });
 
-<div id="mini_inner" class="centered">
- <%= image_tag ("alert.png"), :class=>"alert"%>
-  <h1>Oh no! We couldn't find your page.</h1>
-  <p>This page may not exist anymore, or the URL may have been
-    misspelled. Either way, we are sorry. <br/><br/>To get you back on your feet, search Google below:</a></p>
+        function toggle() {
+            if ($('ul#info').is(':visible')) {
+                $('ul#info').hide();
+            }
+            else {
+                $('ul#info').show();
+            }
+        }
+    </script>
 
-  <div style="border: 0px solid black; padding: 4px; width: 20em; text-align: center; margin: 0px auto 0px auto">
-    <table border="0" cellpadding="0">
-      <tr>
-        <td>
-          <input maxlength="255" name="q" size="25" type="text" value="" />
-          <input type="submit" value="Google Search" />
-         </td>
-        </tr>
-      <tr>
-       <td align="center" style="font-size: 75%">
-       </tr>
-      </table>
+</head>
+<body>
+<div id="container">
+  <div id="header_wrap" style="margin-top: 22px;">
+    <div id="header">
+      <img src="/assets/shareshuttle_logo_sm.png" alt="logo" class="left" />
+        <a id="post_ride" class="button post km_click_event_by_text right" href="/rides/new">Post Rides</a>
+      <div style="clear:both"></div>
     </div>
+  </div>
+
+   <div class="outer">
+    <div id="connect">
+        <b>Sign in to complete booking</b><br /><br />
+        <a href="<%= temp_redirect_sessions_path %>"><img src="/assets/Screen shot 2011-09-24 at 11.17.17 AM.png" alt="facebook" /></a><br /><br />
+        <span><b>Or</b></span><br /><br />
+        <a href="<%= temp_redirect_sessions_path %>"><img src="/assets/signin_linkedin.png" alt="linkedin" /></a><br /><br />
+
+        <a id="why" style="cursor:pointer;">Why do we require facebook or linkedin?</a>
+        <ul id="info" style="display:none;">
+            <li>lorem ipsum lorem ipsum</li>
+            <li>lorem ipsum lorem ipsum</li>
+            <li>lorem ipsum lorem ipsum</li>
+        </ul><br />
+        <div>Don't have facebook or linked in account?  Click <a href="<%= temp_redirect_sessions_path %>">Here</a></div>
+    </div>
+   </div>
+
+
+  <div id="footer">
+    <a class="km_click_event_by_text" href="<%= about_footers_path %>">About & Safety</a>
+      <a class="km_click_event_by_text" href="<%= how_it_works_footers_path %>">How It Works</a>
+      <a class="km_click_event_by_text" href="<%= terms_footers_path %>">Terms &amp; Privacy</a>
+
+  </div>
+  </div>
+</body>
+  </html>
+

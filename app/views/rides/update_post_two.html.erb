@@ -60,7 +60,7 @@
     <li class="last">3. What Else?</li>
   </ul>
   <div style="clear:both"></div>
-  <%= form_for @ride, :url => posted_rides_path(:step => "2") do |f| %>
+  <%= form_for @ride do |f| %>
     <% if @ride.errors.any? %>
       <div class="error_messages">
         <h2>Form is invalid</h2>
@@ -71,7 +71,7 @@
         </ul>
       </div>
     <% end %>
-    <%= hidden_field_tag :next_step, "post_three" %>
+    <%= hidden_field_tag :next_step, "update_post_three" %>
 
     <div id="leftContainer" style="width:600px; float:left; margin-top:50px;">
 
@@ -102,7 +102,7 @@
       </div>
 
       <div style="clear:both">
-        <a href="<%=new_ride_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: white; border-style: solid; border-width: 1px; color: black; background: none repeat scroll 0% 0% transparent; width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
+        <a href="<%=edit_ride_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: white; border-style: solid; border-width: 1px; color: black; background: none repeat scroll 0% 0% transparent; width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
         <input type="submit" value="Next Step" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn"/>
       </div>
 
