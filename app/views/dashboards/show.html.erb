@@ -14,16 +14,15 @@
   <section id="forms">
 
     <% if current_user %>
-
-    <ul class="nav-pills nav">
-      <li>
-        <%= link_to "Ride input page", new_ride_path %>
+    <ul>
+      <li style="float: left; ">
+        <%= link_to "Ride input page ", new_ride_path %> |
       </li>
-      <li>
-        <a href="/rides/search?utf8=✓&search_posted=true&ride%5Bfrom_location_id%5D=&ride%5Bto_location_id%5D=&commit=Search">Ride search page</a>
+      <li style="float: left; ">
+        <a href="/rides/search?utf8=✓&search_posted=true&ride%5Bfrom_location_id%5D=&ride%5Bto_location_id%5D=&commit=Search">&nbsp;Ride search page </a> |&nbsp;
       </li>
-      <li class="active">
-        <%= link_to "My Dashboard", dashboard_path %>
+      <li style="float: left;">
+        <%= link_to " My Dashboard", dashboard_path %>
       </li>
     </ul>
     <% end %>
