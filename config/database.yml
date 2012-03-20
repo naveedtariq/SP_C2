@@ -7,7 +7,7 @@ development:
   host: localhost
 
 test:
-  adapter: mysql
+  adapter: sqlite3
   database: db/test.mysql
   timeout: 5000
   username: root
