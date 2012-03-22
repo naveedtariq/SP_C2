@@ -1,7 +1,10 @@
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: mysql
+  database: db/development.mysql
   timeout: 5000
+  username: root
+  password: ""
+
 
 test:
   adapter: mysql
@@ -9,7 +12,6 @@ test:
   timeout: 5000
   username: root
   password: ""
-  host: localhost
 
 production:
   adapter: mysql
@@ -17,4 +19,3 @@ production:
   timeout: 5000
   username: root
   password: ""
-  host: localhost

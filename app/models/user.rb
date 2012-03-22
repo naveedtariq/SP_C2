@@ -8,11 +8,12 @@ class User < ActiveRecord::Base
 
   has_many :authentications, :dependent => :destroy
   accepts_nested_attributes_for :authentications
-
   mount_uploader :user_image, UserImageUploader
 
   has_many :ride_participants
   has_many :rides, :through => :ride_participants
+
+
   def created_rides
     Ride.where(:id => self.ride_participants_owners.pluck(:ride_id))
   end

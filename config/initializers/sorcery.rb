@@ -6,6 +6,8 @@ Rails.application.config.sorcery.submodules = [:remember_me, :external]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
+config.external_providers = [:facebook]
+
   # -- core --
   # config.not_authenticated_action = :not_authenticated              # what controller action to call for
                                                                       # non-authenticated users.
@@ -201,7 +203,10 @@ Rails.application.config.sorcery.configure do |config|
                                                                                       # the user defined logged out?
 
     # -- external --
+
     user.authentications_class = Authentication                                                # class which holds the various
+
+
                                                                                       # external provider data for this
                                                                                       # user.
 

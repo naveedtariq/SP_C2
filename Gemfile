@@ -9,6 +9,7 @@ gem "carrierwave"
 gem 'json'
 gem 'jquery-rails'
 gem 'will_paginate', "~> 3.0.3"
+gem 'unicorn'
 
 group :production do
   gem 'therubyracer', :platforms => :ruby
