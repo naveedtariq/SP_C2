@@ -3,21 +3,18 @@ development:
   database: db/development.mysql
   timeout: 5000
   username: root
-  password: ""
-  host: localhost
+  password: sp404
 
 test:
   adapter: mysql
   database: db/test.mysql
   timeout: 5000
   username: root
-  password: ""
-  host: localhost
+  password: sp404
 
 production:
   adapter: mysql
   database: db/production.mysql
   timeout: 5000
   username: root
-  password: ""
-  host: localhost
+  password: sp404
