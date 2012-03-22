@@ -2,10 +2,12 @@
 # The default is nothing which will include only core features (password encryption, login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
-Rails.application.config.sorcery.submodules = [:remember_me]
+Rails.application.config.sorcery.submodules = [:remember_me, :external]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
+config.external_providers = [:facebook]
+
   # -- core --
   # config.not_authenticated_action = :not_authenticated              # what controller action to call for
                                                                       # non-authenticated users.
@@ -50,10 +52,11 @@ Rails.application.config.sorcery.configure do |config|
   # config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
   # config.twitter.user_info_mapping = {:email => "screen_name"}
   #
-  # config.facebook.key = "34cebc81c08a521bc66e212f947d73ec"
-  # config.facebook.secret = "5b458d179f61d4f036ee66a497ffbcd0"
-  # config.facebook.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=facebook"
-  # config.facebook.user_info_mapping = {:email => "name"}
+   config.facebook.key = "365401603490972"
+   config.facebook.secret = "ba9d936788748804710532f5918348bc"
+   config.facebook.callback_url = "http://ec2-107-21-79-70.compute-1.amazonaws.com/oauth/callback?provider=facebook"
+   config.facebook.user_info_mapping = {:email => "email"}
+   config.facebook.display = "popup"
   #
   # config.github.key = ""
   # config.github.secret = ""
@@ -199,7 +202,7 @@ Rails.application.config.sorcery.configure do |config|
                                                                                       # the user defined logged out?
 
     # -- external --
-    # user.authentications_class = nil                                                # class which holds the various
+     user.authentications_class = Authentication                                                # class which holds the various
                                                                                       # external provider data for this
                                                                                       # user.
 
