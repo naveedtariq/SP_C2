@@ -27,7 +27,7 @@
 <div id="container">
   <div id="header_wrap" style="margin-top: 22px;">
     <div id="header">
-      <img src="/assets/shareshuttle_logo_sm.png" alt="logo" class="left" />
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
         <a id="post_ride" class="button post km_click_event_by_text right" href="/rides/new">Post Rides</a>
       <div style="clear:both"></div>
     </div>
@@ -42,9 +42,9 @@
 
         <a id="why" style="cursor:pointer;">Why do we require facebook or linkedin?</a>
         <ul id="info" style="display:none;">
-            <li>lorem ipsum lorem ipsum</li>
-            <li>lorem ipsum lorem ipsum</li>
-            <li>lorem ipsum lorem ipsum</li>
+            <li>minimum basic info like first name & profile pic</li>
+            <li>user validation: real people with real friends</li>
+            <li>we preserve all privacy settings</li>
         </ul><br />
         <div>Don't have facebook or linked in account?  Click <a href="<%= temp_redirect_sessions_path %>">Here</a></div>
     </div>
