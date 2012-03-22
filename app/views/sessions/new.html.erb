@@ -3,6 +3,18 @@
     $("#child_toolbar").val(window.toolbar.visible);
   });
 </script>
+<div id="fb-root"></div>
+<<<<<<< HEAD
+<%"https://graph.facebook.com/fid/picture" %>
+=======
+>>>>>>> aec6f947d99701262ff0126eda5f6f4b02230348
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=365401603490972";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div class="row">
 	<div class="span12">
 		<%= form_tag sessions_path :class => 'form-horizontal' do %>
@@ -30,10 +42,9 @@
 				<%= submit_tag "Sign in", :class => "btn btn-primary" %>
 			</div>
 			<div class="control-group">
-				<a id="fbLogin" href="#">
-					<%= image_tag("facebookconnect.gif") %>
-				</a>				
+				<div class="fb-login-button" data-width="300" data-max-rows="1">Login with Facebook </div>	
 			</div>
+      <%= link_to 'Login with Facebook', auth_at_provider_path(:provider => :facebook) %>
 			</fieldset>
 		<% end %>
 	</div>

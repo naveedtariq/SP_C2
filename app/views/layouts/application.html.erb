@@ -31,6 +31,15 @@
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     <% end %>
+
+  <ul style="float: right; margin-right: 10px;">
+    <% if current_user %>
+      <li style="float: left;">Logged in as <%= current_user.email %> | </li>
+      <li style="float: left;">&nbsp;<%= link_to " Log out ", logout_path %></li>
+    <% else %>
+      <li style="float: left;"><%= link_to "Sign in", login_path  %></li>
+   <% end %>
+   </ul>
     <%= yield %>
 
     <div id="footer">

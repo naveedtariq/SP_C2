@@ -46,16 +46,15 @@
         $(".phone-check2").hide();
     });
 
-$("input#ride_participant_phone").keypress(function(){
 
-string = $(this).val();
-str1 = $(this).val().length;
-if (str1 == 3)
-  $(this).val(string.substring(0,3) + '-')
-else if (str1 == 7)
-  $(this).val(string.substring(0,7) + '-')
-});
-
+      $('input#ride_participant_phone').keypress(function(){
+       var string = $(this).val();
+       var str1 = $(this).val().length;
+        if (str1 == 3)
+         $(this).val(string.substring(0,3) + '-')
+        else if (str1 == 7)
+          $(this).val(string.substring(0,7) + '-')
+  });
   });
 </script>
 
@@ -99,7 +98,7 @@ else if (str1 == 7)
                         <div class="riders-pics">
                           <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
                           <%= image_tag rider.user.user_image.url.to_s %>
-                          
+
                           <span class="driver"></span>
                         </div>
                       <%end%>
@@ -143,7 +142,7 @@ else if (str1 == 7)
             <br/>
             <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must be up to 10 digits</div>
             <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
-            <div class="phone-check2" style="display: none; color: red; font-weight: bold;">Phone should be without dashes</div>
+            <div class="phone-check2" style="display: none; color: red; font-weight: bold;">Phone format is wrong</div>
             <div>
               <br/>Preferred method of communication<br/><br/>
               <table><tr>

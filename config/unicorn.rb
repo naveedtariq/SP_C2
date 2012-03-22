@@ -20,5 +20,3 @@ pid "#{source_folder}/tmp/SP_C2_unicorn.pid"
 # Set the path of the log files inside the log folder of the testapp
 stderr_path "#{source_folder}/log/unicorn.stderr.log"
 stdout_path "#{source_folder}/log/unicorn.stdout.log"
-
-
