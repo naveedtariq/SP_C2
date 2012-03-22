@@ -1,7 +1,13 @@
 class User < ActiveRecord::Base
 
-  authenticates_with_sorcery!
-  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :about, :gender, :dob, :phone, :city, :town, :work, :title, :school, :photo, :user_image, :number_of_friends
+  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :about, :gender, :dob, :phone, :city, :town, :work, :title, :school, :photo, :user_image, :number_of_friends, :authentications_attributes
+
+  authenticates_with_sorcery! do |config|
+   config.authentications_class = Authentication
+  end
+
+  has_many :authentications, :dependent => :destroy
+  accepts_nested_attributes_for :authentications
 
   mount_uploader :user_image, UserImageUploader
 

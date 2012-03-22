@@ -1,10 +1,7 @@
 development:
   adapter: sqlite3
-  database: db/development.mysql
+  database: db/development.sqlite3
   timeout: 5000
-  username: root
-  password: ""
-  host: localhost
 
 test:
   adapter: mysql
