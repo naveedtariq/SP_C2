@@ -138,7 +138,7 @@
           <div class="info_view" style="float: none; display: none">
             <b>Please fill out to complete booking</b><br/>
             <%= f.label :phone,"Enter your phone number", :style => "margin-left: 0px;" %>
-            <%= f.text_field :phone%>
+            <%= f.text_field :phone, :maxlength => "12"%>
             <br/>
             <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must be up to 10 digits</div>
             <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
