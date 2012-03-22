@@ -10,6 +10,7 @@ gem 'json'
 gem 'jquery-rails'
 gem 'will_paginate', "~> 3.0.3"
 gem 'unicorn'
+  gem 'mysql2'
 
 group :production do
   gem 'therubyracer', :platforms => :ruby
@@ -18,7 +19,6 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'mysql'
   gem "rspec-rails", "~> 2.6"
 end
 
