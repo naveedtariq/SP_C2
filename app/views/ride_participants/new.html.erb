@@ -13,12 +13,8 @@
         $(".phone-check1").show();
       }
 
-      else if($('input#ride_participant_phone').val().length != 10){
+      else if($('input#ride_participant_phone').val().length != 12){
         $(".phone-check").show();
-      }
-
-      else if(!($('input#ride_participant_phone').val().match(/[0-9]{10}/))){
-        $(".phone-check2").show();
       }
       else if(!($('input#ride_participant_mode_of_communications_sms_text').is(':checked')||$('#ride_participant_mode_of_communications_phone_call').is(':checked')||$('#ride_participant_mode_of_communications_email').is(':checked'))) {
         $(".method-type-check").show();
@@ -44,11 +40,21 @@
     $("input#ride_participant_phone").change(function(){
       if($(this).val() != "")
         $(".phone-check1").hide();
-      if($(this).val().length == 10)
+      if($(this).val().length == 12)
         $(".phone-check").hide();
       if($(this).val().match(/[0-9]{10}/))
         $(".phone-check2").hide();
     });
+
+$("input#ride_participant_phone").keypress(function(){
+
+string = $(this).val();
+str1 = $(this).val().length;
+if (str1 == 3)
+  $(this).val(string.substring(0,3) + '-')
+else if (str1 == 7)
+  $(this).val(string.substring(0,7) + '-')
+});
 
   });
 </script>
@@ -87,7 +93,7 @@
                       <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= @ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= @ride.from_location && @ride.from_location.name %></span></p></div>
                       <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (@ride.departure_time + @ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= @ride.to_location && @ride.to_location.name %></span></p></div>
                     </div>
-                    <div class="ride-image"><% if @ride.ride_type=="Sedon"%><%= image_tag ("sedon.jpg") %><%else%><%= image_tag ("van.jpg")%><%end%><%= @ride.ride_type %></div>
+                    <div class="ride-image"><% if @ride.ride_type=="black car"%><%= image_tag ("blackcar.jpg") %><%else%><%= image_tag ("taxi.jpg")%><%end%><%= @ride.ride_type %></div>
                     <div class="participant-pic">
                       <%@ride.ride_participants.active_participants.role_wise.each do |rider| %>
                         <div class="riders-pics">
