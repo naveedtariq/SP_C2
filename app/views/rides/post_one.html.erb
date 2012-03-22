@@ -94,8 +94,8 @@
         From:<br />
         <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "--- select from ---" %><br /><br />
 
-        <img alt="sedon" src="/assets/sedan.jpg" height="40px" width="140px" /><br />
-        <%= f.radio_button :ride_type, 'Sedon'%><%= f.label :ride_type, 'I am taking a Sedon', :for => 'ride_ride_type_sedon'%>
+        <img alt="sedon" src="/assets/blackcar.jpg" height="40px" width="140px" /><br />
+        <%= f.radio_button :ride_type, 'black car'%><%= f.label :ride_type, 'I am taking a black car', :for => 'ride_ride_type_black_car'%>
       </div>
 
       <div id="toCity" class="left col">
@@ -103,8 +103,8 @@
         <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "--- select to ---" %><br /><br />
         <div class="city-option-same" style="display: none"> From and To City can't same </div>
         <div class="city-check" style="display: none; color: red; font-weight: bold;">Select City</div>
-        <img alt="Van" src="/assets/van.jpg" height="40px" width="140px" /><br />
-        <%= f.radio_button :ride_type, 'Van'  %><%= f.label :ride_type, 'I am taking a Van', :for => 'ride_ride_type_van'%>
+        <img alt="Van" src="/assets/taxi.jpg" height="40px" width="140px" /><br />
+        <%= f.radio_button :ride_type, 'taxi'  %><%= f.label :ride_type, 'I am taking a taxi', :for => 'ride_ride_type_taxi'%>
         <div class="ride-type-check" style="display: none; color: red; font-weight: bold;">No Ride Type Selected</div>
         <div style="clear:both"></div>
       </div>
