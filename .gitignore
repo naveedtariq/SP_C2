@@ -4,3 +4,4 @@ log/
 nbproject/
 db/test.sqlite3
 db/development.mysql
+public/uploads/
