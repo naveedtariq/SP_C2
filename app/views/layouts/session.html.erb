@@ -37,6 +37,10 @@
                 <li><%= link_to "Create Account", signup_path %> </li>
                 <li><%= link_to "Sign in", login_path  %></li>
               <% end %>
+
+               <% if @user.external? %>
+                xvcxvcxv
+                <%end%>
             </ul>
           </div>
         </div>

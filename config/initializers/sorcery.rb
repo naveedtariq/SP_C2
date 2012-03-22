@@ -38,7 +38,7 @@ config.external_providers = [:facebook]
   # config.register_last_activity_time = true                         # will register the time of last user action, every action.
 
   # -- external --
-  # config.external_providers = []                                    # What providers are supported by this app,
+   config.external_providers = [:facebook]                                    # What providers are supported by this app,
                                                                       # i.e. [:twitter, :facebook, :github, :google, :liveid] .
   # config.ca_file = 'path/to/ca_file'                                # Path to ca_file. By default use a internal ca-bundle.crt.
                                                                       # You can change it by your local ca_file.
@@ -54,8 +54,9 @@ config.external_providers = [:facebook]
   #
    config.facebook.key = "365401603490972"
    config.facebook.secret = "ba9d936788748804710532f5918348bc"
-   config.facebook.callback_url = "http://ec2-107-21-79-70.compute-1.amazonaws.com/oauth/callback?provider=facebook"
-   config.facebook.user_info_mapping = {:email => "email"}
+   config.facebook.callback_url = "http://localhost:3000/oauth/callback?provider=facebook"
+   config.facebook.user_info_mapping = {:email => "email", :first_name => "firstname", :last_name => "lastname"}
+   config.facebook.scope = "email"
    config.facebook.display = "popup"
   #
   # config.github.key = ""
@@ -202,7 +203,10 @@ config.external_providers = [:facebook]
                                                                                       # the user defined logged out?
 
     # -- external --
-     user.authentications_class = Authentication                                                # class which holds the various
+
+    user.authentications_class = Authentication                                                # class which holds the various
+
+
                                                                                       # external provider data for this
                                                                                       # user.
 
