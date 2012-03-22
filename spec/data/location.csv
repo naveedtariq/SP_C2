@@ -1,21 +1,1 @@
-"id","name","address1","address2","city","state","country","zip","created_at","updated_at"
-1,"San Francisco",,,"San Francisco",,,,"52:37.1","52:37.1"
-2,"San Jose",,,"San Jose",,,,"52:37.1","52:37.1"
-3,"Berkeley",,,"Berkeley",,,,"52:37.1","52:37.1"
-4,"Oakland",,,"Oakland",,,,"52:37.1","52:37.1"
-5,"Castro Valley",,,"Castro Valley",,,,"52:37.1","52:37.1"
-6,"Fremont",,,"Fremont",,,,"52:37.1","52:37.1"
-7,"Lamorinda",,,"Lamorinda",,,,"52:37.1","52:37.1"
-8,"San Ramon",,,"San Ramon",,,,"52:37.1","52:37.1"
-9,"Walnut Creek",,,"Walnut Creek",,,,"52:37.1","52:37.1"
-10,"San Mateo",,,"San Mateo",,,,"52:37.2","52:37.2"
-11,"San Francisco",,,"San Francisco",,,,"55:37.2","55:37.2"
-12,"San Jose",,,"San Jose",,,,"55:37.2","55:37.2"
-13,"Berkeley",,,"Berkeley",,,,"55:37.2","55:37.2"
-14,"Oakland",,,"Oakland",,,,"55:37.2","55:37.2"
-15,"Castro Valley",,,"Castro Valley",,,,"55:37.2","55:37.2"
-16,"Fremont",,,"Fremont",,,,"55:37.2","55:37.2"
-17,"Lamorinda",,,"Lamorinda",,,,"55:37.2","55:37.2"
-18,"San Ramon",,,"San Ramon",,,,"55:37.2","55:37.2"
-19,"Walnut Creek",,,"Walnut Creek",,,,"55:37.2","55:37.2"
-20,"San Mateo",,,"San Mateo",,,,"55:37.2","55:37.2"
+id,name,address1,address2,city,state,country,zip,created_at,updated_at1,(JFK) John F. Kennedy,,,(JFK) John F. Kennedy,,,,52:37.1,52:37.12,(LGA) LaGuardia,,,(LGA) LaGuardia,,,,52:37.1,52:37.13,(EWR) Newark,,,(EWR) Newark,,,,52:37.1,52:37.14,Battery Park/Financial District,,,Battery Park/Financial District,,,,52:37.1,52:37.15,Chelsea,,,Chelsea,,,,52:37.1,52:37.16,East Village,,,East Village,,,,52:37.1,52:37.17,Garment District,,,Garment District,,,,52:37.1,52:37.18,Gramercy/Flatiron,,,Gramercy/Flatiron,,,,52:37.1,52:37.19,Greenwich Village,,,Greenwich Village,,,,52:37.1,52:37.110,Little Italy/Chinatown,,,Little Italy/Chinatown,,,,52:37.1,52:37.111,Lower East Side,,,Lower East Side,,,,52:37.1,52:37.112,Meat Packing District,,,Meat Packing District,,,,52:37.1,52:37.113,Midtown East,,,Midtown East,,,,52:37.2,52:37.214,Midtown West,,,Midtown West,,,,55:37.2,55:37.215,Murray Hill,,,Murray Hill,,,,55:37.2,55:37.216,Soho/Nolita,,,Soho/Nolita,,,,55:37.2,55:37.217,TriBeCa,,,TriBeCa,,,,55:37.2,55:37.218,Upper East Side,,,Upper East Side,,,,55:37.2,55:37.219,Upper West Side,,,Upper West Side,,,,55:37.2,55:37.220,West Village,,,West Village,,,,55:37.2,55:37.221,Brooklyn,,,Brooklyn,,,,55:37.2,55:37.222,Queens,,,Queens,,,,55:37.2,55:37.2
