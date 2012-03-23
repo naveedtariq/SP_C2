@@ -1,7 +1,7 @@
 SPC2::Application.routes.draw do
   
-  get "oauths/oauth"
-  get "oauths/callback"
+#  get "oauths/oauth"
+#  get "oauths/callback"
   
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"

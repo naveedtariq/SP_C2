@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'sorcery', '0.7.6'
+gem 'sorcery'
 gem 'rails', '3.2.1'
 gem "fog"
 gem "aws-s3"

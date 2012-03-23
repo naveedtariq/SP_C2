@@ -1,5 +1,6 @@
 defaults: &defaults
   api_key: '365401603490972'
+  secret_key: 'ba9d936788748804710532f5918348bc'
 
 development:
   <<: *defaults
