@@ -107,8 +107,8 @@
         <div id="head">
           <%= form_for :ride, :url => search_rides_path, :method => "get", :html => {:id => "search-form"} do |f| %>
             <div id="schedule-container">
-              <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "--- select from ---"%>
-              <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "--- select to ---" %>
+              <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, {:include_blank => "--- select from ---"}, :style => "width:230px"%>
+              <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, {:include_blank => "--- select to ---"}, :style => "width:230px" %>
               <%= f.text_field(:departure_date, :style=>"height: 27px; margin-top: 0px; border-radius: 5px 5px 5px 5px; height: 25px; vertical-align: top; width: 110px;" ) %>
               <%= image_tag ("calendar_input_icon.png"), :style=>"margin-left: -24px; margin-top: 6px; float: left; position: absolute; " %>
               <input type="button" id="btnAll" value="All" name="ride[departure]" class="form-post"/>

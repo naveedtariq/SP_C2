@@ -4723,7 +4723,7 @@ a.skip:hover {
 }
 /* line 183,  */
 #static_splash2 #content .subsection .rides {
-  width: 544px;
+  width: 650px;
   position: absolute;
   left: 0px;
   margin-bottom: 20px;
@@ -10875,7 +10875,7 @@ form#new_ride #add_ride.standard dd {
 }
 
 .inner-info-line1{
-width: 320px;
+width: 412px;
 }
 
 span.info-line1{
@@ -10891,7 +10891,7 @@ padding-top: 15px;
 }
 
 span.info-line11{
-font-size: 17px;
+font-size: 14px;
 font-weight: bold;
 color: black !important;
 width:300px;
