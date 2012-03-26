@@ -56,7 +56,7 @@ config.external_providers = [:facebook]
    config.facebook.secret = "ba9d936788748804710532f5918348bc"
    config.facebook.callback_url = "http://localhost:3000/oauth/callback?provider=facebook"
    config.facebook.user_info_mapping = {:email => "email", :first_name => "firstname", :last_name => "lastname"}
-   config.facebook.scope = "email"
+   config.facebook.scope = "email,offline_access,user_about_me,user_birthday,user_hometown,user_interests,user_work_history,user_education_history"
    config.facebook.display = "popup"
   #
   # config.github.key = ""

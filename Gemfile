@@ -10,6 +10,7 @@ gem 'json'
 gem 'jquery-rails'
 gem 'will_paginate', "~> 3.0.3"
 gem 'unicorn'
+gem 'koala'
 
 group :production do
   gem 'therubyracer', :platforms => :ruby
