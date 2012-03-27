@@ -46,17 +46,14 @@
         $(".phone-check2").hide();
     });
 
-
-$("input#ride_participant_phone").keypress(function(){
-
-string = $(this).val();
-str1 = $(this).val().length;
-if (str1 == 3)
-  $(this).val(string.substring(0,3) + '-')
-else if (str1 == 7)
-  $(this).val(string.substring(0,7) + '-')
-});
-
+      $('input#ride_participant_phone').keypress(function(){
+       var string = $(this).val();
+       var str1 = $(this).val().length;
+        if (str1 == 3)
+         $(this).val(string.substring(0,3) + '-')
+        else if (str1 == 7)
+          $(this).val(string.substring(0,7) + '-')
+  });
   });
 </script>
 <div id="container">
@@ -139,7 +136,7 @@ else if (str1 == 7)
           <div class="info_view" style="float: none; display: none">
             <b>Please fill out to complete booking</b><br/>
             <%= f.label :phone,"Enter your phone number", :style => "margin-left: 0px;" %>
-            <%= f.text_field :phone%>
+            <%= f.text_field :phone, :maxlength => "12"%>
             <br/>
             <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must be up to 10 digits</div>
             <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>

@@ -31,7 +31,7 @@
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     <% end %>
-
+<% if false %>
   <ul style="float: right; margin-right: 10px;">
     <% if current_user %>
       <li style="float: left;">Logged in as <%= current_user.email %> | </li>
@@ -40,11 +40,12 @@
       <li style="float: left;"><%= link_to "Sign in", login_path  %></li>
    <% end %>
    </ul>
+    <% end %>
     <%= yield %>
 
     <div id="footer">
       <a class="km_click_event_by_text" href="<%= about_footers_path %>">About</a>
-      <a class="km_click_event_by_text" href="<%= how_it_works_footers_path %>">How it Work & FAQ</a>
+      <a class="km_click_event_by_text" href="<%= how_it_works_footers_path %>">How it Works & FAQ</a>
       <a class="km_click_event_by_text" href="<%= terms_footers_path %>">Terms &amp; Privacy</a>
       <span>
 

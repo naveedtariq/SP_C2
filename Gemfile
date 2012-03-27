@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'will_paginate', "~> 3.0.3"
 gem 'unicorn'
 gem 'koala'
-
+  gem 'mysql2'
 group :production do
   gem 'therubyracer', :platforms => :ruby
  gem "pg"
@@ -19,7 +19,6 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'mysql2'
   gem "rspec-rails", "~> 2.6"
 end
 

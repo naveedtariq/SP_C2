@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :save_request
   helper_method :production?
   def save_request
-  RequestLogger.create!(:request_url => request.url, :user_agent => request.user_agent, :ip_address => request.remote_ip, :referer => request.referer, :cookie_string => request.cookies)
+    RequestLogger.create!(:request_url => request.url, :user_agent => request.user_agent, :ip_address => request.remote_ip, :referer => request.referer, :cookie_string => request.cookies)
   end
   def not_authenticated
     redirect_to login_url

@@ -54,7 +54,7 @@
 
 <div id="static_splash2">
 
-  <div id="header_wrap" style="margin-top: -10px;">
+  <div id="header_wrap" style="margin-top: 20px;">
     <div id="header">
         <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
       <ul id="top_nav">
@@ -74,11 +74,11 @@
               <div class="text_input">
                  <%= hidden_field_tag :search_posted, "true" %>
           <label for="search_s" class="pin start"></label>
-                 <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "--- select from ---"%>
+                 <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, {:include_blank => "--- select from ---"}, :style => "width:275px"%>
                </div>
               <div class="text_input">
                 <label for="search_e" class="pin end"></label>
-                <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, :include_blank => "--- select to ---"%>
+                <%= f.select :to_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {:include_blank => "--- select to ---"}, :style => "width:275px"%>
                </div>
                <%= f.submit "Search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
             </div>
