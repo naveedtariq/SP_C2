@@ -2,6 +2,8 @@ class Ride < ActiveRecord::Base
   after_find do |ride|
     ride.departure_time = "2012-03-06 13:00:00 +0000".to_time if ride.departure_time.blank?
   end
+  attr_accessor :friends_in_common
+  attr_accessor :count
   has_many :ride_participants
   has_many :users, :through => :ride_participants
   validates  :available_seats, :total_price, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true

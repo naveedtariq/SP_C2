@@ -9,12 +9,12 @@ class RidesController < ApplicationController
     @ride= Ride.new(retrieve_ride)
     render :action => "post_one"
   end
-#  def edit
-#    create_ride_cookie(@ride)
-#    return render :json => retrieve_ride
-#    @ride.attributes = retrieve_ride
-#    render :action => "post_one"
-#  end
+  #  def edit
+  #    create_ride_cookie(@ride)
+  #    return render :json => retrieve_ride
+  #    @ride.attributes = retrieve_ride
+  #    render :action => "post_one"
+  #  end
 
   def create
     @ride = Ride.new(params[:ride])
@@ -28,9 +28,11 @@ class RidesController < ApplicationController
   end
 
   def search
+
     @ride = Ride.new(params[:ride])
     @ride.departure = params[:ride] && params[:ride]["departure"] || "all"
     @rides = Ride.search_rides(params[:ride]).paginate(:page => params[:page], :per_page => SEARCH_RIDES_PER_PAGE)
+    @graph = Koala::Facebook::GraphAPI.new(current_user.oauth_code)
     @count = Ride.search_rides(params[:ride]).count
     return render(:action => "search_home") if params[:search_posted].blank?
   end
@@ -50,17 +52,17 @@ class RidesController < ApplicationController
     end
   end
   def updated
-#    hash = retrieve_ride
-#    @ride = Ride.find hash[:id]
-#    @ride.attributes = hash
-#    @ride.attributes = params[:ride]
-#    store_ride(@ride)
-#    return render :action => params[:next_step] unless params[:step] == "3"
-#    return redirect_to update_ride_rides_path
+    #    hash = retrieve_ride
+    #    @ride = Ride.find hash[:id]
+    #    @ride.attributes = hash
+    #    @ride.attributes = params[:ride]
+    #    store_ride(@ride)
+    #    return render :action => params[:next_step] unless params[:step] == "3"
+    #    return redirect_to update_ride_rides_path
 
 
-       @ride.modify!(params[:ride], current_user)
-       redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
+    @ride.modify!(params[:ride], current_user)
+    redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
   end
   def posted
     #return redirect_to new_ride_path if cookies[:ride].blank?
@@ -71,7 +73,6 @@ class RidesController < ApplicationController
     return redirect_to create_ride_rides_path
   end
   def create_ride
-    return render :action => "404error_ride", :layout => false
     @ride = Ride.create!(retrieve_ride)
     clear_ride
     @ride.make_owner!(current_user)

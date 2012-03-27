@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    return render :text => params.inspect
     @user = User.new(params[:user])
     if @user.save
 #      render :action => "404error_user"

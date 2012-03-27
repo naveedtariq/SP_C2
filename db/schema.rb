@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(:version => 20120327143452) do
     t.datetime "updated_at",  :null => false
     t.text     "friend_list"
     t.text     "interests"
-    t.string   "employers"
   end
 
   create_table "locations", :force => true do |t|
@@ -100,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20120327143452) do
     t.string   "user_image"
     t.integer  "number_of_friends",            :default => 0
     t.string   "photo_url"
+    t.text     "oauth_code"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

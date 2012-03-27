@@ -150,6 +150,8 @@
             <%end%>
             <% last_date = [] %>
             <%@rides.each do |ride| %>
+              <% ride.friends_in_common ||= [] %>
+
               <% unless last_date.include? ride.departure_date  %>
                 <h3 class="headline first">
                   <%= ride.departure_date.strftime("Departing %A, %B #{ride.departure_date.day.ordinalize}") %>
@@ -177,18 +179,19 @@
                     <div class="info-rides">
                       <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.from_location && ride.from_location.name %></span></p></div>
                       <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p></div>
-                     <%#@oauth = Koala::Facebook::OAuth.new(FACEBOOK_KEY , FACEBOOK_SECRET, facebook_callback_sessions_url)%>
-                     <%#@graph = Koala::Facebook::GraphAPI.new(@oauth.get_access_token(params[:code]))%>
-                     <%=@graph.get_connections(fb_id, "mutualfriends/#{100003683732258}")%>
-                     </div>
-                    <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase}.jpg") %><%= ride.ride_type %></div>
+                    </div>
+                    <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase.gsub(" ","")}.jpg") %><%= ride.ride_type %></div>
                     <div class="participant-pic">
                       <%ride.ride_participants.active_participants.role_wise.each do |rider| %>
                         <div class="riders-pics">
                           <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
                           <%= image_tag rider.user.user_image.url.to_s %>
-                          <span class="driver"></span>
+                          <span class="driver">
+                            <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}")%>
+                            <% ride.friends_in_common << mutual_friends  %>
+                          </span>
                         </div>
+
                       <%end%>
                       <% ride.remaining_seats.times do %>
                         <div class="riders-pics">
@@ -197,6 +200,14 @@
                           <span class="driver"></span>
                         </div>
                       <% end %>
+                    </div>
+                    <div>
+                      <% mutual_friends = ride.friends_in_common.flatten %>
+                      <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
+                      <% mutual_friends.each do |friend|  %>
+                        <%= friend["name"] %>
+                      <% end %>
+
                     </div>
                   </div>
                 </div>
