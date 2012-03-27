@@ -199,11 +199,6 @@
     <% end %>
  </div>
   
-  <%####*Here Info get%>
-  <%fb_id = current_user.authentications.first.uid%>
-  <%@graph = Koala::Facebook::API.new("AAAFMVLDGxJwBAB4UZBnR43j6Od2ZBNkhsvt7VU1DhP5zkxUsNaRLQ658zM6BBLZAyEgsZAkmf8Gx97uZChhuHflqmxa44oY38aY3GsvnwApyylSRMnL6r")%>
-  <%=friends=@graph.get_connections(fb_id, "friends")%><br/>
-  <%=info=@graph.get_object(fb_id)%><br/>
 
 <br/>
 

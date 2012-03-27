@@ -2,7 +2,6 @@ SPC2::Application.routes.draw do
   
 #  get "oauths/oauth"
 #  get "oauths/callback"
-  
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
@@ -16,6 +15,8 @@ SPC2::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy] do
     collection do
       get "temp_redirect"
+      get 'facebook_login'
+      get 'facebook_callback'
     end
   end
   resources :rides, :only => [:index, :new, :create, :edit, :update] do
@@ -111,5 +112,5 @@ match "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+#   match ':controller(/:action(/:id))(.:format)'
 end

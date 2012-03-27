@@ -1,25 +1,37 @@
 class SessionsController < ApplicationController
-#  layout "session"
+  #  layout "session"
   def new
     #return render :action => "404error_user", :layout => false
-   # @facebook_api_key = FB_CONFIG['api_key']
+    # @facebook_api_key = FB_CONFIG['api_key']
   end
 
   def create
     user = login(params[:email], params[:password], params[:remember_me])
     if user
-#      if params[:child_toolbar] == "false"
-#        return render :action => "created"
-#      else
-#          render :action => "404error_user"
-        redirect_back_or_to root_url, :notice => "Logged in!"
-#      end
+      #      if params[:child_toolbar] == "false"
+      #        return render :action => "created"
+      #      else
+      #          render :action => "404error_user"
+      redirect_back_or_to root_url, :notice => "Logged in!"
+      #      end
     else
       flash.now.alert = "Email or password was invalid."
       render "new"
     end
   end
+  def facebook_login
+    @oauth = Koala::Facebook::OAuth.new(FACEBOOK_KEY , FACEBOOK_SECRET, facebook_callback_sessions_url)
+    return redirect_to   @oauth.url_for_oauth_code
+  end
+  def facebook_callback
+    @oauth = Koala::Facebook::OAuth.new(FACEBOOK_KEY , FACEBOOK_SECRET, facebook_callback_sessions_url)
+    @graph = Koala::Facebook::GraphAPI.new(@oauth.get_access_token(params[:code]))
+    fb_id = current_user.authentications.first.uid
+    friends=@graph.get_connections(fb_id, "friends")
+    info=@graph.get_object(fb_id)
+    return render :text => friends.inspect
 
+  end
   def destroy
     logout
     redirect_to login_path, :notice => "Logged out!"

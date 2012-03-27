@@ -7,7 +7,6 @@ class RideParticipantsController < ApplicationController
     @ride_participant = @ride.ride_participants.build
   end
   def create_participant
-   return render :action => "404error_rideparticipant", :layout => false
     @ride_participant = @ride.ride_participants.build(retrieve_participant)
     @ride_participant.role = ROLES_FOR_RIDES[:pending]
     @ride_participant.user_id = current_user.id
