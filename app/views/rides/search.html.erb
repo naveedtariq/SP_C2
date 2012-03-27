@@ -177,7 +177,10 @@
                     <div class="info-rides">
                       <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.from_location && ride.from_location.name %></span></p></div>
                       <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p></div>
-                    </div>
+                     <%#@oauth = Koala::Facebook::OAuth.new(FACEBOOK_KEY , FACEBOOK_SECRET, facebook_callback_sessions_url)%>
+                     <%#@graph = Koala::Facebook::GraphAPI.new(@oauth.get_access_token(params[:code]))%>
+                     <%=@graph.get_connections(fb_id, "mutualfriends/#{100003683732258}")%>
+                     </div>
                     <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase}.jpg") %><%= ride.ride_type %></div>
                     <div class="participant-pic">
                       <%ride.ride_participants.active_participants.role_wise.each do |rider| %>

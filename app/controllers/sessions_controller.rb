@@ -27,9 +27,15 @@ class SessionsController < ApplicationController
     @oauth = Koala::Facebook::OAuth.new(FACEBOOK_KEY , FACEBOOK_SECRET, facebook_callback_sessions_url)
     @graph = Koala::Facebook::GraphAPI.new(@oauth.get_access_token(params[:code]))
     fb_id = current_user.authentications.first.uid
-    friends=@graph.get_connections(fb_id, "friends")
-    info=@graph.get_object(fb_id)
-    return render :text => friends.inspect
+    mutual_friends = @graph.get_connections(fb_id, "mutualfriends/#{1038043578}")
+    user_info = @graph.get_object(fb_id)
+    photo = @graph.get_picture(fb_id)
+    current_user.user_image = photo
+    current_user.save
+#    friends=@graph.get_connections(fb_id, "friends")
+#    info=@graph.get_object(fb_id)
+   return render :text =>current_user.first_name.inspect
+   #redirect_to root_url
 
   end
   def destroy
