@@ -30,11 +30,11 @@ class SessionsController < ApplicationController
     mutual_friends = @graph.get_connections(fb_id, "mutualfriends/#{1038043578}")
     user_info = @graph.get_object(fb_id)
     photo = @graph.get_picture(fb_id)
-    current_user.user_image = photo
+    current_user.update_attributes(:photo_url => photo)
     current_user.save
 #    friends=@graph.get_connections(fb_id, "friends")
 #    info=@graph.get_object(fb_id)
-   return render :text =>current_user.first_name.inspect
+   return render :text => current_user.photo_url.inspect
    #redirect_to root_url
 
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120326162650) do
+ActiveRecord::Schema.define(:version => 20120327143452) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20120326162650) do
     t.datetime "deleted_at"
     t.string   "user_image"
     t.integer  "number_of_friends",            :default => 0
+    t.string   "photo_url"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
