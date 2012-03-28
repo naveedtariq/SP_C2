@@ -11,4 +11,4 @@ class SorceryExternal < ActiveRecord::Migration
   def self.down
     drop_table :authentications
   end
-end
+end 
