@@ -6,3 +6,4 @@ db/test.sqlite3
 config/database.yml
 db/development.mysql
 public/uploads/
+.idea/
