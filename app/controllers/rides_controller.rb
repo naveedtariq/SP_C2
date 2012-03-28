@@ -79,7 +79,7 @@ class RidesController < ApplicationController
     clear_ride
     @ride.make_owner!(current_user)
     flash[:notice] = "Successfully created ride"
-    redirect_to root_url
+    redirect_to dashboard_path
   end
   def posted_one
     #    return redirect_to new_ride_path if cookies[:ride].blank?

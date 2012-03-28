@@ -64,7 +64,7 @@ class SessionsController < ApplicationController
     authentication.friend_list = friend_list.join(",")
     authentication.save!
     session[:return_to_url] = cookies[:return_to_url]
-    redirect_back_or_to root_url
+    redirect_back_or_to dashboard_path
 
   end
   def destroy
