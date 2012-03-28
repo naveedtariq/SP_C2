@@ -1,5 +1,5 @@
 class RidesController < ApplicationController
-  before_filter :require_login, :only => [:create, :create_ride, :clone, :index, :update]
+  before_filter :require_login, :only => [:create, :create_ride, :clone, :index, :update, :updated]
   before_filter :secure_ride_load, :only => [:edit, :update]
   def index
     @rides = current_user.created_rides.active
@@ -43,11 +43,14 @@ class RidesController < ApplicationController
     return render :action => "new"
   end
   def update
+
     if @ride.valid?(params[:ride])
       @ride.modify!(params[:ride], current_user)
-      return render :action => params[:next_step] unless params[:step] == "3"
-      redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
-    else
+      unless params[:next_step] == "update"
+        return render :action => params[:next_step]
+      end
+        return redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
+     else
       render :action => "new"
     end
   end
@@ -59,8 +62,7 @@ class RidesController < ApplicationController
     #    store_ride(@ride)
     #    return render :action => params[:next_step] unless params[:step] == "3"
     #    return redirect_to update_ride_rides_path
-
-
+    
     @ride.modify!(params[:ride], current_user)
     redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
   end

@@ -31,16 +31,27 @@
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     <% end %>
-<% if false %>
-  <ul style="float: right; margin-right: 10px;">
+    <div class="nav-bar">
+  <ul style="float: right; margin-right: 40px;">
     <% if current_user %>
-      <li style="float: left;">Logged in as <%= current_user.email %> | </li>
-      <li style="float: left;">&nbsp;<%= link_to " Log out ", logout_path %></li>
+    <div style="color: #FFFFFF;">
+      <li style="float: left;"><%= link_to "Post a Ride", new_ride_path  %></li>
+      <li style="float: left; width: 25px;"><%= image_tag current_user.user_image.url.to_s %></li>
+      <li style="float: left;">&nbsp;&nbsp;<a href="<%=  user_path(current_user) %>"><%= current_user.first_name %>&nbsp;<%= current_user.last_name.chars.first %></a></li>
+      <li style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "edit profile", edit_user_path(current_user) %></li>
+      <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to " Log out ", logout_path %></li></div>
     <% else %>
-      <li style="float: left;"><%= link_to "Sign in", login_path  %></li>
+      <li style="float: left;"><%= link_to "Post a Ride", new_ride_path  %></li>
+      <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Login in", login_path  %></li>
+      <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Sign up", signup_path  %></li>
    <% end %>
    </ul>
-    <% end %>
+      <% if current_user %>
+      <ul style="float: left; margin-left: 20px;">
+       <li style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Dashboard", dashboard_path %></li>
+       <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Inbox", logout_path %></li></div>
+      </ul><%end%>
+   </div>
     <%= yield %>
 
     <div id="footer">

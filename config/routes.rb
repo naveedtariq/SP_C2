@@ -7,7 +7,7 @@ SPC2::Application.routes.draw do
   get "signup" => "users#new", :as => "signup"
 
 
-  resources :users, :only => [:new, :create] do
+  resources :users, :only => [:new, :create, :edit, :update, :show] do
     collection do
       get "logged_in"
     end
@@ -30,8 +30,8 @@ SPC2::Application.routes.draw do
       post "post_two"
       get "update_post_two"
       get "update_post_three"
-       put "posted" => "rides#updated"
-#     put "updated"
+      put "posted" => "rides#updated"
+      put "updated"
     end
     member do
       get "clone"

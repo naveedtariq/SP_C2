@@ -192,3 +192,9 @@ div.col
     padding:5px 12px 5px 0;
     border:1px solid gray;
 }
+
+.nav-bar{
+  background: #0D77B6;
+  width: 100%;
+  height: 25px;
+}

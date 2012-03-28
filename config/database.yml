@@ -10,11 +10,11 @@ test:
   database: sp_test
   timeout: 5000
   username: root
-  password: sp404
+  password: ""
 
 production:
   adapter: mysql2
   database: sp_production
   timeout: 5000
   username: root
-  password: sp404
+  password: ""

@@ -8,8 +8,10 @@ class SessionsController < ApplicationController
 
   def create
     user = login(params[:email], params[:password], params[:remember_me])
+    user.last_login = Time.now
+    user.save(:validate => false)
     if user
-      redirect_back_or_to root_url, :notice => "Logged in!"
+      redirect_back_or_to dashboard_path
       #      end
     else
       flash.now.alert = "Email or password was invalid."
@@ -54,6 +56,7 @@ class SessionsController < ApplicationController
     current_user.oauth_code = oauth_code
     current_user.number_of_friends = friends.count
     current_user.save(:validate => false)
+    current_user.last_login = Time.now
     friend_list = []
     friends.each do |friend|
       friend_list << "#{friend["id"]}:#{friend["name"]}"
