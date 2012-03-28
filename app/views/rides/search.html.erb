@@ -187,8 +187,10 @@
                           <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
                           <%= image_tag rider.user.user_image.url.to_s %>
                           <span class="driver">
-                            <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}")%>
-                            <% ride.friends_in_common << mutual_friends  %>
+                            <% if @graph.present? && rider.user_id != current_user.id %>
+                              <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}")%>
+                              <% ride.friends_in_common << mutual_friends  %>
+                            <% end %>
                           </span>
                         </div>
 
@@ -201,18 +203,22 @@
                         </div>
                       <% end %>
                     </div>
+                    <% if @graph.present? %>
                     <div style="float:left; margin-top: -20px">
 
                       <% mutual_friends = ride.friends_in_common.flatten %>
+                      <% if mutual_friends.count > 0 %>
                       <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
+                      <% end %>
                       <% mutual_friends.each do |friend|  %>
                         <%= friend["name"] %>
                         <% unless friend == mutual_friends.last %>
-                      &nbsp;and&nbsp;
+                          &nbsp;and&nbsp;
                         <% end %>
                       <% end %>
 
                     </div>
+                    <% end %>
                   </div>
                 </div>
               </a>

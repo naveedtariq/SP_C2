@@ -32,7 +32,7 @@ class RidesController < ApplicationController
     @ride = Ride.new(params[:ride])
     @ride.departure = params[:ride] && params[:ride]["departure"] || "all"
     @rides = Ride.search_rides(params[:ride]).paginate(:page => params[:page], :per_page => SEARCH_RIDES_PER_PAGE)
-    @graph = Koala::Facebook::GraphAPI.new(current_user.oauth_code)
+    @graph = Koala::Facebook::GraphAPI.new(current_user.oauth_code)  if(current_user.present? && current_user.oauth_code.present?)
     @count = Ride.search_rides(params[:ride]).count
     return render(:action => "search_home") if params[:search_posted].blank?
   end

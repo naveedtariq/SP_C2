@@ -5,12 +5,13 @@ class OauthsController < ApplicationController
     login_at(params[:provider])
   end
   def callback
+
     provider = params[:provider]
+    cookies[:return_to_url] = session[:return_to_url]
     if @user = login_from(provider)
     else
       begin
         @user = create_from(provider)
-        reset_session
         auto_login(@user)
 
       rescue

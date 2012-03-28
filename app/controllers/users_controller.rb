@@ -4,12 +4,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    return render :text => params.inspect
     @user = User.new(params[:user])
     if @user.save
 #      render :action => "404error_user"
       login(params[:user][:email], params[:user][:password])
-      redirect_to dashboard_path
+      redirect_back_or_to dashboard_path
     else
       render :new
     end

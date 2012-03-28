@@ -4,6 +4,7 @@ class RideParticipantsController < ApplicationController
   before_filter :load_ride, :only => [:new, :create, :cancel, :create_participant]
   before_filter :secure_load_ride, :only => [:accept, :deny]
   def new
+    @graph = Koala::Facebook::GraphAPI.new(current_user.oauth_code) if(current_user.present? && current_user.oauth_code.present?)
     @ride_participant = @ride.ride_participants.build
   end
   def create_participant

@@ -3,15 +3,12 @@ class SessionsController < ApplicationController
   def new
     #return render :action => "404error_user", :layout => false
     # @facebook_api_key = FB_CONFIG['api_key']
+
   end
 
   def create
     user = login(params[:email], params[:password], params[:remember_me])
     if user
-      #      if params[:child_toolbar] == "false"
-      #        return render :action => "created"
-      #      else
-      #          render :action => "404error_user"
       redirect_back_or_to root_url, :notice => "Logged in!"
       #      end
     else
@@ -20,7 +17,7 @@ class SessionsController < ApplicationController
     end
   end
   def facebook_login
-    @oauth = Koala::Facebook::OAuth.new(FACEBOOK_KEY , FACEBOOK_SECRET, facebook_callback_sessions_url)
+  @oauth = Koala::Facebook::OAuth.new(FACEBOOK_KEY , FACEBOOK_SECRET, facebook_callback_sessions_url)
     return redirect_to   @oauth.url_for_oauth_code
   end
   def facebook_callback
@@ -63,8 +60,8 @@ class SessionsController < ApplicationController
     end
     authentication.friend_list = friend_list.join(",")
     authentication.save!
-
-    redirect_to root_url
+    session[:return_to_url] = cookies[:return_to_url]
+    redirect_back_or_to root_url
 
   end
   def destroy
