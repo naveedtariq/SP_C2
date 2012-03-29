@@ -1,7 +1,7 @@
 SPC2::Application.routes.draw do
   
-#  get "oauths/oauth"
-#  get "oauths/callback"
+  #  get "oauths/oauth"
+  #  get "oauths/callback"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
@@ -10,6 +10,9 @@ SPC2::Application.routes.draw do
   resources :users, :only => [:new, :create, :edit, :update, :show] do
     collection do
       get "logged_in"
+    end
+    member do
+      get "inbox"
     end
   end
   resources :sessions, :only => [:new, :create, :destroy] do
@@ -41,11 +44,14 @@ SPC2::Application.routes.draw do
         get "create_participant"
       end
       member do
+        post "create_message"
         get "cancel"
         get "accept"
         get "deny"
       end
     end
+    resources :messages, :only => [:new, :create, :show]
+
   end
   resource :dashboard, :only => [:show]
   resources :footers do
@@ -53,12 +59,13 @@ SPC2::Application.routes.draw do
       get "terms"
       get "how_it_works"
       get "about"
-     end
-     end
+    end
+  end
+  
   root :to => "rides#search"
 
-match "oauth/callback" => "oauths#callback"
-match "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
+  match "oauth/callback" => "oauths#callback"
+  match "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -112,5 +119,5 @@ match "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-#   match ':controller(/:action(/:id))(.:format)'
+  #   match ':controller(/:action(/:id))(.:format)'
 end

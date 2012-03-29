@@ -49,7 +49,7 @@
       <% if current_user %>
       <ul style="float: left; margin-left: 20px;">
        <li style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Dashboard", dashboard_path %></li>
-       <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Inbox", logout_path %></li></div>
+       <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Inbox", inbox_user_path(current_user) %></li></div>
       </ul><%end%>
    </div>
     <%= yield %>
