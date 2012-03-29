@@ -58,7 +58,7 @@
    </tr>
    <tr>
     <th>Last Login</th>
-    <td><%=time_ago_in_words(@user.last_login)%></td>
+    <td><% if @user.last_login.present? %><%=time_ago_in_words(@user.last_login)%><%else%>Never<% end %></td>
    </tr>
 </table> <br/>
  <%@ride_participants = User.find(params[:id]).ride_participants.current_rides.role_wise%>

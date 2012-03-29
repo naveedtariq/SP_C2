@@ -36,7 +36,7 @@
     <% if current_user %>
     <div style="color: #FFFFFF;">
       <li style="float: left;"><%= link_to "Post a Ride", new_ride_path  %></li>
-      <li style="float: left; width: 25px;"><%= image_tag current_user.user_image.url.to_s %></li>
+      <li style="float: left; width: 25px;"><%= image_tag current_user.user_image_url %></li>
       <li style="float: left;">&nbsp;&nbsp;<a href="<%=  user_path(current_user) %>"><%= current_user.first_name %>&nbsp;<%= current_user.last_name.chars.first %></a></li>
       <li style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "edit profile", edit_user_path(current_user) %></li>
       <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to " Log out ", logout_path %></li></div>

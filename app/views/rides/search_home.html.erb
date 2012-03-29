@@ -111,7 +111,7 @@
                         <h1>Sold out</h1>
                       <% end %>
                     </div>
-                    <%= image_tag ride.owner.user_image.url.to_s %>
+                    <%= image_tag ride.owner.user_image_url %>
                     <h1><%= ride.from_location && ride.from_location.name %><span class="trip_type"></span><%= ride.to_location && ride.to_location.name %></h1>
                     <p>
                       <span class="driver"></span>

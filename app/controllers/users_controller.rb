@@ -5,9 +5,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.last_login = Time.now
     if @user.save
 #      render :action => "404error_user"
+    @user.last_login = Time.now
       login(params[:user][:email], params[:user][:password])
       redirect_back_or_to dashboard_path
     else

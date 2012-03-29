@@ -54,7 +54,7 @@ config.external_providers = [:facebook]
   #
    config.facebook.key = FACEBOOK_KEY
    config.facebook.secret = FACEBOOK_SECRET
-   config.facebook.callback_url = "http://electric-stone-1959.heroku.com/oauth/callback?provider=facebook"
+   config.facebook.callback_url = "http://localhost:3000/oauth/callback?provider=facebook"
    config.facebook.user_info_mapping = {:email => "email", :first_name => "first_name", :last_name => "last_name", :about => "bio", :dob => "birthday", :town => "hometown", :gender => "gender", :work => "work", :phone => "phone", :city => "location", :school => "education"}
    config.facebook.scope = "email,offline_access,user_about_me,user_birthday,user_hometown,user_interests,user_work_history,user_education_history,user_location"
    config.facebook.display = "popup"

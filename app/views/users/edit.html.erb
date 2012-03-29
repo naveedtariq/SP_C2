@@ -74,7 +74,7 @@
     <%= f.label :school %>
     <%= f.text_field :school %>
   </div>
-    <div style="margin-left: 250px; "><%= image_tag current_user.user_image.url.to_s %></div>
+    <div style="margin-left: 250px; "><%= image_tag current_user.user_image_url %></div>
   <div class="field">
     <%= f.label :user_image, "Image Upload" %><br />
     <%= f.file_field :user_image %>

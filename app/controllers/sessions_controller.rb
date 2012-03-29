@@ -55,8 +55,8 @@ class SessionsController < ApplicationController
     current_user.photo_url = photo
     current_user.oauth_code = oauth_code
     current_user.number_of_friends = friends.count
-    current_user.save(:validate => false)
     current_user.last_login = Time.now
+    current_user.save(:validate => false)
     friend_list = []
     friends.each do |friend|
       friend_list << "#{friend["id"]}:#{friend["name"]}"

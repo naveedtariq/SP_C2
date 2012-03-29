@@ -185,7 +185,7 @@
                       <%ride.ride_participants.active_participants.role_wise.each do |rider| %>
                         <div class="riders-pics">
                           <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
-                          <%= image_tag rider.user.user_image.url.to_s %>
+                          <%= image_tag rider.user.user_image_url %>
                           <span class="driver">
                             <% if @graph.present? && rider.user_id != current_user.id %>
                               <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}")%>
