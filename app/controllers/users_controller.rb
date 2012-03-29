@@ -29,6 +29,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def inbox
+    @user = User.find(params[:id])
+  end
+
   def logged_in
 #    render :action => "404error_user"
     return render :text => current_user.present?

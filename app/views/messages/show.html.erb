@@ -1,0 +1,52 @@
+<br/><br/>
+<%= link_to "Inbox", inbox_user_path(current_user) %><br/><br/>
+    <table border="1" cellpadding="3">
+      <tr>
+        <th>Offered by</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Departure date</th>
+        <th>Departure time</th>
+        <th>Arrival time</th>
+        <th>Flexibility</th>
+        <th>Duration</th>
+        <th>Vehicle Type</th>
+        <th>Available Seats</th>
+        <th>Total Price</th>
+        <th>Notes</th>
+      </tr>
+        <% ride = Ride.find(params[:ride_id]) %>
+        <tr align="center">
+          <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
+          <td><%= ride.from_location && ride.from_location.name %></td>
+          <td><%= ride.to_location && ride.to_location.name %></td>
+          <td><%= ride.departure_date %></td>
+          <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+          <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z")  %></td>
+          <td><%= ride.flexibility_in_minutes %> mins</td>
+          <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+          <td><%= ride.ride_type %></td>
+          <td><%= ride.remaining_seats %></td>
+          <td><%= number_to_currency(ride.total_price)%></td>
+          <td><%= ride.notes%></td>
+        </tr>
+    </table>
+<br/><br/>
+
+  <% message = Message.find(params[:id]) %>
+  <%sender = User.find(message.owner_id)%>
+  <%= image_tag sender.user_image.url.to_s %>
+  <%=message.created_at.strftime("%d/%m/%y")%><br/>
+  <%=message.message%><br/><br/>
+  <%= image_tag current_user.user_image.url.to_s %>
+
+  <div class="message-box">
+    <%=  form_for @message, :url => ride_messages_path(message.ride_id) do |f| %>
+      <div class="field">
+        <%= f.label :message %>
+        <%= f.text_area :message%>
+      </div>
+      <%= f.submit "Reply"%>
+    <%end%>
+  </div>
+

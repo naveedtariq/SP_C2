@@ -6,6 +6,7 @@ class RideParticipantsController < ApplicationController
   def new
     @graph = Koala::Facebook::GraphAPI.new(current_user.oauth_code) if(current_user.present? && current_user.oauth_code.present?)
     @ride_participant = @ride.ride_participants.build
+    @message = Message.new
   end
   def create_participant
     @ride_participant = @ride.ride_participants.build(retrieve_participant)
@@ -19,6 +20,16 @@ class RideParticipantsController < ApplicationController
       render :action => 'new'
     end
   end
+#  def create_message
+#       @message = current_user.messages.build(params[:message])
+##   @message = Message.new(params[:message])
+#   if @message.save
+#    flash[:notice] = "Message Sent"
+#    redirect_to new_ride_ride_participant_path
+#   else
+#      render :action => 'new'
+#    end
+#  end
   def create
     
     @ride_participant = @ride.ride_participants.build(params[:ride_participant])

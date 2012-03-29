@@ -54,6 +54,11 @@
       else if (str1 == 7)
         $(this).val(string.substring(0,7) + '-')
     });
+
+    $("button#contact-info").click(function () {
+     $("button#contact-info").hide();
+     $(".message-box").show();
+    });
   });
 </script>
 <div id="container">
@@ -206,9 +211,21 @@
           <b><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></b><br />
           Currently city: <%= rider.user.city%><br/>
           Education: <%= rider.user.school%><br/>
-          Facebook connected (<%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}"%>)<br/>
+          Facebook connected (<%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}"%>)<br/><br/>
         </div>
         <div style="clear:both"></div>
+        <button id="contact-info" type="button" style = "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+         <span>Contact me</span>
+         </button>
+        <div class="message-box" style="display: none;">
+          <%=  form_for @message, :url => ride_messages_path(rider.ride_id) do |f| %>
+              <div class="field">
+                <%= f.label :message %>
+                <%= f.text_area :message%>
+               </div>
+          <%= f.submit "Send Message"%>
+           <%end%>
+        </div>
       </div>
     <% end %>
   </div>
