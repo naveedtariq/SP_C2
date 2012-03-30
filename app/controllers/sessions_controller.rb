@@ -19,11 +19,12 @@ class SessionsController < ApplicationController
     end
   end
   def facebook_login
-  @oauth = Koala::Facebook::OAuth.new(FACEBOOK_KEY , FACEBOOK_SECRET, facebook_callback_sessions_url)
+    
+    @oauth = Koala::Facebook::OAuth.new(APP_CONFIG["api_id"] , APP_CONFIG["secret_key"], facebook_callback_sessions_url)
     return redirect_to   @oauth.url_for_oauth_code
   end
   def facebook_callback
-    @oauth = Koala::Facebook::OAuth.new(FACEBOOK_KEY , FACEBOOK_SECRET, facebook_callback_sessions_url)
+    @oauth = Koala::Facebook::OAuth.new(APP_CONFIG["api_id"] , APP_CONFIG["secret_key"], facebook_callback_sessions_url)
     oauth_code = @oauth.get_access_token(params[:code])
     @graph = Koala::Facebook::GraphAPI.new(oauth_code)
     authentication = current_user.authentications.first

@@ -50,7 +50,7 @@ SPC2::Application.routes.draw do
         get "deny"
       end
     end
-    resources :messages, :only => [:new, :create, :show]
+    resource :message, :only => [:new, :create, :show]
 
   end
   resource :dashboard, :only => [:show]

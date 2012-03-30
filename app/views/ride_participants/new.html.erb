@@ -56,8 +56,8 @@
     });
 
     $("button#contact-info").click(function () {
-     $("button#contact-info").hide();
-     $(".message-box").show();
+      $("button#contact-info").hide();
+      $(".message-box").show();
     });
   });
 </script>
@@ -121,7 +121,7 @@
                   </div>
                   <% if @graph.present? %>
                     <div style="float:left; margin-top: -20px">
-                        <% mutual_friends = @ride.friends_in_common.flatten %>
+                      <% mutual_friends = @ride.friends_in_common.flatten %>
                       <% if mutual_friends.count > 0 %>
                         <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
                       <% end %>
@@ -215,16 +215,11 @@
         </div>
         <div style="clear:both"></div>
         <button id="contact-info" type="button" style = "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
-         <span>Contact me</span>
-         </button>
+          <span>Contact me</span>
+        </button>
         <div class="message-box" style="display: none;">
-          <%=  form_for @message, :url => ride_messages_path(rider.ride_id) do |f| %>
-              <div class="field">
-                <%= f.label :message %>
-                <%= f.text_area :message%>
-               </div>
-          <%= f.submit "Send Message"%>
-           <%end%>
+          <%= render "messages/conversations" %>
+
         </div>
       </div>
     <% end %>

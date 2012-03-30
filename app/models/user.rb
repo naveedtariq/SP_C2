@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :about, :gender, :dob, :phone, :city, :town, :work, :title, :school, :photo, :user_image, :number_of_friends, :authentications_attributes, :photo_url
 
   authenticates_with_sorcery! do |config|
-   config.authentications_class = Authentication
+    config.authentications_class = Authentication
   end
 
   has_many :authentications, :dependent => :destroy
@@ -38,7 +38,13 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
   
-def user_image_url
-((self.user_image.present?)?(self.user_image.url.to_s):nil) || self.photo_url || "/assets/no-image.png"
-end
+  def user_image_url
+    ((self.user_image.present?)?(self.user_image.url.to_s):nil) || self.photo_url || "/assets/no-image.png"
+  end
+#  def all_messages
+#    messages = []
+#    messages << self.messages
+#    messages << self.owned_messages
+#    messages.flatten!
+#  end
 end

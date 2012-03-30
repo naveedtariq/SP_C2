@@ -1,0 +1,28 @@
+<% messages = @ride.messages.where("user_id = ? or owner_id = ?", current_user.id, current_user.id).ordered %>
+<% receiver = [] %>
+<% owner = @ride.owner %>
+<% receiver << (owner && owner.id) %>
+<% messages.each do |message| %>
+  <% unless receiver.include? message.user_id %>
+    <% receiver << message.user.id %>
+  <% end %>
+  <%= image_tag message.user.user_image.url.to_s, :style => "width: 40px" %>
+  <%=message.created_at.strftime("%d/%m/%y")%><br/>
+  <%=  message.message %><br/><br/>
+<% end %>
+<% receiver.delete(current_user.id) %>
+<% if receiver.blank? %>
+  Can't send messages to yourself
+<% else  %>
+  <div class="message-box">
+    <%=  form_for Message.new, :url => ride_message_path do |f| %>
+      <%= image_tag current_user.user_image.url.to_s, :style => "width: 40px"  %>
+      <div class="field">
+        <%= f.label :message %>
+        <%= f.text_area :message%>
+        <%= f.hidden_field :owner_id, :value =>(receiver.first) %>
+      </div>
+      <%= f.submit "Send"%>
+    <%end%>
+  </div>
+<%end%>
