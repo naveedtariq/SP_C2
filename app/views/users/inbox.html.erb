@@ -8,7 +8,7 @@
       <% ride=Ride.find(u.ride_id) %>
       <tr>
         <td><a href="<%=ride_message_path(u.ride_id)%>">From: <%= sender.first_name %>&nbsp;<%= sender.last_name.chars.first %>&nbsp;&nbsp;"<%=u.message%>"&nbsp;&nbsp;<%=u.created_at.strftime("%d/%m/%y")%></a></td>
-        <td><%=ride.to_location && ride.to_location.name%>&nbsp;&nbsp; on <%=ride.departure_date%></td>
+        <td><a href="<%= new_ride_ride_participant_path(ride)%>"><%=ride.to_location && ride.to_location.name%>&nbsp;&nbsp; on <%=ride.departure_date%></a></td>
       </tr>
     <%end%>
   <%end%>
