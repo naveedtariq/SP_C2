@@ -4,7 +4,7 @@
     No messages
   <% else %>
     <% @user.owned_messages.rev_ordered.each do |u| %>
-      <% sender=User.find(u.owner_id) %>
+      <% sender=User.find(u.user_id) %>
       <% ride=Ride.find(u.ride_id) %>
       <tr>
         <td><a href="<%=ride_message_path(u.ride_id)%>">From: <%= sender.first_name %>&nbsp;<%= sender.last_name.chars.first %>&nbsp;&nbsp;"<%=u.message%>"&nbsp;&nbsp;<%=u.created_at.strftime("%d/%m/%y")%></a></td>

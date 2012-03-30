@@ -8,6 +8,7 @@ class MessagesController < ApplicationController
     @ride = Ride.find(params[:ride_id])
     @message.ride = @ride
     if @message.save
+      UserMailer.inbox_message_email(current_user,@ride.owner,@message).deliver
       flash[:notice] = "Message Sent"
       redirect_to ride_message_path @ride
     else

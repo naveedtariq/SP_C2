@@ -49,6 +49,7 @@ class RidesController < ApplicationController
       unless params[:next_step] == "update"
         return render :action => params[:next_step]
       end
+        UserMailer.ride_modify_email(current_user).deliver
         return redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
      else
       render :action => "new"

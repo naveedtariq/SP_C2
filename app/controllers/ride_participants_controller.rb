@@ -13,6 +13,7 @@ class RideParticipantsController < ApplicationController
     @ride_participant.role = ROLES_FOR_RIDES[:pending]
     @ride_participant.user_id = current_user.id
     if @ride_participant.save
+      UserMailer.ride_join_email(current_user,@ride_participant.owner).deliver
       clear_participant
       flash[:notice] = "Successfully Booked "
       redirect_to dashboard_path
@@ -51,6 +52,7 @@ class RideParticipantsController < ApplicationController
     @ride_participant = @ride.ride_participants.where({:id => params[:id], :user_id => current_user.id}).first
     @ride_participant.cancel!
     @ride.cancel! if @ride.ride_participants.active_participants.blank?
+    UserMailer.ride_cancel_email(current_user).deliver
     return redirect_to dashboard_path
   end
   

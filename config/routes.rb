@@ -51,6 +51,7 @@ SPC2::Application.routes.draw do
       end
     end
     resource :message, :only => [:new, :create, :show]
+    resource :feedback, :only => [:new, :create]
 
   end
   resource :dashboard, :only => [:show]

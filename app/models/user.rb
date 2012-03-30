@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :rides, :through => :ride_participants
   has_many :messages
   has_many :owned_messages, :class_name => Message, :foreign_key => "owner_id"
+  has_many :feedbacks
+  has_many :owned_feedacks, :class_name => Feedback, :foreign_key => "owner_id"
 
   def created_rides
     Ride.where(:id => self.ride_participants_owners.pluck(:ride_id))
