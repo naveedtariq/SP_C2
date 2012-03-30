@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :owned_messages, :class_name => Message, :foreign_key => "owner_id"
 
-
   def created_rides
     Ride.where(:id => self.ride_participants_owners.pluck(:ride_id))
   end

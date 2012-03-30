@@ -19,8 +19,9 @@ class UsersController < ApplicationController
   end
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      redirect_to dashboard_path
+    @user.attributes = params[:user]
+    if @user.save(:validate => false)
+      redirect_to @user
     else
       render :action => "edit"
     end
