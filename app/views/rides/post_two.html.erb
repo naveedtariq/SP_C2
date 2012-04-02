@@ -1,4 +1,6 @@
 <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
+<%= javascript_include_tag "jquery.ui.map.full.min"%>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $( "#ride_departure_date" ).datepicker({
@@ -43,6 +45,22 @@
       if($(this).val() != "")
         $(".date-check-step2").hide();
     });
+
+     $("#ride_departure_time_4i").change(function(){
+            if($(this).find("option:selected").text() == "01 AM" || $(this).find("option:selected").text() == "02 AM" || $(this).find("option:selected").text() == "03 AM" || $(this).find("option:selected").text() == "04 AM" || $(this).find("option:selected").text() == "05 AM" || $(this).find("option:selected").text() == "09 PM" || $(this).find("option:selected").text() == "10 PM" || $(this).find("option:selected").text() == "11 PM"){
+               $('#taxi-fare').append("Estimated Taxi Fare: $" + "50");
+               $('#taxi-fare').hide();
+               $('#taxi-fare').show();
+               
+            }
+          });
+
+  $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text(), 'destination': $('#ride_to_location_id').find("option:selected").text(), 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('directions') }, function(result, status) {
+    if ( status === 'OK' ){
+      $('#results').show();
+    }
+});
+
   });
 </script>
 
@@ -109,4 +127,11 @@
     </div>
   <% end %>
 </div>
+
+<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
+<div id="taxi-fare" style="display: none;"></div>
+<div id="results" style="display:none;">
+  <div id="directions"></div>
+</div>
+
 

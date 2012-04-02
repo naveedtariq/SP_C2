@@ -43,7 +43,6 @@ class RidesController < ApplicationController
     return render :action => "new"
   end
   def update
-
     if @ride.valid?(params[:ride])
       @ride.modify!(params[:ride], current_user)
       unless params[:next_step] == "update"

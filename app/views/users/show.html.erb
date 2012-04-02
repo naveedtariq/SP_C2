@@ -144,3 +144,16 @@
           <td><%= ride.notes%></td>
         </tr><%end%>
     </table>
+<br/><br/>
+
+
+<% @feedback = Feedback.find_all_by_owner_id(current_user) %>
+<% @feedback.each do |sender| %>
+<%@user = User.find(sender.user_id) %>
+<%@ride = Ride.find(sender.ride_id) %>
+<a href="<%=user_path(@user)%>"><%= @user.full_name %></a> |
+<a href="<%=new_ride_ride_participant_path(@ride.id)%>"><%= @ride.to_location && @ride.to_location.name %>&nbsp;on&nbsp;<%=@ride.departure_date %></a>
+<br/><%= image_tag @user.user_image_url %><br/>
+<%=sender.status%> &nbsp; For &nbsp; <%= current_user.full_name %><br/>
+Feedback: <%=sender.feedback%><br/>
+<%end%>

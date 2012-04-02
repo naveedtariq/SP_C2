@@ -1,4 +1,6 @@
-<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
+<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui"%>
+<%= javascript_include_tag "jquery.ui.map.full.min"%>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $( "#ride_departure_date" ).datepicker({
@@ -28,6 +30,7 @@
     });
 
     $('#ride_to_location_id').change(function() {
+        location.reload();
       if($(this).val() != ""){
         if ($(this).val() == $('#ride_from_location_id').val()) {
           $(".city-option-same").show();
@@ -45,6 +48,7 @@
     });
     
     $('#ride_from_location_id').change(function() {
+        location.reload();
       if($(this).val() != ""){
         if ($(this).val() == $('#ride_to_location_id').val()) {
           $(".city-option-same").show();
@@ -59,7 +63,24 @@
           $("input.ride-check-btn").removeAttr("disabled");
         }
       }
+
     });
+
+$('#map_canvas').gmap().bind('init', function(evt, map) {
+  $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text(), 'destination': $('#ride_to_location_id').find("option:selected").text(), 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+    if ( status === 'OK' ){
+      $('#results').show();
+    }
+ 
+ 
+  });
+});
+if($('#ride_from_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+          $('#JFK-fare').append("Estimated Taxi Fare: $" + "45");
+        }
+if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+          $('#JFK-fare').append("Estimated Taxi Fare: $" + "45");
+        }
   });
 </script>
 <div id="container">
@@ -116,6 +137,13 @@
       </div>
 
     </div>
-
 <% end %>
   </div>
+
+
+<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
+<div id="JFK-fare"></div>
+<div id="results" style="display:none;">
+  <div id="directions"></div>
+</div>
+

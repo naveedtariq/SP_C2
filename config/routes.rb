@@ -51,10 +51,9 @@ SPC2::Application.routes.draw do
       end
     end
     resource :message, :only => [:new, :create, :show]
-    resource :feedback, :only => [:new, :create]
-
   end
   resource :dashboard, :only => [:show]
+  resource :feedback, :only => [:new, :create, :show]
   resources :footers do
     collection do
       get "terms"
@@ -62,7 +61,7 @@ SPC2::Application.routes.draw do
       get "about"
     end
   end
-  
+
   root :to => "rides#search"
 
   match "oauth/callback" => "oauths#callback"

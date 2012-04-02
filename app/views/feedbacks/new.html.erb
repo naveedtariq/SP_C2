@@ -1,0 +1,7 @@
+<h6>Feedbacks</h6><br/><br/>
+<% @past_rides = current_user.ride_participants.past_rides%>
+<% @active_participants = current_user.ride_participants.active_participants%>
+ <% @active_participants.each do |ride_participant| %>
+  <% @ride = ride_participant.ride %>
+   <%= render "feedbacks/feedbacks" %>
+  <%end%>
