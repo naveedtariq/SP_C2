@@ -1,6 +1,8 @@
-<a href="<%=user_path(@ride.owner)%>"><%= @ride.owner && "#{@ride.owner.full_name}" %> </a> |
+<% if owner.present? %>
+<a href="<%=user_path(owner)%>"><%= owner && "#{owner.full_name}" %> </a> |
 <a href="<%=new_ride_ride_participant_path(@ride.id)%>"><%= @ride.to_location && @ride.to_location.name %>&nbsp;on&nbsp;<%=@ride.departure_date %></a>
-<br/><%= image_tag @ride.owner.user_image_url %>
+<br/><%= image_tag owner.user_image_url %>
+<% @feedback = Feedback %>
 <div class="message-box">
   <%=  form_for Feedback.new, :url => feedback_path do |f| %>
     <table>
@@ -29,9 +31,10 @@
       <%= f.label :feedback %>
       <%= f.text_area :feedback%>
       <%= f.hidden_field :ride_id, :value =>(@ride.id) %>
-      <%= f.hidden_field :owner_id, :value =>(@ride.owner.id) %>
+      <%= f.hidden_field :owner_id, :value =>(owner.id) %>
     </div>
     <%= f.submit "Send"%>
   <hr/>
   <%end%>
 </div>
+  <%end%>

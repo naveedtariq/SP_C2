@@ -30,25 +30,35 @@
     });
 
     $('#ride_to_location_id').change(function() {
-        location.reload();
+<%#*location.reload();%>
       if($(this).val() != ""){
         if ($(this).val() == $('#ride_from_location_id').val()) {
           $(".city-option-same").show();
           $('#ride_to_location_id').addClass("validation-error");
           $('#ride_from_location_id').addClass("validation-error");
           $("input.ride-check-btn").attr("disabled", "disabled");
+
         } else {
           $(".city-check").hide();
           $(".city-option-same").hide();
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
           $("input.ride-check-btn").removeAttr("disabled");
+          if($('#ride_from_location_id').val()!=""){
+            $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text(), 'destination': $('#ride_to_location_id').find("option:selected").text(), 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+              if ( status === 'OK' ){
+                $('#results').show();
+              }
+            });
+            return false;
+
+          }
         }
       }
     });
     
     $('#ride_from_location_id').change(function() {
-        location.reload();
+<%#*location.reload();%>
       if($(this).val() != ""){
         if ($(this).val() == $('#ride_to_location_id').val()) {
           $(".city-option-same").show();
@@ -61,32 +71,41 @@
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
           $("input.ride-check-btn").removeAttr("disabled");
+          if($('#ride_to_location_id').val()!=""){
+            $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text(), 'destination': $('#ride_to_location_id').find("option:selected").text(), 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+              if ( status === 'OK' ){
+                $('#results').show();
+              }
+            });
+            return false;
+
+          }
         }
       }
 
     });
 
-$('#map_canvas').gmap().bind('init', function(evt, map) {
-  $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text(), 'destination': $('#ride_to_location_id').find("option:selected").text(), 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
-    if ( status === 'OK' ){
-      $('#results').show();
+    $('#map_canvas').gmap().bind('init', function(evt, map) {
+     <% if @ride.to_location.present? && @ride.from_location.present? %>
+     $('#map_canvas').gmap('displayDirections', { 'origin': <%= @ride.to_location.name %>, 'destination': <%= @ride.from_location.name %>, 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+        if ( status === 'OK' ){
+          $('#results').show();
+        }
+      });
+      <% end %>
+    });
+    if($('#ride_from_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+      $('#JFK-fare').append("Estimated Taxi Fare: $" + "45");
     }
- 
- 
-  });
-});
-if($('#ride_from_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
-          $('#JFK-fare').append("Estimated Taxi Fare: $" + "45");
-        }
-if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
-          $('#JFK-fare').append("Estimated Taxi Fare: $" + "45");
-        }
+    if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+      $('#JFK-fare').append("Estimated Taxi Fare: $" + "45");
+    }
   });
 </script>
 <div id="container">
   <div id="header_wrap" style="margin-top: 22px;">
     <div id="header">
-            <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
       <div style="clear:both"></div>
     </div>
   </div>
@@ -114,7 +133,7 @@ if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Ke
       <div id="fromCity"  style="text-align:center;" class="left col">
         <span style="float:left;">From:</span><br />
         <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, {:include_blank => "--- select from ---"}, :style => "width:230px" %><br /><br />
-		<img alt="black-car" src="/assets/blackcar.jpg" height="40px" width="140px" /><br />
+        <img alt="black-car" src="/assets/blackcar.jpg" height="40px" width="140px" /><br />
 
         <%= f.radio_button :ride_type, 'black car'%><%= f.label :ride_type, 'I am taking a black car', :for => 'ride_ride_type_black_car'%>
       </div>
@@ -124,7 +143,7 @@ if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Ke
         <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, {:include_blank => "--- select to ---"}, :style => "width:230px" %><br /><br />
         <div class="city-option-same" style="display: none"> From and To City can't same </div>
         <div class="city-check" style="display: none; color: red; font-weight: bold;">Select City</div>
-<img alt="Taxi" src="/assets/taxi.jpg" style="height: 63px;" width="140px" /><br />
+        <img alt="Taxi" src="/assets/taxi.jpg" style="height: 63px;" width="140px" /><br />
         <%= f.radio_button :ride_type, 'taxi'  %><%= f.label :ride_type, 'I am taking a taxi', :for => 'ride_ride_type_taxi'%>
         <div class="ride-type-check" style="display: none; color: red; font-weight: bold;">No Ride Type Selected</div>
         <div style="clear:both"></div>
@@ -137,8 +156,8 @@ if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Ke
       </div>
 
     </div>
-<% end %>
-  </div>
+  <% end %>
+</div>
 
 
 <div id="map_canvas" style="height:350px; width: 500px;"></div><br/>

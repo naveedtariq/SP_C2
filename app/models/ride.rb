@@ -1,9 +1,14 @@
 class Ride < ActiveRecord::Base
   after_find do |ride|
     ride.departure_time = "2012-03-06 13:00:00 +0000".to_time if ride.departure_time.blank?
-  end
-  attr_accessor :friends_in_common
+  end 
+  attr_accessor :friends_in_common 
   attr_accessor :count
+  scope :past_rides, lambda {
+    where("departure_date < ?", SpClock.date)
+  }
+  scope :sorted_recent_at_top, order("departure_date Desc")
+
   has_many :ride_participants
   has_many :users, :through => :ride_participants
   validates  :available_seats, :total_price, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true
@@ -14,7 +19,7 @@ class Ride < ActiveRecord::Base
   end
   def departure_date_inclusion
     errors.add(:departure_date, "must be within a year") if(self.departure_date && (self.departure_date > (SpClock.date + 1.year)))
-#    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (SpClock.date)))
+    #    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (SpClock.date)))
   end
   attr_accessor :departure, "all"
   def duration_hours

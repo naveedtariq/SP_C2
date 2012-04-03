@@ -9,6 +9,7 @@ class RideParticipant < ActiveRecord::Base
   scope :confirmed_participants, where(:role => ROLES_FOR_RIDES[:confirmed])
   scope :pending_or_confirmed, where(:role => [ROLES_FOR_RIDES[:confirmed], ROLES_FOR_RIDES[:pending]])
   scope :active_participants,lambda{ joins(:user).where(:role => [ROLES_FOR_RIDES[:confirmed], ROLES_FOR_RIDES[:pending], ROLES_FOR_RIDES[:owner]])}
+  scope :confirmed_or_owner_participants,lambda{ joins(:user).where(:role => [ROLES_FOR_RIDES[:confirmed], ROLES_FOR_RIDES[:owner]])}
   scope :owners, where(:role => ROLES_FOR_RIDES[:owner])
   scope :role_wise, order("role ASC")
   scope :current_rides, lambda {

@@ -1,7 +1,9 @@
 <h6>Feedbacks</h6><br/><br/>
-<% @past_rides = current_user.ride_participants.past_rides%>
-<% @active_participants = current_user.ride_participants.active_participants%>
- <% @active_participants.each do |ride_participant| %>
-  <% @ride = ride_participant.ride %>
-   <%= render "feedbacks/feedbacks" %>
+<% @past_rides = current_user.rides.past_rides.sorted_recent_at_top %>
+<% @past_rides.each do |past_ride| %>
+  <% @active_participants = past_ride.ride_participants.confirmed_or_owner_participants.where("user_id <> ? ", current_user.id) %>
+  <% @active_participants.each do |ride_participant| %>
+    <% @ride = ride_participant.ride %>
+    <%= render "feedbacks/feedbacks", :owner => ride_participant.user %>
   <%end%>
+<%end%>
