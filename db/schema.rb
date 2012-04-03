@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120330142716) do
+ActiveRecord::Schema.define(:version => 20120403071926) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(:version => 20120330142716) do
     t.text     "interests"
   end
 
+  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
   create_table "feedbacks", :force => true do |t|
     t.integer  "user_id"
     t.integer  "owner_id"
@@ -32,6 +34,10 @@ ActiveRecord::Schema.define(:version => 20120330142716) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "feedbacks", ["owner_id"], :name => "index_feedbacks_on_owner_id"
+  add_index "feedbacks", ["ride_id"], :name => "index_feedbacks_on_ride_id"
+  add_index "feedbacks", ["user_id"], :name => "index_feedbacks_on_user_id"
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -46,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20120330142716) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "locations", ["ride_id"], :name => "index_locations_on_ride_id"
+
   create_table "messages", :force => true do |t|
     t.integer  "user_id"
     t.integer  "owner_id"
@@ -54,6 +62,10 @@ ActiveRecord::Schema.define(:version => 20120330142716) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "messages", ["owner_id"], :name => "index_messages_on_owner_id"
+  add_index "messages", ["ride_id"], :name => "index_messages_on_ride_id"
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
 
   create_table "request_loggers", :force => true do |t|
     t.text     "params"
@@ -79,6 +91,9 @@ ActiveRecord::Schema.define(:version => 20120330142716) do
     t.string   "mode_of_communications"
   end
 
+  add_index "ride_participants", ["ride_id"], :name => "index_ride_participants_on_ride_id"
+  add_index "ride_participants", ["user_id"], :name => "index_ride_participants_on_user_id"
+
   create_table "rides", :force => true do |t|
     t.integer  "available_seats"
     t.string   "notes"
@@ -94,6 +109,9 @@ ActiveRecord::Schema.define(:version => 20120330142716) do
     t.integer  "total_price"
     t.integer  "status",                 :default => 1
   end
+
+  add_index "rides", ["from_location_id"], :name => "index_rides_on_from_location_id"
+  add_index "rides", ["to_location_id"], :name => "index_rides_on_to_location_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"

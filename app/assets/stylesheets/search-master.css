@@ -4735,7 +4735,7 @@ a.skip:hover {
 /* line 192,  */
 #static_splash2 #content .subsection .rides ul {
   position: relative;
-  overflow: hidden;
+  overflow: scroll;
   border-top: 1px solid #a7a7a7;
   border-bottom: 1px solid #a7a7a7;
   height: 200px;

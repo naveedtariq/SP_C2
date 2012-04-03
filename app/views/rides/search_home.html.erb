@@ -1,4 +1,4 @@
-
+<%= javascript_include_tag "jQuery.autoscroll.1.01"%>
 <script type="text/javascript">
   $(document).ready(function() {
     $('#ride_to_location_id').change(function() {
@@ -36,10 +36,10 @@
       dateFormat: "yy-mm-dd"
     });
 
+
     $('.ride-scroll').animate({
     scrollTop: $('.ride-scroll').get(0).scrollHeight
-}, 100000);
-
+}, 10000);
   });
 </script>
 <div id="fb-root"></div>
@@ -101,7 +101,7 @@
               Latest Rides
             </h3>
             <ul class="non-blue-h1 ride-scroll"><%@rides.each do |ride| %>
-                <li style="top: 0px;">
+              <li style="">
                   <a class="km_click_event_by_href" href="<%= new_ride_ride_participant_path(ride) %>">
                     <div class="price_box"> 
                       <% if ride.remaining_seats > 0 %>
