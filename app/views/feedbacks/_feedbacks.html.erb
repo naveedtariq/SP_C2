@@ -2,8 +2,10 @@
 <a href="<%=user_path(owner)%>"><%= owner && "#{owner.full_name}" %> </a> |
 <a href="<%=new_ride_ride_participant_path(@ride.id)%>"><%= @ride.to_location && @ride.to_location.name %>&nbsp;on&nbsp;<%=@ride.departure_date %></a>
 <br/><%= image_tag owner.user_image_url %>
-<% @feedback = Feedback %>
+<% @feedback = current_user.feedbacks.where(:owner_id => owner.id, :ride_id => @ride.id).first || Feedback.new %>
 <div class="message-box">
+	<% if @feedback.new_record? %>
+  <% @left_count =  @left_count + 1 %>
   <%=  form_for Feedback.new, :url => feedback_path do |f| %>
     <table>
       <tr>
@@ -36,5 +38,23 @@
     <%= f.submit "Send"%>
   <hr/>
   <%end%>
+<% else%>
+
+<table>
+    <td>
+      Status: 
+    </td>
+    <td>
+      <%= @feedback.status.titleize %>
+    </td>
+  </tr>
+	<tr>
+	    <td>
+	      <%= @feedback.feedback %>
+	    </td>
+	  </tr>
+</table>
+
+<% end %>
 </div>
   <%end%>

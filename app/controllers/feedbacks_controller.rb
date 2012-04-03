@@ -1,6 +1,7 @@
 class FeedbacksController < ApplicationController
 
   def new
+    @left_count = 0
     @feedback = Feedback.new
   end
 

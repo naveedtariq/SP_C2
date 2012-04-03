@@ -1,4 +1,9 @@
-<h6>Feedbacks</h6><br/><br/>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#count-left").text(" - " + $("#left_count").val() + " left to review");
+  });
+</script>
+<h6>Feedbacks<span id="count-left"></span></h6>
 <% @past_rides = current_user.rides.past_rides.sorted_recent_at_top %>
 <% @past_rides.each do |past_ride| %>
   <% @active_participants = past_ride.ride_participants.confirmed_or_owner_participants.where("user_id <> ? ", current_user.id) %>
@@ -7,3 +12,4 @@
     <%= render "feedbacks/feedbacks", :owner => ride_participant.user %>
   <%end%>
 <%end%>
+ <%= hidden_field_tag :left_count, @left_count %>

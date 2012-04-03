@@ -1,8 +1,12 @@
 <%= javascript_include_tag "jquery-1.7.1.min" %>
 <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui", "bootstrap" %>
+<%= javascript_include_tag "jquery.ui.map.full.min"%>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-
+<% if @ride.to_location.present? && @ride.from_location.present? %>
+        $('#map_canvas').gmap('displayDirections', { 'origin': '<%= @ride.to_location.name %>', 'destination': '<%= @ride.from_location.name %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results-temp') }, function(result, status) {});
+<% end %>
     $("#btn-book-ride").click(function () {
       $("#btn-book-ride").hide();
       $(".info_view").show();
@@ -237,3 +241,8 @@
 Feedback: <%=sender.feedback%><br/>
 <%end%>
 
+<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
+<div id="results" style="display:none;">
+  <div id="directions"></div>
+
+</div>

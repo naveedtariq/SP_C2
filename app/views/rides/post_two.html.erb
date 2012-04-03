@@ -55,11 +55,29 @@
             }
           });
 
-  $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text(), 'destination': $('#ride_to_location_id').find("option:selected").text(), 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('directions') }, function(result, status) {
-    if ( status === 'OK' ){
-      $('#results').show();
-    }
-});
+<% if @ride.to_location.present? && @ride.from_location.present? %>
+        $('#map_canvas').gmap('displayDirections', { 'origin': '<%= @ride.to_location.name %>', 'destination': '<%= @ride.from_location.name %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+          if ( status === 'OK' ){
+            var METERS_TO_MILES = 0.000621371192;
+            totalDistance = result.routes[0].legs[0].distance.value;
+            totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
+
+            $("#distance").text("distance: "+totalDistance+' miles');
+            $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
+            if("<%= @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
+              $('#fare').text("Estimated Taxi Fare: $45");
+            }
+            else if("<%=  @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
+              $('#fare').text("Estimated Taxi Fare: $45");
+            }
+            else{
+              var fare = 3.0;
+              fare = (totalDistance * (0.4/0.2))+fare;
+              $('#fare').text("Estimated Taxi Fare: $"+fare);
+            }
+          }
+        });
+<% end %>
 
   });
 </script>
@@ -127,11 +145,15 @@
     </div>
   <% end %>
 </div>
-
 <div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
-<div id="taxi-fare" style="display: none;"></div>
 <div id="results" style="display:none;">
   <div id="directions"></div>
+ 
 </div>
 
-
+ <div id="distance">
+  </div>
+  <div id="duration">
+  </div>
+  <div id="fare">
+  </div>
