@@ -5,7 +5,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
 <% if @ride.to_location.present? && @ride.from_location.present? %>
-        $('#map_canvas').gmap('displayDirections', { 'origin': '<%= @ride.to_location.name %>', 'destination': '<%= @ride.from_location.name %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results-temp') }, function(result, status) {});
+      $('#map_canvas').gmap('displayDirections', { 'origin': '<%= @ride.to_location.name %>', 'destination': '<%= @ride.from_location.name %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results-temp') }, function(result, status) {});
 <% end %>
     $("#btn-book-ride").click(function () {
       $("#btn-book-ride").hide();
@@ -146,65 +146,68 @@
         </div>
       </div>
     </div>
+    <% current_ride = (@ride.departure_date >= SpClock.date) %>
+      <% if current_ride %>
 
     <div id="divPrice">
       <% ts=@ride.remaining_seats %>
       <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
-      <% if ts> 0 %>
+        <% if ts> 0 %>
 
-        <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride),:html => {:class => "book-ride-child-window"} do |f| %>
-          <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%><br /><a style="margin: 0px;" id="how" href="/footers/how_it_works" >How it works?</a><br /><br />
-          <div class="price_view">Total = $<span id="price"><%=  @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span></div><br/>
-          <dd style="margin-left: 0px;" class="changestep"><span class="errormsg"></span>
+          <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride),:html => {:class => "book-ride-child-window"} do |f| %>
+            <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%><br /><a style="margin: 0px;" id="how" href="/footers/how_it_works" >How it works?</a><br /><br />
+            <div class="price_view">Total = $<span id="price"><%=  @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span></div><br/>
+            <dd style="margin-left: 0px;" class="changestep"><span class="errormsg"></span>
 
-            <button id="btn-book-ride" type="button" style = "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
-              <span>Join this ride</span>
-            </button>
-          </dd>
-
-          <div class="info_view" style="float: none; display: none">
-            <b>Please fill out to complete booking</b><br/>
-            <%= f.label :phone,"Enter your phone number", :style => "margin-left: 0px;" %>
-            <%= f.text_field :phone, :maxlength => "12"%>
-            <br/>
-            <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must be up to 10 digits</div>
-            <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
-            <div class="phone-check2" style="display: none; color: red; font-weight: bold;">Phone format is wrong</div>
-            <div>
-              <br/>Preferred method of communication<br/><br/>
-              <table><tr>
-                  <td>
-                    <%= f.radio_button :mode_of_communications, 'sms_text' %>
-                  </td>
-                  <td>
-                    <%= f.label :mode_of_communications, 'Sms text', :for => 'ride_participant_mode_of_communications_sms_text'%>
-                  </td>
-                  <td>
-                    <%= f.radio_button :mode_of_communications, 'phone_call' %>
-                  </td>
-                  <td>
-                    <%= f.label :mode_of_communications, 'Phone call', :for => 'ride_participant_mode_of_communications_phone_call'%>
-                  </td>
-                  <td>
-                    <%= f.radio_button :mode_of_communications, 'email' %>
-                  </td>
-                  <td>
-                    <%= f.label :mode_of_communications, 'Email', :for => 'ride_participant_mode_of_communications_email'%>
-                  </td>
-                </tr>
-              </table>
-              <div class="method-type-check" style="display: none; color: red; font-weight: bold;">No Method Selected</div>
-            </div>
-            <dd class="changestep" style="margin-left: 0px;"><span class="errormsg"></span>
-              <%= f.submit "Book this ride now", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "%>
+              <button id="btn-book-ride" type="button" style = "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+                <span>Join this ride</span>
+              </button>
             </dd>
-          <% end %>
 
-        </div>
-      <% else %>
-        <span>Sold out</span>
-      <% end %>
+            <div class="info_view" style="float: none; display: none">
+              <b>Please fill out to complete booking</b><br/>
+              <%= f.label :phone,"Enter your phone number", :style => "margin-left: 0px;" %>
+              <%= f.text_field :phone, :maxlength => "12"%>
+              <br/>
+              <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must be up to 10 digits</div>
+              <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
+              <div class="phone-check2" style="display: none; color: red; font-weight: bold;">Phone format is wrong</div>
+              <div>
+                <br/>Preferred method of communication<br/><br/>
+                <table><tr>
+                    <td>
+                      <%= f.radio_button :mode_of_communications, 'sms_text' %>
+                    </td>
+                    <td>
+                      <%= f.label :mode_of_communications, 'Sms text', :for => 'ride_participant_mode_of_communications_sms_text'%>
+                    </td>
+                    <td>
+                      <%= f.radio_button :mode_of_communications, 'phone_call' %>
+                    </td>
+                    <td>
+                      <%= f.label :mode_of_communications, 'Phone call', :for => 'ride_participant_mode_of_communications_phone_call'%>
+                    </td>
+                    <td>
+                      <%= f.radio_button :mode_of_communications, 'email' %>
+                    </td>
+                    <td>
+                      <%= f.label :mode_of_communications, 'Email', :for => 'ride_participant_mode_of_communications_email'%>
+                    </td>
+                  </tr>
+                </table>
+                <div class="method-type-check" style="display: none; color: red; font-weight: bold;">No Method Selected</div>
+              </div>
+              <dd class="changestep" style="margin-left: 0px;"><span class="errormsg"></span>
+                <%= f.submit "Book this ride now", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "%>
+              </dd>
+            <% end %>
+
+          </div>
+        <% else %>
+          <span>Sold out</span>
+        <% end %>
     </div>
+      <% end %>
     <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
 
       <div class="profiles left">
@@ -218,9 +221,11 @@
           Facebook connected (<%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}"%>)<br/><br/>
         </div>
         <div style="clear:both"></div>
+        <% if current_ride %>
         <button id="contact-info" type="button" style = "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
           <span>Contact me</span>
         </button>
+        <% end %>
         <div class="message-box" style="display: none;">
           <%= render "messages/conversations" %>
 
@@ -230,19 +235,19 @@
   </div><div class="clear"></div>
   <br/><br/>
 
-<% @feedback = Feedback.find_all_by_ride_id(params[:ride_id]) %>
-<% @feedback.each do |sender| %>
-<%@user = User.find(sender.user_id) %>
-<%@ride = Ride.find(sender.ride_id) %>
-<a href="<%=user_path(@user)%>"><%= @user.full_name %></a> |
-<a href="<%=new_ride_ride_participant_path(@ride.id)%>"><%= @ride.to_location && @ride.to_location.name %>&nbsp;on&nbsp;<%=@ride.departure_date %></a>
-<br/><%= image_tag @user.user_image_url %><br/>
-<%=sender.status%> &nbsp; For &nbsp; <%= current_user.full_name %><br/>
-Feedback: <%=sender.feedback%><br/>
-<%end%>
+  <% @feedbacks = Feedback.find_all_by_ride_id(params[:ride_id]) %>
+  <% @feedbacks.each do |feedback| %>
+    <% user = feedback.user %>
+    <% ride = feedback.ride %>
+    <a href="<%=user_path(user)%>"><%= user.full_name %></a> |
+    <a href="<%=new_ride_ride_participant_path(ride)%>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%= ride.departure_date %></a>
+    <br/><%= image_tag user.user_image_url %><br/>
+    <%= feedback.status.titleize %> &nbsp; For &nbsp; <%= link_to feedback.owner.full_name, user_path(feedback.owner) %><br/>
+    Feedback: <%= feedback.feedback %><br/>
+  <%end%>
 
-<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
-<div id="results" style="display:none;">
-  <div id="directions"></div>
+  <div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
+  <div id="results" style="display:none;">
+    <div id="directions"></div>
 
-</div>
+  </div>
