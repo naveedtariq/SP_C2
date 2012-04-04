@@ -187,7 +187,7 @@
                           <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
                           <%= image_tag rider.user.user_image_url %>
                           <span class="driver">
-                            <% if @graph.present? && rider.user_id != current_user.id %>
+                            <% if @graph.present? && rider.user_id != current_user.id && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?)  %>
                               <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}")%>
                               <% ride.friends_in_common << mutual_friends  %>
                             <% end %>
