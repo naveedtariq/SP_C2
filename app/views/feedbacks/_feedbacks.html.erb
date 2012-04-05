@@ -41,11 +41,12 @@
 <% else%>
 
 <table>
+  <tr>
     <td>
       Status: 
     </td>
     <td>
-      <%= @feedback.status.titleize %>
+      <%= @feedback.status && @feedback.status.titleize %>
     </td>
   </tr>
 	<tr>

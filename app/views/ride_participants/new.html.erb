@@ -242,7 +242,7 @@
     <a href="<%=user_path(user)%>"><%= user.full_name %></a> |
     <a href="<%=new_ride_ride_participant_path(ride)%>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%= ride.departure_date %></a>
     <br/><%= image_tag user.user_image_url %><br/>
-    <%= feedback.status.titleize %> &nbsp; For &nbsp; <%= link_to feedback.owner.full_name, user_path(feedback.owner) %><br/>
+    <%= @feedback.status && feedback.status.titleize %> &nbsp; For &nbsp; <%= link_to feedback.owner.full_name, user_path(feedback.owner) %><br/>
     Feedback: <%= feedback.feedback %><br/>
   <%end%>
 

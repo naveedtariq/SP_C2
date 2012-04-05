@@ -67,6 +67,7 @@ class RidesController < ApplicationController
     redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
   end
   def posted
+     params[:ride]["departure_time(1i)"], params[:ride]["departure_time(2i)"], params[:ride]["departure_time(3i)"] = params[:ride]["departure_date"].split("-")     if params[:step] == "2"
     #return redirect_to new_ride_path if cookies[:ride].blank?
     @ride = Ride.new(retrieve_ride)
     @ride.attributes = params[:ride]
