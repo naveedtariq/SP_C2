@@ -1,7 +1,11 @@
 class Ride < ActiveRecord::Base
   after_find do |ride|
     ride.departure_time = "2012-03-06 13:00:00 +0000".to_time if ride.departure_time.blank?
-  end 
+  end
+  before_save do |ride|
+    ride.departure_time = "2012-03-06 13:00:00 +0000".to_time if ride.departure_time.blank?
+    #ride.departuredatetime =
+  end
   attr_accessor :friends_in_common 
   attr_accessor :count
   scope :past_rides, lambda {

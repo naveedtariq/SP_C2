@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403071926) do
+ActiveRecord::Schema.define(:version => 20120409075347) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20120403071926) do
     t.integer  "flexibility_in_minutes"
     t.integer  "total_price"
     t.integer  "status",                 :default => 1
+    t.datetime "departuredatetime"
   end
 
   add_index "rides", ["from_location_id"], :name => "index_rides_on_from_location_id"

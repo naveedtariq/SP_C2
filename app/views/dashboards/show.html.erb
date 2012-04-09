@@ -1,136 +1,155 @@
 <%= stylesheet_link_tag "terms-style" %>
 <div id="container">
   <div id="header">
-      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+    <%= link_to image_tag("shareshuttle_logo_sm.png", :class => "left"), root_path %>
   </div>
-<div class="container">
-  <section id="code">
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    <% end %>
-  </section>
-</div>
-<div class="container">
-  <section id="forms">
-
-    <% if current_user %>
-    <ul>
-      <li style="float: left; ">
-        <%= link_to "Ride input page ", new_ride_path %> |
-      </li>
-      <li style="float: left; ">
-        <a href="/rides/search?utf8=✓&search_posted=true&ride%5Bfrom_location_id%5D=&ride%5Bto_location_id%5D=&commit=Search">&nbsp;Ride search page </a> |&nbsp;
-      </li>
-      <li style="float: left;">
-        <%= link_to " My Dashboard", dashboard_path %>
-      </li>
-    </ul>
-    <% end %>
-    <br/>
-    <h4> Current Rides</h4>
-    <table border="1" cellpadding="3">
-      <tr>
-        <th>Offered by</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Departure date</th>
-        <th>Departure time</th>
-        <th>Arrival time</th>
-        <th>Flexibility</th>
-        <th>Duration</th>
-        <th>Vehicle Type</th>
-        <th>Available Seats</th>
-        <th>Total Price</th>
-        <th>Notes</th>
-      </tr>
-      <% if @ride_participants.empty? %>
-        <tr><td colspan="12">No records</td></tr>
+  <div class="container">
+    <section id="code">
+      <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <% end %>
-      <% @ride_participants.each do |ride_participant| %>
-        <% ride = ride_participant.ride %>
-        <tr align="center">
-          <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
-          <td><%= ride.from_location && ride.from_location.name %></td>
-          <td><%= ride.to_location && ride.to_location.name %></td>
-          <td><%= ride.departure_date %></td>
-          <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
-          <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z")  %></td>
-          <td><%= ride.flexibility_in_minutes %> mins</td>
-          <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
-          <td><%= ride.ride_type %></td>
-          <td><%= ride.remaining_seats %></td>
-          <td><%= number_to_currency(ride.total_price)%></td>
-          <td><%= ride.notes%></td>
-        </tr>
+    </section>
+  </div>
+  <div class="container">
+    <section id="forms">
+
+      <% if current_user %>
+          <ul>
+            <li style="float: left; ">
+              <%= link_to "Ride input page ", new_ride_path %> |
+            </li>
+            <li style="float: left; ">
+              <a href="/rides/search?utf8=✓&search_posted=true&ride%5Bfrom_location_id%5D=&ride%5Bto_location_id%5D=&commit=Search">&nbsp;Ride
+                search page </a> |&nbsp;
+            </li>
+            <li style="float: left;">
+              <%= link_to " My Dashboard", dashboard_path %>
+            </li>
+          </ul>
+      <% end %>
+      <br/>
+      <h4> Current Rides</h4>
+      <table border="1" cellpadding="3">
         <tr>
-          <td colspan="12">
-            <% case ride_participant.role  %>
-            <% when ROLES_FOR_RIDES[:owner] %>
-              <% if ride.ride_participants.pending_or_confirmed.blank? %>
-                No requests so far. 
-              <% else %>
-                <ul>
-                  <% ride.ride_participants.pending_participants.each do |participant| %>
-                    <li>Status: ride requested by <%= participant.user.full_name %> <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant) %> or <%= link_to "Deny", deny_ride_ride_participant_path(ride, participant) %>; <%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M")  %> left to respond </li>
-                  <% end %>
-                  <% ride.ride_participants.confirmed_participants.each do |participant| %>
-                    <li>Status: ride confirmed for <%= participant.user.full_name %>, contact info: phone <%= participant.phone %>, email: <%= participant.user.email %>; preference: <%= participant.mode_of_communications %></li>
-                  <% end %>
-                </ul>
-              <% end %>
-              <span class="right"> <%= link_to "Modify ride", edit_ride_path(ride) %> | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %></span>
-            <% when ROLES_FOR_RIDES[:pending] %>
-              Status: still pending; <%= ((ride_participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M")  %> left in expiry | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
-            <% when ROLES_FOR_RIDES[:confirmed] %>
-              Status: confirmed by <%= ride_participant.owner.full_name %>; <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
-            <% when ROLES_FOR_RIDES[:expired] %>
-              Status: your ride was not accepted within 24 hours, <%= link_to "post your ride", clone_ride_path( ride) %>
-            <% when ROLES_FOR_RIDES[:rejected] %>
-              Status: your ride was not accepted, <%= link_to "post your ride", clone_ride_path(ride) %>
-            <% end %>
-          </td>
+          <th>Offered by</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Departure date</th>
+          <th>Departure time</th>
+          <th>Arrival time</th>
+          <th>Flexibility</th>
+          <th>Duration</th>
+          <th>Vehicle Type</th>
+          <th>Available Seats</th>
+          <th>Total Price</th>
+          <th>Notes</th>
         </tr>
-      <%end%>
-    </table>
+        <% if @ride_participants.empty? %>
+            <tr>
+              <td colspan="12">No records</td>
+            </tr>
+        <% end %>
+        <% @ride_participants.each do |ride_participant| %>
+            <% ride = ride_participant.ride %>
+            <tr align="center">
+              <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
+              <td><%= ride.from_location && ride.from_location.name %></td>
+              <td><%= ride.to_location && ride.to_location.name %></td>
+              <td><%= ride.departure_date %></td>
+              <td><%= ride.departure_time.strftime("%H:%M #{SpClock.zone_offset}") %></td>
+              <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M #{SpClock.zone_offset}") %></td>
+              <td><%= ride.flexibility_in_minutes %> mins</td>
+              <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+              <td><%= ride.ride_type %></td>
+              <td><%= ride.remaining_seats %></td>
+              <td><%= number_to_currency(ride.total_price) %></td>
+              <td><%= ride.notes %></td>
+            </tr>
+            <tr>
+              <td colspan="12">
+                <% case ride_participant.role %>
+                <% when ROLES_FOR_RIDES[:owner] %>
+                    <% if ride.ride_participants.pending_or_confirmed.blank? %>
+                        No requests so far.
+                    <% else %>
+                        <ul>
+                          <% ride.ride_participants.pending_participants.each do |participant| %>
+                              <li>Status: ride requested
+                                by <%= participant.user.full_name %> <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant) %>
+                                or <%= link_to "Deny", deny_ride_ride_participant_path(ride, participant) %>
+                                ; <%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>
+                                left to respond
+                              </li>
+                          <% end %>
+                          <% ride.ride_participants.confirmed_participants.each do |participant| %>
+                              <li>Status: ride confirmed for <%= participant.user.full_name %>, contact info:
+                                phone <%= participant.phone %>, email: <%= participant.user.email %>;
+                                preference: <%= participant.mode_of_communications %></li>
+                          <% end %>
+                        </ul>
+                    <% end %>
+                    <span class="right"> <%= link_to "Modify ride", edit_ride_path(ride) %>
+                      | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %></span>
+                <% when ROLES_FOR_RIDES[:pending] %>
+                    Status: still
+                    pending; <%= ((ride_participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>
+                    left in expiry
+                    | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
+                <% when ROLES_FOR_RIDES[:confirmed] %>
+                    Status: confirmed by <%= ride_participant.owner.full_name %>
+                    ; <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
+                <% when ROLES_FOR_RIDES[:expired] %>
+                    Status: your ride was not accepted within 24
+                    hours, <%= link_to "post your ride", clone_ride_path(ride) %>
+                <% when ROLES_FOR_RIDES[:rejected] %>
+                    Status: your ride was not accepted, <%= link_to "post your ride", clone_ride_path(ride) %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
 
-    <hr/>
-    <h4> Past Rides</h4>
-    <table border="1" cellpadding="3">
-      <tr>
-        <th>Offered by</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Departure date</th>
-        <th>Departure time</th>
-        <th>Arrival time</th>
-        <th>Flexibility</th>
-        <th>Duration</th>
-        <th>Vehicle Type</th>
-        <th>Available Seats</th>
-        <th>Total Price</th>
-        <th>Notes</th>
-      </tr>
-      <% if @past_rides.empty? %>
-        <tr><td colspan="12">No records</td></tr>
-      <% end %>
-      <% @past_rides.each do |ride_participant| %>
-        <% ride = ride_participant.ride %>
-        <tr align="center">
-          <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
-          <td><%= ride.from_location && ride.from_location.name %></td>
-          <td><%= ride.to_location && ride.to_location.name %></td>
-          <td><%= ride.departure_date %></td>
-          <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
-          <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z")  %></td>
-          <td><%= ride.flexibility_in_minutes %> mins</td>
-          <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
-          <td><%= ride.ride_type %></td>
-          <td><%= ride.remaining_seats %></td>
-          <td><%= number_to_currency(ride.total_price)%></td>
-          <td><%= ride.notes%></td>
+      <hr/>
+      <h4> Past Rides</h4>
+      <table border="1" cellpadding="3">
+        <tr>
+          <th>Offered by</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Departure date</th>
+          <th>Departure time</th>
+          <th>Arrival time</th>
+          <th>Flexibility</th>
+          <th>Duration</th>
+          <th>Vehicle Type</th>
+          <th>Available Seats</th>
+          <th>Total Price</th>
+          <th>Notes</th>
         </tr>
-      <% end %>
-    </table>
-    <%= will_paginate @past_rides, :param_name => "past_rides_page" %>
-  </section>
+        <% if @past_rides.empty? %>
+            <tr>
+              <td colspan="12">No records</td>
+            </tr>
+        <% end %>
+        <% @past_rides.each do |ride_participant| %>
+            <% ride = ride_participant.ride %>
+            <tr align="center">
+              <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
+              <td><%= ride.from_location && ride.from_location.name %></td>
+              <td><%= ride.to_location && ride.to_location.name %></td>
+              <td><%= ride.departure_date %></td>
+              <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+              <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z") %></td>
+              <td><%= ride.flexibility_in_minutes %> mins</td>
+              <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+              <td><%= ride.ride_type %></td>
+              <td><%= ride.remaining_seats %></td>
+              <td><%= number_to_currency(ride.total_price) %></td>
+              <td><%= ride.notes %></td>
+            </tr>
+        <% end %>
+      </table>
+      <%= will_paginate @past_rides, :param_name => "past_rides_page" %>
+    </section>
+  </div>
 </div>

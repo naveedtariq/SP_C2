@@ -8,4 +8,7 @@ class SpClock
   def self.day
     23.hours + 59.minutes
   end
+  def self.zone_offset
+    Time.now.in_time_zone("Eastern Time (US & Canada)").zone
+  end
 end
