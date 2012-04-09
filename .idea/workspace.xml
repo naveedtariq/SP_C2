@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4fd8939-a0ec-4257-8d84-c344db838d24" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/sessions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
     </list>
     <list id="230adeb7-b010-467e-9e24-a5373e898cae" name="Rejected commit: Default" comment="" />
     <ignored path="SP_C2.iws" />
@@ -113,11 +112,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sessions_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="sessions_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="33" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.43291593">
+            <state line="57" column="33" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.html.erb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="48" column="126" selection-start="2167" selection-end="2167" vertical-scroll-proportion="0.6214689">
+              <folding>
+                <element signature="tag#head#0;tag#html#0" expanded="true" />
+                <element signature="tag#ul#0;tag#div#1;tag#body#0;tag#html#0" expanded="true" />
+                <element signature="tag#div#0;tag#ul#0;tag#div#1;tag#body#0;tag#html#0" expanded="true" />
+                <element signature="tag#ul#1;tag#div#1;tag#body#0;tag#html#0" expanded="true" />
+                <element signature="tag#div#2;tag#body#0;tag#html#0" expanded="true" />
+                <element signature="tag#span#0;tag#div#2;tag#body#0;tag#html#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -155,6 +170,7 @@
         <option value="$PROJECT_DIR$/db/migrate/20120327143452_add_photo_url_to_users.rb" />
         <option value="$PROJECT_DIR$/app/views/rides/search.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
       </list>
     </option>
   </component>
@@ -552,7 +568,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="718" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" x="100" y="122" width="1080" height="518" />
@@ -565,7 +581,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327212" sideWeight="0.49675325" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744783" sideWeight="0.9983766" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24594156" sideWeight="0.67278796" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24594156" sideWeight="0.67278796" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554257" sideWeight="0.48701298" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -802,8 +818,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="33" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.43291593">
+        <state line="57" column="33" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="126" selection-start="2167" selection-end="2167" vertical-scroll-proportion="0.6214689">
+          <folding>
+            <element signature="tag#head#0;tag#html#0" expanded="true" />
+            <element signature="tag#ul#0;tag#div#1;tag#body#0;tag#html#0" expanded="true" />
+            <element signature="tag#div#0;tag#ul#0;tag#div#1;tag#body#0;tag#html#0" expanded="true" />
+            <element signature="tag#ul#1;tag#div#1;tag#body#0;tag#html#0" expanded="true" />
+            <element signature="tag#div#2;tag#body#0;tag#html#0" expanded="true" />
+            <element signature="tag#span#0;tag#div#2;tag#body#0;tag#html#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
