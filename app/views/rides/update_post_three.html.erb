@@ -1,4 +1,6 @@
 <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
+<%= javascript_include_tag "jquery.ui.map.full.min"%>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $("#new_ride").submit(function() {
@@ -24,6 +26,31 @@
       if($(this).val() > 0)
         $(".total-price-check1").hide();
     });
+
+  <% if @ride.to_location.present? && @ride.from_location.present? %>
+    $('#map_canvas').gmap('displayDirections', { 'origin': '<%= @ride.to_location.name %>', 'destination': '<%= @ride.from_location.name %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+      if ( status === 'OK' ){
+        var METERS_TO_MILES = 0.000621371192;
+        totalDistance = result.routes[0].legs[0].distance.value;
+        totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
+
+        $("#distance").text("distance: "+totalDistance+' miles');
+        $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
+        if("<%= @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
+          $('#fare').text("Estimated Taxi Fare: $45");
+        }
+        else if("<%=  @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
+          $('#fare').text("Estimated Taxi Fare: $45");
+        }
+        else{
+          var fare = 3.0;
+          fare = (totalDistance * (0.4/0.2))+fare;
+          $('#fare').text("Estimated Taxi Fare: $"+fare);
+        }
+      }
+    });
+  <% end %>
+
   });
 </script>
 <div id="container">
@@ -71,16 +98,22 @@
         <p><b>Notes</b></p>
         <%= f.text_area :notes, :size => "30x3" %>
       </div>
-
-
-
       <div style="clear:both">
         <a href="<%=edit_ride_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: white; border-style: solid; border-width: 1px; color: black; background: none repeat scroll 0% 0% transparent; width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
         <input type="submit" value="Post Ride" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn"/>
       </div>
-
     </div>
-
   <%end%>
+</div>
 
+<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
+<div id="results" style="display:none;">
+  <div id="directions"></div>
+
+</div>
+<div id="distance">
+</div>
+<div id="duration">
+</div>
+<div id="fare">
 </div>
