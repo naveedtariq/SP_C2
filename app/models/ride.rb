@@ -4,12 +4,12 @@ class Ride < ActiveRecord::Base
   end
   before_save do |ride|
     ride.departure_time = "2012-03-06 13:00:00 +0000".to_time if ride.departure_time.blank?
-    #ride.departuredatetime =
+    ride.departuredatetime = ("#{self.departure_date} #{self.departure_time.strftime("%H:%M #{SpClock.time_with_zone.to_s.split(" ").last}")}").to_time
   end
   attr_accessor :friends_in_common 
   attr_accessor :count
   scope :past_rides, lambda {
-    where("departure_date < ? and time < ?", SpClock.date, SpClock.time)
+    where("rides.departuredatetime < ?", SpClock.time)
   }
   scope :sorted_recent_at_top, order("departure_date Desc")
 
@@ -19,6 +19,9 @@ class Ride < ActiveRecord::Base
   validate :departure_date_inclusion
   validate :from_and_to_location                        #Validation
 
+  def active?
+    (((self.departuredatetime - Time.now) > 0) && self.status == 1)
+  end
   def from_and_to_location                               #check for if from and to location names are same
     errors.add(:from_location_id, "can't be same as destination") if(self.from_location_id == self.to_location_id)
   end
@@ -127,9 +130,13 @@ class Ride < ActiveRecord::Base
   def modify!(params, user_id)                                    # modify the ride
     if self.ride_participants.pending_or_confirmed.blank?
       self.update_attributes!(params)
-    else 
-      User.find(user_id).rides << Ride.create!(params)
+      return nil
+    else
+      ride = Ride.create!(self.attributes)
+      ride.update_attributes!(params)
+      User.find(user_id).rides << ride
       self.change_owner!
+      reture ride.id
     end
   end
 

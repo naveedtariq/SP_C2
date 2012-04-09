@@ -42,6 +42,7 @@
           <th>Vehicle Type</th>
           <th>Available Seats</th>
           <th>Total Price</th>
+          <th>Time left</th>
           <th>Notes</th>
         </tr>
         <% if @ride_participants.empty? %>
@@ -63,6 +64,7 @@
               <td><%= ride.ride_type %></td>
               <td><%= ride.remaining_seats %></td>
               <td><%= number_to_currency(ride.total_price) %></td>
+              <td><%= (secs_to_time(ride.departuredatetime - Time.now))  %></td>
               <td><%= ride.notes %></td>
             </tr>
             <tr>
@@ -88,8 +90,9 @@
                           <% end %>
                         </ul>
                     <% end %>
+                   <% if ride.ride_participants.pending_or_confirmed.blank? %>
                     <span class="right"> <%= link_to "Modify ride", edit_ride_path(ride) %>
-                      | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %></span>
+                      |<% end %> <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %></span>
                 <% when ROLES_FOR_RIDES[:pending] %>
                     Status: still
                     pending; <%= ((ride_participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>
@@ -138,8 +141,8 @@
               <td><%= ride.from_location && ride.from_location.name %></td>
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
-              <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
-              <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z") %></td>
+              <td><%= ride.departure_time.strftime("%H:%M #{SpClock.zone_offset}") %></td>
+              <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M #{SpClock.zone_offset}") %></td>
               <td><%= ride.flexibility_in_minutes %> mins</td>
               <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
               <td><%= ride.ride_type %></td>

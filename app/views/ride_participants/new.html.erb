@@ -1,75 +1,77 @@
 <%= javascript_include_tag "jquery-1.7.1.min" %>
 <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui", "bootstrap" %>
-<%= javascript_include_tag "jquery.ui.map.full.min"%>
+<%= javascript_include_tag "jquery.ui.map.full.min" %>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
-  $(document).ready(function(){
-<% if @ride.to_location.present? && @ride.from_location.present? %>
-      $('#map_canvas').gmap('displayDirections', { 'origin': '<%= @ride.to_location.name %>', 'destination': '<%= @ride.from_location.name %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results-temp') }, function(result, status) {});
-<% end %>
-    $("#btn-book-ride").click(function () {
-      $("#btn-book-ride").hide();
-      $(".info_view").show();
-    });
+    $(document).ready(function () {
+        <% if @ride.to_location.present? && @ride.from_location.present? %>
+        $('#map_canvas').gmap('displayDirections', { 'origin':'<%= @ride.to_location.name %>', 'destination':'<%= @ride.from_location.name %>', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results-temp') }, function (result, status) {
+        });
+        <% end %>
+        $("#btn-book-ride").click(function () {
+            $("#btn-book-ride").hide();
+            $(".info_view").show();
+        });
 
-    $("#new_ride_participant").submit(function() {
-      if($('input#ride_participant_phone').val().length < 1){
-        $(".phone-check1").show();
-      }
+        $("#new_ride_participant").submit(function () {
+            if ($('input#ride_participant_phone').val().length < 1) {
+                $(".phone-check1").show();
+            }
 
-      else if($('input#ride_participant_phone').val().length != 12){
-        $(".phone-check").show();
-      }
-      else if(!($('input#ride_participant_mode_of_communications_sms_text').is(':checked')||$('#ride_participant_mode_of_communications_phone_call').is(':checked')||$('#ride_participant_mode_of_communications_email').is(':checked'))) {
-        $(".method-type-check").show();
-      }
-      else{
-        return true;
-      }
-      return false;
-    });
+            else if ($('input#ride_participant_phone').val().length != 12) {
+                $(".phone-check").show();
+            }
+            else if (!($('input#ride_participant_mode_of_communications_sms_text').is(':checked') || $('#ride_participant_mode_of_communications_phone_call').is(':checked') || $('#ride_participant_mode_of_communications_email').is(':checked'))) {
+                $(".method-type-check").show();
+            }
+            else {
+                return true;
+            }
+            return false;
+        });
 
-    $("input#ride_participant_mode_of_communications_sms_text").click(function(){
-      $(".method-type-check").hide();
-    });
+        $("input#ride_participant_mode_of_communications_sms_text").click(function () {
+            $(".method-type-check").hide();
+        });
 
-    $("#ride_participant_mode_of_communications_phone_call").click(function(){
-      $(".method-type-check").hide();
-    });
+        $("#ride_participant_mode_of_communications_phone_call").click(function () {
+            $(".method-type-check").hide();
+        });
 
-    $("#ride_participant_mode_of_communications_email").click(function(){
-      $(".method-type-check").hide();
-    });
+        $("#ride_participant_mode_of_communications_email").click(function () {
+            $(".method-type-check").hide();
+        });
 
-    $("input#ride_participant_phone").change(function(){
-      if($(this).val() != "")
-        $(".phone-check1").hide();
-      if($(this).val().length == 12)
-        $(".phone-check").hide();
-      if($(this).val().match(/[0-9]{10}/))
-        $(".phone-check2").hide();
-    });
+        $("input#ride_participant_phone").change(function () {
+            if ($(this).val() != "")
+                $(".phone-check1").hide();
+            if ($(this).val().length == 12)
+                $(".phone-check").hide();
+            if ($(this).val().match(/[0-9]{10}/))
+                $(".phone-check2").hide();
+        });
 
-    $('input#ride_participant_phone').keypress(function(){
-      var string = $(this).val();
-      var str1 = $(this).val().length;
-      if (str1 == 3)
-        $(this).val(string.substring(0,3) + '-')
-      else if (str1 == 7)
-        $(this).val(string.substring(0,7) + '-')
-    });
+        $('input#ride_participant_phone').keypress(function () {
+            var string = $(this).val();
+            var str1 = $(this).val().length;
+            if (str1 == 3)
+                $(this).val(string.substring(0, 3) + '-')
+            else if (str1 == 7)
+                $(this).val(string.substring(0, 7) + '-')
+        });
 
-    $("button#contact-info").click(function () {
-      $("button#contact-info").hide();
-      $(".message-box").show();
+        $("button#contact-info").click(function () {
+            $("button#contact-info").hide();
+            $(".message-box").show();
+        });
     });
-  });
 </script>
 <div id="container">
   <div id="header_wrap" style="margin-top: 22px;">
     <div id="header">
-      <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
+      <%= link_to image_tag("shareshuttle_logo_sm.png", :class => "left"), root_path %>
       <a id="post_ride" class="button post km_click_event_by_text right" href="<%= new_ride_path %>">Post a ride</a>
+
       <div style="clear:both"></div>
     </div>
   </div>
@@ -77,6 +79,7 @@
   <div id="trip-container" style="height:auto;overflow: none;width:auto;">
     <%= link_to "Back to search results", "#{search_rides_path}?#{params[:return_url]}", :class => "button post km_click_event_by_text", :id => "A1" %>
     <h2><b>Ride Details</b></h2>
+
     <div id="search_run">
       <div id="content_wrapper" class="new_style">
         <div id="content_container" class="clearfix">
@@ -88,55 +91,67 @@
 
                   <% @ride.friends_in_common ||= [] %>
                 </h3>
+
                 <div class="entry">
                   <div class="price_box">
                     <div class="seats">
                       <span class="count"><%= @ride.remaining_seats %></span>
                       <span class="left">seats left</span>
                     </div>
-                    <p><b><%= number_to_currency(@ride.per_price_seat)%></b> / seat</p>
+                    <p><b><%= number_to_currency(@ride.per_price_seat) %></b> / seat</p>
                   </div>
                   <div class="inner_content">
                     <div class="info-rides">
-                      <div class="inner-info-line1"><p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= @ride.departure_time.strftime("%I:%M %p")%></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= @ride.from_location && @ride.from_location.name %></span></p></div>
-                      <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp;  &nbsp; <span class="info-line1"><%= (@ride.departure_time + @ride.duration_in_minutes.minutes).strftime("%I:%M %p")  %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %> mins &nbsp; &nbsp<span class="info-line11"><%= @ride.to_location && @ride.to_location.name %></span></p></div>
+                      <div class="inner-info-line1">
+                        <p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= @ride.departure_time.strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %>
+                          mins &nbsp;
+                          &nbsp<span class="info-line11"><%= @ride.from_location && @ride.from_location.name %></span>
+                        </p></div>
+                      <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp; &nbsp;
+                        <span class="info-line1"><%= (@ride.departure_time + @ride.duration_in_minutes.minutes).strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %>
+                        mins &nbsp;
+                        &nbsp<span class="info-line11"><%= @ride.to_location && @ride.to_location.name %></span></p>
+                      </div>
                     </div>
-                    <div class="ride-image"><% if @ride.ride_type=="black car"%><%= image_tag ("blackcar.jpg") %><%else%><%= image_tag ("taxi.jpg")%><%end%><%= @ride.ride_type %></div>
+                    <div class="ride-image">
+                      <% if @ride.ride_type=="black car" %><%= image_tag ("blackcar.jpg") %>
+                      <% else %><%= image_tag ("taxi.jpg") %>
+                      <% end %><%= @ride.ride_type %></div>
                     <div class="participant-pic">
-                      <%@ride.ride_participants.active_participants.role_wise.each do |rider| %>
-                        <div class="riders-pics">
-                          <div class="riders-info"><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></div>
-                          <a href="<%= user_path(rider.user_id) %>"><%= image_tag rider.user.user_image_url %></a>
-                          <% if @graph.present? && (rider.user_id != current_user.id) && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?)  %>
-                            <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}")%>
-                            <% @ride.friends_in_common << mutual_friends  %>
-                          <% end %>
-                          <span class="driver"></span>
-                        </div>
-                      <%end%>
+                      <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
+                          <div class="riders-pics">
+                            <div class="riders-info"><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></div>
+                            <a href="<%= user_path(rider.user_id) %>"><%= image_tag rider.user.user_image_url %></a>
+                            <% if @graph.present? && (rider.user_id != current_user.id) && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>
+                                <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>
+                                <% @ride.friends_in_common << mutual_friends %>
+                            <% end %>
+                            <span class="driver"></span>
+                          </div>
+                      <% end %>
                       <% @ride.remaining_seats.times do %>
-                        <div class="riders-pics">
-                          <div class="riders-info">open&nbsp;seat</div>
-                          <%= image_tag "car_seat_icon.gif" %>
-                          <span class="driver"></span>
-                        </div>
+                          <div class="riders-pics">
+                            <div class="riders-info">open&nbsp;seat</div>
+                            <%= image_tag "car_seat_icon.gif" %>
+                            <span class="driver"></span>
+                          </div>
                       <% end %>
                     </div>
                   </div>
                   <% if @graph.present? %>
-                    <div style="float:left; margin-top: -20px">
-                      <% mutual_friends = @ride.friends_in_common.flatten.uniq %>
-                      <% if mutual_friends.count > 0 %>
-                        <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
-                      <% end %>
-                      <% mutual_friends.each do |friend|  %>
-                        <%= friend["name"] %>
-                        <% unless friend == mutual_friends.last %>
-                          &nbsp;and&nbsp;
+                      <div style="float:left; margin-top: -20px">
+                        <% mutual_friends = @ride.friends_in_common.flatten.uniq %>
+                        <% if mutual_friends.count > 0 %>
+                            <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
                         <% end %>
-                      <% end %>
+                        <% mutual_friends.each do |friend| %>
+                            <%= friend["name"] %>
+                            <% unless friend == mutual_friends.last %>
+                                &nbsp;and&nbsp;
+                            <% end %>
+                        <% end %>
 
-                    </div>
+                      </div>
                   <% end %>
                 </div>
 
@@ -146,108 +161,131 @@
         </div>
       </div>
     </div>
-    <% current_ride = (@ride.departure_date >= SpClock.date) %>
-      <% if current_ride %>
+    <% if @ride.active? %>
 
-    <div id="divPrice">
-      <% ts=@ride.remaining_seats %>
-      <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
-        <% if ts> 0 %>
+        <div id="divPrice">
+          <% ts=@ride.remaining_seats %>
+          <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
+          <% if ts> 0 %>
 
-          <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride),:html => {:class => "book-ride-child-window"} do |f| %>
-            <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] })%><br /><a style="margin: 0px;" id="how" href="/footers/how_it_works" >How it works?</a><br /><br />
-            <div class="price_view">Total = $<span id="price"><%=  @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span></div><br/>
-            <dd style="margin-left: 0px;" class="changestep"><span class="errormsg"></span>
+              <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride), :html => {:class => "book-ride-child-window"} do |f| %>
+                  <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] }) %>
+                  <br/><a style="margin: 0px;" id="how" href="/footers/how_it_works">How it works?</a><br/><br/>
 
-              <button id="btn-book-ride" type="button" style = "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
-                <span>Join this ride</span>
-              </button>
-            </dd>
+                  <div class="price_view">Total =
+                    $<span id="price"><%= @ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %></span>
+                  </div>
+                  <br/>
+                  <dd style="margin-left: 0px;" class="changestep"><span class="errormsg"></span>
 
-            <div class="info_view" style="float: none; display: none">
-              <b>Please fill out to complete booking</b><br/>
-              <%= f.label :phone,"Enter your phone number", :style => "margin-left: 0px;" %>
-              <%= f.text_field :phone, :maxlength => "12"%>
-              <br/>
-              <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must be up to 10 digits</div>
-              <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
-              <div class="phone-check2" style="display: none; color: red; font-weight: bold;">Phone format is wrong</div>
-              <div>
-                <br/>Preferred method of communication<br/><br/>
-                <table><tr>
-                    <td>
-                      <%= f.radio_button :mode_of_communications, 'sms_text' %>
-                    </td>
-                    <td>
-                      <%= f.label :mode_of_communications, 'Sms text', :for => 'ride_participant_mode_of_communications_sms_text'%>
-                    </td>
-                    <td>
-                      <%= f.radio_button :mode_of_communications, 'phone_call' %>
-                    </td>
-                    <td>
-                      <%= f.label :mode_of_communications, 'Phone call', :for => 'ride_participant_mode_of_communications_phone_call'%>
-                    </td>
-                    <td>
-                      <%= f.radio_button :mode_of_communications, 'email' %>
-                    </td>
-                    <td>
-                      <%= f.label :mode_of_communications, 'Email', :for => 'ride_participant_mode_of_communications_email'%>
-                    </td>
-                  </tr>
-                </table>
-                <div class="method-type-check" style="display: none; color: red; font-weight: bold;">No Method Selected</div>
+                    <button id="btn-book-ride" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+                      <span>Join this ride</span>
+                    </button>
+                  </dd>
+
+                  <div class="info_view" style="float: none; display: none">
+                    <b>Please fill out to complete booking</b><br/>
+                    <%= f.label :phone, "Enter your phone number", :style => "margin-left: 0px;" %>
+                    <%= f.text_field :phone, :maxlength => "12" %>
+                    <br/>
+
+                    <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must be up to
+                      10 digits
+                    </div>
+                    <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
+                    <div class="phone-check2" style="display: none; color: red; font-weight: bold;">Phone format is
+                      wrong
+                    </div>
+                    <div>
+                      <br/>Preferred method of communication<br/><br/>
+                      <table>
+                        <tr>
+                          <td>
+                            <%= f.radio_button :mode_of_communications, 'sms_text' %>
+                          </td>
+                          <td>
+                            <%= f.label :mode_of_communications, 'Sms text', :for => 'ride_participant_mode_of_communications_sms_text' %>
+                          </td>
+                          <td>
+                            <%= f.radio_button :mode_of_communications, 'phone_call' %>
+                          </td>
+                          <td>
+                            <%= f.label :mode_of_communications, 'Phone call', :for => 'ride_participant_mode_of_communications_phone_call' %>
+                          </td>
+                          <td>
+                            <%= f.radio_button :mode_of_communications, 'email' %>
+                          </td>
+                          <td>
+                            <%= f.label :mode_of_communications, 'Email', :for => 'ride_participant_mode_of_communications_email' %>
+                          </td>
+                        </tr>
+                      </table>
+                      <div class="method-type-check" style="display: none; color: red; font-weight: bold;">No Method
+                        Selected
+                      </div>
+                    </div>
+                    <dd class="changestep" style="margin-left: 0px;"><span class="errormsg"></span>
+                      <%= f.submit "Book this ride now", :style => "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; " %>
+                    </dd>
+              <% end %>
+
               </div>
-              <dd class="changestep" style="margin-left: 0px;"><span class="errormsg"></span>
-                <%= f.submit "Book this ride now", :style=>"border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "%>
-              </dd>
-            <% end %>
-
-          </div>
-        <% else %>
-          <span>Sold out</span>
-        <% end %>
-    </div>
-      <% end %>
+          <% else %>
+              <span>Sold out</span>
+          <% end %>
+        </div>
+    <% end %>
     <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
 
-      <div class="profiles left">
-        <div class="riders-pics" style="height: auto;">
-          <a href="<%= user_path(rider.user_id) %>"><%= image_tag rider.user.user_image_url %></a>
-        </div>
-        <div class="info-right left">
-          <b><%= rider.user.first_name%>&nbsp; <%= rider.user.last_name.chars.first %></b><br />
-          Currently city: <%= rider.user.city%><br/>
-          Education: <%= rider.user.school%><br/>
-          Facebook connected (<%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}"%>)<br/><br/>
-        </div>
-        <div style="clear:both"></div>
-        <% if current_ride %>
-        <button id="contact-info" type="button" style = "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
-          <span>Contact me</span>
-        </button>
-        <% end %>
-        <div class="message-box" style="display: none;">
-          <%= render "messages/conversations" %>
+        <div class="profiles left">
+          <div class="riders-pics" style="height: auto;">
+            <a href="<%= user_path(rider.user_id) %>"><%= image_tag rider.user.user_image_url %></a>
+          </div>
+          <div class="info-right left">
+            <b><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></b><br/>
+            Currently city: <%= rider.user.city %>
+            <br/>
+            Education: <%= rider.user.school %>
+            <br/>
+            Facebook connected
+            (<%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}" %>)<br/><br/>
+          </div>
+          <div style="clear:both"></div>
+          <% if @ride.active? %>
+              <button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+                <span>Contact me</span>
+              </button>
+          <% end %>
+          <div class="message-box" style="display: none;">
+            <%= render "messages/conversations" %>
 
+          </div>
         </div>
-      </div>
     <% end %>
-  </div><div class="clear"></div>
+  </div>
+  <div class="clear"></div>
   <br/><br/>
 
   <% @feedbacks = Feedback.find_all_by_ride_id(params[:ride_id]) %>
   <% @feedbacks.each do |feedback| %>
-    <% user = feedback.user %>
-    <% ride = feedback.ride %>
-    <a href="<%=user_path(user)%>"><%= user.full_name %></a> |
-    <a href="<%=new_ride_ride_participant_path(ride)%>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%= ride.departure_date %></a>
-    <br/><%= image_tag user.user_image_url %><br/>
-    <%= feedback.status && feedback.status.titleize %> &nbsp; For &nbsp; <%= link_to feedback.owner.full_name, user_path(feedback.owner) %><br/>
-    Feedback: <%= feedback.feedback %><br/>
-  <%end%>
+      <% user = feedback.user %>
+      <% ride = feedback.ride %>
+      <a href="<%= user_path(user) %>"><%= user.full_name %></a> |
+      <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%= ride.departure_date %></a>
+      <br/><%= image_tag user.user_image_url %>
+      <br/>
+      <%= feedback.status && feedback.status.titleize %> &nbsp;
+      For &nbsp; <%= link_to feedback.owner.full_name, user_path(feedback.owner) %>
+      <br/>
+      Feedback: <%= feedback.feedback %>
+      <br/>
+  <% end %>
 
-  <div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
+  <div id="map_canvas" style="height:350px; width: 500px;"></div>
+  <br/>
+
   <div id="results" style="display:none;">
     <div id="directions"></div>
 
   </div>
+</div>

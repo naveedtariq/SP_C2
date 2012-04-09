@@ -25,4 +25,10 @@ module ApplicationHelper
       (((page.to_i-1) * per_page.to_i) + offset).to_s
     end
   end
+  def secs_to_time(seconds)
+    minutes = seconds/60
+    mins = (minutes%60).to_i
+    hours = (minutes/60).to_i
+    "#{hours}:#{mins}"
+  end
 end

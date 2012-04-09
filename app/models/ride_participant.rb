@@ -14,11 +14,15 @@ class RideParticipant < ActiveRecord::Base
   scope :role_wise, order("role ASC")
   scope :current_rides, lambda {
     joins(:ride).
-      where("rides.departure_date >= ?", SpClock.date)
+      where("rides.departuredatetime >= ?", SpClock.time)
+  }
+  scope :active_rides, lambda {
+    joins(:ride).
+      where("rides.status = ?", STATUS_FOR_RIDES[:active] )
   }
   scope :past_rides, lambda {
     joins(:ride).
-      where("rides.departure_date < ?", SpClock.date)
+      where("rides.departuredatetime < ?", SpClock.time)
   }
   def self.owner
     self.owners.first
