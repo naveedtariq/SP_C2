@@ -33,6 +33,12 @@
             var METERS_TO_MILES = 0.000621371192;
             totalDistance = result.routes[0].legs[0].distance.value;
             totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
+            var fare2 = 0;
+            var fare3 = 0;
+            var dayOfWeek;
+            fare = (totalDistance * (0.4/0.2))+fare;
+            fare2 = fare + 0.50;
+            fare3 = fare + 1;
 
             $("#distance").text("distance: "+totalDistance+' miles');
             $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
@@ -40,6 +46,9 @@
               $('#fare').text("Estimated Taxi Fare: $45");
             }
             else if("<%=  @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
+              $('#fare').text("Estimated Taxi Fare: $45");
+            }
+            else if("<%=  @ride.departure_time.hour %>" == "(JFK) John F. Kennedy"){
               $('#fare').text("Estimated Taxi Fare: $45");
             }
             else{

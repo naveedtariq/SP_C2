@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
     info = @graph.get_object(fb_id)
 
     current_user.dob = Date.strptime(info["birthday"], "%m/%d/%Y") if info["birthday"].present?
-    (current_user.city = (info["location"]["name"]) rescue "") if current_user.town.blank?
+    (current_user.city = (info["location"]["name"]) rescue "") if current_user.city.blank?
 
     (current_user.town = ((info["hometown"]["name"]) rescue "")) if current_user.town.blank?
     education = []

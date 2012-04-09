@@ -21,6 +21,10 @@
         $(".check-flexibility").show();
         return false;
       }
+      else if (($("#ride_departure_time_4i").val() <= <%=SpClock.time_with_zone.hour%>) && ($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) ){
+        $(".before-1hr-booking").show();
+        return false;
+      }
       else{
         return true;
       }
@@ -54,8 +58,13 @@
             totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
             var fare = 3.0;
             var fare2 = 0;
+            var fare3 = 0;
+            var dayOfWeek;
+            var date = $("#ride_departure_date").datepicker('getDate');
+            dayOfWeek = date.getUTCDay();
             fare = (totalDistance * (0.4/0.2))+fare;
             fare2 = fare + 0.50;
+            fare3 = fare + 1;
             $("#distance").text("distance: "+totalDistance+' miles');
             $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
             if("<%= @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
@@ -64,15 +73,19 @@
             else if("<%=  @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
               $('#fare').text("Estimated Taxi Fare: $45");
             }
+            else if((0 <= dayOfWeek && dayOfWeek < 5) && ($("#ride_departure_time_4i").val() >= 16 && $("#ride_departure_time_4i").val() < 20 && $("#ride_departure_time_5i").val() > 0 && $("#ride_departure_time_5i").val() <= 59 )){
+             $('#fare').text("Estimated Taxi Fare: $"+fare3);
+            }
             else{
               var fare = 3.0;
               fare = (totalDistance * (0.4/0.2))+fare;
               $('#fare').text("Estimated Taxi Fare: $"+fare);
             }
-
             $("#ride_departure_time_4i").change(function(){
-            if($(this).find("option:selected").text() == "01 AM" || $(this).find("option:selected").text() == "02 AM" || $(this).find("option:selected").text() == "03 AM" || $(this).find("option:selected").text() == "04 AM" || $(this).find("option:selected").text() == "05 AM" || $(this).find("option:selected").text() == "09 PM" || $(this).find("option:selected").text() == "10 PM" || $(this).find("option:selected").text() == "11 PM"){
+            if($(this).find("option:selected").text() == "01 AM" || $(this).find("option:selected").text() == "02 AM" || $(this).find("option:selected").text() == "03 AM" || $(this).find("option:selected").text() == "04 AM" || $(this).find("option:selected").text() == "05 AM" || $(this).find("option:selected").text() == "09 PM" || $(this).find("option:selected").text() == "10 PM" || $(this).find("option:selected").text() == "11 PM")
              $('#fare').text("Estimated Taxi Fare: $"+fare2);
+            else if((0 <= dayOfWeek && dayOfWeek < 5) && ($("#ride_departure_time_4i").val() >= 16 && $("#ride_departure_time_4i").val() <= 19 && $("#ride_departure_time_5i").val() >= 0 && $("#ride_departure_time_5i").val() <= 59 )){
+             $('#fare').text("Estimated Taxi Fare: $"+fare3);
             }
             else{
               var fare = 3.0;
@@ -80,9 +93,33 @@
               $('#fare').text("Estimated Taxi Fare: $"+fare);
             }
           });
+
+           $("#ride_departure_date").change(function(){
+            var date = $(this).datepicker('getDate');
+            dayOfWeek = date.getUTCDay();
+            if((0 <= dayOfWeek && dayOfWeek < 5) && ($("#ride_departure_time_4i").val() >= 16 && $("#ride_departure_time_4i").val() <= 19 && $("#ride_departure_time_5i").val() >= 0 && $("#ride_departure_time_5i").val() <= 59 )){
+             $('#fare').text("Estimated Taxi Fare: $"+fare3);
+            }
+            else{
+            var fare = 3.0;
+            fare = (totalDistance * (0.4/0.2))+fare;
+            $('#fare').text("Estimated Taxi Fare: $"+fare);
+            }
+          });
           }
         });
 <% end %>
+
+    $('#ride_departure_time_4i').change(function() {
+       if ($("#ride_departure_time_4i").val() >= <%=SpClock.time_with_zone.hour%>)
+         $(".before-1hr-booking").hide();
+
+    });
+
+    $('#ride_departure_time_5i').change(function() {
+     if (($("#ride_departure_time_4i").val() >= <%=SpClock.time_with_zone.hour%>) && ($("#ride_departure_time_5i").val() > <%=SpClock.time_with_zone.min%>) )
+     $(".before-1hr-booking").hide();
+    });
 
   });
 </script>
@@ -125,6 +162,7 @@
       <div class="left" style="margin-right:20px;">
         <p><b>Time</b></p>
         <%= f.time_select :departure_time, {:minute_step => 15, :ampm => true}, {:style => "width:110px"} %>
+        <div class="before-1hr-booking" style="display: none; color: red;">Booking from current time</div>
       </div>
 
       <div class="left" style="margin-right:20px;">
