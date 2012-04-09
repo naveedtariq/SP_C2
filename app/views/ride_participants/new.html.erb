@@ -125,7 +125,7 @@
                   </div>
                   <% if @graph.present? %>
                     <div style="float:left; margin-top: -20px">
-                      <% mutual_friends = @ride.friends_in_common.flatten %>
+                      <% mutual_friends = @ride.friends_in_common.flatten.uniq %>
                       <% if mutual_friends.count > 0 %>
                         <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
                       <% end %>

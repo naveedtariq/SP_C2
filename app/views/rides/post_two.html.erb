@@ -46,22 +46,16 @@
         $(".date-check-step2").hide();
     });
 
-     $("#ride_departure_time_4i").change(function(){
-            if($(this).find("option:selected").text() == "01 AM" || $(this).find("option:selected").text() == "02 AM" || $(this).find("option:selected").text() == "03 AM" || $(this).find("option:selected").text() == "04 AM" || $(this).find("option:selected").text() == "05 AM" || $(this).find("option:selected").text() == "09 PM" || $(this).find("option:selected").text() == "10 PM" || $(this).find("option:selected").text() == "11 PM"){
-               $('#taxi-fare').append("Estimated Taxi Fare: $" + "50");
-               $('#taxi-fare').hide();
-               $('#taxi-fare').show();
-               
-            }
-          });
-
 <% if @ride.to_location.present? && @ride.from_location.present? %>
         $('#map_canvas').gmap('displayDirections', { 'origin': '<%= @ride.to_location.name %>', 'destination': '<%= @ride.from_location.name %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
           if ( status === 'OK' ){
             var METERS_TO_MILES = 0.000621371192;
             totalDistance = result.routes[0].legs[0].distance.value;
             totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
-
+            var fare = 3.0;
+            var fare2 = 0;
+            fare = (totalDistance * (0.4/0.2))+fare;
+            fare2 = fare + 0.50;
             $("#distance").text("distance: "+totalDistance+' miles');
             $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
             if("<%= @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
@@ -75,6 +69,17 @@
               fare = (totalDistance * (0.4/0.2))+fare;
               $('#fare').text("Estimated Taxi Fare: $"+fare);
             }
+
+            $("#ride_departure_time_4i").change(function(){
+            if($(this).find("option:selected").text() == "01 AM" || $(this).find("option:selected").text() == "02 AM" || $(this).find("option:selected").text() == "03 AM" || $(this).find("option:selected").text() == "04 AM" || $(this).find("option:selected").text() == "05 AM" || $(this).find("option:selected").text() == "09 PM" || $(this).find("option:selected").text() == "10 PM" || $(this).find("option:selected").text() == "11 PM"){
+             $('#fare').text("Estimated Taxi Fare: $"+fare2);
+            }
+            else{
+              var fare = 3.0;
+              fare = (totalDistance * (0.4/0.2))+fare;
+              $('#fare').text("Estimated Taxi Fare: $"+fare);
+            }
+          });
           }
         });
 <% end %>
