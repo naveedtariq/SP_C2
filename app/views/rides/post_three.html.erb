@@ -33,6 +33,7 @@
             var METERS_TO_MILES = 0.000621371192;
             totalDistance = result.routes[0].legs[0].distance.value;
             totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
+            var fare = 3.0;
             var fare2 = 0;
             var fare3 = 0;
             var dayOfWeek;
@@ -48,8 +49,11 @@
             else if("<%=  @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
               $('#fare').text("Estimated Taxi Fare: $45");
             }
-            else if("<%=  @ride.departure_time.hour %>" == "(JFK) John F. Kennedy"){
-              $('#fare').text("Estimated Taxi Fare: $45");
+            else if((<%=  @ride.departure_time.hour %> > 20 && <%=@ride.departure_time.hour %> < 24) || (<%=  @ride.departure_time.hour %> > 1 && <%=@ride.departure_time.hour %> < 7)  ){
+              $('#fare').text("Estimated Taxi Fare: $"+fare2);
+            }
+            else if((1 <= <%=@ride.departure_date.wday%> && <%=@ride.departure_date.wday%> < 6) && (<%=  @ride.departure_time.hour %> >= 16 && <%=  @ride.departure_time.hour %> <= 19 && <%=  @ride.departure_time.min %> >= 0 && <%=  @ride.departure_time.min %> <= 59 )){
+              $('#fare').text("Estimated Taxi Fare: $"+fare3);
             }
             else{
               var fare = 3.0;
