@@ -10,7 +10,6 @@ namespace :db do
   desc 'Populates database with generated sample data'
   
   task :populate => :environment do 
-    if false
     puts "started dumping"
     csv_text = File.read("#{Rails.root}/spec/data/user.csv")
     puts "dumping users"
@@ -46,8 +45,7 @@ namespace :db do
       puts "location --> #{location.name}"
 
     end
-    
-  end
+
     csv_text = File.read("#{Rails.root}/spec/data/ride.csv")
     csv = CSV.parse(csv_text, :headers => true)
     users = User.all

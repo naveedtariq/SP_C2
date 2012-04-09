@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4fd8939-a0ec-4257-8d84-c344db838d24" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/dashboards_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/dashboards_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/application_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/application_helper.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ride.rb" afterPath="$PROJECT_DIR$/app/models/ride.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ride_participant.rb" afterPath="$PROJECT_DIR$/app/models/ride_participant.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dashboards/show.html.erb" afterPath="$PROJECT_DIR$/app/views/dashboards/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" afterPath="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/sample_rake.rake" afterPath="$PROJECT_DIR$/lib/tasks/sample_rake.rake" />
     </list>
     <list id="230adeb7-b010-467e-9e24-a5373e898cae" name="Rejected commit: Default" comment="" />
     <ignored path="SP_C2.iws" />
@@ -35,10 +29,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="show.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/dashboards/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="30" selection-start="4361" selection-end="4361" vertical-scroll-proportion="0.7784431">
+            <state line="94" column="30" selection-start="4361" selection-end="4361" vertical-scroll-proportion="-9.285714">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sample_rake.rake" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/tasks/sample_rake.rake">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="0" selection-start="278" selection-end="278" vertical-scroll-proportion="0.42541435">
               <folding />
             </state>
           </provider>
@@ -107,15 +110,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.2-p290/gems/sorcery-0.7.7/lib/sorcery/controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="10" selection-start="1932" selection-end="1932" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ride_participant.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/ride_participant.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -145,7 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/rides/search.html.erb" />
         <option value="$PROJECT_DIR$/db/schema.rb" />
         <option value="$PROJECT_DIR$/app/views/rides/_form.html.erb" />
         <option value="$PROJECT_DIR$/config/application.rb" />
@@ -161,6 +154,7 @@
         <option value="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" />
         <option value="$PROJECT_DIR$/app/models/ride.rb" />
         <option value="$PROJECT_DIR$/app/views/dashboards/show.html.erb" />
+        <option value="$PROJECT_DIR$/lib/tasks/sample_rake.rake" />
       </list>
     </option>
   </component>
@@ -715,13 +709,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/controllers/oauths_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/initializers/sorcery.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="79" selection-start="4486" selection-end="4486" vertical-scroll-proportion="0.0">
@@ -822,7 +809,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/dashboards/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="30" selection-start="4361" selection-end="4361" vertical-scroll-proportion="0.7784431">
+        <state line="94" column="30" selection-start="4361" selection-end="4361" vertical-scroll-proportion="-9.285714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tasks/sample_rake.rake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="278" selection-end="278" vertical-scroll-proportion="0.42541435">
           <folding />
         </state>
       </provider>
