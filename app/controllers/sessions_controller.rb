@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
     friends = @graph.get_connections(fb_id, "friends")
     info = @graph.get_object(fb_id)
     current_user.dob = Date.strptime(info["birthday"], "%m/%d/%Y") if info["birthday"].present?
-    current_user.city = (info["location"]["name"] rescue "") if current_user.city.blank?
+    (current_user.city = (info["location"]["name"]).dup rescue "") if current_user.city.blank?
 
     (current_user.town = ((info["hometown"]["name"]) rescue "")) if current_user.town.blank?
     education = []
@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
     current_user.number_of_friends = friends.count
     current_user.last_login = Time.now
     current_user.save(:validate => false)
-
+    return render :json => current_user
     friend_list = []
     friends.each do |friend|
       friend_list << "#{friend["id"]}:#{friend["name"]}"
