@@ -10,5 +10,8 @@ class SpClock
   end
   def self.zone_offset
     Time.now.in_time_zone("Eastern Time (US & Canada)").zone
+    end
+  def self.time_with_zone
+    Time.now.in_time_zone("Eastern Time (US & Canada)")
   end
 end

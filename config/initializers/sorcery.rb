@@ -55,7 +55,7 @@ config.external_providers = [:facebook]
    config.facebook.key = APP_CONFIG["facebook_app_id"]
    config.facebook.secret = APP_CONFIG["facebook_app_key"]
    config.facebook.callback_url = APP_CONFIG["facebook_return_url"]
-   config.facebook.user_info_mapping = {:email => "email", :first_name => "first_name", :last_name => "last_name", :about => "bio", :dob => "birthday", :town => "hometown", :gender => "gender", :work => "work", :phone => "phone", :city => "location", :school => "education"}
+   config.facebook.user_info_mapping = {:email => "email", :first_name => "first_name", :last_name => "last_name", :about => "bio", :gender => "gender", :phone => "phone"}
    config.facebook.scope = "email,offline_access,user_about_me,user_birthday,user_hometown,user_interests,user_work_history,user_education_history,user_location"
    config.facebook.display = "popup"
   #
