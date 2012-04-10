@@ -44,10 +44,11 @@
           <th>Total Price</th>
           <th>Time left</th>
           <th>Notes</th>
+          <th>Link</th>
         </tr>
         <% if @ride_participants.empty? %>
             <tr>
-              <td colspan="12">No records</td>
+              <td colspan="14">No records</td>
             </tr>
         <% end %>
         <% @ride_participants.each do |ride_participant| %>
@@ -66,9 +67,10 @@
               <td><%= number_to_currency(ride.total_price) %></td>
               <td><%= (secs_to_time(ride.departuredatetime - Time.now))  %></td>
               <td><%= ride.notes %></td>
+              <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
             </tr>
             <tr>
-              <td colspan="12">
+              <td colspan="14">
                 <% case ride_participant.role %>
                 <% when ROLES_FOR_RIDES[:owner] %>
                     <% if ride.ride_participants.pending_or_confirmed.blank? %>
@@ -128,6 +130,7 @@
           <th>Available Seats</th>
           <th>Total Price</th>
           <th>Notes</th>
+          <th>Link</th>
         </tr>
         <% if @past_rides.empty? %>
             <tr>
@@ -149,6 +152,7 @@
               <td><%= ride.remaining_seats %></td>
               <td><%= number_to_currency(ride.total_price) %></td>
               <td><%= ride.notes %></td>
+              <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
             </tr>
         <% end %>
       </table>

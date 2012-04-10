@@ -1,85 +1,90 @@
 <script>
-  $(document).ready(function() {
-    $('#user_password').password_strength();
-  });
+    $(document).ready(function () {
+        $('#user_password').password_strength();
+    });
 </script>
 <div class="container">
   <section id="forms">
-<%= form_for @user, :html => { :multipart => true } do |f| %>
-  <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @user.errors.full_messages %>
-          <li><%= message %></li>
+    <%= form_for @user, :html => {:multipart => true} do |f| %>
+        <% if @user.errors.any? %>
+            <div class="error_messages">
+              <h2>Form is invalid</h2>
+              <ul>
+                <% for message in @user.errors.full_messages %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name, :disabled => true %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name, :disabled => true %>
-  </div>
-  <div class="field">
-    <%= f.label :about %>
-    <%= f.text_area :about %>
-  </div>
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email, :disabled => true %>
-  </div>
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-    <span class="password_strength"></span>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.select :gender, GENDER %>
-  </div>
-  <div class="field">
-    <%= f.label :Date_of_birth %><br />
-    <%= f.date_select :dob, :start_year => 100.years.ago.year, :disabled => true %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :town %>
-    <%= f.text_field :town %>
-  </div>
-  <div class="field">
-    <%= f.label :work %>
-    <%= f.text_field :work %>
-  </div>
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :school %>
-    <%= f.text_field :school %>
-  </div>
-    <div style="margin-left: 250px; "><%= image_tag current_user.user_image_url %></div>
-  <div class="field">
-    <%= f.label :user_image, "Image Upload" %><br />
-    <%= f.file_field :user_image %>
-  </div>
-  <div class="actions"><%= f.submit %></div>
-<% end %>
+        <div class="field">
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, :disabled => true %>
+        </div>
+        <div class="field">
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, :disabled => true %>
+        </div>
+        <div class="field">
+          <%= f.label :about %>
+          <%= f.text_area :about %>
+        </div>
+        <div class="field">
+          <%= f.label :email %>
+          <%= f.text_field :email, :disabled => true %>
+        </div>
+        <% unless @user.password.blank? %>
+            <div class="field">
+              <%= f.label :password %>
+              <%= f.password_field :password %>
+              <span class="password_strength"></span>
+            </div>
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+
+        <% end %>
+        <div class="field">
+          <%= f.label :gender %>
+          <%= f.select :gender, GENDER,{}, :disabled => true %>
+        </div>
+        <div class="field">
+          <%= f.label :Date_of_birth %>
+          <br/>
+          <%= f.date_select :dob, :start_year => 100.years.ago.year, :disabled => true %>
+        </div>
+        <div class="field">
+          <%= f.label :phone %>
+          <%= f.text_field :phone %>
+        </div>
+        <div class="field">
+          <%= f.label :city %>
+          <%= f.text_field :city %>
+        </div>
+        <div class="field">
+          <%= f.label :town %>
+          <%= f.text_field :town %>
+        </div>
+        <div class="field">
+          <%= f.label :work %>
+          <%= f.text_field :work %>
+        </div>
+        <div class="field">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </div>
+        <div class="field">
+          <%= f.label :school %>
+          <%= f.text_field :school %>
+        </div>
+        <div style="margin-left: 250px; "><%= image_tag current_user.user_image_url %></div>
+        <div class="field">
+          <%= f.label :user_image, "Image Upload" %>
+          <br/>
+          <%= f.file_field :user_image %>
+        </div>
+        <div class="actions"><%= f.submit %></div>
+    <% end %>
   </section>
 </div>
