@@ -2,10 +2,12 @@ require "#{Rails.root}/lib/migration_helpers"
 class AddForeignKeys < ActiveRecord::Migration
   extend MigrationHelpers
   def self.up
+=begin
     add_foreign_key(:ride, :id, :ride_participants)
     add_foreign_key(:user, :id, :ride_participants)
     add_foreign_key(:location, :to_location_id, :rides)
     add_foreign_key(:location, :from_location_id, :rides)
+=end
    end
 #
   def self.down
