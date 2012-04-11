@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409075347) do
+ActiveRecord::Schema.define(:version => 20120411081109) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -48,8 +48,10 @@ ActiveRecord::Schema.define(:version => 20120409075347) do
     t.string   "country"
     t.integer  "zip"
     t.integer  "ride_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "group"
+    t.string   "google_helper"
   end
 
   add_index "locations", ["ride_id"], :name => "index_locations_on_ride_id"

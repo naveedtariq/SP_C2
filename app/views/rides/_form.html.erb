@@ -30,12 +30,16 @@
     });
 
     $('#ride_to_location_id').change(function() {
+      var A = [1,2,3];
+      var i = 0;
       if($(this).val() != ""){
-        if ($(this).val() == $('#ride_from_location_id').val()) {
+       while(i< A.length){
+        if ($('#ride_to_location_id').val() <= A[i] && $('#ride_from_location_id').val() <= A[i] || ($('#ride_to_location_id').val() >= $('#ride_from_location_id').val() && $('#ride_from_location_id').val() > A[i]) ) {
           $(".city-option-same").show();
           $('#ride_to_location_id').addClass("validation-error");
           $('#ride_from_location_id').addClass("validation-error");
           $("input.ride-check-btn").attr("disabled", "disabled");
+          return false;
         } else {
           $(".city-check").hide();
           $(".city-option-same").hide();
@@ -64,20 +68,24 @@
                 }
               }
             });
-            return false;
+            //return false;
 
           }
-        }
-      }
+        } i = i + 1;
+      }}
     });
 
     $('#ride_from_location_id').change(function() {
+      var A = [1,2,3];
+      var i = 0;
       if($(this).val() != ""){
-        if ($(this).val() == $('#ride_to_location_id').val()) {
+       while(i< A.length){
+        if ($('#ride_from_location_id').val() <= A[i] && $('#ride_to_location_id').val() <= A[i] || ($('#ride_from_location_id').val() >= $('#ride_to_location_id').val() && $('#ride_to_location_id').val() > A[i]) ) {
           $(".city-option-same").show();
           $('#ride_to_location_id').addClass("validation-error");
           $('#ride_from_location_id').addClass("validation-error");
           $("input.ride-check-btn").attr("disabled", "disabled");
+          return false;
         } else {
           $(".city-option-same").hide();
           $(".city-check").hide();
@@ -106,11 +114,11 @@
               }
             }
           });
-          return false;
+          //return false;
 
         }
-        }
-      }
+        } i = i + 1;
+      }}
     });
 
   <% if @ride.to_location.present? && @ride.from_location.present? %>
@@ -178,7 +186,7 @@
       <div id="toCity" style="text-align:center;" class="left col">
         <span style="float:left;">To:</span><br />
         <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, {:include_blank => "--- select to ---"}, :style => "width:230px" %><br /><br />
-        <div class="city-option-same" style="display: none"> From and To City can't same </div>
+        <div class="city-option-same" style="display: none"> Same Group Selected </div>
         <div class="city-check" style="display: none; color: red; font-weight: bold;">Select City</div>
 <img alt="Taxi" src="/assets/taxi.jpg" style="height: 63px;" width="140px" /><br />
         <%= f.radio_button :ride_type, 'taxi'  %><%= f.label :ride_type, 'I am taking a taxi', :for => 'ride_ride_type_taxi'%>

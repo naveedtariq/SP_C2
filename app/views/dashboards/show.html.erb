@@ -54,7 +54,7 @@
         <% @ride_participants.each do |ride_participant| %>
             <% ride = ride_participant.ride %>
             <tr align="center">
-              <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
+              <td><a href="<%=  user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
               <td><%= ride.from_location && ride.from_location.name %></td>
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
@@ -140,7 +140,7 @@
         <% @past_rides.each do |ride_participant| %>
             <% ride = ride_participant.ride %>
             <tr align="center">
-              <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
+              <td><a href="<%=  user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
               <td><%= ride.from_location && ride.from_location.name %></td>
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>

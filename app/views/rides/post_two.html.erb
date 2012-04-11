@@ -21,8 +21,16 @@
         $(".check-flexibility").show();
         return false;
       }
-      else if (($("#ride_departure_time_4i").val() <= <%=SpClock.time_with_zone.hour%>) && ($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) ){
+      else if (($("input#ride_departure_date").val() == "<%=SpClock.time_with_zone.strftime("%Y-%m-%d")%>" ) && ($("#ride_departure_time_4i").val() < <%=SpClock.time_with_zone.hour%>) && (($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) || ($("#ride_departure_time_5i").val() > <%=SpClock.time_with_zone.min%>)) ){
         $(".before-1hr-booking").show();
+        return false;
+      }
+      else if ( ($("input#ride_departure_date").val() == "<%=SpClock.time_with_zone.strftime("%Y-%m-%d")%>" ) && ($("#ride_departure_time_4i").val() == <%=SpClock.time_with_zone.hour%>) && (($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) || ($("#ride_departure_time_5i").val() > <%=SpClock.time_with_zone.min%>)) ){
+        $(".before-1hr-booking").show();
+        return false;
+      }
+      else if (($("input#ride_departure_date").val() == "<%=SpClock.time_with_zone.strftime("%Y-%m-%d")%>" ) && (($("#ride_departure_time_4i").val() == <%=SpClock.time_with_zone.hour - 1%>) || ($("#ride_departure_time_4i").val() == <%=SpClock.time_with_zone.hour + 1%>) ) && ($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) ){
+        $(".after-1hr-booking").show();
         return false;
       }
       else{
@@ -113,12 +121,14 @@
     $('#ride_departure_time_4i').change(function() {
        if ($("#ride_departure_time_4i").val() >= <%=SpClock.time_with_zone.hour%>)
          $(".before-1hr-booking").hide();
+         $(".after-1hr-booking").hide();
 
     });
 
     $('#ride_departure_time_5i').change(function() {
      if (($("#ride_departure_time_4i").val() >= <%=SpClock.time_with_zone.hour%>) && ($("#ride_departure_time_5i").val() > <%=SpClock.time_with_zone.min%>) )
      $(".before-1hr-booking").hide();
+     $(".after-1hr-booking").hide();
     });
 
   });
@@ -163,6 +173,7 @@
         <p><b>Time</b></p>
         <%= f.time_select :departure_time, {:minute_step => 15, :ampm => true}, {:style => "width:110px"} %>
         <div class="before-1hr-booking" style="display: none; color: red;">Booking from current time</div>
+        <div class="after-1hr-booking" style="display: none; color: red;">After 1 hour Booking allowed</div>
       </div>
 
       <div class="left" style="margin-right:20px;">
