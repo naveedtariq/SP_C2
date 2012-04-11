@@ -5,7 +5,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         <% if @ride.to_location.present? && @ride.from_location.present? %>
-        $('#map_canvas').gmap('displayDirections', { 'origin':'<%= @ride.to_location.name %>', 'destination':'<%= @ride.from_location.name %>', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results-temp') }, function (result, status) {
+        $('#map_canvas').gmap('displayDirections', { 'origin': '<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'destination': '<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('resultstmp') }, function(result, status) {
         });
         <% end %>
         $("#btn-book-ride").click(function () {
@@ -167,7 +167,7 @@
           <% ts=@ride.remaining_seats %>
           <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
           <% if ts> 0 %>
-               <% if @ride.ride_participants.active_participants.pluck(:user_id).include? current_user.id %>
+               <% if current_user && (@ride.ride_participants.active_participants.pluck(:user_id).include? current_user.id) %>
               <span>You're already in this ride</span>
               <% else %>
               <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride), :html => {:class => "book-ride-child-window"} do |f| %>
@@ -289,4 +289,5 @@
     <div id="directions"></div>
 
   </div>
+</div>
 </div>

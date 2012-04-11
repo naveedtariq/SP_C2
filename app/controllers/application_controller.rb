@@ -24,6 +24,9 @@ class ApplicationController < ActionController::Base
     ride_departure_date = ride.departure_date.to_s
     ride_attributes = ride.attributes
     ride_attributes.delete("departure_date")
+    ride_attributes.delete("departuredatetime")
+    ride_attributes.delete("created_at")
+    ride_attributes.delete("updated_at")
     cookies[:ride] = "#{ride_attributes.to_s}, departure_date=>#{ride_departure_date}".gsub!("nil", "")
   end
   def store_ride_participants(ride_participant)

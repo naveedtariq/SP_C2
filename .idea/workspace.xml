@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a4fd8939-a0ec-4257-8d84-c344db838d24" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/rides_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/rides_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" afterPath="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/rides/post_three.html.erb" afterPath="$PROJECT_DIR$/app/views/rides/post_three.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/rides/post_two.html.erb" afterPath="$PROJECT_DIR$/app/views/rides/post_two.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/rides/update_post_three.html.erb" afterPath="$PROJECT_DIR$/app/views/rides/update_post_three.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/rides/update_post_two.html.erb" afterPath="$PROJECT_DIR$/app/views/rides/update_post_two.html.erb" />
     </list>
     <list id="230adeb7-b010-467e-9e24-a5373e898cae" name="Rejected commit: Default" comment="" />
     <ignored path="SP_C2.iws" />
@@ -30,19 +36,82 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/users/show.html.erb">
+      <file leaf-file-name="rides_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/rides_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="14" selection-start="1322" selection-end="1322" vertical-scroll-proportion="-4.035714">
+            <state line="41" column="0" selection-start="1364" selection-end="1364" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ride.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/ride.rb">
+      <file leaf-file-name="search.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/rides/search.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="48" selection-start="3085" selection-end="3085" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post_one.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/rides/post_one.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post_two.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/rides/post_two.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="61" column="4" selection-start="2782" selection-end="3152" vertical-scroll-proportion="-9.428572">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post_three.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/rides/post_three.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="4" selection-start="1444" selection-end="1444" vertical-scroll-proportion="-7.857143">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/rides/edit.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_form.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/rides/_form.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="32.214287">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update_post_two.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/rides/update_post_two.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="62" column="4" selection-start="3159" selection-end="3159" vertical-scroll-proportion="47.92857">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update_post_three.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/rides/update_post_three.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="4" selection-start="1444" selection-end="1444" vertical-scroll-proportion="-7.071429">
               <folding />
             </state>
           </provider>
@@ -51,72 +120,7 @@
       <file leaf-file-name="new.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/ride_participants/new.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="169" column="105" selection-start="8448" selection-end="8448" vertical-scroll-proportion="0.33267328">
-              <folding>
-                <element signature="e#8668#12259#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application_helper.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/helpers/application_helper.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="5" selection-start="518" selection-end="518" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="constants.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/initializers/constants.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="14" selection-start="315" selection-end="324" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboards_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/dashboards_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="4" selection-start="95" selection-end="399" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="users_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="23" selection-start="803" selection-end="803" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edit.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/users/edit.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="42" selection-start="1576" selection-end="1576" vertical-scroll-proportion="-9.214286">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rides_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/rides_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="24" selection-start="954" selection-end="954" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ride_participant.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/ride_participant.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="28" selection-start="575" selection-end="594" vertical-scroll-proportion="0.0">
+            <state line="7" column="344" selection-start="826" selection-end="826" vertical-scroll-proportion="0.29001883">
               <folding />
             </state>
           </provider>
@@ -138,12 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/rides/post_two.html.erb" />
-        <option value="$PROJECT_DIR$/config/initializers/sorcery.rb" />
-        <option value="$PROJECT_DIR$/lib/sp_clock.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
-        <option value="$PROJECT_DIR$/lib/tasks/sample_rake.rake" />
-        <option value="$PROJECT_DIR$/app/views/rides/search.html.erb" />
         <option value="$PROJECT_DIR$/app/views/rides/search_home.html.erb" />
         <option value="$PROJECT_DIR$/app/views/dashboards/show.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/dashboards_controller.rb" />
@@ -153,6 +151,12 @@
         <option value="$PROJECT_DIR$/app/models/ride.rb" />
         <option value="$PROJECT_DIR$/app/models/ride_participant.rb" />
         <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/rides_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/rides/post_two.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/rides/post_three.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/rides/update_post_two.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/rides/update_post_three.html.erb" />
         <option value="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" />
       </list>
     </option>
@@ -297,7 +301,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dashboards" />
+              <option name="myItemId" value="rides" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SP_C2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SP_C2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ride_participants" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -708,133 +734,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/rides/_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="28" selection-start="412" selection-end="446" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/rides/search.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="34" selection-start="2936" selection-end="2936" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/rides/update_post_two.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="30" selection-start="370" selection-end="370" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/dashboards/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="82" selection-start="7290" selection-end="7290" vertical-scroll-proportion="-8.75">
-          <folding>
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="do ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="if ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="if ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="do ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="case ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="if ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="do ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="do ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="if ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="if ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="do ... end" />
-            <marker date="1334168716000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.2.1/lib/action_controller/metal.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="8" selection-start="4441" selection-end="4441" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/rides/search_home.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="36" selection-start="1549" selection-end="1549" vertical-scroll-proportion="-0.78571427">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="14" selection-start="1322" selection-end="1322" vertical-scroll-proportion="-4.035714">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="23" selection-start="803" selection-end="803" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/edit.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="42" selection-start="1576" selection-end="1576" vertical-scroll-proportion="-9.214286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/dashboards_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="4" selection-start="95" selection-end="399" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/ride.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="48" selection-start="3085" selection-end="3085" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/initializers/constants.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="14" selection-start="315" selection-end="324" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/application_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="5" selection-start="518" selection-end="518" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/ride_participant.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="28" selection-start="575" selection-end="594" vertical-scroll-proportion="0.0">
@@ -842,19 +741,108 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/ride.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="7" selection-start="488" selection-end="493" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="35" selection-start="1032" selection-end="1032" vertical-scroll-proportion="-11.884615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/data/ride_backup.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="93" selection-start="371" selection-end="371" vertical-scroll-proportion="0.19677997">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/data/ride.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/data/location.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="75" selection-start="865" selection-end="870" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/rides_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="24" selection-start="954" selection-end="954" vertical-scroll-proportion="0.0">
+        <state line="41" column="0" selection-start="1364" selection-end="1364" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/rides/search.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/rides/post_one.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/rides/post_two.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="4" selection-start="2782" selection-end="3152" vertical-scroll-proportion="-9.428572">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/rides/post_three.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="4" selection-start="1444" selection-end="1444" vertical-scroll-proportion="-7.857143">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/rides/edit.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/rides/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="32.214287">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/rides/update_post_two.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="4" selection-start="3159" selection-end="3159" vertical-scroll-proportion="47.92857">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/rides/update_post_three.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="4" selection-start="1444" selection-end="1444" vertical-scroll-proportion="-7.071429">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/ride_participants/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="169" column="105" selection-start="8448" selection-end="8448" vertical-scroll-proportion="0.33267328">
-          <folding>
-            <element signature="e#8668#12259#0" expanded="false" />
-          </folding>
+        <state line="7" column="344" selection-start="826" selection-end="826" vertical-scroll-proportion="0.29001883">
+          <folding />
         </state>
       </provider>
     </entry>
