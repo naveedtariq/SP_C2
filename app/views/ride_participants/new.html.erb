@@ -167,7 +167,9 @@
           <% ts=@ride.remaining_seats %>
           <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
           <% if ts> 0 %>
-
+               <% if @ride.ride_participants.active_participants.pluck(:user_id).include? current_user.id %>
+              <span>You're already in this ride</span>
+              <% else %>
               <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride), :html => {:class => "book-ride-child-window"} do |f| %>
                   <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] }) %>
                   <br/><a style="margin: 0px;" id="how" href="/footers/how_it_works">How it works?</a><br/><br/>
@@ -178,9 +180,9 @@
                   <br/>
                   <dd style="margin-left: 0px;" class="changestep"><span class="errormsg"></span>
 
-                    <% if @ride.owner != current_user %><button id="btn-book-ride" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+                    <button id="btn-book-ride" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
                       <span>Join this ride</span>
-                    </button><%end%>
+                    </button>
                   </dd>
 
                   <div class="info_view" style="float: none; display: none">
@@ -228,7 +230,7 @@
                       <%= f.submit "Book this ride now", :style => "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; " %>
                     </dd>
               <% end %>
-
+              <% end %>
               </div>
           <% else %>
               <span>Sold out</span>
