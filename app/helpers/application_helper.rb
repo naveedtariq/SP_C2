@@ -16,7 +16,7 @@ module ApplicationHelper
     else
       "#{t}"
     end
-    
+
   end
   def number_of_records(page, per_page, offset = 1)
     if page.blank?
@@ -29,6 +29,8 @@ module ApplicationHelper
     minutes = seconds/60
     mins = (minutes%60).to_i
     hours = (minutes/60).to_i
-    "#{hours}:#{mins}"
+    days = (hours/24).to_i
+    hours = (hours%24).to_i
+    "#{days}d #{hours}h #{mins}m"
   end
 end

@@ -120,7 +120,7 @@
                     <div class="participant-pic">
                       <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
                           <div class="riders-pics">
-                            <div class="riders-info"><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></div>
+                            <div class="riders-info"><a href="<%= user_path(rider.user_id) %>" style="color: #ffffff;"><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></a></div>
                             <a href="<%= user_path(rider.user_id) %>"><%= image_tag rider.user.user_image_url %></a>
                             <% if @graph.present? && (rider.user_id != current_user.id) && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>
                                 <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>
@@ -167,7 +167,9 @@
           <% ts=@ride.remaining_seats %>
           <% tp=@ride.total_price-((@ride.total_price/@ride.available_seats)*@ride.booked_seats) %>
           <% if ts> 0 %>
-
+               <% if @ride.ride_participants.active_participants.pluck(:user_id).include? current_user.id %>
+              <span>You're already in this ride</span>
+              <% else %>
               <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride), :html => {:class => "book-ride-child-window"} do |f| %>
                   <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| [i.to_s + ' seat @ ' + (number_with_precision((tp.to_f)/i, :precision => 2)).to_s + ' each ', i] }) %>
                   <br/><a style="margin: 0px;" id="how" href="/footers/how_it_works">How it works?</a><br/><br/>
@@ -228,7 +230,7 @@
                       <%= f.submit "Book this ride now", :style => "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; " %>
                     </dd>
               <% end %>
-
+              <% end %>
               </div>
           <% else %>
               <span>Sold out</span>
@@ -252,14 +254,13 @@
           </div>
           <div style="clear:both"></div>
           <% if @ride.active? %>
-              <button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+              <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %><button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
                 <span>Contact me</span>
-              </button>
+              </button><%end%>
           <% end %>
-          <div class="message-box" style="display: none;">
+          <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %><div class="message-box" style="display: none;">
             <%= render "messages/conversations" %>
-
-          </div>
+          </div><%end%>
         </div>
     <% end %>
   </div>

@@ -33,7 +33,8 @@
     });
 
       $( "#ride_departure" ).datepicker({
-      dateFormat: "yy-mm-dd"
+      dateFormat: "yy-mm-dd"             ,
+          minDate: 0, maxDate: "+1Y"
     });
 var scrollTime = 20000;
 	function scrollup(){

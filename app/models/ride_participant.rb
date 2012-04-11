@@ -10,6 +10,7 @@ class RideParticipant < ActiveRecord::Base
   scope :pending_or_confirmed, where(:role => [ROLES_FOR_RIDES[:confirmed], ROLES_FOR_RIDES[:pending]])
   scope :active_participants,lambda{ joins(:user).where(:role => [ROLES_FOR_RIDES[:confirmed], ROLES_FOR_RIDES[:pending], ROLES_FOR_RIDES[:owner]])}
   scope :confirmed_or_owner_participants,lambda{ joins(:user).where(:role => [ROLES_FOR_RIDES[:confirmed], ROLES_FOR_RIDES[:owner]])}
+  scope :not_cancelled_or_abandoned,lambda{ joins(:user).where( "role NOT IN (#{[ROLES_FOR_RIDES[:canceled], ROLES_FOR_RIDES[:abandoned]].join(", ")})", )}
   scope :owners, where(:role => ROLES_FOR_RIDES[:owner])
   scope :role_wise, order("role ASC")
   scope :current_rides, lambda {

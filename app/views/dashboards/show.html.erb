@@ -44,16 +44,17 @@
           <th>Total Price</th>
           <th>Time left</th>
           <th>Notes</th>
+          <th>Link</th>
         </tr>
         <% if @ride_participants.empty? %>
             <tr>
-              <td colspan="12">No records</td>
+              <td colspan="14">No records</td>
             </tr>
         <% end %>
         <% @ride_participants.each do |ride_participant| %>
             <% ride = ride_participant.ride %>
             <tr align="center">
-              <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
+              <td><a href="<%=  user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
               <td><%= ride.from_location && ride.from_location.name %></td>
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
@@ -66,9 +67,10 @@
               <td><%= number_to_currency(ride.total_price) %></td>
               <td><%= (secs_to_time(ride.departuredatetime - Time.now))  %></td>
               <td><%= ride.notes %></td>
+              <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
             </tr>
             <tr>
-              <td colspan="12">
+              <td colspan="14">
                 <% case ride_participant.role %>
                 <% when ROLES_FOR_RIDES[:owner] %>
                     <% if ride.ride_participants.pending_or_confirmed.blank? %>
@@ -128,6 +130,7 @@
           <th>Available Seats</th>
           <th>Total Price</th>
           <th>Notes</th>
+          <th>Link</th>
         </tr>
         <% if @past_rides.empty? %>
             <tr>
@@ -137,7 +140,7 @@
         <% @past_rides.each do |ride_participant| %>
             <% ride = ride_participant.ride %>
             <tr align="center">
-              <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
+              <td><a href="<%=  user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
               <td><%= ride.from_location && ride.from_location.name %></td>
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
@@ -149,6 +152,7 @@
               <td><%= ride.remaining_seats %></td>
               <td><%= number_to_currency(ride.total_price) %></td>
               <td><%= ride.notes %></td>
+              <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
             </tr>
         <% end %>
       </table>

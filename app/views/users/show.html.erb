@@ -1,159 +1,164 @@
 <h4>My Profile</h4><br/>
-<%=image_tag @user.user_image_url, :style => "width: 200px"%>
+<%= image_tag @user.user_image_url, :style => "width: 200px" %>
 <table border="1" cellpadding="10px" cellspacing="10">
   <tr>
     <th>First Name</th>
-    <td><%=@user.first_name%></td>
-   </tr>
-     <tr>
+    <td><%= @user.first_name %></td>
+  </tr>
+  <tr>
     <th>Last Name</th>
-    <td><%=@user.last_name%></td>
-   </tr>
-     <tr>
+    <td><%= @user.last_name %></td>
+  </tr>
+  <tr>
     <th>About</th>
-    <td><%=@user.about%></td>
-   </tr>
-     <tr>
+    <td><%= @user.about %></td>
+  </tr>
+  <tr>
     <th>Bithday</th>
-    <td><%=@user.dob%></td>
-   </tr>
-    <tr>
+    <td><%= @user.dob %></td>
+  </tr>
+  <tr>
     <th>Email</th>
-    <td><%=@user.email%></td>
-   </tr>
-    <tr>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
     <th>Gender</th>
-    <td><%=@user.gender%></td>
-   </tr>
-    <tr>
+    <td><%= @user.gender %></td>
+  </tr>
+  <tr>
     <th>Phone</th>
-    <td><%=@user.phone%></td>
-   </tr>
-    <tr>
+    <td><%= @user.phone %></td>
+  </tr>
+  <tr>
     <th>City</th>
-    <td><%=@user.city%></td>
-   </tr>
-    <tr>
+    <td><%= @user.city %></td>
+  </tr>
+  <tr>
     <th>Town</th>
-    <td><%=@user.town%></td>
-   </tr>
-    <tr>
+    <td><%= @user.town %></td>
+  </tr>
+  <tr>
     <th>Work</th>
-    <td><%=@user.work%></td>
-   </tr>
-    <tr>
+    <td><%= @user.work %></td>
+  </tr>
+  <tr>
     <th>Title</th>
-    <td><%=@user.title%></td>
-   </tr>
-    <tr>
+    <td><%= @user.title %></td>
+  </tr>
+  <tr>
     <th>School</th>
-    <td><%=@user.school%></td>
-   </tr>
-    <tr>
-      <th>Total Friends</th>
-    <td><%=@user.number_of_friends%></td>
-   </tr>
-    <tr>
+    <td><%= @user.school %></td>
+  </tr>
+  <tr>
+    <th>Total Friends</th>
+    <td><%= @user.number_of_friends %></td>
+  </tr>
+  <tr>
     <th>Member since</th>
-    <td><%=@user.created_at.strftime("%B %Y")%></td>
-   </tr>
-   <tr>
+    <td><%= @user.created_at.strftime("%B %Y") %></td>
+  </tr>
+  <tr>
     <th>Last Login</th>
-    <td><% if @user.last_login.present? %><%=time_ago_in_words(@user.last_login)%><%else%>Never<% end %></td>
-   </tr>
+    <td>
+      <% if @user.last_login.present? %><%= time_ago_in_words(@user.last_login) %>
+      <% else %>Never
+      <% end %></td>
+  </tr>
 </table> <br/>
- <%@ride_participants = User.find(params[:id]).ride_participants.current_rides.role_wise%>
- <% @past_rides = User.find(params[:id]).ride_participants.past_rides.paginate(:page => params[:past_rides_page], :per_page => PAST_RIDES_PER_PAGE)%>
-
-    <h4> Current Rides</h4>
-    <table border="1" cellpadding="3">
+<h4> Current Rides</h4>
+<table border="1" cellpadding="3">
+  <tr>
+    <th>Offered by</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Departure date</th>
+    <th>Departure time</th>
+    <th>Arrival time</th>
+    <th>Flexibility</th>
+    <th>Duration</th>
+    <th>Vehicle Type</th>
+    <th>Available Seats</th>
+    <th>Total Price</th>
+    <th>Notes</th>
+    <th>Link</th>
+  </tr>
+  <% if @ride_participants.empty? %>
       <tr>
-        <th>Offered by</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Departure date</th>
-        <th>Departure time</th>
-        <th>Arrival time</th>
-        <th>Flexibility</th>
-        <th>Duration</th>
-        <th>Vehicle Type</th>
-        <th>Available Seats</th>
-        <th>Total Price</th>
-        <th>Notes</th>
+        <td colspan="12">No records</td>
       </tr>
-      <% if @ride_participants.empty? %>
-        <tr><td colspan="12">No records</td></tr>
-      <% end %>
-      <% @ride_participants.each do |ride_participant| %>
-        <% ride = ride_participant.ride %>
-        <tr align="center">
-          <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
-          <td><%= ride.from_location && ride.from_location.name %></td>
-          <td><%= ride.to_location && ride.to_location.name %></td>
-          <td><%= ride.departure_date %></td>
-          <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
-          <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z")  %></td>
-          <td><%= ride.flexibility_in_minutes %> mins</td>
-          <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
-          <td><%= ride.ride_type %></td>
-          <td><%= ride.remaining_seats %></td>
-          <td><%= number_to_currency(ride.total_price)%></td>
-          <td><%= ride.notes%></td>
-        </tr>
-        <tr>
-          <td colspan="12">
-              <span class="right"> <%= link_to "View ride", new_ride_ride_participant_path(ride) %></span>
-          </td>
-        </tr><%end%>
-    </table>
+  <% end %>
+  <% @ride_participants.each do |ride_participant| %>
+      <% ride = ride_participant.ride %>
+      <tr align="center">
+        <td><a href="<%=  user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
+        <td><%= ride.from_location && ride.from_location.name %></td>
+        <td><%= ride.to_location && ride.to_location.name %></td>
+        <td><%= ride.departure_date %></td>
+        <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+        <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z") %></td>
+        <td><%= ride.flexibility_in_minutes %> mins</td>
+        <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+        <td><%= ride.ride_type %></td>
+        <td><%= ride.remaining_seats %></td>
+        <td><%= number_to_currency(ride.total_price) %></td>
+        <td><%= ride.notes %></td>
+        <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
+      </tr>
+  <% end %>
+</table>
 
-    <hr/>
-    <h4> Past Rides</h4>
-    <table border="1" cellpadding="3">
+<hr/>
+<h4> Past Rides</h4>
+<table border="1" cellpadding="3">
+  <tr>
+    <th>Offered by</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Departure date</th>
+    <th>Departure time</th>
+    <th>Arrival time</th>
+    <th>Flexibility</th>
+    <th>Duration</th>
+    <th>Vehicle Type</th>
+    <th>Available Seats</th>
+    <th>Total Price</th>
+    <th>Notes</th>
+    <th>link</th>
+  </tr>
+  <% if @past_rides.empty? %>
       <tr>
-        <th>Offered by</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Departure date</th>
-        <th>Departure time</th>
-        <th>Arrival time</th>
-        <th>Flexibility</th>
-        <th>Duration</th>
-        <th>Vehicle Type</th>
-        <th>Available Seats</th>
-        <th>Total Price</th>
-        <th>Notes</th>
+        <td colspan="12">No records</td>
       </tr>
-      <% if @past_rides.empty? %>
-        <tr><td colspan="12">No records</td></tr>
-      <% end %>
-      <% @past_rides.each do |ride_participant| %>
-        <% ride = ride_participant.ride %>
-        <tr align="center">
-          <td><%= ride.owner && "#{ride.owner.full_name}" %></td>
-          <td><%= ride.from_location && ride.from_location.name %></td>
-          <td><%= ride.to_location && ride.to_location.name %></td>
-          <td><%= ride.departure_date %></td>
-          <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
-          <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z")  %></td>
-          <td><%= ride.flexibility_in_minutes %> mins</td>
-          <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
-          <td><%= ride.ride_type %></td>
-          <td><%= ride.remaining_seats %></td>
-          <td><%= number_to_currency(ride.total_price)%></td>
-          <td><%= ride.notes%></td>
-        </tr><%end%>
-    </table>
+  <% end %>
+  <% @past_rides.each do |ride_participant| %>
+      <% ride = ride_participant.ride %>
+      <tr align="center">
+        <td><a href="<%=  user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
+        <td><%= ride.from_location && ride.from_location.name %></td>
+        <td><%= ride.to_location && ride.to_location.name %></td>
+        <td><%= ride.departure_date %></td>
+        <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+        <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z") %></td>
+        <td><%= ride.flexibility_in_minutes %> mins</td>
+        <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+        <td><%= ride.ride_type %></td>
+        <td><%= ride.remaining_seats %></td>
+        <td><%= number_to_currency(ride.total_price) %></td>
+        <td><%= ride.notes %></td>
+        <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
+      </tr>
+  <% end %>
+</table>
 <br/><br/>
 
 
 <% @feedbacks = Feedback.find_all_by_owner_id(params[:id]) %>
 <% @feedbacks.each do |feedback| %>
-<%user = feedback.user %>
-<%ride = feedback.ride %>
-<a href="<%=user_path(user)%>"><%= user.full_name %></a> |
-<a href="<%=new_ride_ride_participant_path(ride)%>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%=ride.departure_date %></a>
-<br/><%= image_tag user.user_image_url %><br/>
-<%= feedback.status%> &nbsp; by &nbsp; <%= user.full_name %><br/>
-Feedback: <%= feedback.feedback%><br/>
-<%end%>
+    <% user = feedback.user %>
+    <% ride = feedback.ride %>
+    <a href="<%= user_path(user) %>"><%= user.full_name %></a> |
+    <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%= ride.departure_date %></a>
+    <br/><%= image_tag user.user_image_url %><br/>
+    <%= feedback.status %> &nbsp; by &nbsp; <%= user.full_name %><br/>
+    Feedback: <%= feedback.feedback %><br/>
+<% end %>
