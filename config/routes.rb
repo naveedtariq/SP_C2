@@ -14,7 +14,6 @@ SPC2::Application.routes.draw do
     end
     member do
       get "inbox"
-      get "contact"
     end
   end
   resources :sessions, :only => [:new, :create, :destroy] do
@@ -41,11 +40,13 @@ SPC2::Application.routes.draw do
     member do
       get "clone"
     end
-    resources :ride_participants, :only => [:new, :create] do 
+    resources :ride_participants, :only => [:new, :create, :update] do
       collection do
         get "create_participant"
       end
       member do
+
+        get "contact"
         post "create_message"
         get "cancel"
         get "accept"

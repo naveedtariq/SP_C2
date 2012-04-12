@@ -42,12 +42,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def contact
 
-    @user = User.find params[:id]
-#      redirect_to dashboard_path
-
-  end
 
   def update_phone
     
