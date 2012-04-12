@@ -45,6 +45,7 @@
           <th>Time left</th>
           <th>Notes</th>
           <th>Link</th>
+          <th>Price Per Seat</th>
         </tr>
         <% if @ride_participants.empty? %>
             <tr>
@@ -68,6 +69,7 @@
               <td><%= (secs_to_time(ride.departuredatetime - Time.now))  %></td>
               <td><%= ride.notes %></td>
               <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
+              <td><%= ride.price_per_seat_with_owner%></td>
             </tr>
             <tr>
               <td colspan="14">
@@ -79,16 +81,19 @@
                         <ul>
                           <% ride.ride_participants.pending_participants.each do |participant| %>
                               <li>Status: ride requested
-                                by <%= participant.user.full_name %> <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant) %>
+                                by <a href="<%=  user_path(participant.user) %>"><%= participant.user.full_name %></a> <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant) %>
                                 or <%= link_to "Deny", deny_ride_ride_participant_path(ride, participant) %>
                                 ; <%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>
                                 left to respond
                               </li>
                           <% end %>
                           <% ride.ride_participants.confirmed_participants.each do |participant| %>
-                              <li>Status: ride confirmed for <%= participant.user.full_name %>, contact info:
+                              <li>Status: ride confirmed for <a href="<%=  user_path(participant.user) %>"><%= participant.user.full_name %></a >, contact info:
                                 phone <%= participant.phone %>, email: <%= participant.user.email %>;
                                 preference: <%= participant.mode_of_communications %></li>
+                                <li>Status: ride confirmed by <a href="<%=  user_path(current_user) %>"><%= current_user.full_name %></a >, contact info:
+                                phone <%= current_user.phone %>, email: <%= current_user.email %>;
+                                </li>  
                           <% end %>
                         </ul>
                     <% end %>
@@ -131,6 +136,7 @@
           <th>Total Price</th>
           <th>Notes</th>
           <th>Link</th>
+          <th>Price Per Seat</th>
         </tr>
         <% if @past_rides.empty? %>
             <tr>
@@ -153,6 +159,7 @@
               <td><%= number_to_currency(ride.total_price) %></td>
               <td><%= ride.notes %></td>
               <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
+              <td><%= ride.price_per_seat_with_owner%></td>
             </tr>
         <% end %>
       </table>

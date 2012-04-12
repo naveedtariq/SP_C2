@@ -151,4 +151,8 @@ class Ride < ActiveRecord::Base
     end
   end
 
+  def price_per_seat_with_owner
+    self.total_price / ((self.available_seats) + 1)
+  end
+
 end

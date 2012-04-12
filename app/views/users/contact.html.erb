@@ -1,0 +1,34 @@
+<%= javascript_include_tag "jquery-1.7.1.min", "jquery.phonemask"%>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    $(".edit_user").submit(function () {
+      if ($('input#user_phone').val().length < 1) {
+          $(".phone-check1").show();
+      }
+      else{
+            return true;
+      }
+            return false;
+     });
+
+  $("input#user_phone").change(function () {
+      if ($(this).val() != "")
+      $(".phone-check1").hide();
+  });
+  $("input#user_phone").mask("999-999-9999");
+       });
+</script>
+<%= form_for @user do |f| %>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email, :disabled => true %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
+  <%= hidden_field_tag 'contact', 'phone' %>
+<div class="actions"><%= f.submit %></div>
+    <% end %>

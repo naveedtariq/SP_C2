@@ -39,13 +39,22 @@ class RideParticipantsController < ApplicationController
     
   end
   def accept
+    
     @ride_participant = @ride.ride_participants.find(params[:id])
     @ride_participant.update_attribute(:role, ROLES_FOR_RIDES[:confirmed])
+    if( @ride.ride_participants.confirmed_participants.count == 1)  
+      return redirect_to contact_user_path(current_user)
+    else
     return redirect_to dashboard_path
+    end
   end
   def deny
     @ride_participant = @ride.ride_participants.find(params[:id])
     @ride_participant.update_attribute(:role, ROLES_FOR_RIDES[:rejected])
+    return redirect_to dashboard_path
+  end
+
+  def contact_info
     return redirect_to dashboard_path
   end
   def cancel

@@ -198,3 +198,8 @@ div.col
   width: 100%;
   height: 25px;
 }
+
+input[type=button]:active
+{
+    background:#FFE58F;
+}
