@@ -60,7 +60,7 @@ class Ride < ActiveRecord::Base
 
   scope :scoped_departure, lambda { |date_departure| where("departure_date < ?", date_departure) } #Select rides where departure date have been passed
   scope :active, where(:status => STATUS_FOR_RIDES[:active]) # Select rides where status is '1', '1' for active
-  scope :current_rides, where("departuredatetime >= ?", SpClock.date) # Select current rides where departure date is today date or coming date
+  scope :current_rides, where("departuredatetime >= ?", SpClock.time) # Select current rides where departure date is today date or coming date
   scope :orderby_date, order("departure_date ASC") # order the rides by departure_date in Ascending ordered
   scope :orderby_time, order("departure_time ASC") # order the rides by departure_time in Ascending ordered
   scope :orderby_price, order("total_price ASC") # order the rides by total_price in Ascending ordered
