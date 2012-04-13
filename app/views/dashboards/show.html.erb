@@ -98,11 +98,7 @@
                                 contact info:
                                 phone <%= participant.phone %>, email: <%= participant.user.email %>;
                                 preference: <%= participant.mode_of_communications %></li>
-                              <li>Status: ride confirmed by
-                                <a href="<%= user_path(current_user) %>"><%= current_user.full_name %></a>, contact
-                                info:
-                                phone <%= current_user.phone %>, email: <%= current_user.email %>;
-                              </li>
+
                           <% end %>
                         </ul>
                     <% end %>
@@ -116,10 +112,11 @@
                     left in expiry
                     | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
                 <% when ROLES_FOR_RIDES[:confirmed] %>
-                    Status: confirmed by <a href="<%= user_path(current_user) %>"><%= current_user.full_name %></a>, contact
+                    <% owner = ride.owner%>
+                    Status: confirmed by <a href="<%= user_path(owner) %>"><%= owner.full_name %></a>, contact
                     info:
-                    phone <%= ride_participant.phone %>, email: <%= ride_participant.user.email %>;
-                    preference: <%= ride_participant.mode_of_communications %>
+                    phone <%= ride_participant.owner.phone %>, email: <%= owner.email %>;
+                    preference: <%= ride_participant.owner.mode_of_communications %>
                     ; <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
                 <% when ROLES_FOR_RIDES[:expired] %>
                     Status: your ride was not accepted within 24

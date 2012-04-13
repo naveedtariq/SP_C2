@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     Rails.env == "production"
   end
   def to_hash(str)
-    Hash[str.gsub(/{|}|\"/,"").split(",").map{|m| m.strip.split("=>") }] unless str.blank?
+    Hash[str.gsub(/{|}|\"/,"").split(",").map{|m| m.strip.split("=>") }]
   end
   def create_or_store_ride(ride)
     cookies[:ride] ||= ride.attributes.to_s.gsub!("nil","")
