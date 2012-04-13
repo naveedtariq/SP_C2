@@ -29,7 +29,7 @@ class RideParticipant < ActiveRecord::Base
     self.owners.first
     end
   def owner_participant
-    self.owners.first
+    self.ride.ride_participants.owners.first
   end
   def owner
     self.ride.owner
