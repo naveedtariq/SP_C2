@@ -115,8 +115,8 @@
                     <% owner = ride.owner%>
                     Status: confirmed by <a href="<%= user_path(owner) %>"><%= owner.full_name %></a>, contact
                     info:
-                    phone <%= ride_participant.owner.phone %>, email: <%= owner.email %>;
-                    preference: <%= ride_participant.owner.mode_of_communications %>
+                    phone <%= ride_participant.owner_participant.phone %>, email: <%= owner.email %>;
+                    preference: <%= ride_participant.owner_participant.mode_of_communications %>
                     ; <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
                 <% when ROLES_FOR_RIDES[:expired] %>
                     Status: your ride was not accepted within 24

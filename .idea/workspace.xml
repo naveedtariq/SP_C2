@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4fd8939-a0ec-4257-8d84-c344db838d24" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ride_participant.rb" afterPath="$PROJECT_DIR$/app/models/ride_participant.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dashboards/show.html.erb" afterPath="$PROJECT_DIR$/app/views/dashboards/show.html.erb" />
     </list>
     <list id="230adeb7-b010-467e-9e24-a5373e898cae" name="Rejected commit: Default" comment="" />
@@ -51,7 +51,7 @@
       <file leaf-file-name="show.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/dashboards/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="30" selection-start="4892" selection-end="4892" vertical-scroll-proportion="0.55069584">
+            <state line="118" column="70" selection-start="6068" selection-end="6068" vertical-scroll-proportion="0.4632207">
               <folding />
             </state>
           </provider>
@@ -60,7 +60,7 @@
       <file leaf-file-name="ride_participant.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/ride_participant.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="31" selection-start="394" selection-end="416" vertical-scroll-proportion="0.0">
+            <state line="30" column="23" selection-start="1489" selection-end="1506" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -136,7 +136,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/models/ride_participant.rb" />
         <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
         <option value="$PROJECT_DIR$/app/controllers/rides_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/rides/post_two.html.erb" />
@@ -151,6 +150,7 @@
         <option value="$PROJECT_DIR$/app/views/ride_participants/contact.html.erb" />
         <option value="$PROJECT_DIR$/app/models/ride.rb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+        <option value="$PROJECT_DIR$/app/models/ride_participant.rb" />
         <option value="$PROJECT_DIR$/app/views/dashboards/show.html.erb" />
       </list>
     </option>
@@ -867,14 +867,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/ride_participant.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="31" selection-start="394" selection-end="416" vertical-scroll-proportion="0.0">
+        <state line="30" column="23" selection-start="1489" selection-end="1506" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/dashboards/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="30" selection-start="4892" selection-end="4892" vertical-scroll-proportion="0.55069584">
+        <state line="118" column="70" selection-start="6068" selection-end="6068" vertical-scroll-proportion="0.4632207">
           <folding />
         </state>
       </provider>
