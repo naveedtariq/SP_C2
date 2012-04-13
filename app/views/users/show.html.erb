@@ -1,5 +1,10 @@
 <h4>My Profile</h4><br/>
-<%= image_tag @user.user_image_url, :style => "width: 200px" %>
+<%= image_tag @user.user_image_url, :style => "width: 200px" %><br/>
+<%if @graph.present?%>
+<%authentication = current_user.authentications.first%>
+<%fb_id = authentication.uid%>
+<a href="https://www.facebook.com/profile.php?id=<%=fb_id%>">Facebook Profile </a>
+<%end%>
 <table border="1" cellpadding="10px" cellspacing="10">
   <tr>
     <th>First Name</th>

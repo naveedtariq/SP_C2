@@ -98,8 +98,15 @@
 
                 <% @ride.friends_in_common ||= [] %>
               </h3>
-
               <div class="entry">
+               <%  if @ride.remaining_seats==0 %>
+                <a href="<%=clone_ride_path(@ride)%>"><div class="price_box">
+                <div class="seats">
+                 <span class="count1">Similar post</span>
+                 </div>
+                  <p><b><%= number_to_currency(@ride.price_per_seat_with_owner)%></b> / seat</p>
+                   </div></a>
+                <%else%>
                 <div class="price_box">
                   <div class="seats">
                     <span class="count"><%= @ride.remaining_seats %></span>
@@ -107,6 +114,7 @@
                   </div>
                   <p><b><%= number_to_currency(@ride.price_per_seat_with_owner) %></b> / seat</p>
                 </div>
+                <%end%>
                 <div class="inner_content">
                   <div class="info-rides">
                     <div class="inner-info-line1">

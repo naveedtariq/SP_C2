@@ -65,7 +65,7 @@
 
     $("input#ride_departure_date").change(function(){
       if($(this).val().length != 0)
-        $("#ride_departure_all").removeAttr("checked", "checked");
+      $("#ride_departure_all").removeAttr("checked", "checked");
       $("#ride_departure_first_option").removeAttr("checked", "checked");
       $("#ride_departure_second_option").removeAttr("checked", "checked");
       $("#search-form").submit();
@@ -75,6 +75,7 @@
       $("#ride_departure_all").attr("checked", "checked");
       $("#search-form").submit();
       return true;
+ 
     });
 
     $("#btn14").click(function(){
@@ -89,6 +90,17 @@
       return true;
     });
 
+    if($('#ride_departure_all').is(':checked'))
+      $('input#btnAll').addClass('active');
+    else if ($('#ride_departure_first_option').is(':checked'))
+      $('input#btn14').addClass('active');
+    else
+      $('input#btn30').addClass('active');
+
+    if($("input#ride_departure_date").val().length != 0){
+      $("#ride_departure_all").removeAttr("checked", "checked");
+      $('input#btnAll').removeClass('active');
+    }
   });
 </script>
 <div class="clear"></div>
@@ -114,7 +126,7 @@
               <%= f.select :to_location_id, Location.all.collect {|p| [ p.name, p.id ] }, {:include_blank => "--- select to ---"}, :style => "width:230px" %>
               <%= f.text_field(:departure_date, :style=>"height: 27px; margin-top: 0px; border-radius: 5px 5px 5px 5px; height: 25px; vertical-align: top; width: 110px;" ) %>
               <%= image_tag ("calendar_input_icon.png"), :style=>"margin-left: -24px; margin-top: 6px; float: left; position: absolute; " %>
-              <input type="button" id="btnAll" value="All" name="ride[departure]" class="form-post"/>
+              <input type="button" id="btnAll" value="All" name="ride[departure]" class="form-post.active"/>
               <input type="button" id="btn14" value="Next 14 Days" />
               <input type="button" id="btn30" value="Next 30 Days" />
               <table style="display: none;">

@@ -28,6 +28,11 @@ input[type=button]:hover
     background:#FFE58F;
 }
 
+input[type=button]:active
+{
+    background:#FFE58F;
+}
+
  h1
 {
     font:bold 13px Arial;
@@ -199,7 +204,15 @@ div.col
   height: 25px;
 }
 
-input[type=button]:active
+input#btnAll.active
+{
+    background:#FFE58F;
+}
+input#btn14.active
+{
+    background:#FFE58F;
+}
+input#btn30.active
 {
     background:#FFE58F;
 }
