@@ -85,7 +85,7 @@
                                 <% if ride.ride_participants.confirmed_participants.count > 1 %>
                                     <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant) %>
                                 <% else %>
-                                    <%= link_to "Accept", contact_ride_ride_participant_path(ride, participant) %>
+                                    <%= link_to "Accept", "#{contact_ride_ride_participant_path(ride, ride.ride_participants.owners.where(:user_id => current_user.id).first)}?accept=#{participant.id}" %>
                                 <% end %>
                                 or <%= link_to "Deny", deny_ride_ride_participant_path(ride, participant) %>
                                 ; <%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>

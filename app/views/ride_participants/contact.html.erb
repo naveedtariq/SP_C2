@@ -31,7 +31,7 @@
        });
 
 </script>
-<%= form_for [@ride,@ride_participant] do |f| %>
+<%= form_for [@ride,@ride_participant], :url => ride_ride_participant_path(@ride, @ride_participant, :accept => params[:accept]) do |f| %>
   <div class="field">
     <%= f.label :email %>
     <%= text_field_tag :email, current_user.email, :disabled => true %>

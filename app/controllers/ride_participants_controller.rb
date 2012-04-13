@@ -73,7 +73,7 @@ class RideParticipantsController < ApplicationController
   def update
     @ride_participant = RideParticipant.find(params[:id])
     @ride_participant.update_attributes! params[:ride_participant]
-    return redirect_to accept_ride_ride_participant_path(@ride, @ride_participant)
+    return redirect_to accept_ride_ride_participant_path(@ride, RideParticipant.find(params[:accept]))
   end
 
   private
