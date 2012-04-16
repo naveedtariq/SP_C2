@@ -1,4 +1,19 @@
 <%= stylesheet_link_tag "terms-style" %>
+<%= javascript_include_tag "jquery-1.7.1.min", "jquery.popupWindow"%>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+$('.contact-form').popupWindow({
+height:500,
+width:800,
+top:50,
+left:50
+});
+
+window.close();
+opener.location.reload(true);
+    });
+</script>
 <div id="container">
   <div id="header">
     <%= link_to image_tag("shareshuttle_logo_sm.png", :class => "left"), root_path %>
@@ -91,7 +106,7 @@
                                 <% if ride.ride_participants.confirmed_participants.count > 1 %>
                                     <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant) %>
                                 <% else %>
-                                    <%= link_to "Accept", "#{contact_ride_ride_participant_path(ride, ride.ride_participants.owners.where(:user_id => current_user.id).first)}?accept=#{participant.id}" %>
+                                    <%= link_to "Accept", "#{contact_ride_ride_participant_path(ride, ride.ride_participants.owners.where(:user_id => current_user.id).first)}?accept=#{participant.id}", :class => 'contact-form' %>
                                 <% end %>
                                 or <%= link_to "Deny", deny_ride_ride_participant_path(ride, participant) %>
                                 ; <%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>

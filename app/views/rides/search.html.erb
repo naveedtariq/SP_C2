@@ -3,8 +3,30 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#ride_to_location_id').change(function() {
-      if($(this).val() != ""){
-        if ($(this).val() == $('#ride_from_location_id').val()) {
+      var A = [1,2,3];
+      var i = 0;
+      var j =0;
+      var k=0;
+      var IsFound = false;
+      var IsFound2 = false;
+      if($(this).val() != "" && $('#ride_from_location_id').val()!=""){
+       while(i< A.length){
+        if($('#ride_to_location_id').val() == A[i]){
+            IsFound = true;
+            break;
+        }
+        i = i+1;
+       }
+       while(k< A.length){
+        if($('#ride_from_location_id').val() == A[k]){
+           IsFound2 = true;
+           break;
+        }
+        k = k+1;
+       }
+       if(IsFound){
+        while(j<A.length){
+         if ($('#ride_from_location_id').val() <= A[j]) {
           $(".city-option-same").show();
           $('#ride_to_location_id').addClass("validation-error");
           $('#ride_from_location_id').addClass("validation-error");
@@ -12,7 +34,13 @@
           $("#ride_departure_all").attr("disabled", "disabled");
           $("#ride_departure_first_option").attr("disabled", "disabled");
           $("#ride_departure_second_option").attr("disabled", "disabled");
-        } else {
+          $("#btnAll").attr("disabled", "disabled");
+          $("#btn14").attr("disabled", "disabled");
+          $("#btn30").attr("disabled", "disabled");
+          $("#search-form").attr("disabled", "disabled");
+          return false;
+         }
+         else {
           $(".city-option-same").hide();
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
@@ -20,13 +48,71 @@
           $("#ride_departure_all").removeAttr("disabled", "disabled");
           $("#ride_departure_first_option").removeAttr("disabled", "disabled");
           $("#ride_departure_second_option").removeAttr("disabled", "disabled");
+          $("#btnAll").removeAttr("disabled", "disabled");
+          $("#btn14").removeAttr("disabled", "disabled");
+          $("#btn30").removeAttr("disabled", "disabled");
+          //$("#search-form").submit();
+         }
+         j = j+1;
+        } $("#search-form").submit();
+       }
+       else{
+         if (!IsFound2) {
+          $(".city-option-same").show();
+          $('#ride_to_location_id').addClass("validation-error");
+          $('#ride_from_location_id').addClass("validation-error");
+          $("input#ride_departure_date").attr("disabled", "disabled");
+          $("#ride_departure_all").attr("disabled", "disabled");
+          $("#ride_departure_first_option").attr("disabled", "disabled");
+          $("#ride_departure_second_option").attr("disabled", "disabled");
+          $("#btnAll").attr("disabled", "disabled");
+          $("#btn14").attr("disabled", "disabled");
+          $("#btn30").attr("disabled", "disabled");
+          $("#search-form").attr("disabled", "disabled");
+          return false;
+         }
+         else {
+          $(".city-option-same").hide();
+          $('#ride_to_location_id').removeClass("validation-error");
+          $('#ride_from_location_id').removeClass("validation-error");
+          $("input#ride_departure_date").removeAttr("disabled", "disabled");
+          $("#ride_departure_all").removeAttr("disabled", "disabled");
+          $("#ride_departure_first_option").removeAttr("disabled", "disabled");
+          $("#ride_departure_second_option").removeAttr("disabled", "disabled");
+          $("#btnAll").removeAttr("disabled", "disabled");
+          $("#btn14").removeAttr("disabled", "disabled");
+          $("#btn30").removeAttr("disabled", "disabled");
           $("#search-form").submit();
+         } 
         }
-      }
-    });
+       }
+      });
+
     $('#ride_from_location_id').change(function() {
-      if($(this).val() != ""){
-        if ($(this).val() == $('#ride_to_location_id').val()) {
+      var A = [1,2,3];
+      var i = 0;
+      var j =0;
+      var k=0;
+      var IsFound = false;
+      var IsFound2 = false;
+      if($(this).val() != "" && $('#ride_to_location_id').val()!="" ){
+       while(i< A.length){
+        if($('#ride_from_location_id').val() == A[i]){
+           IsFound = true;
+           break;
+        }
+        i = i+1;
+       }
+       while(k< A.length){
+        if($('#ride_to_location_id').val() == A[k]){
+           IsFound2 = true;
+           break;
+        }
+        k = k+1;
+       }
+       if(IsFound){
+        while(j<A.length){
+         if ($('#ride_to_location_id').val() <= A[j]) {
           $(".city-option-same").show();
           $('#ride_to_location_id').addClass("validation-error");
           $('#ride_from_location_id').addClass("validation-error");
@@ -34,7 +120,13 @@
           $("#ride_departure_all").attr("disabled", "disabled");
           $("#ride_departure_first_option").attr("disabled", "disabled");
           $("#ride_departure_second_option").attr("disabled", "disabled");
-        } else {
+          $("#btnAll").attr("disabled", "disabled");
+          $("#btn14").attr("disabled", "disabled");
+          $("#btn30").attr("disabled", "disabled");
+          $("#search-form").attr("disabled", "disabled");
+          return false;
+         }
+         else {
           $(".city-option-same").hide();
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
@@ -42,10 +134,46 @@
           $("#ride_departure_all").removeAttr("disabled", "disabled");
           $("#ride_departure_first_option").removeAttr("disabled", "disabled");
           $("#ride_departure_second_option").removeAttr("disabled", "disabled");
+          $("#btnAll").removeAttr("disabled", "disabled");
+          $("#btn14").removeAttr("disabled", "disabled");
+          $("#btn30").removeAttr("disabled", "disabled");
+          //$("#search-form").submit();
+         }
+         j = j+1;
+        } $("#search-form").submit();
+       }
+       else{
+         if (!IsFound2) {
+          $(".city-option-same").show();
+          $('#ride_to_location_id').addClass("validation-error");
+          $('#ride_from_location_id').addClass("validation-error");
+          $("input#ride_departure_date").attr("disabled", "disabled");
+          $("#ride_departure_all").attr("disabled", "disabled");
+          $("#ride_departure_first_option").attr("disabled", "disabled");
+          $("#ride_departure_second_option").attr("disabled", "disabled");
+          $("#btnAll").attr("disabled", "disabled");
+          $("#btn14").attr("disabled", "disabled");
+          $("#btn30").attr("disabled", "disabled");
+          !$("#search-form").attr("disabled", "disabled");
+          return false;
+         }
+         else {
+          $(".city-option-same").hide();
+          $('#ride_to_location_id').removeClass("validation-error");
+          $('#ride_from_location_id').removeClass("validation-error");
+          $("input#ride_departure_date").removeAttr("disabled", "disabled");
+          $("#ride_departure_all").removeAttr("disabled", "disabled");
+          $("#ride_departure_first_option").removeAttr("disabled", "disabled");
+          $("#ride_departure_second_option").removeAttr("disabled", "disabled");
+          $("#btnAll").removeAttr("disabled", "disabled");
+          $("#btn14").removeAttr("disabled", "disabled");
+          $("#btn30").removeAttr("disabled", "disabled");
           $("#search-form").submit();
-        }
+         }
+       }
       }
-    });
+     });
+     
     $("#btnAll").click(function(){
       $("input#ride_departure_date").attr("disabled", "disabled");
     });
@@ -129,7 +257,7 @@
               <input type="button" id="btnAll" value="All" name="ride[departure]" class="form-post.active"/>
               <input type="button" id="btn14" value="Next 14 Days" />
               <input type="button" id="btn30" value="Next 30 Days" />
-              <table style="display: none;">
+              <table style="display: block;">
                 <tr>
                   <td>
                     <%= f.radio_button :departure, 'all'%>
@@ -154,7 +282,7 @@
               <%= hidden_field_tag :search_posted, "true" %>
             </div>
           <% end %>
-          <div class="city-option-same" style="display: none"> From and To City can't be the same </div>
+          <div class="city-option-same" style="display: none"> Same Group Select </div>
         </div>
         <div id="results">
           <div class="ride_list">
