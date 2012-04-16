@@ -31,7 +31,8 @@
       <h4> Current Rides</h4>
       <table border="1" cellpadding="3">
         <tr>
-          <th>Offered by</th>
+          <th>Owner</th>
+          <th>Riders</th>
           <th>From</th>
           <th>To</th>
           <th>Departure date</th>
@@ -56,6 +57,11 @@
             <% ride = ride_participant.ride %>
             <tr align="center">
               <td><a href="<%= user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
+              <td>
+                <% ride.ride_participants.confirmed_participants.each do |p| %>
+                    <a href="<%= user_path(p.user) %>"><%= p.user && "#{p.user.full_name}" %></a>&nbsp;
+                <% end %>
+              </td>
               <td><%= ride.from_location && ride.from_location.name %></td>
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
@@ -112,7 +118,7 @@
                     left in expiry
                     | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
                 <% when ROLES_FOR_RIDES[:confirmed] %>
-                    <% owner = ride.owner%>
+                    <% owner = ride.owner %>
                     Status: confirmed by <a href="<%= user_path(owner) %>"><%= owner.full_name %></a>, contact
                     info:
                     phone <%= ride_participant.owner_participant.phone %>, email: <%= owner.email %>;
@@ -133,7 +139,8 @@
       <h4> Past Rides</h4>
       <table border="1" cellpadding="3">
         <tr>
-          <th>Offered by</th>
+          <th>Owner</th>
+          <th>Riders</th>
           <th>From</th>
           <th>To</th>
           <th>Departure date</th>
@@ -157,6 +164,11 @@
             <% ride = ride_participant.ride %>
             <tr align="center">
               <td><a href="<%= user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
+              <td>
+                <% ride.ride_participants.confirmed_participants.each do |p| %>
+                    <a href="<%= user_path(p.user) %>"><%= p.user && "#{p.user.full_name}" %></a>&nbsp;
+                <% end %>
+              </td>
               <td><%= ride.from_location && ride.from_location.name %></td>
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
