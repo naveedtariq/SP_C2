@@ -45,20 +45,31 @@
             $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
             if("<%= @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
               $('#fare').text("Estimated Taxi Fare: $45");
+              $('input[type=number].""').val('45');
+             
+
             }
             else if("<%=  @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
               $('#fare').text("Estimated Taxi Fare: $45");
+              $('input[type=number].""').val('45');
+
+             
             }
             else if((<%=  @ride.departure_time.hour %> > 20 && <%=@ride.departure_time.hour %> < 24) || (<%=  @ride.departure_time.hour %> > 1 && <%=@ride.departure_time.hour %> < 7)  ){
               $('#fare').text("Estimated Taxi Fare: $"+fare2);
+              $('input[type=number].""').val(fare2);
+              
             }
             else if((1 <= <%=@ride.departure_date.wday%> && <%=@ride.departure_date.wday%> < 6) && (<%=  @ride.departure_time.hour %> >= 16 && <%=  @ride.departure_time.hour %> <= 19 && <%=  @ride.departure_time.min %> >= 0 && <%=  @ride.departure_time.min %> <= 59 )){
               $('#fare').text("Estimated Taxi Fare: $"+fare3);
+              $('input[type=number].""').val(fare3);
+              
             }
             else{
               var fare = 3.0;
               fare = (totalDistance * (0.4/0.2))+fare;
               $('#fare').text("Estimated Taxi Fare: $"+fare);
+              $('input[type=number].""').val(fare);
             }
           }
         });
@@ -97,14 +108,14 @@
 
       <div class="left" style="margin-right:40px;">
         <p><b>Total Ride Price One Way</b></p>
-        $<%= f.number_field :total_price, {:style => "height: 26px; width: 110px;"} %>
+        $<%= f.number_field :total_price, {:style => "height: 26px; width: 110px;", :value => ""} %>
         <div class="total-price-check" style="display: none; color: red; margin-bottom: -25px; ">Price should not be greater than $200</div>
         <div class="total-price-check1" style="display: none; color: red; margin-bottom: -25px; ">Price should be positive </div>
         <div class="total-price-check2" style="display: none; color: red; margin-bottom: -25px; ">Price field can't be empty </div>
       </div>
       <div class="left" style="margin-right:20px;">
         <p><b>Number of available seats</b></p>
-        <%= f.select :available_seats, 1..2, {:style => "width: 110px"} %>
+        <%= f.select :available_seats, 1..2, {:style => "width: 110px", :selected => '2'} %>
       </div>
       <br/>
       <div class="left" style="margin-right:20px;">

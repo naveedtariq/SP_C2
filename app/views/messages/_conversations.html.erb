@@ -15,7 +15,7 @@
 <% if receiver.blank? %>
   Can't send messages to yourself
 <% else  %>
-  <div class="message-box">
+  <div class="message-box11">
     <%=  form_for Message.new, :url => ride_message_path do |f| %>
       <%= image_tag current_user.user_image_url.to_s, :style => "width: 40px"  %>
       <div class="field">

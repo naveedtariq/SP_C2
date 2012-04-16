@@ -2,35 +2,125 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#ride_to_location_id').change(function() {
-      if($(this).val() != ""){
-        if ($(this).val() == $('#ride_from_location_id').val()) {
+      var A = [1,2,3];
+      var i = 0;
+      var j =0;
+      var k=0;
+      var IsFound = false;
+      var IsFound2 = false;
+
+     if($(this).val() != "" && $('#ride_from_location_id').val()!=""){
+      while(i< A.length){
+        if($('#ride_to_location_id').val() == A[i]){
+          IsFound = true;
+          break;
+        }
+          i = i+1;
+      }
+      while(k< A.length){
+         if($('#ride_from_location_id').val() == A[k]){
+           IsFound2 = true;
+           break;
+         }
+         k = k+1;
+       }
+       if(IsFound){
+        while(j<A.length){
+        if ($('#ride_from_location_id').val() <= A[j]) {
           $(".city-option-same").show();
           $('#ride_to_location_id').addClass("validation-error");
           $('#ride_from_location_id').addClass("validation-error");
           $("#btn-search").attr("disabled", "disabled");
-        } else {
+          return false;
+        }
+        else {
+          $(".city-option-same").hide();
+          $('#ride_to_location_id').removeClass("validation-error");
+          $('#ride_from_location_id').removeClass("validation-error");
+          $("#btn-search").removeAttr("disabled");
+        }
+        j = j+1; }
+       }
+      else{
+        if (!IsFound2) {
+          $(".city-option-same").show();
+          $('#ride_to_location_id').addClass("validation-error");
+          $('#ride_from_location_id').addClass("validation-error");
+          $("#btn-search").attr("disabled", "disabled");
+            return false;
+        }
+        else {
           $(".city-option-same").hide();
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
           $("#btn-search").removeAttr("disabled");
         }
       }
+     }
     });
+
+
     $('#ride_from_location_id').change(function() {
-      if($(this).val() != ""){
-        if ($(this).val() == $('#ride_to_location_id').val()) {
+
+      var A = [1,2,3];
+      var i = 0;
+      var j =0;
+      var k=0;
+      var IsFound = false;
+      var IsFound2 = false;
+
+      if($(this).val() != "" && $('#ride_to_location_id').val()!="" ){
+       while(i< A.length){
+        if($('#ride_from_location_id').val() == A[i]){
+          IsFound = true;
+          break;
+         }
+        i = i+1;
+       }
+       while(k< A.length){
+        if($('#ride_to_location_id').val() == A[k]){
+          IsFound2 = true;
+          break;
+        }
+       k = k+1;
+      }
+
+      if(IsFound){
+       while(j<A.length){
+        if ($('#ride_to_location_id').val() <= A[j]) {
           $(".city-option-same").show();
           $('#ride_to_location_id').addClass("validation-error");
           $('#ride_from_location_id').addClass("validation-error");
           $("#btn-search").attr("disabled", "disabled");
-        } else {
+        }
+        else {
+          $(".city-option-same").hide();
+          $('#ride_to_location_id').removeClass("validation-error");
+          $('#ride_from_location_id').removeClass("validation-error");
+          $("#btn-search").removeAttr("disabled");
+        }
+        j = j+1;
+       }
+      }
+      else{
+       if (!IsFound2) {
+          $(".city-option-same").show();
+          $('#ride_to_location_id').addClass("validation-error");
+          $('#ride_from_location_id').addClass("validation-error");
+          $("#btn-search").attr("disabled", "disabled");
+        }
+        else {
           $(".city-option-same").hide();
           $('#ride_to_location_id').removeClass("validation-error");
           $('#ride_from_location_id').removeClass("validation-error");
           $("#btn-search").removeAttr("disabled");
         }
       }
-    });
+    
+  
+
+
+      }});
 
       $( "#ride_departure" ).datepicker({
       dateFormat: "yy-mm-dd"             ,
@@ -94,7 +184,7 @@ var scrollTime = 20000;
               <div class="text_input">
                 <label for="search_e" class="pin end"></label>
                 <%= f.select :to_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {:include_blank => "--- select to ---"}, :style => "width:275px"%>
-               </div>
+              </div>
                <%= f.submit "Search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
             </div>
         
@@ -107,7 +197,7 @@ var scrollTime = 20000;
             </div>
           <% end %>
         </div>
-        <div class="city-option-same" style="font-weight: bold;color: red; display: none"> From and To City can't be the same </div>
+        <div class="city-option-same" style="font-weight: bold;color: red; display: none"> Same Group Select </div>
       </div>
       <div id="content">
         <div id="results" class="subsection">
