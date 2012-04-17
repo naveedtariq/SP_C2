@@ -1,0 +1,75 @@
+<%= javascript_include_tag "jquery-1.7.1.min", "jquery.phonemask"%>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input#ride_participant_mode_of_communications_sms_text").click(function () {
+            $(".method-type-check").hide();
+        });
+        $("#ride_participant_mode_of_communications_phone_call").click(function () {
+            $(".method-type-check").hide();
+        });
+        $("#ride_participant_mode_of_communications_email").click(function () {
+            $(".method-type-check").hide();
+        });
+    $(".edit_ride_participant").submit(function () {
+      if ($('input#ride_participant_phone').val().length < 1) {
+          $(".phone-check1").show();
+      }
+      else if (!($('input#ride_participant_mode_of_communications_sms_text').is(':checked') || $('#ride_participant_mode_of_communications_phone_call').is(':checked') || $('#ride_participant_mode_of_communications_email').is(':checked'))) {
+          $(".method-type-check").show();
+      }
+      else{
+            return true;
+            opener.location.reload(true);
+            self.close();
+      }
+            return false;
+     });
+
+  $("input#ride_participant_phone").change(function () {
+      if ($(this).val() != "")
+      $(".phone-check1").hide();
+  });
+  $("input#ride_participant_phone").mask("999-999-9999");
+       });
+
+</script>
+<%= form_for [@ride,@ride_participant], :url => ride_ride_participant_path(@ride, @ride_participant, :accept => params[:accept]) do |f| %>
+  <div class="field">
+    <%= f.label :email %>
+    <%= text_field_tag :email, current_user.email, :disabled => true %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %>
+    <%= f.text_field :phone, :value => current_user.phone %>
+  </div>
+  <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
+  <%= hidden_field_tag 'contact', 'phone' %>
+    <br/>Preferred method of communication<br/><br/>
+    <table>
+      <tr>
+        <td>
+          <%= f.radio_button :mode_of_communications, 'sms_text' %>
+        </td>
+        <td>
+          <%= f.label :mode_of_communications, 'Sms text', :for => 'ride_participant_mode_of_communications_sms_text' %>
+        </td>
+        <td>
+          <%= f.radio_button :mode_of_communications, 'phone_call' %>
+        </td>
+        <td>
+          <%= f.label :mode_of_communications, 'Phone call', :for => 'ride_participant_mode_of_communications_phone_call' %>
+        </td>
+        <td>
+          <%= f.radio_button :mode_of_communications, 'email' %>
+        </td>
+        <td>
+          <%= f.label :mode_of_communications, 'Email', :for => 'ride_participant_mode_of_communications_email' %>
+        </td>
+      </tr>
+    </table>
+    <div class="method-type-check" style="display: none; color: red; font-weight: bold;">No
+      Method
+      Selected
+    </div>
+<div class="actions"><%= f.submit %></div>
+    <% end %>

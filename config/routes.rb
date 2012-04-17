@@ -7,9 +7,10 @@ SPC2::Application.routes.draw do
   get "signup" => "users#new", :as => "signup"
 
 
-  resources :users, :only => [:new, :create, :edit, :update, :show] do
+  resources :users, :only => [:new, :create, :edit, :update, :show, :contact] do
     collection do
       get "logged_in"
+      get "update_phone"
     end
     member do
       get "inbox"
@@ -39,11 +40,13 @@ SPC2::Application.routes.draw do
     member do
       get "clone"
     end
-    resources :ride_participants, :only => [:new, :create] do 
+    resources :ride_participants, :only => [:new, :create, :update] do
       collection do
         get "create_participant"
       end
       member do
+
+        get "contact"
         post "create_message"
         get "cancel"
         get "accept"

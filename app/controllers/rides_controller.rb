@@ -39,8 +39,9 @@ class RidesController < ApplicationController
 
   def clone
     clone_ride = Ride.find(params[:id])
-    @ride = Ride.new(clone_ride.attributes)
-    return render :action => "new"
+    store_ride(clone_ride)
+    @ride = Ride.new(retrieve_ride)
+    render :action => "post_one"
   end
   def update
     if @ride.valid?(params[:ride])

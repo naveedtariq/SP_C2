@@ -27,6 +27,9 @@ class RideParticipant < ActiveRecord::Base
   }
   def self.owner
     self.owners.first
+    end
+  def owner_participant
+    self.ride.ride_participants.owners.first
   end
   def owner
     self.ride.owner

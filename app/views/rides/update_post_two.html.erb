@@ -59,7 +59,7 @@
     });
 
     <% if @ride.to_location.present? && @ride.from_location.present? %>
-        $('#map_canvas').gmap('displayDirections', { 'origin': '<%= @ride.to_location.name %>', 'destination': '<%= @ride.from_location.name %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+      $('#map_canvas').gmap('displayDirections', { 'origin': '<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination': '<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
           if ( status === 'OK' ){
             var METERS_TO_MILES = 0.000621371192;
             totalDistance = result.routes[0].legs[0].distance.value;

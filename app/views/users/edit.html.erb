@@ -1,6 +1,22 @@
-<script>
+<%= javascript_include_tag "jquery-1.7.1.min", "jquery.phonemask"%>
+<script type="text/javascript">
     $(document).ready(function () {
-        $('#user_password').password_strength();
+    $(".edit_user").submit(function (){
+      if ($('input#user_phone').val().length < 1) {
+        $(".phone-check1").show();
+      }
+      else{
+        return true;
+      }
+      return false;
+    });
+
+    $("input#user_phone").change(function () {
+      if ($(this).val() != "")
+        $(".phone-check1").hide();
+    });
+    $("input#user_phone").mask("999-999-9999");
+
     });
 </script>
 <div class="container">
@@ -58,6 +74,7 @@
           <%= f.label :phone %>
           <%= f.text_field :phone %>
         </div>
+        <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
         <div class="field">
           <%= f.label :city %>
           <%= f.text_field :city %>

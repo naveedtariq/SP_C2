@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name                                               # return the full name of user
-    "#{self.first_name} #{self.last_name}"
+    "#{self.first_name} #{self.last_name[0]}."
   end
 
   validates_confirmation_of :password                         # Validation of confirmation Password
