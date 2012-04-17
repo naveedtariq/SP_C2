@@ -1,6 +1,11 @@
 <%= javascript_include_tag "jQuery.autoscroll.1.01"%>
 <script type="text/javascript">
   $(document).ready(function() {
+
+      if(opener){
+          window.close();
+          opener.location.reload(true);
+      }
     $('#ride_to_location_id').change(function() {
       var A = [1,2,3];
       var i = 0;

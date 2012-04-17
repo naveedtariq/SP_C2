@@ -9,9 +9,10 @@ width:800,
 top:50,
 left:50
 });
-
-window.close();
-opener.location.reload(true);
+if(opener){
+    window.close();
+    opener.location.reload(true);
+}
     });
 </script>
 <div id="container">

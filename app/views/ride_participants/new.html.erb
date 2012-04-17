@@ -1,9 +1,19 @@
-<%= javascript_include_tag "jquery-1.7.1.min", "jquery.ui.dialog", "jquery.ui.core", "jquery.ui.widget", "jquery.ui.position", "jquery.ui.mouse", "jquery.ui.draggable", "jquery.ui.droppable", "jquery.ui.button", "jquery.ui.resizable", "jquery.ui.dialog.min"%>
-<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui", "bootstrap", "jquery.ui.dialog"%>
+<%= javascript_include_tag "jquery-1.7.1.min", "jquery.ui.dialog", "jquery.ui.core", "jquery.ui.widget", "jquery.ui.position", "jquery.ui.mouse", "jquery.ui.draggable", "jquery.ui.droppable", "jquery.ui.button", "jquery.ui.resizable", "jquery.ui.dialog.min" %>
+<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui", "bootstrap", "jquery.ui.dialog" %>
 <%= javascript_include_tag "jquery.ui.map.full.min", "jquery.phonemask" %>
+<%= javascript_include_tag "jquery.popupWindow" %>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $('.contact-form').popupWindow({
+            height:500,
+            width:800,
+            top:50,
+            left:50
+        });
+        <% if cookies[:contact] && cookies[:contact].to_i == @ride.id %>
+        $(".message-box").dialog();
+        <% end %>
         <% if @ride.to_location.present? && @ride.from_location.present? %>
         $('#map_canvas').gmap('displayDirections', { 'origin':'<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'destination':'<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('resultstmp') }, function (result, status) {
         });
@@ -62,8 +72,8 @@
 
         $("button#contact-info").click(function () {
             //$("button#contact-info").hide();
-           // $(".message-box").show();
-              $(".message-box").dialog();
+            // $(".message-box").show();
+            $(".message-box").dialog();
 
         });
 
@@ -106,9 +116,9 @@
                   <a href="<%= clone_ride_path(@ride) %>">
                     <div class="price_box">
                       <div class="seats">
-                        <span class="count1">Similar post</span>
+                        <span class="count1">Sold out</span>
                       </div>
-                      <p><b><%= number_to_currency(@ride.price_per_seat_with_owner) %></b> / seat</p>
+                      <p>Post Similar</p>
                     </div>
                   </a>
               <% else %>
@@ -280,14 +290,25 @@
         <br/>
         Facebook connected
         (<%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}" %>
-        )<br/><br/>
+        )
+        <br/>
+        <% if rider.user.authentications.present? %>
+            <% fb_id = rider.user.authentications.first.uid %>
+            <a href="https://www.facebook.com/profile.php?id=<%= fb_id %>">Facebook Profile </a>
+        <% end %>
+        <br/><br/>
       </div>
       <div style="clear:both"></div>
       <% if @ride.active? %>
           <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %>
-              <button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
-                <span>Contact me</span>
-              </button>
+              <% if logged_in? %>
+                  <button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+                    <span>Contact me</span>
+                  </button>
+              <% else %>
+                  <a href="<%= auth_at_provider_path(:provider => :facebook, contact: @ride.id) %>" class="contact-form">Contact
+                    me</a>
+              <% end %>
           <% end %>
       <% end %>
       <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %>

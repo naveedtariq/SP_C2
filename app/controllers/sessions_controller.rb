@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   #  layout "session"
+  before_filter :require_not_loggedin, :only => [:new, :create]
+
   def new
     #return render :action => "404error_user", :layout => false
     # @facebook_api_key = FB_CONFIG['api_key']
@@ -18,12 +20,14 @@ class SessionsController < ApplicationController
       render "new"
     end
   end
+
   def facebook_login
-    @oauth = Koala::Facebook::OAuth.new(APP_CONFIG["facebook_app_id"] , APP_CONFIG["facebook_app_key"], facebook_callback_sessions_url)
-    return redirect_to   @oauth.url_for_oauth_code
+    @oauth = Koala::Facebook::OAuth.new(APP_CONFIG["facebook_app_id"], APP_CONFIG["facebook_app_key"], facebook_callback_sessions_url)
+    return redirect_to @oauth.url_for_oauth_code
   end
+
   def facebook_callback
-    @oauth = Koala::Facebook::OAuth.new(APP_CONFIG["facebook_app_id"] , APP_CONFIG["facebook_app_key"], facebook_callback_sessions_url)
+    @oauth = Koala::Facebook::OAuth.new(APP_CONFIG["facebook_app_id"], APP_CONFIG["facebook_app_key"], facebook_callback_sessions_url)
     oauth_code = @oauth.get_access_token(params[:code])
     @graph = Koala::Facebook::GraphAPI.new(oauth_code)
     authentication = current_user.authentications.first
@@ -66,12 +70,18 @@ class SessionsController < ApplicationController
     redirect_back_or_to dashboard_path
 
   end
+
   def destroy
+    cookies[:contact] = nil
     logout
     redirect_to login_path, :notice => "Logged out!"
   end
+
   def temp_redirect
     session[:user_id] = User.first && User.first.id
     return redirect_to session[:return_to_url]
+  end
+  def require_not_loggedin
+    return redirect_back_or_to root_path if current_user.present?
   end
 end

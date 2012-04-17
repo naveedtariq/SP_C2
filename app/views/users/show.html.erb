@@ -1,24 +1,22 @@
 <h4>My Profile</h4><br/>
 <%= image_tag @user.user_image_url, :style => "width: 200px" %><br/>
-<%if @graph.present?%>
-  <%authentication = Authentication.find_by_user_id(params[:id])%>
-<% user  = User.find(params[:id])%>
-  <%if user.authentications.present?%>
-<%fb_id = authentication.uid%>
-<a href="https://www.facebook.com/profile.php?id=<%=fb_id%>">Facebook Profile </a>
-<%end%>
-<%end%>
+<% if @graph.present? %>
+    <% if @user.authentications.present? %>
+        <% fb_id = @user.authentications.first.uid %>
+        <a href="https://www.facebook.com/profile.php?id=<%= fb_id %>">Facebook Profile </a>
+    <% end %>
+<% end %>
 <br/><br/>
-<% if @graph.present? && (user.id != current_user.id) && (current_user.authentications.first.present?) && (user.authentications.first.present?) %>
-  <%mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{user.authentications.first.uid}") %>
+<% if @graph.present? && (@user.id != current_user.id) && (current_user.authentications.first.present?) && (@user.authentications.first.present?) %>
+    <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{@user.authentications.first.uid}") %>
     <% if mutual_friends.count > 0 %>
-      <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
+        <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
     <% end %>
     <% mutual_friends.each do |friend| %>
-      <%= friend["name"] %>
-      <% unless friend == mutual_friends.last %>
-        &nbsp;and&nbsp;
-      <% end %>
+        <%= friend["name"] %>
+        <% unless friend == mutual_friends.last %>
+            &nbsp;and&nbsp;
+        <% end %>
     <% end %>
 
 
@@ -116,7 +114,7 @@
   <% @ride_participants.each do |ride_participant| %>
       <% ride = ride_participant.ride %>
       <tr align="center">
-        <td><a href="<%=  user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
+        <td><a href="<%= user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
         <td>
           <% ride.ride_participants.confirmed_participants.each do |p| %>
               <a href="<%= user_path(p.user) %>"><%= p.user && "#{p.user.full_name}" %></a>&nbsp;
@@ -165,7 +163,7 @@
   <% @past_rides.each do |ride_participant| %>
       <% ride = ride_participant.ride %>
       <tr align="center">
-        <td><a href="<%=  user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
+        <td><a href="<%= user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
         <td>
           <% ride.ride_participants.confirmed_participants.each do |p| %>
               <a href="<%= user_path(p.user) %>"><%= p.user && "#{p.user.full_name}" %></a>&nbsp;

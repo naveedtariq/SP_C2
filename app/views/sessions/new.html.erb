@@ -1,53 +1,64 @@
 
+<%= javascript_include_tag "jquery-1.7.1.min", "jquery.popupWindow"%>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#child_toolbar").val(window.toolbar.visible);
-      });
+    $(document).ready(function () {
+        $("#child_toolbar").val(window.toolbar.visible);
+
+        $('.contact-form').popupWindow({
+            height:500,
+            width:800,
+            top:50,
+            left:50
+        });
+    });
 </script>
 <div id="fb-root"></div>
 <script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=365401603490972";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'))
 
-  </script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=365401603490972";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'))
+
+</script>
 <div class="fb-login-button"></div>
 <div class="row">
-	<div class="span12">
-		<%= form_tag sessions_path :class => 'form-horizontal' do %>
-			<fieldset>
-				<legend>Sign in with your existing account</legend>
-			<div class="control-group">
-				<%= label_tag :email, nil, :class => 'control-label' %>
-				<div class="controls">
-					<%= text_field_tag :email, params[:email], :class => 'input-xlarge' %>
-				</div>
-			</div>
-			<div class="control-group">
-				<%= label_tag :password , nil, :class => 'control-label' %>
-				<div class="controls">
-					<%= password_field_tag :password ,nil, :class => 'input-xlarge' %>
-				</div>
-        <%= hidden_field_tag :child_toolbar  %>
-			</div>
-			<div class="control-group">
-				<%= check_box_tag :remember_me, 1, params[:remember_me], :class => 'pull-left', :style => 'margin-right:5px;' %>
-				<%= label_tag :remember_me, nil, :class => 'pull-left' %>
-			</div>
-			<br style="clear:both;float:none;" />
-			<div class="actions">
-				<%= submit_tag "Sign in", :class => "btn btn-primary" %>
-			</div>
-			<div class="control-group">
-        <a href="<%= auth_at_provider_path(:provider => :facebook)%>"><%= image_tag ("facebookconnect.gif")%></a>
-        <%= link_to 'Login with Facebook', auth_at_provider_path(:provider => :facebook) %>
-          
-			</div>
-			</fieldset>
-		<% end %>
-	</div>
+  <div class="span12">
+    <%= form_tag sessions_path :class => 'form-horizontal' do %>
+        <fieldset>
+          <legend>Sign in with your existing account</legend>
+          <div class="control-group">
+            <%= label_tag :email, nil, :class => 'control-label' %>
+            <div class="controls">
+              <%= text_field_tag :email, params[:email], :class => 'input-xlarge' %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= label_tag :password, nil, :class => 'control-label' %>
+            <div class="controls">
+              <%= password_field_tag :password, nil, :class => 'input-xlarge' %>
+            </div>
+            <%= hidden_field_tag :child_toolbar %>
+          </div>
+          <div class="control-group">
+            <%= check_box_tag :remember_me, 1, params[:remember_me], :class => 'pull-left', :style => 'margin-right:5px;' %>
+            <%= label_tag :remember_me, nil, :class => 'pull-left' %>
+          </div>
+          <br style="clear:both;float:none;"/>
+
+          <div class="actions">
+            <%= submit_tag "Sign in", :class => "btn btn-primary" %>
+          </div>
+          <div class="control-group">
+            <a href="<%= auth_at_provider_path(:provider => :facebook) %>" class="contact-form"><%= image_tag ("facebookconnect.gif") %></a>
+            <%= link_to 'Login with Facebook', auth_at_provider_path(:provider => :facebook) %>
+
+          </div>
+        </fieldset>
+    <% end %>
+  </div>
 </div>
