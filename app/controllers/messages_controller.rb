@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   def new
     @message = Message.new
+    @ride = Ride.find(params[:ride_id])
   end
 
   def create
@@ -20,5 +21,7 @@ class MessagesController < ApplicationController
   def show
     cookies[:contact] = nil
     @ride = Ride.find(params[:ride_id])
+    @req_user = User.find(params[:req_id]) if((params[:req_id]).present?)
+    render :layout => false
   end
 end

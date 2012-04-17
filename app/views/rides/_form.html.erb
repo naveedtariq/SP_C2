@@ -66,7 +66,8 @@
           $('#ride_from_location_id').removeClass("validation-error");
           $("input.ride-check-btn").removeAttr("disabled");
           if($('#ride_from_location_id').val()!=""){
-            $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" nyc", 'destination': $('#ride_to_location_id').find("option:selected").text()+" ", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+            if($('#ride_from_location_id').find("option:selected").text() == "Meat Packing District"){
+             $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" 10014", 'destination': $('#ride_to_location_id').find("option:selected").text()+" ", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
               if ( status === 'OK' ){
                 var METERS_TO_MILES = 0.000621371192;
                 totalDistance = result.routes[0].legs[0].distance.value;
@@ -88,8 +89,31 @@
               }
             });
             //return false;
-
           }
+          else{
+            $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" nyc", 'destination': $('#ride_to_location_id').find("option:selected").text()+" ", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+              if ( status === 'OK' ){
+                var METERS_TO_MILES = 0.000621371192;
+                totalDistance = result.routes[0].legs[0].distance.value;
+                totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
+
+                $("#distance").text("distance: "+totalDistance+' miles');
+                $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
+                if($('#ride_from_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+                  $('#fare').text("Estimated Taxi Fare: $45");
+                }
+                else if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+                  $('#fare').text("Estimated Taxi Fare: $45");
+                }
+                else{
+                  var fare = 3.0;
+                  fare = (totalDistance * (0.4/0.2))+fare;
+                  $('#fare').text("Estimated Taxi Fare: $"+fare);
+                }
+              }
+            });
+          }
+          } //req
         } j = j + 1;}
       }
       else{
@@ -106,7 +130,8 @@
           $('#ride_from_location_id').removeClass("validation-error");
           $("input.ride-check-btn").removeAttr("disabled");
           if($('#ride_from_location_id').val()!=""){
-            $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" ", 'destination': $('#ride_to_location_id').find("option:selected").text()+" nyc", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+            if($('#ride_to_location_id').find("option:selected").text() == "Meat Packing District"){
+             $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" ", 'destination': $('#ride_to_location_id').find("option:selected").text()+" 10014", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
               if ( status === 'OK' ){
                 var METERS_TO_MILES = 0.000621371192;
                 totalDistance = result.routes[0].legs[0].distance.value;
@@ -128,8 +153,31 @@
               }
             });
            // return false;
-
           }
+          else{
+            $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" ", 'destination': $('#ride_to_location_id').find("option:selected").text()+" nyc", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+              if ( status === 'OK' ){
+                var METERS_TO_MILES = 0.000621371192;
+                totalDistance = result.routes[0].legs[0].distance.value;
+                totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
+
+                $("#distance").text("distance: "+totalDistance+' miles');
+                $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
+                if($('#ride_from_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+                  $('#fare').text("Estimated Taxi Fare: $45");
+                }
+                else if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+                  $('#fare').text("Estimated Taxi Fare: $45");
+                }
+                else{
+                  var fare = 3.0;
+                  fare = (totalDistance * (0.4/0.2))+fare;
+                  $('#fare').text("Estimated Taxi Fare: $"+fare);
+                }
+              }
+            });
+          }
+          } //req
         }
       }
      }});
@@ -171,7 +219,8 @@
           $('#ride_from_location_id').removeClass("validation-error");
           $("input.ride-check-btn").removeAttr("disabled");
           if($('#ride_to_location_id').val()!=""){
-            $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" ", 'destination': $('#ride_to_location_id').find("option:selected").text()+" nyc", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+            if($('#ride_to_location_id').find("option:selected").text() == "Meat Packing District"){
+             $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" ", 'destination': $('#ride_to_location_id').find("option:selected").text()+" 10014", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
               if ( status === 'OK' ){
                 var METERS_TO_MILES = 0.000621371192;
                 totalDistance = result.routes[0].legs[0].distance.value;
@@ -193,8 +242,31 @@
               }
             });
            // return false;
-
           }
+          else {
+             $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" ", 'destination': $('#ride_to_location_id').find("option:selected").text()+" nyc", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+              if ( status === 'OK' ){
+                var METERS_TO_MILES = 0.000621371192;
+                totalDistance = result.routes[0].legs[0].distance.value;
+                totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
+
+                $("#distance").text("distance: "+totalDistance+' miles');
+                $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
+                if($('#ride_from_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+                  $('#fare').text("Estimated Taxi Fare: $45");
+                }
+                else if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+                  $('#fare').text("Estimated Taxi Fare: $45");
+                }
+                else{
+                  var fare = 3.0;
+                  fare = (totalDistance * (0.4/0.2))+fare;
+                  $('#fare').text("Estimated Taxi Fare: $"+fare);
+                }
+              }
+            });
+          }
+          } //req
         }  j = j + 1; }
        }
        else
@@ -212,7 +284,8 @@
           $('#ride_from_location_id').removeClass("validation-error");
           $("input.ride-check-btn").removeAttr("disabled");
           if($('#ride_to_location_id').val()!=""){
-            $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" nyc", 'destination': $('#ride_to_location_id').find("option:selected").text()+" ", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+            if($('#ride_from_location_id').find("option:selected").text() == "Meat Packing District"){
+             $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" 10014", 'destination': $('#ride_to_location_id').find("option:selected").text()+" ", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
               if ( status === 'OK' ){
                 var METERS_TO_MILES = 0.000621371192;
                 totalDistance = result.routes[0].legs[0].distance.value;
@@ -234,8 +307,31 @@
               }
             });
            // return false;
-
           }
+          else{
+             $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" nyc", 'destination': $('#ride_to_location_id').find("option:selected").text()+" ", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+              if ( status === 'OK' ){
+                var METERS_TO_MILES = 0.000621371192;
+                totalDistance = result.routes[0].legs[0].distance.value;
+                totalDistance = (Math.round( totalDistance * METERS_TO_MILES * 10 ) / 10)
+
+                $("#distance").text("distance: "+totalDistance+' miles');
+                $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
+                if($('#ride_from_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+                  $('#fare').text("Estimated Taxi Fare: $45");
+                }
+                else if($('#ride_to_location_id').find("option:selected").text() == "(JFK) John F. Kennedy"){
+                  $('#fare').text("Estimated Taxi Fare: $45");
+                }
+                else{
+                  var fare = 3.0;
+                  fare = (totalDistance * (0.4/0.2))+fare;
+                  $('#fare').text("Estimated Taxi Fare: $"+fare);
+                }
+              }
+            });
+          }
+          }//req
         }
        }
 
