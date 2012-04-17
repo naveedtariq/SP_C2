@@ -3,6 +3,8 @@
     $("#count-left").text(" - " + $("#left_count").val() + " left to review");
   });
 </script>
+<div class="main-msg-box" style="border: 1px solid;">
+  <div class="left-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px; width: 700px;">
 <h6>Feedbacks<span id="count-left"></span></h6>
 <% @past_rides = current_user.rides.past_rides.sorted_recent_at_top %>
 <% @past_rides.each do |past_ride| %>
@@ -13,3 +15,7 @@
   <%end%>
 <%end%>
  <%= hidden_field_tag :left_count, @left_count %>
+  </div>
+      <div class="right-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px;">
+<iframe src="" name="frame-a" width="600" height="650" ></iframe>
+  </div>

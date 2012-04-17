@@ -1,6 +1,6 @@
 <% if owner.present? %>
 <a href="<%=user_path(owner)%>"><%= owner && "#{owner.full_name}" %> </a> |
-<a href="<%=new_ride_ride_participant_path(@ride.id)%>"><%= @ride.to_location && @ride.to_location.name %>&nbsp;on&nbsp;<%=@ride.departure_date %></a>
+<a href="<%=new_ride_ride_participant_path(@ride.id)%>" target="frame-a"><%= @ride.to_location && @ride.to_location.name %>&nbsp;on&nbsp;<%=@ride.departure_date %></a>
 <br/><%= image_tag owner.user_image_url %>
 <% @feedback = current_user.feedbacks.where(:owner_id => owner.id, :ride_id => @ride.id).first || Feedback.new %>
 <div class="message-box">
