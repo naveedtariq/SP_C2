@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-   def new
+  before_filter :require_login, :only => [:inbox, :edit, :update]
+
+  def new
     @user = User.new
   end
 
@@ -7,30 +9,33 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
 #      render :action => "404error_user"
-    @user.last_login = Time.now
+      @user.last_login = Time.now
       login(params[:user][:email], params[:user][:password])
       redirect_back_or_to dashboard_path
     else
       render :new
     end
   end
+
   def edit
     @user = User.find(params[:id])
   end
+
   def update
 
     @user = User.find(params[:id])
     @user.attributes = params[:user]
     if @user.save(:validate => false)
-     if (params[:contact] == "phone")
-      redirect_to dashboard_path
-     else
-      redirect_to @user
-     end
+      if (params[:contact] == "phone")
+        redirect_to dashboard_path
+      else
+        redirect_to @user
+      end
     else
       render :action => "edit"
-     end
+    end
   end
+
   def show
     @graph = Koala::Facebook::GraphAPI.new(current_user.oauth_code) if (current_user.present? && current_user.oauth_code.present?)
     @user = User.find(params[:id])
@@ -39,13 +44,12 @@ class UsersController < ApplicationController
   end
 
   def inbox
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
 
-
   def update_phone
-    
+
   end
 
   def logged_in

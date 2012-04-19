@@ -11,8 +11,6 @@ SPC2::Application.routes.draw do
     collection do
       get "logged_in"
       get "update_phone"
-    end
-    member do
       get "inbox"
     end
   end

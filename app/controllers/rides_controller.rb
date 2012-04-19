@@ -16,16 +16,16 @@ class RidesController < ApplicationController
   #    render :action => "post_one"
   #  end
 
-  def create
-    @ride = Ride.new(params[:ride])
-    if @ride.save
-      @ride.make_owner!(current_user)
-      flash[:notice] = "Successfully created ride"
-      redirect_to root_url
-    else
-      render :action => 'new'
-    end
-  end
+  #def create
+  #  @ride = Ride.new(params[:ride])
+  #  if @ride.save
+  #    @ride.make_owner!(current_user)
+  #    flash[:notice] = "Successfully created ride"
+  #    redirect_to root_url
+  #  else
+  #    render :action => 'new'
+  #  end
+  #end
 
   def search
 

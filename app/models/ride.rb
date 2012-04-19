@@ -18,9 +18,10 @@ class Ride < ActiveRecord::Base
   validates :available_seats, :total_price, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true
   validate :departure_date_inclusion
   validate :from_and_to_location #Validation
-  def price_per_seat(number_of_seats)
+  def price_per_seat(number_of_seats = 1)
     (self.total_price/(self.ride_participants.active_participants.count + number_of_seats))
   end
+
   def active?
     (((self.departuredatetime - Time.now) > 0) && self.status == 1)
   end
