@@ -28,9 +28,6 @@
                 $(".phone-check1").show();
             }
 
-                    <%#*else if ($('input#ride_participant_phone').val().length != 12) {%>
-                    <%#*$(".phone-check").show();%>
-                    <%#*}%>
             else if (!($('input#ride_participant_mode_of_communications_sms_text').is(':checked') || $('#ride_participant_mode_of_communications_phone_call').is(':checked') || $('#ride_participant_mode_of_communications_email').is(':checked'))) {
                 $(".method-type-check").show();
             }
@@ -302,6 +299,7 @@
       <% if @ride.active? %>
           <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %>
               <% if logged_in? %>
+
                   <button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
                     <span>Contact me</span>
                   </button>
@@ -313,7 +311,7 @@
       <% end %>
       <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %>
           <div class="message-box" style="display: none;">
-            <%= render "messages/conversations" %>
+            <%= render "messages/conversations", contact_me: true %>
           </div>
       <% end %>
     </div>

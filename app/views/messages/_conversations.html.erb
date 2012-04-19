@@ -1,4 +1,3 @@
-<% if current_user.present? %>
 <% messages = @ride.messages.where("user_id = ? or owner_id = ?", current_user.id, current_user.id).ordered %>
 <% receiver = [] %>
 <% owner = @ride.owner %>
@@ -16,7 +15,7 @@
   Can't send messages to yourself
 <% else  %>
   <div class="message-box11">
-    <%=  form_for Message.new, :url => ride_message_path do |f| %>
+    <%=  form_for Message.new, :url => ride_message_path(contact_me: contact_me) do |f| %>
       <%= image_tag current_user.user_image_url.to_s, :style => "width: 40px"  %>
       <div class="field">
         <%= f.label :message %>
@@ -26,6 +25,4 @@
       <%= f.submit "Send"%>
     <%end%>
   </div>
-<%end%>
-
 <%end%>

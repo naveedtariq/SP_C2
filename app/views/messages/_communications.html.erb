@@ -1,34 +1,17 @@
-<% if current_user.present? %>
-<%req_id = @req_user %>
-<%if @req_user.present?%>
-<% messages = @ride.messages.where("user_id = ? and owner_id = ?",req_id.id, current_user.id).ordered %>
-<%end%>
-<% receiver = [] %>
-<% owner = @ride.owner %>
-<% receiver << (owner && owner.id) %>
-<% messages.each do |message| %>
-  <% unless receiver.include? message.user_id %>
-    <% receiver << message.user_id %>
-  <% end %>
-  <%= image_tag message.user.user_image_url.to_s, :style => "width: 40px" %>
-  <%=message.created_at.strftime("%d/%m/%y")%><br/>
-  <%=  message.message %><br/><br/>
+<% @messages.each do |message| %>
+    <%= image_tag message.user.user_image_url.to_s, :style => "width: 40px" %>
+    <%= message.created_at.strftime("%d/%m/%y") %><br/>
+    <%= message.message %><br/><br/>
 <% end %>
-<% receiver.delete(current_user.id) %>
-<% if receiver.blank? %>
-  Can't send messages to yourself
-<% else  %>
-  <div class="message-box11">
-    <%=  form_for Message.new, :url => ride_message_path do |f| %>
-      <%= image_tag current_user.user_image_url.to_s, :style => "width: 40px"  %>
+<div class="message-box11">
+  <%= form_for Message.new, :url => ride_message_path(@ride, req_id: @req_user) do |f| %>
+      <%= image_tag current_user.user_image_url.to_s, :style => "width: 40px" %>
       <div class="field">
         <%= f.label :message %>
-        <%= f.text_area :message%>
-        <%= f.hidden_field :owner_id, :value =>(receiver.first) %>
+        <%= f.text_area :message %>
+        <%= f.hidden_field :owner_id, :value => (@req_user.id) %>
       </div>
-      <%= f.submit "Send"%>
-    <%end%>
-  </div>
-<%end%>
+      <%= f.submit "Send" %>
+  <% end %>
+</div>
 
-<%end%>

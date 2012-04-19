@@ -1,36 +1,43 @@
 <%= javascript_include_tag "jquery-1.7.2.min", "jquery.fancybox", "jquery.tabSlideOut.v1.3" %>
 <%= stylesheet_link_tag "jquery.fancybox" %>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.fancybox').fancybox();
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.fancybox').fancybox();
 
     });
-    </script>
-	<style type="text/css">
-		.fancybox-custom .fancybox-skin {
-			box-shadow: 0 0 50px #222;
-		}
-	</style>
+</script>
+<style type="text/css">
+    .fancybox-custom .fancybox-skin {
+        box-shadow: 0 0 50px #222;
+    }
+</style>
 <h6>My Inbox</h6><br/><br/>
 <div class="main-msg-box" style="border: 1px solid;">
   <div class="left-all-msgs" style="border: 1px solid; float: left; height: 700px; margin-left: 5px; margin-top: 5px;">
-<table border="1" cellpadding="10px" cellspacing="10">
-  <% if @user.owned_messages.blank? %>
-    No messages
-  <% else %>
-    
-    <% @user.owned_messages.rev_ordered.each do |u| %>
-      <% sender=User.find(u.user_id) %>
-      <% ride=Ride.find(u.ride_id) %>
-      <tr>
-        <td><a href="<%=ride_message_path(u.ride_id)+"?req_id=#{sender.id.to_s}"%>" target="frame-a">From: <%= sender.first_name %>&nbsp;<%= sender.last_name.chars.first %>&nbsp;&nbsp;"<%=u.message%>"&nbsp;&nbsp;<%=u.created_at.strftime("%d/%m/%y")%></a></td>
-        <td><a href="<%= new_ride_ride_participant_path(ride)%>"><%=ride.to_location && ride.to_location.name%>&nbsp;&nbsp; on <%=ride.departure_date%></a></td>
-      </tr>
-    <%end%>
-  <%end%>
-</table>
- </div>
+    <table border="1" cellpadding="10px" cellspacing="10">
+      <% if @user.owned_messages.blank? %>
+          No messages
+      <% else %>
+          <thead>
+          <td>Title</td>
+          <td>Ride</td>
+          </thead>
+          <% @user.owned_messages.rev_ordered.each do |u| %>
+              <% sender=User.find(u.user_id) %>
+              <% ride=Ride.find(u.ride_id) %>
+              <tr>
+                <td>
+                  <a href="<%= ride_message_path(u.ride_id)+"?req_id=#{sender.id.to_s}" %>" target="frame-a">From: <%= sender.first_name %>&nbsp;<%= sender.last_name.chars.first %>&nbsp;&nbsp;"<%= u.message %>
+                    "&nbsp;&nbsp;<%= u.created_at.strftime("%d/%m/%y") %></a></td>
+                <td>
+                  <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;&nbsp;
+                    on <%= ride.departure_date %></a></td>
+              </tr>
+          <% end %>
+      <% end %>
+    </table>
+  </div>
   <div class="right-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px;">
-<iframe src="" name="frame-a" width="600" height="650" ></iframe>
+    <iframe src="<%= params[:iframe] %>" name="frame-a" width="600" height="650"></iframe>
   </div>
 </div>
