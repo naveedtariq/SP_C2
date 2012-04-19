@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4fd8939-a0ec-4257-8d84-c344db838d24" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/messages_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/messages_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/rides_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/rides_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/users_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/users_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/messages/_communications.html.erb" afterPath="$PROJECT_DIR$/app/views/messages/_communications.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/messages/_conversations.html.erb" afterPath="$PROJECT_DIR$/app/views/messages/_conversations.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ride.rb" afterPath="$PROJECT_DIR$/app/models/ride.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dashboards/show.html.erb" afterPath="$PROJECT_DIR$/app/views/dashboards/show.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" afterPath="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/users/inbox.html.erb" afterPath="$PROJECT_DIR$/app/views/users/inbox.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
     </list>
     <list id="230adeb7-b010-467e-9e24-a5373e898cae" name="Rejected commit: Default" comment="" />
     <ignored path="SP_C2.iws" />
@@ -38,10 +32,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="new.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="new.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/ride_participants/new.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="304" column="113" selection-start="15006" selection-end="15006" vertical-scroll-proportion="0.2644135">
+            <state line="126" column="49" selection-start="5567" selection-end="5567" vertical-scroll-proportion="-0.4074074">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ride_participant.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/ride_participant.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/dashboards/show.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="93" column="141" selection-start="3556" selection-end="3556" vertical-scroll-proportion="-5.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="20120419022425_add_default_to_ride_participants.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20120419022425_add_default_to_ride_participants.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="27" selection-start="182" selection-end="182" vertical-scroll-proportion="0.11578947">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ride.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/ride.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="39" selection-start="1039" selection-end="1039" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -108,9 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/rides/search.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/rides/search_home.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/oauths_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/users/show.html.erb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
@@ -121,9 +148,12 @@
         <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/views/users/inbox.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" />
         <option value="$PROJECT_DIR$/app/views/messages/_conversations.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/messages_controller.rb" />
+        <option value="$PROJECT_DIR$/app/models/ride.rb" />
+        <option value="$PROJECT_DIR$/app/views/ride_participants/new.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/dashboards/show.html.erb" />
+        <option value="$PROJECT_DIR$/db/migrate/20120419022425_add_default_to_ride_participants.rb" />
       </list>
     </option>
   </component>
@@ -771,25 +801,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/dashboards/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="6" selection-start="255" selection-end="323" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/initializers/constants.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="17" selection-start="331" selection-end="350" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="24" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile.lock">
       <provider selected="true" editor-type-id="text-editor">
         <state line="170" column="39" selection-start="3986" selection-end="3986" vertical-scroll-proportion="0.33272058">
@@ -867,9 +878,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/ride.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="39" selection-start="1039" selection-end="1039" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/ride_participant.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/ride_participants/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="304" column="113" selection-start="15006" selection-end="15006" vertical-scroll-proportion="0.2644135">
+        <state line="126" column="49" selection-start="5567" selection-end="5567" vertical-scroll-proportion="-0.4074074">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/dashboards/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="141" selection-start="3556" selection-end="3556" vertical-scroll-proportion="-5.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20120419022425_add_default_to_ride_participants.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="27" selection-start="182" selection-end="182" vertical-scroll-proportion="0.11578947">
           <folding />
         </state>
       </provider>

@@ -124,7 +124,7 @@
                       <span class="count"><%= @ride.remaining_seats %></span>
                       <span class="left">seats left</span>
                     </div>
-                    <p><b><%= number_to_currency(@ride.price_per_seat_with_owner) %></b> / seat</p>
+                    <p><b><%= number_to_currency(@ride.price_per_seat) %></b> / seat</p>
                   </div>
               <% end %>
               <div class="inner_content">
