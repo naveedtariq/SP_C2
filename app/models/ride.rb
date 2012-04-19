@@ -9,7 +9,7 @@ class Ride < ActiveRecord::Base
   attr_accessor :friends_in_common
   attr_accessor :count
   scope :past_rides, lambda {
-    where("rides.departuredatetime < ?", SpClock.time)
+    where("rides.departuredatetime < ?", SpClock.time_with_zone)
   }
   scope :sorted_recent_at_top, order("departure_date Desc")
 
