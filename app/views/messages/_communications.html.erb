@@ -1,4 +1,4 @@
-<% @messages.each do |message| %>
+<% @messages.each do |message| %>                                               <!-- fetch all messages -->
     <%= image_tag message.user.user_image_url.to_s, :style => "width: 40px" %>
     <%= message.created_at.strftime("%d/%m/%y") %><br/>
     <%= message.message %><br/><br/>
@@ -9,7 +9,7 @@
       <div class="field">
         <%= f.label :message %>
         <%= f.text_area :message %>
-        <%= f.hidden_field :owner_id, :value => (@req_user.id) %>
+        <%= f.hidden_field :owner_id, :value => (@req_user.id) %>               <!-- hidden field for owner_id in message table -->
       </div>
       <%= f.submit "Send" %>
   <% end %>

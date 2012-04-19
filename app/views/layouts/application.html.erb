@@ -14,16 +14,16 @@
   </head>  
   <body data-twttr-rendered="true">
     <% if production? %>
-      <% if GOOGLE_ANALYTICS_TOGGLE=="ON"%>
+      <% if GOOGLE_ANALYTICS_TOGGLE=="ON"%>                                     <!-- google analytics toogle  -->
         <%= raw GOOGLE_ANALYTICS %>
       <% end %>
-      <% if MIXPANEL_TOGGLE=="ON"%>
+      <% if MIXPANEL_TOGGLE=="ON"%>                                             <!-- mixpanel toogle -->
         <%= raw MIXPANEL %>
       <% end %>
-      <% if GETCLICKY_TOGGLE=="ON"%>
+      <% if GETCLICKY_TOGGLE=="ON"%>                                            <!-- get clicky toogle -->
         <%= raw GETCLICKY %>
       <% end %>
-      <% if CRAZYEGG_TOGGLE=="ON"%>
+      <% if CRAZYEGG_TOGGLE=="ON"%>                                             <!-- crazyegg toogle -->
         <%= raw CRAZYEGG %>
       <% end %>
     <% end %>
@@ -33,7 +33,7 @@
     <% end %>
     <div class="nav-bar">
   <ul style="float: right; margin-right: 40px;">
-    <% if current_user %>
+    <% if current_user %>                                                       <!-- main navigation for current user -->
     <div style="color: #FFFFFF;">
       <li style="float: left;"><%= link_to "Post a Ride", new_ride_path  %></li>
       <li style="float: left; width: 25px;"><%= image_tag current_user.user_image_url %></li>
@@ -46,7 +46,7 @@
       <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Sign up", signup_path  %></li>
    <% end %>
    </ul>
-      <div style="float: left; color: #FFFFFF;"><%= Time.now.in_time_zone("Eastern Time (US & Canada)").strftime("%d-%m-%Y %H:%M %Z")%></div>
+      <div style="float: left; color: #FFFFFF;"><%= Time.now.in_time_zone("Eastern Time (US & Canada)").strftime("%d-%m-%Y %H:%M %Z")%></div>           <!-- main navigation EDT time format -->
       <% if current_user %>
       <ul style="float: left; margin-left: 20px;">
        <li style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Dashboard", dashboard_path %></li>
@@ -56,7 +56,7 @@
    </div>
     <%= yield %>
 
-    <div id="footer">
+    <div id="footer">                                                                                                   <!-- footer layout here -->
       <a class="km_click_event_by_text" href="<%= about_footers_path %>">About</a>
       <a class="km_click_event_by_text" href="<%= how_it_works_footers_path %>">How it Works & FAQ</a>
       <a class="km_click_event_by_text" href="<%= terms_footers_path %>">Terms &amp; Privacy</a>

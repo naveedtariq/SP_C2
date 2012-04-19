@@ -2,7 +2,7 @@
 <%= javascript_include_tag 'windows' %>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#ride_to_location_id').change(function () {
+        $('#ride_to_location_id').change(function () {                          // here check to and from location ar not from same group
             var A = [1, 2, 3];
             var i = 0;
             var j = 0;
@@ -89,7 +89,7 @@
             }
         });
 
-        $('#ride_from_location_id').change(function () {
+        $('#ride_from_location_id').change(function () {                        // here check for to and from location from same group
             var A = [1, 2, 3];
             var i = 0;
             var j = 0;
@@ -250,7 +250,7 @@
     <div id="content_container" class="clearfix">
       <div id="content">
         <div id="head">
-          <%= form_for :ride, :url => search_rides_path, :method => "get", :html => {:id => "search-form"} do |f| %>
+          <%= form_for :ride, :url => search_rides_path, :method => "get", :html => {:id => "search-form"} do |f| %>                    <!-- form for post ride 2nd Step -->
               <div id="schedule-container">
                 <%= f.select :from_location_id, Location.all.collect { |p| [p.name, p.id] }, {:include_blank => "--- select from ---"}, :style => "width:230px" %>
                 <%= f.select :to_location_id, Location.all.collect { |p| [p.name, p.id] }, {:include_blank => "--- select to ---"}, :style => "width:230px" %>
@@ -305,7 +305,7 @@
                 <% end %>
                 <a href="<%= (ride.remaining_seats > 0) ? (new_ride_ride_participant_path(ride, :return_url => request.query_string)) : (clone_ride_path(ride)) %>">
                   <div class="entry">
-                    <% if ride.remaining_seats==0 %>
+                    <% if ride.remaining_seats==0 %>                            <!-- here check if no reaming seat then price box change to sold out  -->
                         <div class="price_box">
                           <div class="seats">
                             <span class="count1">SOLD OUT</span>
@@ -333,14 +333,14 @@
                           &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p>
                         </div>
                       </div>
-                      <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase.gsub(" ", "")}.jpg") %><%= ride.ride_type %></div>
+                      <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase.gsub(" ", "")}.jpg") %><%= ride.ride_type %></div>                <!-- here ride's riders fetch -->
                       <div class="participant-pic">
                         <% ride.ride_participants.active_participants.role_wise.each do |rider| %>
                             <div class="riders-pics">
                               <div class="riders-info"><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></div>
                               <%= image_tag rider.user.user_image_url %>
                               <span class="driver">
-                            <% if @graph.present? && rider.user_id != current_user.id && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>
+                            <% if @graph.present? && rider.user_id != current_user.id && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>              <!--check if login through facebook then fetch his friends -->
                               <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>
                                     <% ride.friends_in_common << mutual_friends %>
                             <% end %>
@@ -348,7 +348,7 @@
                             </div>
 
                         <% end %>
-                        <% ride.remaining_seats.times do %>
+                        <% ride.remaining_seats.times do %>                      <!-- fetched how many remaing seats then accordingly empty seat pic appeared -->
                             <div class="riders-pics">
                               <div class="riders-info">open&nbsp;seat</div>
                               <%= image_tag "car_seat_icon.gif" %>
@@ -359,12 +359,14 @@
                       <% if @graph.present? %>
                           <div style="float:left; margin-top: -20px">
 
-                            <% mutual_friends = ride.friends_in_common.flatten.uniq %>
+                            <% mutual_friends = ride.friends_in_common.flatten.uniq %>                        <!--fetched unique mutual friends b/w current user and riders -->
                             <% if mutual_friends.count > 0 %>
                                 <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
                             <% end %>
                             <% mutual_friends.each do |friend| %>
-                                <%= friend["name"] %>
+                                <img src="http://graph.facebook.com/<%=friend["id"]%>/picture"/>
+                                <%#= image_tag ("http://graph.facebook.com/friend[id]/picture") %>
+                                <%= friend["name"] %>                                                         <!-- fetched mutual friend's name from facebook -->
                                 <% unless friend == mutual_friends.last %>
                                     &nbsp;and&nbsp;
                                 <% end %>
@@ -387,7 +389,7 @@
           </div>
           <div class="page_list">
             <span class="showing">
-              Showing <%= number_of_records(params[:page], SEARCH_RIDES_PER_PAGE) %>
+              Showing <%= number_of_records(params[:page], SEARCH_RIDES_PER_PAGE) %>                        <!-- Pagination applied for the search rides results if the no of rides increasd per page  -->
               - <%= number_of_records(params[:page], SEARCH_RIDES_PER_PAGE, SEARCH_RIDES_PER_PAGE) %>
               of <strong><%= @count %> results</strong>
             </span>

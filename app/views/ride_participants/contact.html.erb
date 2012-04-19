@@ -2,7 +2,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("input#ride_participant_mode_of_communications_sms_text").click(function () {
-            $(".method-type-check").hide();
+            $(".method-type-check").hide();                                     // check for that no mode of communication is selected
         });
         $("#ride_participant_mode_of_communications_phone_call").click(function () {
             $(".method-type-check").hide();
@@ -19,7 +19,7 @@
       }
       else{
             return true;
-            opener.location.reload(true);
+            opener.location.reload(true);                                       // for popup window of contact close
             self.close();
       }
             return false;
@@ -29,7 +29,7 @@
       if ($(this).val() != "")
       $(".phone-check1").hide();
   });
-  $("input#ride_participant_phone").mask("999-999-9999");
+  $("input#ride_participant_phone").mask("999-999-9999");                       // jquery for phone number format
        });
 
 </script>

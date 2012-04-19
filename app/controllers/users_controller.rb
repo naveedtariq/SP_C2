@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
-  before_filter :require_login, :only => [:inbox, :edit, :update]
+  before_filter :require_login, :only => [:inbox, :edit, :update]               # require login for these functions
 
   def new
-    @user = User.new
+    @user = User.new                                                            # create new instance of user
   end
 
-  def create
+  def create                                                                    # create user
     @user = User.new(params[:user])
     if @user.save
 #      render :action => "404error_user"
       @user.last_login = Time.now
-      login(params[:user][:email], params[:user][:password])
+      login(params[:user][:email], params[:user][:password])                    # login user 
       redirect_back_or_to dashboard_path
     else
       render :new
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def update
+  def update                                                                    # update user information
 
     @user = User.find(params[:id])
     @user.attributes = params[:user]
@@ -37,10 +37,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    @graph = Koala::Facebook::GraphAPI.new(current_user.oauth_code) if (current_user.present? && current_user.oauth_code.present?)
+    @graph = Koala::Facebook::GraphAPI.new(current_user.oauth_code) if (current_user.present? && current_user.oauth_code.present?)          # graph API use here
     @user = User.find(params[:id])
-    @ride_participants = @user.ride_participants.current_rides.active_rides.not_cancelled_or_abandoned.role_wise
-    @past_rides = @user.ride_participants.past_rides.active_rides.confirmed_or_owner_participants.paginate(:page => params[:past_rides_page], :per_page => PAST_RIDES_PER_PAGE)
+    @ride_participants = @user.ride_participants.current_rides.active_rides.not_cancelled_or_abandoned.role_wise      # user current active rides
+    @past_rides = @user.ride_participants.past_rides.active_rides.confirmed_or_owner_participants.paginate(:page => params[:past_rides_page], :per_page => PAST_RIDES_PER_PAGE)    # past rides in which user has confirmed participants and owner
   end
 
   def inbox
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 
   end
 
-  def logged_in
+  def logged_in                                                                 # login function
 #    render :action => "404error_user"
     return render :text => current_user.present?
   end

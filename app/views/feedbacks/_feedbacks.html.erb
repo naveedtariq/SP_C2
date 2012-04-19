@@ -1,11 +1,11 @@
-<% if owner.present? %>
+<% if owner.present? %>                                                         <!--check for feedback owner present  -->
 <a href="<%=user_path(owner)%>"><%= owner && "#{owner.full_name}" %> </a> |
 <a href="<%=new_ride_ride_participant_path(@ride.id)%>" target="frame-a"><%= @ride.to_location && @ride.to_location.name %>&nbsp;on&nbsp;<%=@ride.departure_date %></a>
 <br/><%= image_tag owner.user_image_url %>
-<% @feedback = current_user.feedbacks.where(:owner_id => owner.id, :ride_id => @ride.id).first || Feedback.new %>
+<% @feedback = current_user.feedbacks.where(:owner_id => owner.id, :ride_id => @ride.id).first || Feedback.new %>               <!-- feedbacks b/w owner and user -->
 <div class="message-box">
 	<% if @feedback.new_record? %>
-  <% @left_count =  @left_count + 1 %>
+  <% @left_count =  @left_count + 1 %>                                  <!-- feedback count which have to give -->
   <%=  form_for Feedback.new, :url => feedback_path do |f| %>
     <table>
       <tr>
@@ -32,8 +32,8 @@
     <div class="field">
       <%= f.label :feedback %>
       <%= f.text_area :feedback%>
-      <%= f.hidden_field :ride_id, :value =>(@ride.id) %>
-      <%= f.hidden_field :owner_id, :value =>(owner.id) %>
+      <%= f.hidden_field :ride_id, :value =>(@ride.id) %>                       <!-- ride_id assign for which ride against feedback gave -->
+      <%= f.hidden_field :owner_id, :value =>(owner.id) %>                      <!--owner_id assign for feedback-->
     </div>
     <%= f.submit "Send"%>
   <hr/>

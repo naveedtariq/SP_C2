@@ -1,11 +1,11 @@
   # To change this template, choose Tools | Templates
 # and open the template in the editor.
-GENDER = ["Male", "Female"]
+GENDER = ["Male", "Female"]                                                     # Gender array
 #RIDETYPE=["Sedon", "Suv", "Van"]
-IMAGE_SIZE="10"
-SEARCH_OPTION_ONE_IN_DAYS = 15
-SEARCH_OPTION_TWO_IN_DAYS = 30
-ROLES_FOR_RIDES = {
+IMAGE_SIZE="10"                                                                 # Image size uploading by user
+SEARCH_OPTION_ONE_IN_DAYS = 15                                                  # Search Rides for next 15 days
+SEARCH_OPTION_TWO_IN_DAYS = 30                                                  # search rides with in Moth
+ROLES_FOR_RIDES = {                                                             # Rider's Role define here
     :owner => 1,
     :pending => 2,
     :confirmed => 3,
@@ -14,9 +14,9 @@ ROLES_FOR_RIDES = {
     :rejected => 6,
     :canceled => 7
 }
-PAST_RIDES_PER_PAGE = 5
-SEARCH_RIDES_PER_PAGE = 20
-STATUS_FOR_RIDES = {
+PAST_RIDES_PER_PAGE = 5                                                         # past Rides per page
+SEARCH_RIDES_PER_PAGE = 20                                                      # Total search result rides per page
+STATUS_FOR_RIDES = {                                                            # Status of rider either active or cancel
   :active => 1,
   :canceled => 2
 }
@@ -47,7 +47,7 @@ d=['init','track','track_links','track_forms','register','register_once','identi
 for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
 </script>"
 
-GETCLICKY = "<script src='static.getclicky.com/js' type='text/javascript'></script>
+GETCLICKY = "<script src='http://static.getclicky.com/js' type='text/javascript'></script>
 <script type='text/javascript'>try{ clicky.init(66553995); }catch(e){}</script>
 <noscript><p><img alt='Clicky' width='1' height='1' src='in.getclicky.com/66553995ns.gif' /></p></noscript>"
 
@@ -64,11 +64,11 @@ KISSMETRICS = "<script type='text/javascript'>
 
   CRAZYEGG = ""
 
-  GOOGLE_ANALYTICS_TOGGLE = "ON"
-  MIXPANEL_TOGGLE = "ON"
-  GETCLICKY_TOGGLE = "ON"
-  KISSMETRICS_TOGGLE = "ON"
-  CRAZYEGG_TOGGLE = "ON"
+  GOOGLE_ANALYTICS_TOGGLE = "ON"                                                # google_toogle on/off
+  MIXPANEL_TOGGLE = "ON"                                                        # mixpanel_toggle on/off
+  GETCLICKY_TOGGLE = "ON"                                                       # getclicky_toggle on/off
+  KISSMETRICS_TOGGLE = "ON"                                                     # kissmetrics_toggle on/off
+  CRAZYEGG_TOGGLE = "ON"                                                        # crazyegg_toggle on/off
 
 
 

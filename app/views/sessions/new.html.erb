@@ -4,7 +4,7 @@
     $(document).ready(function () {
         $("#child_toolbar").val(window.toolbar.visible);
 
-        $('.contact-form').popupWindow({
+        $('.contact-form').popupWindow({                          // jquery for popup window
             height:500,
             width:800,
             top:50,
@@ -15,7 +15,7 @@
 <div id="fb-root"></div>
 <script>
 
-    (function (d, s, id) {
+    (function (d, s, id) {                                                      //  facebook jssdk
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s);
@@ -28,7 +28,7 @@
 <div class="fb-login-button"></div>
 <div class="row">
   <div class="span12">
-    <%= form_tag sessions_path :class => 'form-horizontal' do %>
+    <%= form_tag sessions_path :class => 'form-horizontal' do %>                <!-- form for login user -->
         <fieldset>
           <legend>Sign in with your existing account</legend>
           <div class="control-group">

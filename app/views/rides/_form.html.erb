@@ -3,16 +3,16 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    $( "#ride_departure_date" ).datepicker({
+    $( "#ride_departure_date" ).datepicker({                                    // jquery for departure_date from calendar
       dateFormat: "yy-mm-dd",
       minDate: 0, maxDate: "+1Y"
     });
 
-    $("#new_ride").submit(function() {
+    $("#new_ride").submit(function() {                                          // check if no ride selected in post ride page
       if(!($('#ride_ride_type_black_car').is(':checked')||$('#ride_ride_type_taxi').is(':checked'))) {
         $(".ride-type-check").show();
         return false;
-      }
+      }                                                                         //  here check if to and from city select
       else if(($('#ride_to_location_id').val()=="") || ($('#ride_from_location_id').val()=="")){
         $(".city-check").show();
         return false;
@@ -29,7 +29,7 @@
       $(".ride-type-check").hide();
     });
 
-    $('#ride_to_location_id').change(function() {
+    $('#ride_to_location_id').change(function() {                 // here check to or from location are not in same group
         var A = [1,2,3];
         var i = 0;
         var j =0;
@@ -66,7 +66,7 @@
           $('#ride_from_location_id').removeClass("validation-error");
           $("input.ride-check-btn").removeAttr("disabled");
           if($('#ride_from_location_id').val()!=""){
-            if($('#ride_from_location_id').find("option:selected").text() == "Meat Packing District"){
+            if($('#ride_from_location_id').find("option:selected").text() == "Meat Packing District"){                                                                                                                                                                                                                                                                //google map change its map w.r.t to and from location 
              $('#map_canvas').gmap('displayDirections', { 'origin': $('#ride_from_location_id').find("option:selected").text()+" 10014", 'destination': $('#ride_to_location_id').find("option:selected").text()+" ", 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
               if ( status === 'OK' ){
                 var METERS_TO_MILES = 0.000621371192;
@@ -182,7 +182,7 @@
       }
      }});
 
-   $('#ride_from_location_id').change(function() {
+   $('#ride_from_location_id').change(function() {                              // here chcek to and from location are no from same group
     var A = [1,2,3];
     var i = 0;
     var j =0;
@@ -339,7 +339,7 @@
       }});
 
   <% if @ride.to_location.present? && @ride.from_location.present? %>
-  $('#map_canvas').gmap('displayDirections', { 'origin': '<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination': '<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+  $('#map_canvas').gmap('displayDirections', { 'origin': '<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination': '<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {               // goole map for already selected to and from location
   if ( status === 'OK' ){
   var METERS_TO_MILES = 0.000621371192;
   totalDistance = result.routes[0].legs[0].distance.value;
@@ -377,7 +377,7 @@
     <li>2. What Time?</li>
     <li class="last">3. What Else?</li>
   </ul>
-  <%= form_for @ride do |f| %>
+  <%= form_for @ride do |f| %>                                                  <!-- here form for Post Ride -->
     <% if @ride.errors.any? %>
       <div class="error_messages">
         <h2>Form is invalid</h2>

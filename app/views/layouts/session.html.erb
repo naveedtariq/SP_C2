@@ -5,22 +5,22 @@
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-    <% if production? &&  KISSMETRICS_TOGGLE=="ON"%>
+    <% if production? &&  KISSMETRICS_TOGGLE=="ON"%>                            <!-- kissmetrics toogle here -->
       <%= raw KISSMETRICS %>
      <% end %>
   </head>
   <body>
     <% if production? %>
-      <% if GOOGLE_ANALYTICS_TOGGLE=="ON"%>
+      <% if GOOGLE_ANALYTICS_TOGGLE=="ON"%>                                     <!-- google analytics toogle -->
         <%= raw GOOGLE_ANALYTICS %>
       <% end %>
-      <% if MIXPANEL_TOGGLE=="ON"%>
+      <% if MIXPANEL_TOGGLE=="ON"%>                                             <!-- mixpanel toogle here -->
         <%= raw MIXPANEL %>
       <% end %>
-      <% if GETCLICKY_TOGGLE=="ON"%>
+      <% if GETCLICKY_TOGGLE=="ON"%>                                            <!-- get clicky toogle -->
         <%= raw GETCLICKY %>
       <% end %>
-      <% if CRAZYEGG_TOGGLE=="ON"%>
+      <% if CRAZYEGG_TOGGLE=="ON"%>                                             <!-- crazzyegg toogle -->
         <%= raw CRAZYEGG %>
       <% end %>
     <% end %>
@@ -30,7 +30,7 @@
           <%= link_to "SP_C2", root_path, :class => "brand" %>
           <div class="nav-collapse">
             <ul class="nav">
-              <% if current_user %>
+              <% if current_user %>                                             <!--main navigation for current user -->
                 <li>Logged in as <%= current_user.email %>.</li>
                 <li><%= link_to "Sign out", logout_path %></li>
               <% else %>

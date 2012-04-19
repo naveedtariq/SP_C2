@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def time_to_minutes(t)
+  def time_to_minutes(t)                                                        # function for time change to in minutes
     hours = t/60
     minutes = t%60
     if(hours > 0 && minutes > 0)
@@ -18,14 +18,14 @@ module ApplicationHelper
     end
 
   end
-  def number_of_records(page, per_page, offset = 1)
+  def number_of_records(page, per_page, offset = 1)                             # function for count records per page in search rides results
     if page.blank?
       "1"
     else
       (((page.to_i-1) * per_page.to_i) + offset).to_s
     end
   end
-  def secs_to_time(seconds)
+  def secs_to_time(seconds)                                                     # function for convert seconds in proper time 
     minutes = seconds/60
     mins = (minutes%60).to_i
     hours = (minutes/60).to_i
