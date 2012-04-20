@@ -324,20 +324,8 @@
 <div class="clear"></div>
 <br/><br/>
 
-<% @feedbacks = Feedback.find_all_by_ride_id(params[:ride_id]) %>               <!-- here fetch all feedbacks of the current ride -->
-<% @feedbacks.each do |feedback| %>
-    <% user = feedback.user %>
-    <% ride = feedback.ride %>
-    <a href="<%= user_path(user) %>"><%= user.full_name %></a> |
-    <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%= ride.departure_date %></a>
-    <br/><%= image_tag user.user_image_url %>
-    <br/>
-    <%= feedback.status && feedback.status.titleize %> &nbsp;
-    For &nbsp; <%= link_to feedback.owner.full_name, user_path(feedback.owner) %>
-    <br/>
-    Feedback: <%= feedback.feedback %>
-    <br/>
-<% end %>
+<iframe src="<%= new_ride_feedback_path(@ride) %>" name="frame-a" width="600" height="650"></iframe>
+
 
 <div id="map_canvas" style="height:350px; width: 500px;"></div>      <!-- here google map show-->
 <br/>
