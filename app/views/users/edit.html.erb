@@ -15,12 +15,12 @@
       if ($(this).val() != "")
         $(".phone-check1").hide();
     });
-    $("input#user_phone").mask("999-999-9999");
+    $("input#user_phone").mask("999-999-9999");                                 // jquery for phone number format
 
     });
 </script>
 <div class="container">
-  <section id="forms">
+  <section id="forms">                                                          <!-- here User update his information -->
     <%= form_for @user, :html => {:multipart => true} do |f| %>
         <% if @user.errors.any? %>
             <div class="error_messages">

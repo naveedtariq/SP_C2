@@ -1,22 +1,19 @@
 class OauthsController < ApplicationController
-  skip_before_filter :require_login
+  skip_before_filter :require_login                                             # no login require
 
   def oauth
-    cookies[:contact] = params[:contact]
-    login_at(params[:provider])
+    cookies[:contact] = params[:contact]                                        # assign contact cookies
+    login_at(params[:provider])                                                 # Login with respect to provider such as facebook and twitter
   end
 
-  def callback
-
+  def callback                                                                  # call back function after login through facebook
     provider = params[:provider]
-    cookies[:return_to_url] = session[:return_to_url]
-
+    cookies[:return_to_url] = session[:return_to_url]                           # return url save in cookies
     begin
-      if @user = login_from(provider)
+      if @user = login_from(provider)                                           # login from social network save record in user
       else
         @user = create_from(provider)
         auto_login(@user)
-
       end
     rescue
     end

@@ -1,11 +1,11 @@
   # To change this template, choose Tools | Templates
 # and open the template in the editor.
-GENDER = ["Male", "Female"]
+GENDER = ["Male", "Female"]                                                     # Gender array
 #RIDETYPE=["Sedon", "Suv", "Van"]
-IMAGE_SIZE="10"
-SEARCH_OPTION_ONE_IN_DAYS = 15
-SEARCH_OPTION_TWO_IN_DAYS = 30
-ROLES_FOR_RIDES = {
+IMAGE_SIZE="10"                                                                 # Image size uploading by user
+SEARCH_OPTION_ONE_IN_DAYS = 15                                                  # Search Rides for next 15 days
+SEARCH_OPTION_TWO_IN_DAYS = 30                                                  # search rides with in Moth
+ROLES_FOR_RIDES = {                                                             # Rider's Role define here
     :owner => 1,
     :pending => 2,
     :confirmed => 3,
@@ -14,9 +14,9 @@ ROLES_FOR_RIDES = {
     :rejected => 6,
     :canceled => 7
 }
-PAST_RIDES_PER_PAGE = 5
-SEARCH_RIDES_PER_PAGE = 20
-STATUS_FOR_RIDES = {
+PAST_RIDES_PER_PAGE = 5                                                         # past Rides per page
+SEARCH_RIDES_PER_PAGE = 20                                                      # Total search result rides per page
+STATUS_FOR_RIDES = {                                                            # Status of rider either active or cancel
   :active => 1,
   :canceled => 2
 }
@@ -64,11 +64,11 @@ KISSMETRICS = "<script type='text/javascript'>
 
   CRAZYEGG = ""
 
-  GOOGLE_ANALYTICS_TOGGLE = "ON"
-  MIXPANEL_TOGGLE = "ON"
-  GETCLICKY_TOGGLE = "ON"
-  KISSMETRICS_TOGGLE = "ON"
-  CRAZYEGG_TOGGLE = "ON"
+  GOOGLE_ANALYTICS_TOGGLE = "ON"                                                # google_toogle on/off
+  MIXPANEL_TOGGLE = "ON"                                                        # mixpanel_toggle on/off
+  GETCLICKY_TOGGLE = "ON"                                                       # getclicky_toggle on/off
+  KISSMETRICS_TOGGLE = "ON"                                                     # kissmetrics_toggle on/off
+  CRAZYEGG_TOGGLE = "ON"                                                        # crazyegg_toggle on/off
 
 
 

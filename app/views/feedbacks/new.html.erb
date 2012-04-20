@@ -1,21 +1,18 @@
 <script type="text/javascript">
   $(document).ready(function(){
-    $("#count-left").text(" - " + $("#left_count").val() + " left to review");
+    $("#count-left").text(" - " + $("#left_count").val() + " left to review");        // for showing how many feedback left to review
   });
 </script>
 <div class="main-msg-box" style="border: 1px solid;">
-  <div class="left-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px; width: 700px;">
+  <div class="left-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px; width: 632px;">
 <h6>Feedbacks<span id="count-left"></span></h6>
-<% @past_rides = current_user.rides.past_rides.sorted_recent_at_top %>
-<% @past_rides.each do |past_ride| %>
-  <% @active_participants = past_ride.ride_participants.confirmed_or_owner_participants.where("user_id <> ? ", current_user.id) %>
+  <% @active_participants = @ride.ride_participants.confirmed_or_owner_participants.where("user_id <> ? ", current_user.id) %>
   <% @active_participants.each do |ride_participant| %>
-    <% @ride = ride_participant.ride %>
-    <%= render "feedbacks/feedbacks", :owner => ride_participant.user %>
+    <%= render "feedbacks/feedbacks", :owner => ride_participant.user %>        <!--render feedbacks partial here -->
   <%end%>
-<%end%>
- <%= hidden_field_tag :left_count, @left_count %>
+ <%= hidden_field_tag :left_count, @left_count %>                               <!-- hidden field for feedback count -->
   </div>
       <div class="right-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px;">
-<iframe src="" name="frame-a" width="600" height="650" ></iframe>
+<iframe src="" name="frame-a" width="600" height="650" ></iframe>               <!-- iframe div for feedback given -->
+  </div>
   </div>

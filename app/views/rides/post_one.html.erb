@@ -3,17 +3,17 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#ride_departure_date").datepicker({
+        $("#ride_departure_date").datepicker({                                  //jquery for datepicker calender
             dateFormat:"yy-mm-dd",
             minDate:0, maxDate:"+1Y"
         });
 
-        $("#new_ride").submit(function () {
+        $("#new_ride").submit(function () {                                     //check for ride_type selected or not
             if (!($('#ride_ride_type_black_car').is(':checked') || $('#ride_ride_type_taxi').is(':checked'))) {
                 $(".ride-type-check").show();
                 return false;
             }
-            else if (($('#ride_to_location_id').val() == "") || ($('#ride_from_location_id').val() == "")) {
+            else if (($('#ride_to_location_id').val() == "") || ($('#ride_from_location_id').val() == "")) {              // check to and from location city selcted or not
                 $(".city-check").show();
                 return false;
             }
@@ -29,7 +29,7 @@
             $(".ride-type-check").hide();
         });
 
-        $('#ride_to_location_id').change(function () {
+        $('#ride_to_location_id').change(function () {                          // check to and from location city are not from same group
             var A = [1, 2, 3];
             var i = 0;
             var j = 0;
@@ -187,7 +187,7 @@
             }
         });
 
-        $('#ride_from_location_id').change(function () {
+        $('#ride_from_location_id').change(function () {                        // check to and from location city are not from same group
             var A = [1, 2, 3];
             var i = 0;
             var j = 0;
@@ -346,7 +346,7 @@
         });
 
         <% if @ride.to_location.present? && @ride.from_location.present? %>
-        $('#map_canvas').gmap('displayDirections', { 'origin':'<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination':'<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results') }, function (result, status) {
+        $('#map_canvas').gmap('displayDirections', { 'origin':'<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination':'<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results') }, function (result, status) {                // google map change its map w.r.t to an from location
             if (status === 'OK') {
                 var METERS_TO_MILES = 0.000621371192;
                 totalDistance = result.routes[0].legs[0].distance.value;
@@ -387,7 +387,7 @@
     <li>2. What Time?</li>
     <li class="last">3. What Else?</li>
   </ul>
-  <%= form_for @ride, :url => posted_rides_path do |f| %>
+  <%= form_for @ride, :url => posted_rides_path do |f| %>                       <!-- form for post ride step 1 -->
       <% if @ride.errors.any? %>
           <div class="error_messages">
             <h2>Form is invalid</h2>
@@ -435,8 +435,8 @@
 </div>
 
 
-<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
-<div id="results" style="display:none;">
+<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>            <!-- google map show here -->
+<div id="results" style="display:none;">                                        <!-- direction an distance show here -->
   <div id="directions"></div>
 
 </div>

@@ -1,18 +1,20 @@
 <h4>My Profile</h4><br/>
 <%= image_tag @user.user_image_url, :style => "width: 200px" %><br/>
-<% if @graph.present? %>
+<% if @graph.present? %>                                                                                <!-- check if user login through facebook account  -->
     <% if @user.authentications.present? %>
         <% fb_id = @user.authentications.first.uid %>
-        <a href="https://www.facebook.com/profile.php?id=<%= fb_id %>">Facebook Profile </a>
+        <a href="https://www.facebook.com/profile.php?id=<%= fb_id %>">Facebook Profile </a>            <!-- facebook profile link if the user login through facebook -->
     <% end %>
 <% end %>
 <br/><br/>
-<% if @graph.present? && (@user.id != current_user.id) && (current_user.authentications.first.present?) && (@user.authentications.first.present?) %>
+<% if @graph.present? && (@user.id != current_user.id) && (current_user.authentications.first.present?) && (@user.authentications.first.present?) %>          <!--here user common friends in his profile with respect to current user -->
     <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{@user.authentications.first.uid}") %>
     <% if mutual_friends.count > 0 %>
         <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
     <% end %>
     <% mutual_friends.each do |friend| %>
+        <img src="http://graph.facebook.com/<%=friend["id"]%>/picture"/>
+        <%#= image_tag("http://graph.facebook.com/friend[id]/picture") %>
         <%= friend["name"] %>
         <% unless friend == mutual_friends.last %>
             &nbsp;and&nbsp;
@@ -86,7 +88,7 @@
       <% end %></td>
   </tr>
 </table> <br/>
-<h4> Current Rides</h4>
+<h4> Current Rides</h4>                                                         <!-- here current rides of user -->
 <table border="1" cellpadding="3">
   <tr>
     <th>Owner</th>
@@ -135,7 +137,7 @@
 </table>
 
 <hr/>
-<h4> Past Rides</h4>
+<h4> Past Rides</h4>                                                            <!-- here all past rides of user -->
 <table border="1" cellpadding="3">
   <tr>
     <th>Owner</th>
@@ -185,7 +187,7 @@
 <br/><br/>
 
 
-<% @feedbacks = Feedback.find_all_by_owner_id(params[:id]) %>
+<% @feedbacks = Feedback.find_all_by_owner_id(params[:id]) %>                   <!-- here all feedback of the user in his profile -->
 <% @feedbacks.each do |feedback| %>
     <% user = feedback.user %>
     <% ride = feedback.ride %>

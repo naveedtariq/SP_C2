@@ -21,7 +21,7 @@
         $(".check-flexibility").show();
         return false;
       }
-      else if (($("input#ride_departure_date").val() == "<%=SpClock.time_with_zone.strftime("%Y-%m-%d")%>" ) && ($("#ride_departure_time_4i").val() < <%=SpClock.time_with_zone.hour%>) && (($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) || ($("#ride_departure_time_5i").val() > <%=SpClock.time_with_zone.min%>)) ){
+      else if (($("input#ride_departure_date").val() == "<%=SpClock.time_with_zone.strftime("%Y-%m-%d")%>" ) && ($("#ride_departure_time_4i").val() < <%=SpClock.time_with_zone.hour%>) && (($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) || ($("#ride_departure_time_5i").val() > <%=SpClock.time_with_zone.min%>)) ){                           // check for post ride in specific time duration
         $(".before-1hr-booking").show();
         return false;
       }
@@ -57,7 +57,7 @@
       if($(this).val() != "")
         $(".date-check-step2").hide();
     });
-<% if @ride.to_location.present? && @ride.from_location.present? %>
+<% if @ride.to_location.present? && @ride.from_location.present? %>             // google map fucntion
     $('#map_canvas').gmap('displayDirections', { 'origin': '<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination': '<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
           if ( status === 'OK' ){
             var METERS_TO_MILES = 0.000621371192;
@@ -147,7 +147,7 @@
     <li class="last">3. What Else?</li>
   </ul>
   <div style="clear:both"></div>
-  <%= form_for @ride, :url => posted_rides_path(:step => "2") do |f| %>
+  <%= form_for @ride, :url => posted_rides_path(:step => "2") do |f| %>         <!--form for post ride step 2 -->
     <% if @ride.errors.any? %>
       <div class="error_messages">
         <h2>Form is invalid</h2>
@@ -197,8 +197,8 @@
     </div>
   <% end %>
 </div>
-<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
-<div id="results" style="display:none;">
+<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>            <!--google map show here -->
+<div id="results" style="display:none;">                                        <!--direction, duration and fare show here -->
   <div id="directions"></div>
  
 </div>

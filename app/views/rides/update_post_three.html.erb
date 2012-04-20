@@ -4,7 +4,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $("#new_ride").submit(function() {
-      if($('input#ride_total_price').val() > 200){
+      if($('input#ride_total_price').val() > 200){                              // here price check for post tide step 3
         $(".total-price-check").show();
         return false;
       }
@@ -28,7 +28,7 @@
     });
 
   <% if @ride.to_location.present? && @ride.from_location.present? %>
-      $('#map_canvas').gmap('displayDirections', { 'origin': '<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination': '<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {
+      $('#map_canvas').gmap('displayDirections', { 'origin': '<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination': '<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('results') }, function(result, status) {               // here google map function
           if ( status === 'OK' ){
         var METERS_TO_MILES = 0.000621371192;
         totalDistance = result.routes[0].legs[0].distance.value;
@@ -79,7 +79,7 @@
     <li class="last active">3. What Else?</li>
   </ul>
   <div style="clear:both"></div>
-  <%= form_for @ride do |f| %>
+  <%= form_for @ride do |f| %>                                                  <!-- form for post ride Step 3 -->
     <% if @ride.errors.any? %>
       <div class="error_messages">
         <h2>Form is invalid</h2>
@@ -118,8 +118,8 @@
   <%end%>
 </div>
 
-<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>
-<div id="results" style="display:none;">
+<div id="map_canvas" style="height:350px; width: 500px;"></div><br/>            <!--google map sho here -->
+<div id="results" style="display:none;">                                        <!--distance, duration and fare show here -->
   <div id="directions"></div>
 
 </div>

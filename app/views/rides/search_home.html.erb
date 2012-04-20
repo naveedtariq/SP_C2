@@ -6,7 +6,7 @@
           window.close();
           opener.location.reload(true);
       }
-    $('#ride_to_location_id').change(function() {
+    $('#ride_to_location_id').change(function() {                               // here chech to and from location are not from the same group
       var A = [1,2,3];
       var i = 0;
       var j =0;
@@ -65,7 +65,7 @@
     });
 
 
-    $('#ride_from_location_id').change(function() {
+    $('#ride_from_location_id').change(function() {                             // here check to and from location are not from the same group
 
       var A = [1,2,3];
       var i = 0;
@@ -132,7 +132,7 @@
           minDate: 0, maxDate: "+1Y"
     });
 var scrollTime = 20000;
-	function scrollup(){
+	function scrollup(){                                                          // jquery auto scroll for latest rides
 			$('.ride-scroll').animate({
 		    scrollTop: $('.ride-scroll').get(0).newScrollHeight
 		},-100, 'linear', function(){scroll();});
@@ -153,7 +153,7 @@ var scrollTime = 20000;
   });
 </script>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>(function(d, s, id) {                                                   // facebook jssdk for like button
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
@@ -179,7 +179,7 @@ var scrollTime = 20000;
     <div id="content_container" class="clearfix">
       <div id="content">
         <div id="routes">
-          <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
+          <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>                                 <!-- form for search rides w.r.t to and from location -->
             <div class="box">
               <div class="text_input">
                  <%= hidden_field_tag :search_posted, "true" %>
@@ -210,7 +210,7 @@ var scrollTime = 20000;
             <h3 class="headline first">
               Latest Rides
             </h3>
-            <ul class="non-blue-h1 ride-scroll"><%@rides.each do |ride| %>
+            <ul class="non-blue-h1 ride-scroll"><%@rides.each do |ride| %>      <!-- here fetched latest 20 rides in auto scroller -->
               <li style="">
                   <a class="km_click_event_by_href" href="<%= new_ride_ride_participant_path(ride) %>">
                     <div class="price_box"> 

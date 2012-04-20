@@ -2,13 +2,13 @@
   <script>
     
 $(document).ready(function() {
- $('#user_password').password_strength();
+ $('#user_password').password_strength();                           // check passwork length strong or week
 });
 </script>
 <div class="container">
   <section id="forms">
 
-<%= form_for @user, :html => { :multipart => true } do |f| %>
+<%= form_for @user, :html => { :multipart => true } do |f| %>                   <!-- here user sign up page -->
   <% if @user.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>

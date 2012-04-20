@@ -1,18 +1,18 @@
 <%= stylesheet_link_tag "terms-style" %>
-<%= javascript_include_tag "jquery-1.7.1.min", "jquery.popupWindow"%>
+<%= javascript_include_tag "jquery-1.7.1.min", "jquery.popupWindow" %>
 <script type="text/javascript">
     $(document).ready(function () {
 
-$('.contact-form').popupWindow({
-height:500,
-width:800,
-top:50,
-left:50
-});
-if(opener){
-    window.close();
-    opener.location.reload(true);
-}
+        $('.contact-form').popupWindow({                                      // jquery function for popup the window when user going to accept ride
+            height:500,
+            width:800,
+            top:50,
+            left:50
+        });
+        if (opener) {
+            window.close();
+            opener.location.reload(true);
+        }
     });
 </script>
 <div id="container">
@@ -29,7 +29,7 @@ if(opener){
   <div class="container">
     <section id="forms">
 
-      <% if current_user %>
+      <% if current_user %>                                                     <!-- on dashboard small menu link -->
           <ul>
             <li style="float: left; ">
               <%= link_to "Ride input page ", new_ride_path %> |
@@ -44,7 +44,7 @@ if(opener){
           </ul>
       <% end %>
       <br/>
-      <h4> Current Rides</h4>
+      <h4> Current Rides</h4> <!-- current rides table here-->
       <table border="1" cellpadding="3">
         <tr>
           <th>Owner</th>
@@ -64,21 +64,23 @@ if(opener){
           <th>Link</th>
           <th>Price Per Seat</th>
         </tr>
-        <% if @ride_participants.empty? %>
+        <% if @ride_participants.empty? %>                                      <!-- check for ride_participant empty or not-->
             <tr>
               <td colspan="14">No records</td>
             </tr>
         <% end %>
-        <% @ride_participants.each do |ride_participant| %>
+
+        <% @ride_participants.each do |ride_participant| %>                     <!-- fetch rides information here -->
             <% ride = ride_participant.ride %>
             <tr align="center">
               <td><a href="<%= user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
               <td>
-                <% ride.ride_participants.confirmed_participants.each do |p| %>
+                <% ride.ride_participants.confirmed_participants.each do |p| %>   <!-- confirmed participants fetche with respect to rides -->
                     <a href="<%= user_path(p.user) %>"><%= p.user && "#{p.user.full_name}" %></a>&nbsp;
                 <% end %>
               </td>
               <td><%= ride.from_location && ride.from_location.name %></td>
+              <!-- fetched all ride informations -->
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
               <td><%= ride.departure_time.strftime("%H:%M #{SpClock.zone_offset}") %></td>
@@ -97,11 +99,11 @@ if(opener){
               <td colspan="14">
                 <% case ride_participant.role %>
                 <% when ROLES_FOR_RIDES[:owner] %>
-                    <% if ride.ride_participants.pending_or_confirmed.blank? %>
+                    <% if ride.ride_participants.pending_or_confirmed.blank? %>                   <!-- check for if no ride's pending and confirmed ride_participants  -->
                         No requests so far.
                     <% else %>
                         <ul>
-                          <% ride.ride_participants.pending_participants.each do |participant| %>
+                          <% ride.ride_participants.pending_participants.each do |participant| %>           <!-- pending ride_participants which want to accept to join ride -->
                               <li>Status: ride requested
                                 by <a href="<%= user_path(participant.user) %>"><%= participant.user.full_name %></a>
                                 <% if ride.ride_participants.confirmed_participants.count > 1 %>
@@ -124,9 +126,9 @@ if(opener){
                           <% end %>
                         </ul>
                     <% end %>
-                    <% if ride.ride_participants.pending_or_confirmed.blank? %>
-                    <span class="right"> <%= link_to "Modify ride", edit_ride_path(ride) %>
-                      |
+                    <% if ride.ride_participants.pending_or_confirmed.blank? %>                   <!-- modify/cancel ride link for rides -->
+                  <span class="right"> <%= link_to "Modify ride", edit_ride_path(ride) %>
+                    |
                     <% end %> <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %></span>
                 <% when ROLES_FOR_RIDES[:pending] %>
                     Status: still
@@ -139,11 +141,20 @@ if(opener){
                     info:
                     phone <%= ride_participant.owner_participant.phone %>, email: <%= owner.email %>;
                     preference: <%= ride_participant.owner_participant.mode_of_communications %>
-                    ; <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
-                <% when ROLES_FOR_RIDES[:expired] %>
+                    ;
+                    <% ride.ride_participants.confirmed_participants.where("user_id != #{current_user.id}").each do |participant| %>
+                        <li>Status: ride confirmed for
+                          <a href="<%= user_path(participant.user) %>"><%= participant.user.full_name %></a>,
+                          contact info:
+                          phone <%= participant.phone %>, email: <%= participant.user.email %>;
+                          preference: <%= participant.mode_of_communications %></li>
+
+                    <% end %>
+                    <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
+                <% when ROLES_FOR_RIDES[:expired] %>                              <!-- if rides expired then link changed to post your ride-->
                     Status: your ride was not accepted within 24
                     hours, <%= link_to "post your ride", clone_ride_path(ride) %>
-                <% when ROLES_FOR_RIDES[:rejected] %>
+                <% when ROLES_FOR_RIDES[:rejected] %>                             <!-- for reject rides post ride link appear here-->
                     Status: your ride was not accepted, <%= link_to "post your ride", clone_ride_path(ride) %>
                 <% end %>
               </td>
@@ -152,7 +163,7 @@ if(opener){
       </table>
 
       <hr/>
-      <h4> Past Rides</h4>
+      <h4> Past Rides</h4> <!-- past rides show-->
       <table border="1" cellpadding="3">
         <tr>
           <th>Owner</th>
@@ -171,12 +182,12 @@ if(opener){
           <th>Link</th>
           <th>Price Per Seat</th>
         </tr>
-        <% if @past_rides.empty? %>
+        <% if @past_rides.empty? %>                                             <!--check for empty rides-->
             <tr>
               <td colspan="12">No records</td>
             </tr>
         <% end %>
-        <% @past_rides.each do |ride_participant| %>
+        <% @past_rides.each do |ride_participant| %>                            <!-- past rides fetch here -->
             <% ride = ride_participant.ride %>
             <tr align="center">
               <td><a href="<%= user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
@@ -201,7 +212,7 @@ if(opener){
             </tr>
         <% end %>
       </table>
-      <%= will_paginate @past_rides, :param_name => "past_rides_page" %>
+      <%= will_paginate @past_rides, :param_name => "past_rides_page" %>        <!-- pagination if rides increased as per page rides-->
     </section>
   </div>
 </div>

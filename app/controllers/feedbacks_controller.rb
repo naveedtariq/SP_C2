@@ -1,19 +1,26 @@
 class FeedbacksController < ApplicationController
+   layout false
+   before_filter :load_ride                                                      # Require load_ride for messages
+   before_filter :require_login                                                  # Require Login for messages
 
-  def new
-    @left_count = 0
+   def new                                                                       # function to make new object of feedback
+    @left_count = 0                                                             # variable to count feedbacks which are left to be give
     @feedback = Feedback.new
   end
 
-  def create
-   @feedback = current_user.feedbacks.build(params[:feedback])
-    if @feedback.save
-
+  def create                                                                    # function for given feedback
+    @feedback = current_user.feedbacks.build(params[:feedback])                 # Create the feedback by current user
+    if @feedback.save                                                           # if feedback save then redirect to feedback page
       flash[:notice] = "feedback Sent"
-      redirect_to new_feedback_path
+      redirect_to new_ride_feedback_path(@ride)
     else
       render :action => 'new'
     end
   end
+
+   private
+   def load_ride
+     @ride = Ride.find(params[:ride_id])                                         # find ride against ride_id
+   end
 end
 

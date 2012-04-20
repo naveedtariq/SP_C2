@@ -1,16 +1,4 @@
-<%= javascript_include_tag "jquery-1.7.2.min", "jquery.fancybox", "jquery.tabSlideOut.v1.3" %>
-<%= stylesheet_link_tag "jquery.fancybox" %>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.fancybox').fancybox();
-
-    });
-</script>
-<style type="text/css">
-    .fancybox-custom .fancybox-skin {
-        box-shadow: 0 0 50px #222;
-    }
-</style>
+<%= javascript_include_tag "jquery-1.7.2.min" %>
 <h6>My Inbox</h6><br/><br/>
 <div class="main-msg-box" style="border: 1px solid;">
   <div class="left-all-msgs" style="border: 1px solid; float: left; height: 700px; margin-left: 5px; margin-top: 5px;">
@@ -22,7 +10,7 @@
           <td>Title</td>
           <td>Ride</td>
           </thead>
-          <% @user.owned_messages.rev_ordered.each do |u| %>
+          <% @user.owned_messages.rev_ordered.each do |u| %>                    <!--here user owned message fetched -->
               <% sender=User.find(u.user_id) %>
               <% ride=Ride.find(u.ride_id) %>
               <tr>
@@ -37,7 +25,7 @@
       <% end %>
     </table>
   </div>
-  <div class="right-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px;">
+  <div class="right-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px;">                               <!-- iframe for message send b/w sender and receiver  -->
     <iframe src="<%= params[:iframe] %>" name="frame-a" width="600" height="650"></iframe>
   </div>
 </div>
