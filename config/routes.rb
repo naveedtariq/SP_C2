@@ -12,6 +12,7 @@ SPC2::Application.routes.draw do
       get "logged_in"
       get "update_phone"
       get "inbox"
+      get "feedback"
     end
   end
   resources :sessions, :only => [:new, :create, :destroy] do
@@ -52,9 +53,10 @@ SPC2::Application.routes.draw do
       end
     end
     resource :message, :only => [:new, :create, :show]
+    resource :feedback, :only => [:new, :create, :show]
+
   end
   resource :dashboard, :only => [:show]
-  resource :feedback, :only => [:new, :create, :show]
   resources :footers do
     collection do
       get "terms"

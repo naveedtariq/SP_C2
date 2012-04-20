@@ -2,7 +2,7 @@
 *:focus {
   outline: transparent none 0;
 }
-
+ul.navigation-bar-main a{color: white !important}
 /* element styles */
 /* line 15 */
 html, body {
@@ -163,7 +163,6 @@ for the purpose of displaying the new bookit module in private networks */
   line-height: 12px;
   padding-left: 15px;
   margin-top: 5px;
-  background: url(../2/images/l_caret.png) no-repeat left 0px;
   font-weight: normal;
 }
 /* line 48 */
@@ -230,7 +229,6 @@ for the purpose of displaying the new bookit module in private networks */
   line-height: 14px;
   padding-right: 25px;
   margin-top: 4px;
-  background: url(../2/images/r_caret.png) no-repeat right 3px;
   font-weight: 500;
 }
 /* line 51 */
@@ -523,7 +521,6 @@ for the purpose of displaying the new bookit module in private networks */
   display: inline-block;
   line-height: 32px;
   padding-left: 34px;
-  background: url(../2/images/print_icon.png) no-repeat left center;
   font-weight: normal;
 }
 /* line 60 */
@@ -862,7 +859,6 @@ for the purpose of displaying the new bookit module in private networks */
   right: 10px;
   width: 12px;
   height: 100%;
-  background: url(../2/images/down_arrows.png) no-repeat right 7px;
 }
 /* line 151 */
 .dropdown .template {
@@ -889,22 +885,12 @@ for the purpose of displaying the new bookit module in private networks */
 }
 /* line 173 */
 .dropdown .template.round_trip .icon {
-  background: url(../2/images/round_trip_medium.png) no-repeat center top;
-}
-/* line 176 */
-.dropdown .template.depart_trip .icon {
-  background: url(../2/images/round_trip_medium.png) no-repeat center -19px;
-}
-/* line 179 */
-.dropdown .template.return_trip .icon {
-  background: url(../2/images/round_trip_medium.png) no-repeat center -38px;
 }
 /* line 183 */
 .dropdown .template.route .icon {
   display: inline-block;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
-  background: url(../2/images/round_trip_small.png) center no-repeat;
   width: 12px;
   height: 9px;
   padding: 0 3px;
@@ -934,7 +920,6 @@ for the purpose of displaying the new bookit module in private networks */
   display: block;
   line-height: 15px;
   padding-right: 13px;
-  background: url(../2/images/up_down_pointers.png) no-repeat right 1px;
 }
 /* line 213 */
 .dropmenu .label a:hover span {
@@ -1159,11 +1144,9 @@ for the purpose of displaying the new bookit module in private networks */
 }
 /* line 314 */
 .ride_list .entry .userpic span.driver {
-  background: url(../2/images/button_driver_icon.png) 0 -28px no-repeat;
 }
 /* line 317 */
 .ride_list .entry .userpic span.passenger {
-  background: url(../2/images/button_passenger_icon.png) 0 -28px no-repeat;
 }
 /* line 321 */
 .ride_list .entry .username {
@@ -1209,14 +1192,6 @@ float: left;
   padding: 0 8px;
   opacity: 0.7;
 }
-/* line 355 */
-.ride_list .entry .inner_content .trip_type.round_trip {
-  background: url(../2/images/round_trip_medium.png) no-repeat center 0;
-}
-/* line 358 */
-.ride_list .entry .inner_content .trip_type.one_way {
-  background: url(../2/images/round_trip_medium.png) no-repeat center -19px;
-}
 /* line 361 */
 .ride_list .entry .inner_content h3 {
   font-size: 18px;
@@ -1255,7 +1230,6 @@ float: left;
   border: 1px solid #bbb;
   line-height: 13px;
   padding: 2px 4px 2px 18px;
-  background: #f8f0ff url(../2/images/search_filter_icons.png) no-repeat 1px -131px;
 }
 /* line 391 */
 .ride_list .entry .inner_content h4 .commute span {
@@ -1386,7 +1360,6 @@ float: left;
   margin: 0 auto 3px auto;
   width: 24px;
   height: 22px;
-  background: url(../2/images/passenger_flat.png) no-repeat left 0px;
 }
 /* line 492 */
 .ride_list .entry:hover .price_box {
@@ -1474,12 +1447,10 @@ float: left;
 }
 /* line 558 */
 .feedback .comment p.negative .name strong {
-  background: url(../2/images/thumbs.png) no-repeat right -12px;
   padding-right: 18px;
 }
 /* line 562 */
 .feedback .comment p.positive .name strong {
-  background: url(../2/images/thumbs.png) no-repeat right 1px;
   padding-right: 18px;
 }
 
@@ -1613,7 +1584,6 @@ float: left;
 /* line 659 */
 .data_table table td .check {
   margin: 0 auto;
-  background: url(../2/images/check_blue.png) no-repeat center -24px;
   text-indent: -9999px;
 }
 /* line 664 */
@@ -1782,7 +1752,6 @@ float: left;
 }
 /* line 779 */
 #header #logo {
-  background: url(../2/images/logo.png);
   bottom: 10px;
   display: block;
   font-size: 0;
@@ -2047,7 +2016,6 @@ by Mike Brevoort, adjusted above for our UI */
 /* line 995 */
 #fb_friend_select.inline .head {
   text-indent: -10000px;
-  background: url(../2/images/refer_friends_ride_free_banner.png) no-repeat left top;
   width: 834px;
   height: 90px;
   position: absolute;
@@ -2193,7 +2161,6 @@ by Mike Brevoort, adjusted above for our UI */
   display: block;
   text-align: center;
   padding-left: 54px;
-  background: url(../2/images/fbconnect_button_bg.png) no-repeat -14px -10px;
   font-weight: 500;
 }
 /* line 256 */
@@ -2261,7 +2228,6 @@ by Mike Brevoort, adjusted above for our UI */
   padding: 0 4px 0 22px;
   margin: 2px 6px;
   width: 150px;
-  background: url(../2/images/search_icon_small.png) no-repeat 5px 3px;
   font-family: "Helvetica Neue", Helvetica, "Lucida Grande", Arial, sans-serif;
   float: none;
   position: absolute;
@@ -2373,7 +2339,6 @@ by Mike Brevoort, adjusted above for our UI */
   height: 35px;
   line-height: 35px;
   font-size: 18px;
-  background: url(../2/images/facebook_icon_medium.png) no-repeat left center;
   padding-left: 39px;
   text-shadow: 0 1px #fff;
   font-weight: normal;
@@ -2496,7 +2461,6 @@ by Mike Brevoort, adjusted above for our UI */
   height: 40px;
   right: 50px;
   top: 18px;
-  background: url(../2/images/promo_down_arrow.png) no-repeat left top;
 }
 
 /* top nav */
@@ -2525,7 +2489,6 @@ ul#top_nav a.post:hover {
 /* line 1246 */
 ul#top_nav a#private_networks {
   padding-right: 13px;
-  background: url(../2/images/up_down_pointers.png) no-repeat right 1px;
 }
 /* line 1249 */
 ul#top_nav a#private_networks:hover {
@@ -2554,7 +2517,6 @@ ul#top_nav .dropmenu li a span {
   display: block;
   padding-left: 28px;
   background-repeat: no-repeat;
-  background-image: url(../2/images/account_dropmenu_icons.png);
 }
 /* line 1276 */
 ul#top_nav .dropmenu li a.profile span {
@@ -2875,7 +2837,6 @@ ul#top_nav .dropmenu li a.logout:hover span {
 /* line 1450 */
 #sec_nav .inbox .inbox_messages .point {
   position: absolute;
-  background: url(../2/images/panel_top_point.png) no-repeat left top;
   width: 45px;
   height: 24px;
   top: 0;
@@ -2943,7 +2904,6 @@ ul#top_nav .dropmenu li a.logout:hover span {
   -ms-border-radius: 3px;
   -khtml-border-radius: 3px;
   border-radius: 3px;
-  background: white url(../2/images/search_icon.png) 326px center no-repeat;
 }
 /* line 1506 */
 #networks_header #search_networks.loading {
@@ -3036,7 +2996,6 @@ ul#top_nav .dropmenu li a.logout:hover span {
   float: left;
   width: 134px;
   font-size: 13px;
-  background: url(../2/images/favicon_default.gif) no-repeat left 1px;
 }
 /* line 1576 */
 #networks_header ul.platform_wrap li.state ul.platforms a span {
@@ -3057,7 +3016,6 @@ ul#top_nav .dropmenu li a.logout:hover span {
   padding-right: 18px;
   display: inline-block;
   line-height: 12px;
-  background: url(../2/images/up_caret.png) no-repeat right 2px;
   font-weight: 500;
 }
 /* line 1599 */
@@ -3092,7 +3050,6 @@ ul#top_nav .dropmenu li a.logout:hover span {
   display: inline-block;
   line-height: 12px;
   padding-right: 17px;
-  background: url(../2/images/r_carets.png) no-repeat right -10px;
   font-weight: 500;
 }
 
@@ -3114,7 +3071,6 @@ ul#top_nav .dropmenu li a.logout:hover span {
 /* line 1633 */
 .search_network_results .favicon_wrap {
   display: block;
-  background: url(../2/images/favicon_default.gif) no-repeat left -1px;
 }
 /* line 1636 */
 .search_network_results .favicon_wrap .favicon {
@@ -3130,7 +3086,6 @@ a.skip {
   font-size: 12px;
   line-height: 12px;
   padding-right: 11px;
-  background: url(../2/images/r_caret.png) no-repeat right -14px;
 }
 /* line 1651 */
 a.skip:hover {
@@ -3171,7 +3126,6 @@ a.skip:hover {
   left: 50px;
   width: 27px;
   height: 18px;
-  background: url(../2/images/bubble_point_down_lb.png) no-repeat left top;
 }
 /* line 1673 */
 #action h2 {
@@ -3279,7 +3233,6 @@ a.skip:hover {
   line-height: 20px;
   padding-left: 24px;
   font-weight: normal;
-  background: url(../2/images/promote_social_buttons.png) no-repeat -12px -16px;
 }
 /* line 1764 */
 #action .item.promote .post a.facebook,
@@ -3292,7 +3245,6 @@ a.skip:hover {
   width: 55px;
   height: 20px;
   margin-left: 7px;
-  background: url(../2/images/promote_social_buttons.png) no-repeat left top;
   text-indent: -9999px;
 }
 /* line 1775 */
@@ -3483,22 +3435,8 @@ a.skip:hover {
   font-style: italic;
 }
 
-/* fonts */
-@font-face {
-  font-family: 'DINBold';
-  src: url("../fonts/din/din-bold-webfont.eot");
-  src: url("../fonts/din/din-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/din/din-bold-webfont.woff") format("woff"), url("../fonts/din/din-bold-webfont.ttf") format("truetype"), url("../fonts/din/din-bold-webfont.svg#DINBold") format("svg");
-  font-weight: bold;
-  font-style: normal;
-}
 
-@font-face {
-  font-family: 'DINMedium';
-  src: url("../fonts/din/din-medium-webfont.eot");
-  src: url("../fonts/din/din-medium-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/din/din-medium-webfont.woff") format("woff"), url("../fonts/din/din-medium-webfont.ttf") format("truetype"), url("../fonts/din/din-medium-webfont.svg#DINMedium") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
+
 
 /* controller scoped stylsheets */
 /**
@@ -4232,7 +4170,6 @@ a.skip:hover {
 /* line 524, */
 #booking_pdfreceipt #content .ticket {
   position: relative;
-  background: url(../2/images/booking_pdfreceipt_ticket_bg.png) no-repeat 0 0;
   height: 193px;
   /* setting left/right padding to 0 because padding is sometimes rendered within the
    * set width of a container, and sometimes outside of it 
@@ -4265,7 +4202,6 @@ a.skip:hover {
 }
 /* line 551, */
 #booking_pdfreceipt #content .ticket h2 .trip_type.one_way {
-  background: url(../2/images/round_trip_medium.png) center -20px no-repeat;
 }
 /* line 556, */
 #booking_pdfreceipt #content .ticket .detail {
@@ -4418,7 +4354,6 @@ a.skip:hover {
 }
 /* line 17,  */
 #static_splash2 .stagewrap {
-  background: url(../2/images/burst_homepage_bg.png) no-repeat center #0D77B6;
   width: 100%;
   height: 327px;
   position: absolute;
@@ -4520,20 +4455,10 @@ a.skip:hover {
   position: absolute;
   background-position: center center;
   background-repeat: no-repeat;
-}
-/* line 81,  */
-#static_splash2 #content #routes .box .text_input label.start {
-  background: url(../2/images/pin_start_homepage.png) no-repeat center 44%;
-}
-/* line 84,  */
+}/* line 84,  */
 #static_splash2 #content #routes .box .text_input label.end {
-  background: url(../2/images/pin_end_homepage.png) no-repeat center 44%;
-}
-/* line 87,  */
-#static_splash2 #content #routes .box .text_input label.cal {
-  background: url(../2/images/calendar_input_icon2.png) no-repeat center 42%;
-}
-/* line 92,  */
+  background: no-repeat center 44%;
+}/* line 92,  */
 #static_splash2 #content #routes .box .text_input.short {
   width: 100px;
   position: absolute;
@@ -4696,7 +4621,6 @@ a.skip:hover {
   display: inline-block;
   width: 46px;
   height: 37px;
-  background-image: url(../2/images/car_homepage.png);
   margin-right: 3px;
 }
 /* line 159,  */
@@ -4704,7 +4628,6 @@ a.skip:hover {
   display: inline-block;
   width: 13px;
   height: 100%;
-  background: url(../2/images/arrow_white.png) center 14px no-repeat;
   margin-left: 3px;
 }
 /* line 172,  */
@@ -4730,7 +4653,6 @@ a.skip:hover {
 }
 /* line 189,  */
 #static_splash2 #content .subsection .rides .border_shadow {
-  background: url(../2/images/shadow_wide_homepage.png) 0 0 no-repeat;
 }
 /* line 192,  */
 #static_splash2 #content .subsection .rides ul {
@@ -4781,7 +4703,7 @@ a.skip:hover {
 }
 /* line 222,  */
 #static_splash2 #content .subsection .rides li .trip_type {
-  background: url(../2/images/round_trip_small_blue.png) center no-repeat;
+  background: center no-repeat;
   width: 12px;
   height: 9px;
   padding: 0 5px;
@@ -4801,11 +4723,9 @@ a.skip:hover {
 }
 /* line 238,  */
 #static_splash2 #content .subsection .rides li p span.driver {
-  background: url(../2/images/driver.png) 0 center no-repeat;
 }
 /* line 241,  */
 #static_splash2 #content .subsection .rides li p span.passenger {
-  background: url(../2/images/passenger.png) 0 center no-repeat;
 }
 /* line 246,  */
 #static_splash2 #content .subsection .rides li h1 {
@@ -4852,7 +4772,6 @@ a.skip:hover {
 }
 /* line 285,  */
 #static_splash2 #content .subsection .events .border_shadow {
-  background: url(../2/images/shadow_short_homepage.png) 5px 0 no-repeat;
 }
 /* line 290,  */
 #static_splash2 #content .subsection .events .slider_container .left_arr, #static_splash2 #content .subsection .events .slider_container .right_arr {
@@ -4880,7 +4799,7 @@ a.skip:hover {
 }
 /* line 308,  */
 #static_splash2 #content .subsection .events .slider_container .left_arr {
-  background-image: url(../2/images/left_arrow.png);
+  
   left: -13px;
 }
 /* line 311,  */
@@ -4889,7 +4808,6 @@ a.skip:hover {
 }
 /* line 315,  */
 #static_splash2 #content .subsection .events .slider_container .right_arr {
-  background-image: url(../2/images/right_arrow.png);
   right: -13px;
 }
 /* line 318,  */
@@ -5027,7 +4945,6 @@ a.skip:hover {
   line-height: 14px;
   padding-right: 25px;
   margin-top: 4px;
-  background: url(../2/images/r_caret.png) no-repeat right 3px;
   font-weight: 500;
 }
 /* line 398,  */
@@ -5035,7 +4952,6 @@ a.skip:hover {
   margin: 0 auto 70px;
   font-size: 14px;
   text-align: center;
-  background: url(../2/images/quote-shelf.png) no-repeat 55% 70%;
 }
 /* line 404,  */
 #static_splash2 #content .quote a {
@@ -5085,7 +5001,6 @@ a.skip:hover {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: url(../2/images/arrow_blue.png) center center no-repeat;
   padding: 0 1px;
 }
 
@@ -5109,7 +5024,6 @@ a.skip:hover {
   top: -40px;
   text-indent: -9999px;
   height: 80px;
-  background: url("/2/images/safety-banner.png") no-repeat center top;
 }
 /* line 465,  */
 #static_safety #content h2 {
@@ -5171,8 +5085,7 @@ a.skip:hover {
 /* line 511,  */
 #static_safety #content .features ul li div {
   margin: 0 auto;
-  height: 59px;
-  background: url(../2/images/safety_features_icons.png) no-repeat center center;
+  height: 59px;center;
   position: relative;
   left: -20px;
 }
@@ -5290,7 +5203,6 @@ a.skip:hover {
 /* line 597,  */
 #static_safety #content .checklist ul {
   overflow: hidden;
-  background: url(../2/images/safety_car_road.gif) no-repeat left bottom;
   padding-bottom: 75px;
   margin-bottom: 80px;
 }
@@ -5305,7 +5217,6 @@ a.skip:hover {
   margin: 0 auto;
   width: 50px;
   height: 53px;
-  background: url(../2/images/safety_checklist_icons.png) no-repeat center center;
   position: relative;
   left: -20px;
 }
@@ -5323,7 +5234,6 @@ a.skip:hover {
 }
 /* line 624,  */
 #static_safety #content .checklist ul h4 {
-  background: url(../2/images/check_purple.png) no-repeat left center;
   padding-left: 20px;
   position: relative;
   left: -20px;
@@ -5356,7 +5266,6 @@ a.skip:hover {
   display: inline-block;
   width: 24px;
   height: 24px;
-  background: url(../2/images/driver_passenger_small.png) no-repeat left top;
 }
 /* line 653,  */
 #static_safety #content .tips .drivers {
@@ -5440,14 +5349,12 @@ a.skip:hover {
   top: -40px;
   text-indent: -9999px;
   height: 80px;
-  background: url("/2/images/how-it-works-banner.png") no-repeat center top;
 }
 /* line 703,  */
 #static_howitworks #content .splash {
   text-align: center;
   margin-top: -40px;
   padding-top: 14px;
-  background: url(../2/images/shadow.png) no-repeat center 216px;
   overflow: hidden;
 }
 /* line 709,  */
@@ -5511,7 +5418,6 @@ a.skip:hover {
   width: 50px;
   height: 50px;
   margin: 5px auto;
-  background: url(../2/images/driver_passenger_big) no-repeat;
 }
 /* line 754,  */
 #static_howitworks #content .roles .role h3 {
@@ -5519,7 +5425,6 @@ a.skip:hover {
   height: 50px;
   line-height: 35px;
   text-align: center;
-  background: url(../2/images/driverpassenger_flags.png) no-repeat;
 }
 /* line 761,  */
 #static_howitworks #content .roles .role ul {
@@ -5536,7 +5441,6 @@ a.skip:hover {
   height: 80px;
   position: absolute;
   margin-top: -10px;
-  background: url(../2/images/blue_icons.png) no-repeat;
 }
 /* line 774,  */
 #static_howitworks #content .roles .role li.d1 div {
@@ -5597,7 +5501,6 @@ a.skip:hover {
   text-align: center;
   height: 200px;
   padding-top: 50px;
-  background: url(../2/images/car_road_quote.png) no-repeat center bottom;
 }
 /* line 824,  */
 #static_howitworks #content .quotes .quote_list li {
@@ -5647,7 +5550,6 @@ a.skip:hover {
 /* line 867,  */
 #static_welcome #content .explain {
   text-align: center;
-  background: url(../2/images/happy_car.png) no-repeat center top;
   padding-top: 172px;
 }
 /* line 871,  */
@@ -5669,7 +5571,6 @@ a.skip:hover {
 }
 /* line 886,  */
 #static_welcome #content .more {
-  background: url(../2/images/road_shelf.png) no-repeat left top;
   overflow: hidden;
   margin-bottom: 40px;
 }
@@ -5707,7 +5608,6 @@ a.skip:hover {
   padding-left: 45px;
   line-height: 36px;
   margin-bottom: 7px;
-  background: url(../2/images/driver_passenger.png) no-repeat left top;
   text-shadow: 0 1px #fff;
 }
 /* line 906,  */
@@ -5744,7 +5644,6 @@ a.skip:hover {
 }
 /* line 934,  */
 #static_welcome #content .get_started {
-  background: url(../2/images/shadow_large.png) no-repeat center 352px;
 }
 /* line 936,  */
 #static_welcome #content .get_started .video {
@@ -5783,7 +5682,6 @@ a.skip:hover {
   display: inline-block;
   line-height: 40px;
   padding-left: 65px;
-  background: url(../2/images/search_post_icons.png) no-repeat left 0px;
 }
 /* line 961,  */
 #static_welcome #content .get_started .act span.search .button {
@@ -5798,8 +5696,6 @@ a.skip:hover {
   display: inline-block;
   line-height: 40px;
   padding-right: 65px;
-  background: url(../2/images/search_post_icons.png) no-repeat right -54px;
-}
 /* line 971,  */
 #static_welcome #content .get_started .act span.post .button {
   margin-left: 15px;
@@ -5834,9 +5730,7 @@ a.skip:hover {
   position: relative;
   top: -40px;
   text-indent: -9999px;
-  height: 80px;
-  background: url("../2/images/about-page-banner.png") no-repeat center top;
-}
+  height: 80px;}
 /* line 996,  */
 #static_about #content a.button.info {
   font-size: 15px;
@@ -5868,7 +5762,6 @@ a.skip:hover {
 #static_about #content .what_why li div {
   width: 100%;
   height: 65px;
-  background: url(../2/images/about_icons.png) no-repeat center top;
 }
 /* line 1021,  */
 #static_about #content .what_why li.how div {
@@ -5903,7 +5796,6 @@ a.skip:hover {
 #static_about #content h2 {
   margin: 0 auto 40px auto;
   text-align: center;
-  background: url(../2/images/road_banner.png) no-repeat center center;
   text-transform: uppercase;
   font-size: 30px;
   line-height: 40px;
@@ -5921,7 +5813,6 @@ a.skip:hover {
 #static_about #content .ethos {
   margin: 0 auto 0 auto;
   padding-bottom: 70px;
-  background: url(../2/images/badge_bg.png) no-repeat center 45px;
 }
 /* line 1066,  */
 #static_about #content .ethos h2 {
@@ -5952,7 +5843,6 @@ a.skip:hover {
   top: -9px;
   margin-left: 3px;
   text-indent: -100000px;
-  background: url(../2/images/logo_small.png) no-repeat center center;
   width: 100px;
   height: 30px;
 }
@@ -5975,14 +5865,12 @@ a.skip:hover {
 }
 /* line 1104,  */
 #static_about #content .team .img {
-  background: url(../2/images/zteam_smile.jpg) no-repeat center center;
   width: 640px;
   height: 447px;
   margin-bottom: 15px;
 }
 /* line 1109,  */
 #static_about #content .team .img:hover {
-  background-image: url(../2/images/zteam_action.jpg);
 }
 /* line 1113,  */
 #static_about #content .team p {
@@ -6042,9 +5930,7 @@ a.skip:hover {
   padding-left: 40px;
   font-weight: normal;
   color: #0d77b6;
-  font-size: 18px;
-  background: url(../2/images/zimdollar.png) no-repeat left center;
-}
+  font-size: 18px;}
 /* line 21,  */
 #ride_add .bonus_explanation p {
   margin: 0 auto;
@@ -6084,11 +5970,9 @@ a.skip:hover {
 }
 /* line 57,  */
 #ride_share #head .route .trip_type.round_trip {
-  background: url(../2/images/round_trip_medium.png) center 0 no-repeat;
 }
 /* line 60,  */
 #ride_share #head .route .trip_type.one_way {
-  background: url(../2/images/round_trip_medium.png) center -19px no-repeat;
 }
 /* line 63,  */
 #ride_share #head .route .with {
@@ -6099,11 +5983,9 @@ a.skip:hover {
 }
 /* line 69,  */
 #ride_share #head .route .with.passenger {
-  background: url(../2/images/passenger.png) no-repeat left 3px;
 }
 /* line 72,  */
 #ride_share #head .route .with.driver {
-  background: url(../2/images/driver.png) no-repeat left 3px;
 }
 /* line 76,  */
 #ride_share #head ul.acts {
@@ -6127,7 +6009,6 @@ a.skip:hover {
   padding-left: 20px;
   font-size: 11px;
   line-height: 11px;
-  background: url(../2/images/ride_action_icons.png) no-repeat left top;
 }
 /* line 96,  */
 #ride_share #head ul.acts a.matchlist {
@@ -6244,9 +6125,7 @@ a.skip:hover {
 #ride_share #detail .driver_detail .vehicle .nosmoke {
   display: inline-block;
   width: 20px;
-  height: 17px;
-  background: url(../2/images/nonsmoking_icon.png) no-repeat center center;
-}
+  height: 17px;}
 /* line 178,  */
 #ride_share #detail .driver_detail .riders {
   float: right;
@@ -6294,7 +6173,6 @@ a.skip:hover {
   display: block;
   width: 28px;
   height: 28px;
-  background: url(../2/images/seat.png) no-repeat 3px center;
 }
 /* line 210,  */
 #ride_share #detail .map {
@@ -6316,12 +6194,10 @@ a.skip:hover {
 #ride_share #detail .locations td.start,
 #ride_share #detail .locations td.end {
   padding-left: 22px;
-  background: url(../2/images/pin_start.png) no-repeat left 2px;
   vertical-align: top;
 }
 /* line 228,  */
 #ride_share #detail .locations td.end {
-  background: url(../2/images/pin_end.png) no-repeat left 2px;
 }
 /* line 231,  */
 #ride_share #detail .locations td.trip_type {
@@ -6336,11 +6212,9 @@ a.skip:hover {
 }
 /* line 240,  */
 #ride_share #detail .locations td.round_trip span {
-  background: url(../2/images/round_trip_medium.png) no-repeat center 4px;
 }
 /* line 243,  */
 #ride_share #detail .locations td.one_way span {
-  background: url(../2/images/round_trip_medium.png) no-repeat center -15px;
 }
 /* line 247,  */
 #ride_share #detail small {
@@ -6512,7 +6386,6 @@ a.skip:hover {
 }
 /* line 371,  */
 #ride_share #info .user .networks li {
-  background: url(../2/images/check_blue.png) no-repeat 1px 3px;
   padding-left: 15px;
 }
 /* line 376,  */
@@ -6529,20 +6402,17 @@ a.skip:hover {
 #ride_share #info .user a.show_more,
 #ride_share #info .user a.show_less {
   display: block;
-  background: url(../2/images/up_down_pointers.png) no-repeat left -38px;
-  padding-left: 12px;
+padding-left: 12px;
   font-size: 11px;
   line-height: 11px;
   margin: 0 0 15px 0;
 }
 /* line 393,  */
 #ride_share #info .user a.show_less {
-  background: url(../2/images/up_down_pointers.png) no-repeat left -12px;
 }
 /* line 396,  */
 #ride_share #info .user a.report {
   display: block;
-  background: url(../2/images/flag_blue.png) no-repeat left 0px;
   padding-left: 16px;
   font-size: 11px;
   line-height: 11px;
@@ -6676,17 +6546,7 @@ a.skip:hover {
   top: 1px;
   left: 7px;
 }
-/* line 88, */
-#search_run #content #head form.search .text_input .pin.start {
-  background-image: url(../2/images/pin_start.png);
-}
-/* line 91, */
-#search_run #content #head form.search .text_input .pin.end {
-  background-image: url(../2/images/pin_end.png);
-}
-/* line 94, */
 #search_run #content #head form.search .text_input .datetime_icon {
-  background-image: url(../2/images/calendar_input_icon.png);
   width: 15px;
 }
 /* line 98, */
@@ -6973,7 +6833,6 @@ a.skip:hover {
   height: 17px;
   left: -11px;
   top: 7px;
-  background: url(../2/images/panel_header_left_point.png) no-repeat left top;
 }
 /* line 280, */
 #search_run #content #info .filters .inner {
@@ -7026,9 +6885,7 @@ a.skip:hover {
   display: block;
   padding-left: 19px;
   line-height: 14px;
-  margin-top: 4px;
-  background: url(../2/images/search_filter_icons.png) no-repeat left 0px;
-}
+  margin-top: 4px;}
 /* line 313, */
 #search_run #content #info .filters .filterset a.filter.first {
   -moz-border-radius: 4px 0 0 4px;
@@ -7299,7 +7156,6 @@ a.skip:hover {
   height: 20px;
   margin-top: 20px;
   display: inline-block;
-  background: url("/2/images/popup_dialog_arrow.png") no-repeat center center;
   opacity: 0;
   filter: alpha(opacity=0);
   position: relative;
@@ -7322,7 +7178,6 @@ a.skip:hover {
   position: absolute;
   margin-top: -45px;
   margin-left: -143px;
-  background: url("/2/images/popup_dialog_banner.png");
 }
 /* line 544, */
 .popup .banner-top h1 {
@@ -7439,7 +7294,6 @@ a.skip:hover {
 /* line 48,  */
 #user_profile #content #info .notice .point, #user_edit #content #info .notice .point, #user_vouch #content #info .notice .point {
   position: absolute;
-  background: url(../2/images/bubble_point_up_lb.png) no-repeat left top;
   width: 22px;
   height: 12px;
   top: -12px;
@@ -7459,7 +7313,6 @@ a.skip:hover {
   left: -50px;
   line-height: 47px;
   padding-left: 31px;
-  background: url(../2/images/profile_banner_bg.png) no-repeat -76px top;
   width: 668px;
   z-index: 1;
   text-align: center;
@@ -7571,7 +7424,6 @@ a.skip:hover {
   margin-top: 7px;
   text-shadow: 0 1px #fff;
   color: #555;
-  background: url(../2/images/button_icons_large.png) no-repeat left -22px;
   font-weight: normal;
 }
 /* line 113,  */
@@ -7585,7 +7437,7 @@ a.skip:hover {
 }
 /* line 121,  */
 #user_edit #content #info .notice .button b {
-  background: url(../2/images/facebook_icon_small.png) no-repeat left 5px;
+  background:  no-repeat left 5px;
   padding-left: 25px;
 }
 /* line 126,  */
@@ -7664,7 +7516,7 @@ a.skip:hover {
   line-height: 12px;
   padding-left: 20px;
   margin-top: 5px;
-  background: url(../2/images/button_icons_small.png) no-repeat left 1px;
+  background:  no-repeat left 1px;
   font-weight: normal;
 }
 /* line 138,  */
@@ -7774,7 +7626,7 @@ a.skip:hover {
   margin-top: 7px;
   text-shadow: 0 1px #fff;
   color: #555;
-  background: url(../2/images/button_icons_large.png) no-repeat left 2px;
+  background:  no-repeat left 2px;
   font-weight: normal;
 }
 /* line 147,  */
@@ -7800,7 +7652,7 @@ a.skip:hover {
 /* line 162,  */
 #user_edit #content #detail dl dd span.checkbox.smoke label {
   padding-left: 29px;
-  background: url(../2/images/nonsmoking_icon_large.png) no-repeat left 4px;
+  background:  no-repeat left 4px;
 }
 /* line 169,  */
 #user_edit #content #detail dl dd.vehicle {
@@ -7839,7 +7691,7 @@ a.skip:hover {
   float: left;
   width: 243px;
   height: 161px;
-  background: white url(../2/images/profile_car_missing.png) no-repeat center center;
+  background: white no-repeat center center;
 }
 /* line 198,  */
 #user_edit #content #detail dl dd .my_car .car_pic .empty a.add {
@@ -7913,7 +7765,7 @@ a.skip:hover {
   margin-top: 7px;
   text-shadow: 0 1px #fff;
   color: #555;
-  background: url(../2/images/button_icons_large.png) no-repeat left -48px;
+  background:  no-repeat left -48px;
   font-weight: normal;
 }
 /* line 205,  */
@@ -8064,7 +7916,7 @@ a.skip:hover {
   margin-top: 5px;
   color: #eee;
   text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
-  background: url(../2/images/button_icons_small.png) no-repeat left -63px;
+  background:  no-repeat left -63px;
   font-weight: normal;
 }
 /* line 272,  */
@@ -8230,7 +8082,7 @@ a.skip:hover {
   line-height: 15px;
   padding-left: 17px;
   margin-top: 7px;
-  background: url(../2/images/button_icons_small.png) no-repeat left -40px;
+  background:  no-repeat left -40px;
   font-weight: normal;
 }
 /* line 301,  */
@@ -8299,7 +8151,7 @@ a.skip:hover {
 /* line 361,  */
 #user_profile #content #info ul.info li strong {
   font-weight: 500;
-  background: url(../2/images/profile_info_icons.png) no-repeat -2px top;
+  background:  no-repeat -2px top;
   padding-left: 25px;
   padding-top: 1px;
   paddingh-bottom: 1px;
@@ -8342,7 +8194,7 @@ a.skip:hover {
   line-height: 16px;
   font-weight: 300;
   padding-left: 20px;
-  background: url(../2/images/facebook_icon_small.png) no-repeat left 0px;
+  background:  no-repeat left 0px;
   margin: 3px 0;
 }
 /* line 401,  */
@@ -8434,7 +8286,7 @@ a.skip:hover {
 /* line 465,  */
 #user_profile #content #info .extra.verifications ul li {
   padding-left: 25px;
-  background: url(../2/images/check_blue.png) no-repeat 5px -19px;
+  background:  no-repeat 5px -19px;
 }
 /* line 472,  */
 #user_profile #content #info .extra.car .nosmoke {
@@ -8444,7 +8296,7 @@ a.skip:hover {
   top: 5px;
   width: 17px;
   height: 17px;
-  background: url(../2/images/nonsmoking_icon.png) no-repeat left top;
+  background:  no-repeat left top;
 }
 /* line 481,  */
 #user_profile #content #info .extra.car .bottom {
@@ -8538,13 +8390,13 @@ a.skip:hover {
   line-height: 12px;
   padding-left: 20px;
   margin-top: 5px;
-  background: url(../2/images/button_icons_small.png) no-repeat left 1px;
+  background:  no-repeat left 1px;
   font-weight: normal;
 }
 /* line 309 */
 #user_profile #content #detail h1.name a.edit b {
   padding-left: 15px;
-  background: url(../2/images/button_icons_small.png) no-repeat left -19px;
+  background:  no-repeat left -19px;
 }
 /* line 504,  */
 #user_profile #content #detail .completion_notice {
@@ -8603,7 +8455,6 @@ a.skip:hover {
   width: 41px;
   height: 42px;
   display: block;
-  background: url(../2/images/swoop-arrow.png);
   position: absolute;
   z-index: 91;
   margin: -34px 0 0 226px;
@@ -8888,7 +8739,7 @@ a.skip:hover {
   display: block;
   text-align: center;
   padding-left: 54px;
-  background: url(../2/images/fbconnect_button_bg.png) no-repeat -14px -10px;
+  background:no-repeat -14px -10px;
   font-weight: 500;
 }
 /* line 256 */
@@ -8912,7 +8763,7 @@ a.skip:hover {
 /* line 270 */
 #user_profile #content #detail .vouch_request .button.facebook b {
   padding-left: 27px;
-  background: url(../2/images/fbconnect_button_small_bg.png) no-repeat -8px -7px;
+  background:  no-repeat -8px -7px;
   font-weight: normal;
 }
 /* line 275 */
@@ -8986,7 +8837,7 @@ a.skip:hover {
 }
 /* line 285 */
 #user_profile #content #detail .vouch_request .button.email b {
-  background: url(../2/images/button_icons_large.png) no-repeat 2px -66px;
+  background:  no-repeat 2px -66px;
   padding-left: 30px;
   font-weight: normal;
   text-shadow: 0 1px rgba(255, 255, 255, 0.6);
@@ -9120,7 +8971,7 @@ a.skip:hover {
   display: block;
   text-align: center;
   padding-left: 54px;
-  background: url(../2/images/fbconnect_button_bg.png) no-repeat -14px -10px;
+  background: no-repeat -14px -10px;
   font-weight: 500;
 }
 /* line 256 */
@@ -9144,7 +8995,7 @@ a.skip:hover {
 /* line 270 */
 #user_profile #content #detail .vouch_request_new .button.facebook b {
   padding-left: 27px;
-  background: url(../2/images/fbconnect_button_small_bg.png) no-repeat -8px -7px;
+  background:no-repeat -8px -7px;
   font-weight: normal;
 }
 /* line 275 */
@@ -9307,7 +9158,7 @@ a.skip:hover {
   line-height: 15px;
   padding-left: 17px;
   margin-top: 7px;
-  background: url(../2/images/button_icons_small.png) no-repeat left -40px;
+  background:  no-repeat left -40px;
   font-weight: normal;
 }
 /* line 742,  */
@@ -9346,7 +9197,6 @@ a.skip:hover {
 /* line 768,  */
 #user_payouts #content ul.steps {
   padding-top: 70px;
-  background: url(../2/images/ride_payout_steps.png) no-repeat center top;
   overflow: hidden;
   width: 750px;
   margin: 40px auto;
@@ -9430,7 +9280,6 @@ a.skip:hover {
 /* line 838,  */
 #setup_paypal_dialog p.explain {
   padding-top: 50px;
-  background: url(../2/images/paypal_logo.png) no-repeat center top;
   color: #666;
 }
 
@@ -9451,7 +9300,6 @@ a.skip:hover {
   position: relative;
   width: 938px;
   height: 422px;
-  background: url(../2/images/refer_20_bg.jpg) no-repeat left -30px;
   border: 1px solid #d4d4d4;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -9591,7 +9439,6 @@ a.skip:hover {
   display: block;
   text-align: center;
   padding-left: 54px;
-  background: url(../2/images/fbconnect_button_bg.png) no-repeat -14px -10px;
   font-weight: 500;
 }
 /* line 256 */
@@ -9615,7 +9462,6 @@ a.skip:hover {
 /* line 270 */
 #user_referrals #content .explain .refer .facebook .button b {
   padding-left: 27px;
-  background: url(../2/images/fbconnect_button_small_bg.png) no-repeat -8px -7px;
   font-weight: normal;
 }
 /* line 275 */
@@ -9689,7 +9535,7 @@ a.skip:hover {
 }
 /* line 900,  */
 #user_referrals #content .explain .refer .email .button b {
-  background: url(../2/images/button_icons_large.png) no-repeat 2px -66px;
+  background:  no-repeat 2px -66px;
   padding-left: 30px;
   font-weight: normal;
   text-shadow: 0 1px rgba(255, 255, 255, 0.6);
@@ -9768,7 +9614,6 @@ a.skip:hover {
   width: 55px;
   height: 20px;
   margin-right: 10px;
-  background: url(../2/images/promote_social_buttons.png) no-repeat left top;
   text-indent: -9999px;
 }
 /* line 959,  */
@@ -9995,7 +9840,7 @@ a.skip:hover {
   line-height: 15px;
   padding-left: 17px;
   margin-top: 7px;
-  background: url(../2/images/button_icons_small.png) no-repeat left -40px;
+  background:  no-repeat left -40px;
   font-weight: normal;
 }
 /* line 1043,  */
@@ -10145,7 +9990,7 @@ a.skip:hover {
   line-height: 15px;
   padding-left: 17px;
   margin-top: 7px;
-  background: url(../2/images/button_icons_small.png) no-repeat left -40px;
+  background:  no-repeat left -40px;
   font-weight: normal;
 }
 
@@ -10178,7 +10023,6 @@ a.skip:hover {
   padding-left: 65px;
   font-size: 30px;
   line-height: 40px;
-  background: url(../2/images/fbconnect_people.png) no-repeat left top;
 }
 /* line 1082,  */
 #user_connect #content .explain p {
@@ -10199,13 +10043,11 @@ a.skip:hover {
   text-indent: -9999px;
   width: 367px;
   height: 33px;
-  background: url(../2/images/fbconnect_why_banner.png) no-repeat left top;
 }
 /* line 1100,  */
 #user_connect #content .why li {
   padding-left: 30px;
   margin: 11px 0 0 32px;
-  background: url(../2/images/check_blue.png) no-repeat 10px -15px;
 }
 /* line 1104,  */
 #user_connect #content .why li h4 {
@@ -10322,7 +10164,6 @@ a.skip:hover {
   display: block;
   text-align: center;
   padding-left: 54px;
-  background: url(../2/images/fbconnect_button_bg.png) no-repeat -14px -10px;
   font-weight: 500;
 }
 /* line 256 */
@@ -10438,7 +10279,6 @@ a.skip:hover {
   display: block;
   width: 28px;
   height: 28px;
-  background: url(../2/images/seat.png) no-repeat 3px center;
 }
 /* line 66 */
 #vanpool_share #detail .seats em {

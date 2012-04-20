@@ -1,12 +1,11 @@
 <% if owner.present? %>                                                         <!--check for feedback owner present  -->
-<a href="<%=user_path(owner)%>"><%= owner && "#{owner.full_name}" %> </a> |
-<a href="<%=new_ride_ride_participant_path(@ride.id)%>" target="frame-a"><%= @ride.to_location && @ride.to_location.name %>&nbsp;on&nbsp;<%=@ride.departure_date %></a>
+<a href="<%=user_path(owner)%>"><%= owner && "#{owner.full_name}" %> </a>
 <br/><%= image_tag owner.user_image_url %>
 <% @feedback = current_user.feedbacks.where(:owner_id => owner.id, :ride_id => @ride.id).first || Feedback.new %>               <!-- feedbacks b/w owner and user -->
 <div class="message-box">
 	<% if @feedback.new_record? %>
   <% @left_count =  @left_count + 1 %>                                  <!-- feedback count which have to give -->
-  <%=  form_for Feedback.new, :url => feedback_path do |f| %>
+  <%=  form_for Feedback.new, :url => ride_feedback_path(@ride) do |f| %>
     <table>
       <tr>
         <td>
@@ -43,7 +42,7 @@
 <table>
   <tr>
     <td>
-      Status: 
+      Status:
     </td>
     <td>
       <%= @feedback.status && @feedback.status.titleize %>
