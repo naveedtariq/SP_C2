@@ -3,18 +3,18 @@ development:
   database: sp_development
   timeout: 5000
   username: root
-  password: ""
+  password: sp404
 
 test:
   adapter: mysql2
   database: sp_test
   timeout: 5000
   username: root
-  password: ""
+  password: sp404
 
 production:
   adapter: mysql2
   database: sp_production
   timeout: 5000
   username: root
-  password: ""
+  password: sp404
