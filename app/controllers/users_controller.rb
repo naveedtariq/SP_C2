@@ -9,8 +9,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
 #      render :action => "404error_user"
+      UserMailer.sign_up_email(@user).deliver
       @user.last_login = Time.now
-      login(params[:user][:email], params[:user][:password])                    # login user 
+      login(params[:user][:email], params[:user][:password])                    # login user
       redirect_back_or_to dashboard_path
     else
       render :new

@@ -9,7 +9,7 @@
     });
 
     $("#new_ride").submit(function() {                                          // check if no ride selected in post ride page
-      if(!($('#ride_ride_type_black_car').is(':checked')||$('#ride_ride_type_taxi').is(':checked'))) {
+      if(!($('#ride_ride_type_blackcar').is(':checked')||$('#ride_ride_type_taxi').is(':checked'))) {
         $(".ride-type-check").show();
         return false;
       }                                                                         //  here check if to and from city select
@@ -21,7 +21,7 @@
         return true;
       }
     });
-    $("#ride_ride_type_black_car").click(function(){
+    $("#ride_ride_type_blackcar").click(function(){
       $(".ride-type-check").hide();
     });
 
@@ -397,7 +397,7 @@
         <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, {:include_blank => "--- select from ---"}, :style => "width:230px" %><br /><br />
 		<img alt="black-car" src="/assets/blackcar.jpg" height="40px" width="140px" /><br />
 
-        <%= f.radio_button :ride_type, 'black car'%><%= f.label :ride_type, 'I am taking a black car', :for => 'ride_ride_type_black_car'%>
+        <%= f.radio_button :ride_type, 'blackcar'%><%= f.label :ride_type, 'I am taking a black car', :for => 'ride_ride_type_blackcar'%>
       </div>
 
       <div id="toCity" style="text-align:center;" class="left col">

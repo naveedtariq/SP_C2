@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "l070061@gmail.com"
+  default from: "spnotification00@gmail.com"
 
   def ride_modify_email(user)                        # function for send email when ride modify
     @user = user
@@ -22,5 +22,30 @@ class UserMailer < ActionMailer::Base
    @owner = owner
    @message = message
    mail(:to => owner.email, :subject => "Inbox Message")
+  end
+
+  def sign_up_email(user)                               # function to send email when user sign-up to the site
+   @user = user
+   mail(:to => user.email, :subject => "Thanks For Signup")
+  end
+
+  def post_ride_email(user)                             # function to send email when user post a ride
+    @user = user
+    mail(:to => user.email, :subject => "Post A Ride")
+  end
+
+  def ride_accepted_email(current_user,ride)            # function to send email when owner of ride accept his request to join ride
+    @user = current_user
+    @ride = ride
+    @req_user = User.find(@ride.user_id)
+    mail(:to => @req_user.email, :subject => "Ride Accepted")
+  end
+
+  def feedback_email(current_user,ride,feedback)        # function to send email when current user give the feedback
+    @user = current_user
+    @ride = ride
+    @feedback = feedback
+    @req_ride = Ride.find(ride.id)
+    mail(:to => @req_ride.owner.email, :subject => "Feedback Get")
   end
 end

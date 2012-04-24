@@ -1,0 +1,21 @@
+<h1>Welcome to my site, <%= @req_user.first_name %></h1>                           <!--here send email to user when someone accept his request against ride (Ride Accepted Email Template) -->
+<p>
+<%=@user.first_name%>&nbsp;<%=@user.last_name%> Accepted your Request.
+</p>
+<p> Details of the Owner are </p>
+ <p> Email:  <%=@user.email%> <br/>
+     Contact: <%=@user.phone%>
+</p>
+<br/>
+<p> Other Contact info of all Ride Participants of this Ride is following <br/>
+  <%  ride = Ride.find(@ride.ride_id) %>
+  <% ride.ride_participants.confirmed_participants.each do |participant| %>
+  <li>Status: ride confirmed for
+    Name Participant <%= participant.user.full_name %>
+    phone <%= participant.phone %>, email: <%= participant.user.email %>;
+    preference: <%= participant.mode_of_communications %></li>
+<% end %>
+
+  </p>
+
+<p>Thanks for joining and have a great day!</p>
