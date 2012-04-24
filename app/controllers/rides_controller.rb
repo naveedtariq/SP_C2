@@ -80,6 +80,7 @@ class RidesController < ApplicationController
     @ride = Ride.create!(retrieve_ride)
     clear_ride
     @ride.make_owner!(current_user)                                             # make the owner of ride
+    UserMailer.post_ride_email(current_user).deliver
     flash[:notice] = "Successfully created ride"
     redirect_to dashboard_path
   end

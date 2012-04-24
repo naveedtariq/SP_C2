@@ -11,6 +11,7 @@ class FeedbacksController < ApplicationController
   def create                                                                    # function for given feedback
     @feedback = current_user.feedbacks.build(params[:feedback])                 # Create the feedback by current user
     if @feedback.save                                                           # if feedback save then redirect to feedback page
+      UserMailer.feedback_email(current_user,@ride,@feedback).deliver
       flash[:notice] = "feedback Sent"
       redirect_to new_ride_feedback_path(@ride)
     else

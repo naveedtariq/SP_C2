@@ -71,7 +71,8 @@ class RideParticipantsController < ApplicationController
 
   def update                                                                    # Function for update ride_participant
     @ride_participant = RideParticipant.find(params[:id])
-    @ride_participant.update_attributes! params[:ride_participant]              # Modify here 
+    @ride_participant.update_attributes! params[:ride_participant]              # Modify here
+    UserMailer.ride_accepted_email(current_user,RideParticipant.find(params[:accept])).deliver
     return redirect_to accept_ride_ride_participant_path(@ride, RideParticipant.find(params[:accept]))
   end
 

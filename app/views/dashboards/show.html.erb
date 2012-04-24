@@ -93,7 +93,7 @@
               <td><%= (secs_to_time(ride.departuredatetime - Time.now)) %></td>
               <td><%= ride.notes %></td>
               <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
-              <td><%= number_to_currency((ride.total_price/ride.ride_participants.confirmed_or_owner_participants.pluck(:number_of_seats).sum)*(ride.ride_participants.where(:user_id => current_user).first.number_of_seats || 1)) %></td>
+              <td><%if (ride.ride_participants.confirmed_or_owner_participants.pluck(:number_of_seats).sum) > 0 %><%= number_to_currency((ride.total_price/ride.ride_participants.confirmed_or_owner_participants.pluck(:number_of_seats).sum)*(ride.ride_participants.where(:user_id => current_user).first.number_of_seats || 1)) %><%end%></td>
             </tr>
             <tr>
               <td colspan="14">

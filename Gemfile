@@ -11,7 +11,9 @@ gem 'jquery-rails'
 gem 'will_paginate', "~> 3.0.3"
 gem 'unicorn'
 gem 'koala'
-  gem 'mysql2'
+gem 'mysql2'
+gem 'exception_notification'
+gem 'letter_opener', group: :development
 group :production do
   gem 'therubyracer', :platforms => :ruby
  gem "pg"

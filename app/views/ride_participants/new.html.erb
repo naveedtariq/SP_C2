@@ -141,7 +141,7 @@
                   </div>
                 </div>
                 <div class="ride-image">
-                  <% if @ride.ride_type=="black car" %><%= image_tag ("blackcar.jpg") %>
+                  <% if @ride.ride_type=="blackcar" %><%= image_tag ("blackcar.jpg") %>
                       <% else %><%= image_tag ("taxi.jpg") %>
                       <% end %><%= @ride.ride_type %></div>
                 <div class="participant-pic">
@@ -323,10 +323,14 @@
 </div>
 <div class="clear"></div>
 <br/><br/>
-
-<iframe src="<%= new_ride_feedback_path(@ride) %>" name="frame-a" width="600" height="650"></iframe>
-
-
+<div style="border: 1px solid;">
+  <% @ride.feedbacks.each do |feedback| %>
+      <a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url.to_s, :style => "width: 40px" %></a><br/>
+      Status:     <%= feedback.status && feedback.status.titleize %><br/>
+	    Feedback:   <%= feedback.feedback %><br/>
+      <hr/>
+  <% end %>
+  </div><br/><br/>
 <div id="map_canvas" style="height:350px; width: 500px;"></div>      <!-- here google map show-->
 <br/>
 

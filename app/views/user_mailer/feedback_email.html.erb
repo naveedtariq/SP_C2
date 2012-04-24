@@ -1,0 +1,8 @@
+<h1>Welcome to my site, <%= @req_ride.owner.first_name %></h1>     <!--here we send email to user when someone give feedback to the ride's owner (Feedback email Temppelate) -->
+<p>
+<%=@user.first_name%>&nbsp;<%=@user.last_name%> give you a feedback.
+</p><br/>
+<p><b>Feedback is  </b><br/><%=@feedback.feedback%></p><br/>
+You may check your feedbacks from your site account 
+<p>Thanks for joining and have a great day!</p>
+
