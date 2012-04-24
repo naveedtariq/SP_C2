@@ -325,7 +325,8 @@
 <br/><br/>
 <div style="border: 1px solid;">
   <% @ride.feedbacks.each do |feedback| %>
-      <a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url.to_s, :style => "width: 40px" %></a><br/>
+      from:<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %><br/>
+      to:<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
       Status:     <%= feedback.status && feedback.status.titleize %><br/>
 	    Feedback:   <%= feedback.feedback %><br/>
       <hr/>
