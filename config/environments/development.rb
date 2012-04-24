@@ -10,7 +10,7 @@ SPC2::Application.configure do
   config.whiny_nils = true
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
@@ -37,11 +37,12 @@ SPC2::Application.configure do
 
   #Exception Notification
 
-    config.middleware.use ExceptionNotifier,
-    sender_address: 'no-reply@devsinc.com',
-    exception_recipients: 'spnotification00@gmail.com'
-    #ignore_exceptions: ExceptionNotifier.default_ignore_exceptions # + [RuntimeError]
 
-    #config.action_mailer.delivery_method = :letter_opener
+  config.middleware.use ExceptionNotifier,
+                        sender_address: 'spnotification00@gmail.com',
+                        exception_recipients: ['pyroxicated@gmail.com']
+  #ignore_exceptions: ExceptionNotifier.default_ignore_exceptions # + [RuntimeError]
+
+  #config.action_mailer.delivery_method = :letter_opener
 
 end

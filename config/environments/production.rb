@@ -62,6 +62,15 @@ SPC2::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+  #Exception Notification
+
+  config.middleware.use ExceptionNotifier,
+                        sender_address: 'spnotification00@gmail.com',
+                        exception_recipients: ['pyroxicated@gmail.com', "usman@devsinc.com"]
+  #ignore_exceptions: ExceptionNotifier.default_ignore_exceptions # + [RuntimeError]
+
+  #config.action_mailer.delivery_method = :letter_opener
+
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
