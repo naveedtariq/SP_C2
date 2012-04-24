@@ -40,7 +40,7 @@ SPC2::Application.configure do
 
   config.middleware.use ExceptionNotifier,
                         sender_address: 'spnotification00@gmail.com',
-                        exception_recipients: ['pyroxicated@gmail.com']
+                        exception_recipients: ['junaidg27@hotmail.com','bilal.basharat@devsinc.com','usman.asif@devsinc.com','junaid.qayyum@devsinc.com']
   #ignore_exceptions: ExceptionNotifier.default_ignore_exceptions # + [RuntimeError]
 
   #config.action_mailer.delivery_method = :letter_opener
