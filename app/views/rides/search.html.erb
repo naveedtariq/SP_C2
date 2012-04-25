@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
+<%= stylesheet_link_tag "search-master", "search-yui-reset-min", "search-style", "search-custom_jqueryui", "application-login"%>
 <%= javascript_include_tag 'windows' %>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -333,7 +333,7 @@
                           &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p>
                         </div>
                       </div>
-                      <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase.gsub(" ", "")}.jpg") %><%= ride.ride_type %></div>                <!-- here ride's riders fetch -->
+                      <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase.gsub(" ", "")}.jpg")%><%= ride.ride_type %></div>                <!-- here ride's riders fetch -->
                       <div class="participant-pic">
                         <% ride.ride_participants.active_participants.role_wise.each do |rider| %>
                             <div class="riders-pics">
