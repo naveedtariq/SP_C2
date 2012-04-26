@@ -107,7 +107,10 @@ class Ride < ActiveRecord::Base
     riders = self.ride_participants_owners
     riders.update_all(:role => ROLES_FOR_RIDES[:abandoned])
     rider = self.ride_participants.pending_or_confirmed.first
-    rider.update_attribute(:role, ROLES_FOR_RIDES[:owner]) unless rider.blank?
+    unless rider.blank?
+    rider.update_attribute(:role, ROLES_FOR_RIDES[:owner])
+    UserMailer.owner_change_email(rider).deliver
+    end
   end
 
   def make_owner!(user) # Changes the owner to user

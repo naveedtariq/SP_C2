@@ -48,4 +48,12 @@ class UserMailer < ActionMailer::Base
     @req_ride = Ride.find(ride.id)
     mail(:to => @req_ride.owner.email, :subject => "Feedback Get")
   end
+
+  def owner_change_email(ride)
+    @ride = ride
+    rider = RideParticipant.find(ride)
+    req_ride = rider.ride
+    #participants = User.find(:conditions => ["id in (?)",req_ride.ride_participants.confirmed_or_owner_participants.pluck(:user_id)]).pluck(:email)
+    mail(:to => ['usman@devsinc.com', 'usman.asif@hotmail.com'], :subject => "New Owner")
+  end
 end
