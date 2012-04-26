@@ -1,5 +1,4 @@
 class RidesController < ApplicationController
-  before_filter :authenticate
   before_filter :require_login, :only => [:create, :create_ride, :clone, :index, :update, :updated]             # require the login to use that kind of functionality
   before_filter :secure_ride_load, :only => [:edit, :update]
 
@@ -99,12 +98,5 @@ class RidesController < ApplicationController
     @ride = current_user.rides.find(params[:id])
   end
 
-protected
-
-def authenticate
-  authenticate_or_request_with_http_basic do |username, password|
-    username == "devsinc" && password == "helloworld123"
-  end
-end
 
 end
