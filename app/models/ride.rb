@@ -8,6 +8,14 @@ class Ride < ActiveRecord::Base
   end
   attr_accessor :friends_in_common
   attr_accessor :count
+
+  attr_accessor :return_trip_checkbox
+  attr_accessor :return_trip_departure_date
+  attr_accessor :return_trip_departure_time
+
+  
+
+
   scope :past_rides, lambda {
     where("rides.departuredatetime < ?", SpClock.time)
   }

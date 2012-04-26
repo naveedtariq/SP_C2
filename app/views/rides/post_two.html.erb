@@ -8,6 +8,11 @@
       minDate: 0, maxDate: "+1Y"
     });
 
+    $( "#ride_return_trip_departure_date" ).datepicker({
+      dateFormat: "yy-mm-dd",
+      minDate: 0, maxDate: "+1Y"
+    });
+
     $("#new_ride").submit(function(){
       if($('#ride_departure_date').val()==""){
         $(".date-check-step2").show()
@@ -32,6 +37,28 @@
       else if (($("input#ride_departure_date").val() == "<%=SpClock.time_with_zone.strftime("%Y-%m-%d")%>" ) && (($("#ride_departure_time_4i").val() == <%=SpClock.time_with_zone.hour - 1%>) || ($("#ride_departure_time_4i").val() == <%=SpClock.time_with_zone.hour + 1%>) ) && ($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) ){
         $(".after-1hr-booking").show();
         return false;
+      }
+      else if ( $("#ride_return_trip_checkbox").is(':checked')) {
+       if(($("#ride_departure_date").val()) > ($("#ride_return_trip_departure_date").val())){
+        $(".departure-greater-arrival").show();
+        return false;
+      }
+      else if((($("#ride_departure_date").val() == $("#ride_return_trip_departure_date").val()) && (($("#ride_departure_time_4i").val() == $("#ride_return_trip_departure_time_4i").val()) && ($("#ride_departure_time_5i").val() == $("#ride_return_trip_departure_time_5i").val()) ))){
+        $(".departure-dt-same-arrival").show();
+        return false;
+      }
+      else if(($("#ride_departure_date").val() == $("#ride_return_trip_departure_date").val()) && ($("#ride_departure_time_4i").val() > $("#ride_return_trip_departure_time_4i").val())){
+        $(".departure-hr-greater-arrival").show();
+        return false;
+      }
+      else if((($("#ride_departure_date").val() == $("#ride_return_trip_departure_date").val()) && (($("#ride_departure_time_4i").val() == $("#ride_return_trip_departure_time_4i").val()) && ($("#ride_departure_time_5i").val() > $("#ride_return_trip_departure_time_5i").val()) ))){
+        $(".departure-min-greater-arrival").show();
+        return false;
+      }
+      else if((($("#ride_departure_date").val() == $("#ride_return_trip_departure_date").val()) && (($("#ride_return_trip_departure_time_4i").val() == (($("#ride_departure_time_4i").val())+1)) && ($("#ride_departure_time_5i").val() > $("#ride_return_trip_departure_time_5i").val()) ))){
+        $(".departure-1hr-arrival").show();
+        return false;
+      }
       }
       else{
         return true;
@@ -74,6 +101,9 @@
             fare3 = fare + 1;
             $("#distance").text("distance: "+totalDistance+' miles');
             $("#duration").text("duration: "+result.routes[0].legs[0].duration.text);
+            var aa = parseInt(result.routes[0].legs[0].duration.value / 60);
+            var aa1 = aa%5;
+            var duration_final = aa + (5 -aa1);
             if("<%= @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
               $('#fare').text("Estimated Taxi Fare: $45");
             }
@@ -113,6 +143,8 @@
             $('#fare').text("Estimated Taxi Fare: $"+fare);
             }
           });
+
+          $("#ride_duration_minutes").val(duration_final);
           }
         });
 <% end %>
@@ -129,6 +161,27 @@
      $(".before-1hr-booking").hide();
      $(".after-1hr-booking").hide();
     });
+
+    $("#ride_return_trip_checkbox").click(function () {
+     if( $(this).is(':checked')) {
+        $(".return_box").show();
+    } else {
+        $(".return_box").hide();
+    }
+
+     });
+
+     if( $("#ride_return_trip_checkbox").is(':checked')) {
+       $(".return_box").show();
+     }
+    $("input#ride_return_trip_departure_date").change(function(){
+      $(".departure-greater-arrival").hide();
+      $(".departure-dt-same-arrival").hide();
+      $(".departure-hr-greater-arrival").hide();
+      $(".departure-min-greater-arrival").hide();
+      $(".departure-1hr-arrival").hide();
+    });
+
 
   });
 </script>
@@ -183,12 +236,33 @@
 
       <div class="left" style="margin-right:20px;">
         <p><b>Trip Duration</b></p>
-        <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change", :style => "width:110px"} %>
-        hrs:<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change", :style => "width:110px"} %>mins
+        <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change", :style => "display:none", :selected => "0"} %>
+        <%= f.select :duration_minutes, (5..90).step(5).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change", :style => "width:110px"} %>mins
         <div class="check-duration" style="display: none; color: red;">Select Some duration</div>
+      </div><div style="clear:both"></div>
+      <div class="left" style="margin-right:20px;">
+        <%= f.label :return_trip_checkbox, "Want Return Trip ?? " %>
+        <%= f.check_box :return_trip_checkbox%>
+        </div><div style="clear:both"></div>
 
+      <div class="return_box" style="display: none;">
+        <div id="leftContainer" style="width:600px; float:left; margin-top:10px;">
+         <div class="left" style="margin-right:20px;">
+          <p><b>Arrival</b></p>
+           <%= f.text_field :return_trip_departure_date %>
+            <div class="departure-greater-arrival" style="display:none; color: red; margin-bottom: -6px">Departure Date later than Arrival</div>
+            <div class="departure-dt-same-arrival" style="display:none; color: red; margin-bottom: -6px">Departure Date_Time Same with Arrival Date_Time</div>
+            <div class="departure-hr-greater-arrival" style="display:none; color: red; margin-bottom: -6px">Departure Hours later than Arrival</div>
+            <div class="departure-min-greater-arrival" style="display:none; color: red; margin-bottom: -6px">Departure Min later than Arrival</div>
+            <div class="departure-1hr-arrival" style="display:none; color: red; margin-bottom: -6px">Arrival should be after an hour </div>
+          </div>
+
+          <div class="left" style="margin-right:20px;">
+           <p><b>Time</b></p>
+           <%= f.time_select :return_trip_departure_time, {:minute_step => 15, :ampm => true, :include_blank => false}, {:style => "width:110px"} %>
+           </div>
+         </div>
       </div>
-
       <div style="clear:both">
         <a href="<%=new_ride_path%>" style="float:left; margin-right: 10px;margin-top:40px;border-color: white; border-style: solid; border-width: 1px; color: black; background: none repeat scroll 0% 0% transparent; width: 87px; font-size: 13px; height: 26px; height: 26px;text-align: center; line-height: 25px; ">Back</a>
         <input type="submit" value="Next Step" style="margin-top:40px;border-color: rgb(47, 87, 28) rgb(47, 87, 28) rgb(40, 77, 23); border-style: solid; border-width: 1px; color: rgb(255, 255, 255); padding: 3px 12px; background: none repeat scroll 0% 0% rgb(110, 169, 83); width: 103px; font-size: 13px; height: 29px; " name="commit" class="ride-check-btn"/>

@@ -49,9 +49,9 @@ class RidesController < ApplicationController
       unless params[:next_step] == "update"
         return render :action => params[:next_step]
       end
-        UserMailer.ride_modify_email(current_user).deliver                      # Mail sent to the user when ride modify
-        return redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
-     else
+      UserMailer.ride_modify_email(current_user).deliver                      # Mail sent to the user when ride modify
+      return redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
+    else
       render :action => "new"
     end
   end
@@ -68,15 +68,29 @@ class RidesController < ApplicationController
     redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
   end
   def posted
-     params[:ride]["departure_time(1i)"], params[:ride]["departure_time(2i)"], params[:ride]["departure_time(3i)"] = params[:ride]["departure_date"].split("-")     if params[:step] == "2"
+    params[:ride]["departure_time(1i)"], params[:ride]["departure_time(2i)"], params[:ride]["departure_time(3i)"] = params[:ride]["departure_date"].split("-")     if params[:step] == "2"
+    if params[:step] == "2"
+      params[:ride]["return_trip_departure_time"] = "#{params[:ride][:return_trip_departure_date]} #{params[:ride]["return_trip_departure_time(4i)"]}:#{params[:ride]["return_trip_departure_time(5i)"]}"
+      params[:ride].delete("return_trip_departure_time(1i)")
+      params[:ride].delete("return_trip_departure_time(2i)")
+      params[:ride].delete("return_trip_departure_time(3i)")
+      params[:ride].delete("return_trip_departure_time(4i)")
+      params[:ride].delete("return_trip_departure_time(5i)")
+    end
+
     #return redirect_to new_ride_path if cookies[:ride].blank?
-    @ride = Ride.new(retrieve_ride)
+#      return render :json => params[:ride]
+  @ride = Ride.new(retrieve_ride)
     @ride.attributes = params[:ride]
     store_ride(@ride)
+#    
+#    return render :json => cookies
+
     return render :action => params[:next_step] unless params[:step] == "3"
     return redirect_to create_ride_rides_path
   end
   def create_ride                                                               # Create new ride
+#    return render :json => @ride
     @ride = Ride.create!(retrieve_ride)
     clear_ride
     @ride.make_owner!(current_user)                                             # make the owner of ride

@@ -30,13 +30,24 @@ class ApplicationController < ActionController::Base
 
   def store_ride(ride) # To store the ride information
     ride_departure_date = ride.departure_date.to_s
+    ride_return_trip_departure_date= ride.return_trip_departure_date.to_s
+    ride_return_trip_departure_time= ride.return_trip_departure_time.to_s
+    ride_return_trip_checkbox= ride.return_trip_checkbox.to_s
+#    cookies["return_trip_departure_date"] = ride.return_trip_departure_date
+#    cookies["return_trip_departure_time"] = ride.return_trip_departure_time
     ride_attributes = ride.attributes
     ride_attributes.delete("departure_date")
+#    ride_attributes.delete("return_trip_departure_date")
+#    ride_attributes.delete("return_trip_departure_time")
+    ride_attributes.delete("return_trip_checkbox")
     ride_attributes.delete("departuredatetime")
     ride_attributes.delete("created_at")
     ride_attributes.delete("updated_at")
     cookies[:ride] = "#{ride_attributes.to_s}, departure_date=>#{ride_departure_date}".gsub!("nil", "")
-  end
+#    cookies[:ride] = "#{ride_attributes.to_s}, return_trip_departure_date=>#{ride_return_trip_departure_date}".gsub!("nil", "")
+#    cookies[:ride] = "#{ride_attributes.to_s}, return_trip_departure_time=>#{ride_return_trip_departure_time}".gsub!("nil", "")
+    cookies[:ride] = "#{ride_attributes.to_s}, return_trip_checkbox=>#{ride_return_trip_checkbox}".gsub!("nil", "")
+ end
 
   def store_ride_participants(ride_participant) # Ride Participant store in cookies
     cookies[:ride_participant] = ride_participant.attributes.to_s
