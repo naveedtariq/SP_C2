@@ -178,8 +178,8 @@
 
       <div class="left" style="margin-right:20px;">
         <p><b>Trip Duration</b></p>
-        <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change", :style => "width:110px"} %>
-        hrs:<%= f.select :duration_minutes, (0..45).step(15).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change", :style => "width:110px"} %>mins
+        <%= f.select :duration_hours, (0..3).collect{|t| ["0#{t}", t]}, {}, {:class => "duration-change", :style => "display:none; width:110px"} %>
+        <%= f.select :duration_minutes, (5..90).step(5).collect{|t| [to_minutes(t), t]}, {}, {:class => "duration-change", :style => "width:110px"} %>mins
         <div class="check-duration" style="display: none; color: red;">Select Some duration</div>
 
       </div>

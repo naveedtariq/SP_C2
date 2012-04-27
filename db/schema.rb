@@ -23,8 +23,6 @@ ActiveRecord::Schema.define(:version => 20120419022425) do
     t.text     "interests"
   end
 
-  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
-
   create_table "feedbacks", :force => true do |t|
     t.integer  "user_id"
     t.integer  "owner_id"
@@ -34,10 +32,6 @@ ActiveRecord::Schema.define(:version => 20120419022425) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "feedbacks", ["owner_id"], :name => "index_feedbacks_on_owner_id"
-  add_index "feedbacks", ["ride_id"], :name => "index_feedbacks_on_ride_id"
-  add_index "feedbacks", ["user_id"], :name => "index_feedbacks_on_user_id"
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -54,8 +48,6 @@ ActiveRecord::Schema.define(:version => 20120419022425) do
     t.string   "google_helper"
   end
 
-  add_index "locations", ["ride_id"], :name => "index_locations_on_ride_id"
-
   create_table "messages", :force => true do |t|
     t.integer  "user_id"
     t.integer  "owner_id"
@@ -64,10 +56,6 @@ ActiveRecord::Schema.define(:version => 20120419022425) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "messages", ["owner_id"], :name => "index_messages_on_owner_id"
-  add_index "messages", ["ride_id"], :name => "index_messages_on_ride_id"
-  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
 
   create_table "request_loggers", :force => true do |t|
     t.text     "params"

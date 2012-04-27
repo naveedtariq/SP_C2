@@ -4,18 +4,13 @@ class Ride < ActiveRecord::Base
   end
   before_save do |ride|
     ride.departure_time = "2012-03-06 13:00:00 +0000".to_time if ride.departure_time.blank?
-    ride.departuredatetime = ("#{self.departure_date} #{self.departure_time.strftime("%H:%M #{SpClock.time_with_zone.to_s.split(" ").last}")}").to_time
+    ride.departuredatetime = ("#{self.departure_time.strftime("#{self.departure_date} %H:%M #{SpClock.time_with_zone.to_s.split(" ").last}")}").to_time
   end
   attr_accessor :friends_in_common
   attr_accessor :count
-
   attr_accessor :return_trip_checkbox
   attr_accessor :return_trip_departure_date
   attr_accessor :return_trip_departure_time
-
-  
-
-
   scope :past_rides, lambda {
     where("rides.departuredatetime < ?", SpClock.time)
   }
@@ -60,7 +55,7 @@ class Ride < ActiveRecord::Base
 
   def duration_minutes=(dur_min)
     self.duration_in_minutes ||= 0
-    self.duration_in_minutes = dur_min.to_i + self.duration_in_minutes
+    self.duration_in_minutes = dur_min.to_i
   end
 
   validates_numericality_of :available_seats, :greater_than => 0 # check the input is numerical based or not
