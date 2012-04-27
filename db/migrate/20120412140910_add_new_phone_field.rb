@@ -5,7 +5,7 @@ class AddNewPhoneField < ActiveRecord::Migration
 
   end
   def self.down
-    add_column :users, :phone, :integer
     remove_column :users, :phone
+    add_column :users, :phone, :integer
   end
 end
