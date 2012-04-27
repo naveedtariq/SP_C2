@@ -1,6 +1,6 @@
 development:
   adapter: mysql2
-  database: sp_development_master
+  database: sp_development
   timeout: 5000
   username: root
   password: 

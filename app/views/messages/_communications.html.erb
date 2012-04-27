@@ -1,6 +1,6 @@
 <% @messages.each do |message| %>                                               <!-- fetch all messages -->
     <%= image_tag message.user.user_image_url.to_s, :style => "width: 40px" %>
-    <%= message.created_at.strftime("%d/%m/%y") %><br/>
+    <%= message.created_at.strftime("%d/%m/%y") %><br/><%= time_ago_in_words(message.created_at) %> ago<br/>
     <%= message.message %><br/><br/>
 <% end %>
 <div class="message-box11">

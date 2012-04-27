@@ -8,7 +8,7 @@
             <% receiver << message.user.id %>
         <% end %>
         <%= image_tag message.user.user_image_url.to_s, :style => "width: 40px" %>
-        <%= message.created_at.strftime("%d/%m/%y") %><br/>
+        <%= message.created_at.strftime("%d/%m/%y") %>&nbsp;&nbsp;<%= time_ago_in_words(message.created_at) %><br/>
         <%= message.message %><br/><br/>
     <% end %>
     <% receiver.delete(current_user.id) %>                                          <!-- check for not message to yourself -->
