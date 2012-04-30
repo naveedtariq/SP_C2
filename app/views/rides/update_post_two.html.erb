@@ -21,15 +21,15 @@
         $(".check-flexibility").show();
         return false;
       }
-      else if (($("input#ride_departure_date").val() == "<%=SpClock.time_with_zone.strftime("%Y-%m-%d")%>" ) && ($("#ride_departure_time_4i").val() < <%=SpClock.time_with_zone.hour%>) && (($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) || ($("#ride_departure_time_5i").val() > <%=SpClock.time_with_zone.min%>)) ){           // check for post ride w.r.t to time duration that defined
+      else if (($("input#ride_departure_date").val() == "<%=RequestLogger.sp_clock_time_with_zone.strftime("%Y-%m-%d")%>" ) && ($("#ride_departure_time_4i").val() < <%=RequestLogger.sp_clock_time_with_zone.hour%>) && (($("#ride_departure_time_5i").val() <= <%=RequestLogger.sp_clock_time_with_zone.min%>) || ($("#ride_departure_time_5i").val() > <%=RequestLogger.sp_clock_time_with_zone.min%>)) ){           // check for post ride w.r.t to time duration that defined
         $(".before-1hr-booking").show();
         return false;
       }
-      else if ( ($("input#ride_departure_date").val() == "<%=SpClock.time_with_zone.strftime("%Y-%m-%d")%>" ) && ($("#ride_departure_time_4i").val() == <%=SpClock.time_with_zone.hour%>) && (($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) || ($("#ride_departure_time_5i").val() > <%=SpClock.time_with_zone.min%>)) ){
+      else if ( ($("input#ride_departure_date").val() == "<%=RequestLogger.sp_clock_time_with_zone.strftime("%Y-%m-%d")%>" ) && ($("#ride_departure_time_4i").val() == <%=RequestLogger.sp_clock_time_with_zone.hour%>) && (($("#ride_departure_time_5i").val() <= <%=RequestLogger.sp_clock_time_with_zone.min%>) || ($("#ride_departure_time_5i").val() > <%=RequestLogger.sp_clock_time_with_zone.min%>)) ){
        $(".before-1hr-booking").show();
         return false;
       }
-      else if (($("input#ride_departure_date").val() == "<%=SpClock.time_with_zone.strftime("%Y-%m-%d")%>" ) && (($("#ride_departure_time_4i").val() == <%=SpClock.time_with_zone.hour - 1%>) || ($("#ride_departure_time_4i").val() == <%=SpClock.time_with_zone.hour + 1%>) ) && ($("#ride_departure_time_5i").val() <= <%=SpClock.time_with_zone.min%>) ){
+      else if (($("input#ride_departure_date").val() == "<%=RequestLogger.sp_clock_time_with_zone.strftime("%Y-%m-%d")%>" ) && (($("#ride_departure_time_4i").val() == <%=RequestLogger.sp_clock_time_with_zone.hour - 1%>) || ($("#ride_departure_time_4i").val() == <%=RequestLogger.sp_clock_time_with_zone.hour + 1%>) ) && ($("#ride_departure_time_5i").val() <= <%=RequestLogger.sp_clock_time_with_zone.min%>) ){
         $(".after-1hr-booking").show();
         return false;
       }
@@ -115,14 +115,14 @@
         });
 <% end %>
     $('#ride_departure_time_4i').change(function() {
-       if ($("#ride_departure_time_4i").val() >= <%=SpClock.time_with_zone.hour%>)
+       if ($("#ride_departure_time_4i").val() >= <%=RequestLogger.sp_clock_time_with_zone.hour%>)
          $(".before-1hr-booking").hide();
          $(".after-1hr-booking").hide();
 
     });
 
     $('#ride_departure_time_5i').change(function() {
-     if (($("#ride_departure_time_4i").val() >= <%=SpClock.time_with_zone.hour%>) && ($("#ride_departure_time_5i").val() > <%=SpClock.time_with_zone.min%>) )
+     if (($("#ride_departure_time_4i").val() >= <%=RequestLogger.sp_clock_time_with_zone.hour%>) && ($("#ride_departure_time_5i").val() > <%=RequestLogger.sp_clock_time_with_zone.min%>) )
      $(".before-1hr-booking").hide();
     });
   });
@@ -159,7 +159,7 @@
 
       <div class="left" style="margin-right:20px;">
         <p><b>Depart</b></p>
-        <%= f.text_field :departure_date, :value => (f.object.departure_date || SpClock.date) %>
+        <%= f.text_field :departure_date, :value => (f.object.departure_date || RequestLogger.sp_clock_date) %>
         <div class="date-check-step2" style="display:none; color: red; margin-bottom: -6px">Departure Date can't be blank</div>
       </div>
 

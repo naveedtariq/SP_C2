@@ -16,8 +16,8 @@ Factory.define :ride do |f|
   f.from_location_id l.id
   f.available_seats 3
   f.total_price 3
-  f.departure_date SpClock.date
-  f.departure_time SpClock.time
+  f.departure_date RequestLogger.sp_clock_date
+  f.departure_time RequestLogger.sp_clock_time
   f.duration_in_minutes 15
   f.ride_type "Sudon"
 end

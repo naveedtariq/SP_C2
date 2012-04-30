@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
 
   def create
     user = login(params[:email], params[:password], params[:remember_me])       # build a session of a user here
-    user.save(:validate => false)
     if user
       user.last_login = Time.now                                                # time of login save
+      user.save(:validate => false)
       redirect_back_or_to dashboard_path
       #      end
     else

@@ -12,7 +12,7 @@ describe "Rides", :js =>true do
     click_link ('Ride input page')
     current_path.should eq(new_ride_path)
     select(Location.last.name, :from => "ride_from_location_id")
-    fill_in "ride_departure_date", :with => SpClock.date
+    fill_in "ride_departure_date", :with => RequestLogger.sp_clock_date
     choose('ride_ride_type_sedon')
     fill_in "ride_total_price", :with => "12"
     fill_in "ride_notes", :with => "test"
@@ -31,7 +31,7 @@ describe "Rides", :js =>true do
     current_path.should eq(root_path)
     click_link ('Ride input page')
     current_path.should eq(new_ride_path)
-    fill_in "ride_departure_date", :with => SpClock.date
+    fill_in "ride_departure_date", :with => RequestLogger.sp_clock_date
     choose('ride_ride_type_sedon')
     fill_in "ride_total_price", :with => "12"
     fill_in "ride_notes", :with => "test"
@@ -51,7 +51,7 @@ describe "Rides", :js =>true do
     click_link ('Ride input page')
     current_path.should eq(new_ride_path)
     fill_in "ride_total_price", :with => ""
-    fill_in "ride_departure_date", :with => SpClock.date
+    fill_in "ride_departure_date", :with => RequestLogger.sp_clock_date
     fill_in "ride_notes", :with => "test"
     click_button ('Create Ride')
     page.should have_content("Total price can't be blank")
@@ -70,7 +70,7 @@ describe "Rides", :js =>true do
     click_link ('Ride input page')
     current_path.should eq(new_ride_path)
     fill_in "ride_total_price", :with => "dsas"
-    fill_in "ride_departure_date", :with => SpClock.date
+    fill_in "ride_departure_date", :with => RequestLogger.sp_clock_date
     fill_in "ride_notes", :with => "test"
     click_button ('Create Ride')
     page.should have_content("Total price is not a number")
@@ -107,7 +107,7 @@ describe "Rides", :js =>true do
     click_link ('Ride input page')
     current_path.should eq(new_ride_path)
     select(Location.last.name, :from => "ride_from_location_id")
-    fill_in "ride_departure_date", :with => SpClock.date
+    fill_in "ride_departure_date", :with => RequestLogger.sp_clock_date
     choose('ride_ride_type_sedon')
     fill_in "ride_total_price", :with => "60  "
     fill_in "ride_notes", :with => "test"
@@ -137,7 +137,7 @@ describe "Rides", :js =>true do
     click_link ('Ride input page')
     current_path.should eq(new_ride_path)
     select(Location.last.name, :from => "ride_from_location_id")
-    fill_in "ride_departure_date", :with => SpClock.date
+    fill_in "ride_departure_date", :with => RequestLogger.sp_clock_date
     choose('ride_ride_type_sedon')
     fill_in "ride_total_price", :with => "60  "
     fill_in "ride_notes", :with => "test"
@@ -185,7 +185,7 @@ describe "Rides", :js =>true do
     click_link ('Ride input page')
     current_path.should eq(new_ride_path)
     select(Location.last.name, :from => "ride_from_location_id")
-    fill_in "ride_departure_date", :with => SpClock.date
+    fill_in "ride_departure_date", :with => RequestLogger.sp_clock_date
     choose('ride_ride_type_sedon')
     fill_in "ride_total_price", :with => "60  "
     fill_in "ride_notes", :with => "test"
@@ -233,7 +233,7 @@ describe "Rides", :js =>true do
     click_link ('Ride input page')
     current_path.should eq(new_ride_path)
     select(Location.last.name, :from => "ride_from_location_id")
-    fill_in "ride_departure_date", :with => SpClock.date
+    fill_in "ride_departure_date", :with => RequestLogger.sp_clock_date
     choose('ride_ride_type_sedon')
     fill_in "ride_total_price", :with => "60  "
     fill_in "ride_notes", :with => "test"
@@ -257,7 +257,7 @@ describe "Rides", :js =>true do
     click_link ('Ride input page')
     current_path.should eq(new_ride_path)
     select(Location.last.name, :from => "ride_from_location_id")
-    fill_in "ride_departure_date", :with => SpClock.date
+    fill_in "ride_departure_date", :with => RequestLogger.sp_clock_date
     choose('ride_ride_type_sedon')
     fill_in "ride_total_price", :with => "60  "
     fill_in "ride_notes", :with => "test"
