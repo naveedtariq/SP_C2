@@ -63,7 +63,7 @@ namespace :db do
         if((index.to_i % 3) == 0)
           added_user = added_users.delete_at(rand(added_users.size-1))
           puts "====> this ride has a pending participant #{added_user.full_name}"
-          ride.ride_participants.create!(:role => ROLES_FOR_RIDES[:pending], :user_id => (added_user.id), :number_of_seats => 1, :phone => "234234", :mode_of_communications => "phone" )
+          ride.ride_participants.create!(:role => ROLES_FOR_RIDES[:confirmed], :user_id => (added_user.id), :number_of_seats => 1, :phone => "234234", :mode_of_communications => "phone" )
         end
       end
       added_users << user
