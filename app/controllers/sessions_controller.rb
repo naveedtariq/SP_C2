@@ -81,6 +81,6 @@ class SessionsController < ApplicationController
     return redirect_to session[:return_to_url]
   end
   def require_not_loggedin                                                                           # no login required function redirection to root path if user present
-    return redirect_back_or_to root_path if current_user.present?
+    return redirect_back_or_to dashboard_path if current_user.present?
   end
 end

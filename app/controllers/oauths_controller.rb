@@ -13,6 +13,8 @@ class OauthsController < ApplicationController
       if @user = login_from(provider)                                           # login from social network save record in user
       else
         @user = create_from(provider)
+        UserMailer.sign_up_email(@user).deliver
+
         auto_login(@user)
       end
     rescue
