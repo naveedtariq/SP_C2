@@ -143,8 +143,10 @@
             $('#fare').text("Estimated Taxi Fare: $"+fare);
             }
           });
-
-          $("#ride_duration_minutes").val(duration_final);
+          if(aa%5 == 0)
+            $("#ride_duration_minutes").val(aa);
+          else
+            $("#ride_duration_minutes").val(duration_final);
           }
         });
 <% end %>

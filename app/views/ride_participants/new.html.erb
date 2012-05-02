@@ -301,9 +301,8 @@
           <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %>
               <% if logged_in? %>
 
-                  <button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
-                    <%if current_user.messages.where("user_id = ? and owner_id = ?", current_user,@ride.owner).count > 0 %><span>View Message</span><%else%><span>Contact me</span><%end%>
-                  </button>
+                  
+<%if current_user.messages.where("user_id = ? and owner_id = ?", current_user,@ride.owner).count > 0 %><a href="/users/inbox?iframe=/rides/<%=params[:ride_id]%>/message" style="color: #FFFFFF;"><button id="contact-info-button2" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>View Message</span></button></a><%else%><button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>Contact me</span></button><%end%>
               <% else %>
                   <a href="<%= auth_at_provider_path(:provider => :facebook, contact: @ride.id) %>" class="contact-form">Contact
                     me</a>
@@ -322,15 +321,30 @@
 </div>
 <div class="clear"></div>
 <br/><br/>
+<%if @ride.active?%>
+  <div style="border: 1px solid;">
+    <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
+      <% feedback=Feedback.find_all_by_owner_id(rider.user_id)%>
+      <% feedback.each do |feedback| %>
+        From:&nbsp;<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %><br/>
+        To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
+        Status:     <%= feedback.status && feedback.status.titleize %><br/>
+        Feedback:   <%= feedback.feedback %><br/>
+        <hr/>
+      <% end %>
+    <%end%>
+  </div><br/><br/>
+  <%else%>
 <div style="border: 1px solid;">
   <% @ride.feedbacks.each do |feedback| %>
-      from:<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %><br/>
-      to:<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
+      From:&nbsp;<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %><br/>
+      To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
       Status:     <%= feedback.status && feedback.status.titleize %><br/>
 	    Feedback:   <%= feedback.feedback %><br/>
       <hr/>
   <% end %>
   </div><br/><br/>
+<%end%>
 <div id="map_canvas" style="height:350px; width: 500px;"></div>      <!-- here google map show-->
 <br/>
 
