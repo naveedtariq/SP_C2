@@ -2,11 +2,13 @@
   <div class="left-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px; width: 632px;">
     <h6>Feedbacks</h6>
     <% @past_rides.each do |past_ride| %>
-        <% ride = past_ride.ride %>
+        <%ride = past_ride.ride %>
+        <%if ride.ride_participants.active_participants.count > 1%>
         <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;&nbsp;
           on <%= ride.departure_date %></a>
         | <%= link_to "feedback", new_ride_feedback_path(ride), :target => "frame-a" %>
         <br/>
+        <%end%>
     <% end %>
   </div>
   <div class="right-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px;">

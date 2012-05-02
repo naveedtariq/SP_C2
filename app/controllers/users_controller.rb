@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     @user = current_user
   end
   def feedback
-    @past_rides = current_user.ride_participants.past_rides(RequestLogger.sp_clock_time).active_rides.confirmed_or_owner_participants.paginate(:page => params[:past_rides_page], :per_page => PAST_RIDES_PER_PAGE)    # Retrieve the current user past rides those rides which are confirmed or current user is owner of ride
+    @past_rides = current_user.ride_participants.past_rides(RequestLogger.sp_clock_time).active_rides.confirmed_or_owner_participants #.paginate(:page => params[:past_rides_page], :per_page => PAST_RIDES_PER_PAGE)    # Retrieve the current user past rides those rides which are confirmed or current user is owner of ride
   end
 
 
