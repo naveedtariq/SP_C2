@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   #  layout "session"
   before_filter :require_not_loggedin, :only => [:new, :create]                 # no login require for login page
+  #before_filter :require_login, :only => [:facebook_callback]                 # no login require for login page
   def new
     #return render :action => "404error_user", :layout => false
     # @facebook_api_key = FB_CONFIG['api_key']
@@ -26,6 +27,7 @@ class SessionsController < ApplicationController
   end
 
   def facebook_callback                                                         # callback function for facebook
+    return redirect_to login_path if current_user.blank?
     @oauth = Koala::Facebook::OAuth.new(APP_CONFIG["facebook_app_id"], APP_CONFIG["facebook_app_key"], facebook_callback_sessions_url)
     oauth_code = @oauth.get_access_token(params[:code])                         # get access token of current user login through facebook
     @graph = Koala::Facebook::GraphAPI.new(oauth_code)                          # use graph api here
