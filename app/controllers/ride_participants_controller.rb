@@ -37,6 +37,8 @@ class RideParticipantsController < ApplicationController
   def create
     @ride_participant = @ride.ride_participants.build(params[:ride_participant])
     store_ride_participants(@ride_participant)                                  # Store ride_participant
+    current_user.update_attribute(:phone, @ride_participant.phone)
+    current_user.update_attribute(:mode_of_communications, @ride_participant.mode_of_communications)
     return redirect_to create_participant_ride_ride_participants_path(@ride)
 
   end
@@ -73,6 +75,8 @@ class RideParticipantsController < ApplicationController
   def update                                                                    # Function for update ride_participant
     @ride_participant = RideParticipant.find(params[:id])
     @ride_participant.update_attributes! params[:ride_participant]              # Modify here
+    current_user.update_attribute(:phone, @ride_participant.phone)
+    current_user.update_attribute(:mode_of_communications, @ride_participant.mode_of_communications)
     UserMailer.ride_accepted_email(current_user,RideParticipant.find(params[:accept]),@ride_participant).deliver
     return redirect_to accept_ride_ride_participant_path(@ride, RideParticipant.find(params[:accept]))
   end
