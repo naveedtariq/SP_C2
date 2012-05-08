@@ -50,6 +50,7 @@ class RideParticipantsController < ApplicationController
   def deny                                                                      # Deny function for ride_participant that owner not allowed you to join ride
     @ride_participant = @ride.ride_participants.find(params[:id])
     @ride_participant.update_attribute(:role, ROLES_FOR_RIDES[:rejected])
+    UserMailer.ride_deny_email(@ride_participant,current_user).deliver
     return redirect_to dashboard_path
   end
 
@@ -72,7 +73,7 @@ class RideParticipantsController < ApplicationController
   def update                                                                    # Function for update ride_participant
     @ride_participant = RideParticipant.find(params[:id])
     @ride_participant.update_attributes! params[:ride_participant]              # Modify here
-    UserMailer.ride_accepted_email(current_user,RideParticipant.find(params[:accept])).deliver
+    UserMailer.ride_accepted_email(current_user,RideParticipant.find(params[:accept]),@ride_participant).deliver
     return redirect_to accept_ride_ride_participant_path(@ride, RideParticipant.find(params[:accept]))
   end
 

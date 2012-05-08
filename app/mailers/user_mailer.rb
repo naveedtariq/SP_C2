@@ -34,9 +34,10 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Post A Ride")
   end
 
-  def ride_accepted_email(current_user,ride)            # function to send email when owner of ride accept his request to join ride
+  def ride_accepted_email(current_user,ride,participant)            # function to send email when owner of ride accept his request to join ride
     @user = current_user
     @ride = ride
+    @ride_participant = participant
     @req_user = User.find(@ride.user_id)
     mail(:to => @req_user.email, :subject => "Ride Accepted")
   end
@@ -56,5 +57,12 @@ class UserMailer < ActionMailer::Base
 
     participants = User.find_all_by_id(@ride.ride_participants.confirmed_or_owner_participants.pluck(:user_id)).map(&:email)
     mail(:to => participants, :subject => "New Owner")
+  end
+
+  def ride_deny_email(participant,ride_owner)
+    @ride_owner = ride_owner
+    @participant = participant
+    @user = User.find(@participant.user_id)
+    mail(:to => @user.email, :subject => "Deny Ride")
   end
 end

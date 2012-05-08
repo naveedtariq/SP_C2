@@ -80,6 +80,19 @@
             $(".price_tag").hide();
             $("#price_tag_" + $("#ride_participant_number_of_seats").find("option:selected").val()).show();
         });
+
+    <% if current_user.mode_of_communications.present?%>
+       if (<%=current_user.mode_of_communications == "sms_text"%>)
+        $("#ride_participant_mode_of_communications_sms_text").attr("checked", "checked");
+       else if(<%=current_user.mode_of_communications == "phone_call"%>)
+         $("#ride_participant_mode_of_communications_phone_call").attr("checked", "checked");
+       else
+         $("#ride_participant_mode_of_communications_email").attr("checked", "checked");
+     <%end%>
+
+     <% if current_user.phone.present?%>
+       $("#ride_participant_phone").val("<%=current_user.phone%>");
+     <%end%>
     });
 </script>
 <div id="container">
@@ -302,7 +315,7 @@
               <% if logged_in? %>
 
                   
-<%if current_user.messages.where("user_id = ? and owner_id = ?", current_user,@ride.owner).count > 0 %><a href="/users/inbox?iframe=/rides/<%=params[:ride_id]%>/message" style="color: #FFFFFF;"><button id="contact-info-button2" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>View Message</span></button></a><%else%><button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>Contact me</span></button><%end%>
+<%if Message.where("user_id = ? and ride_id = ?", @ride.owner,@ride).count > 0 %><a href="/users/inbox?iframe=/rides/<%=params[:ride_id]%>/message" style="color: #FFFFFF;"><button id="contact-info-button2" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>View Message</span></button></a><%else%><% if current_user.messages.where("ride_id = ?",@ride).blank?%><button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>Contact me</span></button><%else%><button id="message-sent-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>Message sent</span></button><%end%><%end%>
               <% else %>
                   <a href="<%= auth_at_provider_path(:provider => :facebook, contact: @ride.id) %>" class="contact-form">Contact
                     me</a>
@@ -330,6 +343,7 @@
         To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
         Status:     <%= feedback.status && feedback.status.titleize %><br/>
         Feedback:   <%= feedback.feedback %><br/>
+        <%= link_to "Check A Ride", new_ride_ride_participant_path(feedback.ride_id) %><br/>
         <hr/>
       <% end %>
     <%end%>
@@ -341,6 +355,7 @@
       To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
       Status:     <%= feedback.status && feedback.status.titleize %><br/>
 	    Feedback:   <%= feedback.feedback %><br/>
+      <%= link_to "Check A Ride", new_ride_ride_participant_path(feedback.ride_id) %><br/>
       <hr/>
   <% end %>
   </div><br/><br/>

@@ -4,18 +4,22 @@
 </p>
 <p> Details of the Owner are </p>
  <p> Email:  <%=@user.email%> <br/>
-     Contact: <%=@user.phone%>
+     Contact: <%=@ride_participant.phone%><br/>
+     preference: <%= @ride_participant.mode_of_communications %>
 </p>
 <br/>
-<p> Other Contact info of all Ride Participants of this Ride is following <br/>
   <%  ride = Ride.find(@ride.ride_id) %>
-  <% ride.ride_participants.confirmed_participants.each do |participant| %>
-  <li>Status: ride confirmed for
-    Name Participant <%= participant.user.full_name %>
-    phone <%= participant.phone %>, email: <%= participant.user.email %>;
-    preference: <%= participant.mode_of_communications %></li>
-<% end %>
-
+<%if ride.ride_participants.confirmed_participants.present? %>
+  <p> Other Contact info of all Ride Participants of this Ride is following <br/>
+    <% ride.ride_participants.confirmed_participants.each do |participant| %>
+    <li>Status: ride confirmed for
+      Name Participant: <%= participant.user.full_name %>
+      phone: <%= participant.phone %>, email: <%= participant.user.email %>;
+      preference: <%= participant.mode_of_communications %></li>
+  <% end %>
   </p>
+ <%else%>
+  <br/> On this ride there is no more particpants except ride's owner.
+  <%end%>
 
 <p>Thanks for joining and have a great day!</p>

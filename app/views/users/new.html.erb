@@ -1,8 +1,9 @@
+<%= javascript_include_tag "jquery-1.7.1.min", "jquery.phonemask","jquery.password_strength"%>
 <h1>Sign Up</h1>
-  <script>
-    
+<script type="text/javascript">
 $(document).ready(function() {
  $('#user_password').password_strength();                           // check passwork length strong or week
+ $('input#user_phone').mask("999-999-9999");
 });
 </script>
 <div class="container">
@@ -56,6 +57,31 @@ $(document).ready(function() {
   <div class="field">
     <%= f.label :phone %>
     <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :mode_of_communications %>
+    <table>
+        <tr>
+          <td>
+            <%= f.radio_button :mode_of_communications, 'sms_text' %>
+          </td>
+          <td>
+            <%= f.label :mode_of_communications, 'Sms text', :for => 'user_mode_of_communications_sms_text' %>
+          </td>
+          <td>
+            <%= f.radio_button :mode_of_communications, 'phone_call' %>
+          </td>
+          <td>
+            <%= f.label :mode_of_communications, 'Phone call', :for => 'user_mode_of_communications_phone_call' %>
+          </td>
+          <td>
+            <%= f.radio_button :mode_of_communications, 'email' %>
+          </td>
+          <td>
+            <%= f.label :mode_of_communications, 'Email', :for => 'user_mode_of_communications_email' %>
+          </td>
+        </tr>
+      </table>
   </div>
   <div class="field">
     <%= f.label :city %>

@@ -372,6 +372,11 @@
         if ($('#ride_from_location_id').val() == "" || $('#ride_to_location_id').val() == "")
             $(".city-option-same").hide();
 
+        if (opener) {
+           window.opener.location = "<%=clone_ride_path(params[:ride_id])%>";
+            window.close();
+        }
+
     });
 </script>
 <div id="container">
@@ -399,7 +404,6 @@
           </div>
       <% end %>
       <%= hidden_field_tag :next_step, "post_two" %>
-
       <div style="clear:both"></div>
       <div id="leftContainer" style="width:600px; float:left;">
         <div id="fromCity" style="text-align:center;" class="left col">

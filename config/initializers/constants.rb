@@ -20,6 +20,7 @@ STATUS_FOR_RIDES = {                                                            
   :active => 1,
   :canceled => 2
 }
+
 GOOGLE_ANALYTICS = "<script type=\"text/javascript\">
 
   var _gaq = _gaq || [];
