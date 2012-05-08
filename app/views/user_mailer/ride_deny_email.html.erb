@@ -2,4 +2,4 @@
 <p><%=@ride_owner.first_name%>&nbsp;<%=@ride_owner.last_name%> Reject your Request.</p>
 <br/>
 You can clone ride by the click on following link.
-http://ec2-50-17-68-61.compute-1.amazonaws.com/rides/<%=@participant.ride_id%>/clone
+<%= link_to "Clone this ride", clone_ride_url(@participant.ride, :host => BASE_URL) %>

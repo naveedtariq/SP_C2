@@ -1,6 +1,6 @@
 class RideParticipantsController < ApplicationController
 
-  before_filter :require_login, :only => [:create_participant, :accept, :deny, :cancel]                   # require the login to use that kind of functionality
+  before_filter :require_login, :only => [:create_participant, :accept, :deny, :cancel, :update]                   # require the login to use that kind of functionality
   before_filter :load_ride, :only => [:new, :create, :cancel, :create_participant, :contact, :update]     # require load_ride before this controller use
   before_filter :secure_load_ride, :only => [:accept, :deny]                                              # require secure_load_ride for this
 
