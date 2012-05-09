@@ -15,6 +15,8 @@ class RideParticipantsController < ApplicationController
     @ride_participant.role = ROLES_FOR_RIDES[:pending]                          # firstly ride_participant role will be pending
     @ride_participant.user_id = current_user.id                                 # Ride_participant will be current user which became participant of ride
     if @ride_participant.save
+      current_user.update_attribute(:phone, @ride_participant.phone)
+      current_user.update_attribute(:mode_of_communications, @ride_participant.mode_of_communications)
       UserMailer.ride_join_email(current_user, @ride_participant.owner).deliver # when current user join ride mail send to the ride_owner that current user want to join your ride
       clear_participant
       flash[:notice] = "Successfully Booked "
@@ -37,8 +39,7 @@ class RideParticipantsController < ApplicationController
   def create
     @ride_participant = @ride.ride_participants.build(params[:ride_participant])
     store_ride_participants(@ride_participant)                                  # Store ride_participant
-    current_user.update_attribute(:phone, @ride_participant.phone)
-    current_user.update_attribute(:mode_of_communications, @ride_participant.mode_of_communications)
+
     return redirect_to create_participant_ride_ride_participants_path(@ride)
 
   end
