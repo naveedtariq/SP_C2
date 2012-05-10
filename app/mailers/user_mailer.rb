@@ -6,9 +6,14 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Ride Modify")
   end
 
-  def ride_cancel_email(user)                        # function for send email when ride cancel
+  def ride_cancel_email(user,ride,participant)                        # function for send email when ride cancel
    @user = user
+   @ride = ride
+   @ride_participant = participant
+   rr = Ride.find(participant.ride_id)
+   participants = User.find_all_by_id(rr.ride_participants.confirmed_or_owner_participants.pluck(:user_id)).map(&:email)
    mail(:to => user.email, :subject => "Ride Cancelled")
+   mail(:to => participants, :subject => "Ride Cancelled")
   end
 
   def ride_join_email(current_user,owner)            # function for send email when user want to join ride
@@ -38,8 +43,12 @@ class UserMailer < ActionMailer::Base
     @user = current_user
     @ride = ride
     @ride_participant = participant
+    rr = Ride.find(participant.ride_id)
+    puts rr
+    puts rr
     @req_user = User.find(@ride.user_id)
-    mail(:to => @req_user.email, :subject => "Ride Accepted")
+    participants = User.find_all_by_id(rr.ride_participants.confirmed_or_owner_participants.pluck(:user_id)).map(&:email)
+    mail(:to => participants, :subject => "Ride Accepted")
   end
 
   def feedback_email(current_user,ride,feedback)        # function to send email when current user give the feedback

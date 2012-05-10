@@ -2,4 +2,15 @@
 <p>
   You have successfully Cancel the Ride.
 </p>
+<br/>
+
+<%  ride = Ride.find(@ride.id) %>
+<%if ride.ride_participants.confirmed_or_owner_participants.present? %>
+    Now Active Ride PArticipants of the ride following <br/>
+    <% ride.ride_participants.confirmed_or_owner_participants.each do |participant| %>
+      Name Participant: <%= participant.user.full_name %><br/>
+   <%end%>
+  <%else%>
+    Now There is no others RideParticipant
+  <%end%>
 <p>Thanks for joining and have a great day!</p>

@@ -9,7 +9,7 @@
 </p>
 <br/>
   <%  ride = Ride.find(@ride.ride_id) %>
-<%if ride.ride_participants.confirmed_participants.present? %>
+<%if ride.ride_participants.confirmed_or_owner_participants.present? %>
   <p> Other Contact info of all Ride Participants of this Ride is following <br/>
     <% ride.ride_participants.confirmed_participants.each do |participant| %>
     <li>Status: ride confirmed for

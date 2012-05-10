@@ -65,7 +65,7 @@ class RideParticipantsController < ApplicationController
     @ride_participant = @ride.ride_participants.where({:id => params[:id], :user_id => current_user.id}).first
     @ride_participant.cancel!
     @ride.cancel! if @ride.ride_participants.active_participants.blank?
-    UserMailer.ride_cancel_email(current_user).deliver                          # Mail send to user that you have cancel that specific ride
+    UserMailer.ride_cancel_email(current_user,@ride,@ride_participant).deliver                          # Mail send to user that you have cancel that specific ride
     return redirect_to dashboard_path
   end
 
@@ -78,6 +78,7 @@ class RideParticipantsController < ApplicationController
     @ride_participant.update_attributes! params[:ride_participant]              # Modify here
     current_user.update_attribute(:phone, @ride_participant.phone)
     current_user.update_attribute(:mode_of_communications, @ride_participant.mode_of_communications)
+#    return render :json => @ride_participant
     UserMailer.ride_accepted_email(current_user,RideParticipant.find(params[:accept]),@ride_participant).deliver
     return redirect_to accept_ride_ride_participant_path(@ride, RideParticipant.find(params[:accept]))
   end
