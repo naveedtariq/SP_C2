@@ -371,12 +371,14 @@
 
         if ($('#ride_from_location_id').val() == "" || $('#ride_to_location_id').val() == "")
             $(".city-option-same").hide();
-
+         <%if params[:ride_id].present? %>
         if (opener) {
+          
            window.opener.location = "<%=clone_ride_path(params[:ride_id])%>";
             window.close();
+            
         }
-
+        <%end%>
     });
 </script>
 <div id="container">
