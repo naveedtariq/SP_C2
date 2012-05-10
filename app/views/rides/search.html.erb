@@ -1,9 +1,7 @@
-<%= stylesheet_link_tag "search-master", "search-yui-reset-min", "search-style", "search-custom_jqueryui", "application-login"%>
-<%= javascript_include_tag 'windows' %>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#ride_to_location_id').change(function () {                          // here check to and from location ar not from same group
-            var A = [1, 2, 3];
+            var A = [1,2,3];
             var i = 0;
             var j = 0;
             var k = 0;
@@ -30,67 +28,63 @@
                             $(".city-option-same").show();
                             $('#ride_to_location_id').addClass("validation-error");
                             $('#ride_from_location_id').addClass("validation-error");
-                            $("input#ride_departure_date").attr("disabled", "disabled");
                             $("#ride_departure_all").attr("disabled", "disabled");
                             $("#ride_departure_first_option").attr("disabled", "disabled");
                             $("#ride_departure_second_option").attr("disabled", "disabled");
                             $("#btnAll").attr("disabled", "disabled");
                             $("#btn14").attr("disabled", "disabled");
                             $("#btn30").attr("disabled", "disabled");
-                            $("#search-form").attr("disabled", "disabled");
+                            $("#RideSearch").attr("disabled", "disabled");
                             return false;
                         }
                         else {
                             $(".city-option-same").hide();
                             $('#ride_to_location_id').removeClass("validation-error");
                             $('#ride_from_location_id').removeClass("validation-error");
-                            $("input#ride_departure_date").removeAttr("disabled", "disabled");
                             $("#ride_departure_all").removeAttr("disabled", "disabled");
                             $("#ride_departure_first_option").removeAttr("disabled", "disabled");
                             $("#ride_departure_second_option").removeAttr("disabled", "disabled");
                             $("#btnAll").removeAttr("disabled", "disabled");
                             $("#btn14").removeAttr("disabled", "disabled");
                             $("#btn30").removeAttr("disabled", "disabled");
-                            //$("#search-form").submit();
+                            //$("#RideSearch").submit();
                         }
                         j = j + 1;
                     }
-                    $("#search-form").submit();
+                    $("#RideSearch").submit();
                 }
                 else {
                     if (!IsFound2) {
                         $(".city-option-same").show();
                         $('#ride_to_location_id').addClass("validation-error");
                         $('#ride_from_location_id').addClass("validation-error");
-                        $("input#ride_departure_date").attr("disabled", "disabled");
                         $("#ride_departure_all").attr("disabled", "disabled");
                         $("#ride_departure_first_option").attr("disabled", "disabled");
                         $("#ride_departure_second_option").attr("disabled", "disabled");
                         $("#btnAll").attr("disabled", "disabled");
                         $("#btn14").attr("disabled", "disabled");
                         $("#btn30").attr("disabled", "disabled");
-                        $("#search-form").attr("disabled", "disabled");
+                        $("#RideSearch").attr("disabled", "disabled");
                         return false;
                     }
                     else {
                         $(".city-option-same").hide();
                         $('#ride_to_location_id').removeClass("validation-error");
                         $('#ride_from_location_id').removeClass("validation-error");
-                        $("input#ride_departure_date").removeAttr("disabled", "disabled");
                         $("#ride_departure_all").removeAttr("disabled", "disabled");
                         $("#ride_departure_first_option").removeAttr("disabled", "disabled");
                         $("#ride_departure_second_option").removeAttr("disabled", "disabled");
                         $("#btnAll").removeAttr("disabled", "disabled");
                         $("#btn14").removeAttr("disabled", "disabled");
                         $("#btn30").removeAttr("disabled", "disabled");
-                        $("#search-form").submit();
+                        $("#RideSearch").submit();
                     }
                 }
             }
         });
 
         $('#ride_from_location_id').change(function () {                        // here check for to and from location from same group
-            var A = [1, 2, 3];
+            var A = [1,2,3];
             var i = 0;
             var j = 0;
             var k = 0;
@@ -111,302 +105,521 @@
                     }
                     k = k + 1;
                 }
+
                 if (IsFound) {
                     while (j < A.length) {
                         if ($('#ride_to_location_id').val() <= A[j]) {
+
                             $(".city-option-same").show();
                             $('#ride_to_location_id').addClass("validation-error");
                             $('#ride_from_location_id').addClass("validation-error");
-                            $("input#ride_departure_date").attr("disabled", "disabled");
                             $("#ride_departure_all").attr("disabled", "disabled");
                             $("#ride_departure_first_option").attr("disabled", "disabled");
                             $("#ride_departure_second_option").attr("disabled", "disabled");
                             $("#btnAll").attr("disabled", "disabled");
                             $("#btn14").attr("disabled", "disabled");
                             $("#btn30").attr("disabled", "disabled");
-                            $("#search-form").attr("disabled", "disabled");
+                            $("#RideSearch").attr("disabled", "disabled");
                             return false;
                         }
                         else {
                             $(".city-option-same").hide();
                             $('#ride_to_location_id').removeClass("validation-error");
                             $('#ride_from_location_id').removeClass("validation-error");
-                            $("input#ride_departure_date").removeAttr("disabled", "disabled");
                             $("#ride_departure_all").removeAttr("disabled", "disabled");
                             $("#ride_departure_first_option").removeAttr("disabled", "disabled");
                             $("#ride_departure_second_option").removeAttr("disabled", "disabled");
                             $("#btnAll").removeAttr("disabled", "disabled");
                             $("#btn14").removeAttr("disabled", "disabled");
                             $("#btn30").removeAttr("disabled", "disabled");
-                            //$("#search-form").submit();
+                            //$("#RideSearch").submit();
                         }
                         j = j + 1;
                     }
-                    $("#search-form").submit();
+                    $("#RideSearch").submit();
                 }
                 else {
                     if (!IsFound2) {
                         $(".city-option-same").show();
                         $('#ride_to_location_id').addClass("validation-error");
                         $('#ride_from_location_id').addClass("validation-error");
-                        $("input#ride_departure_date").attr("disabled", "disabled");
                         $("#ride_departure_all").attr("disabled", "disabled");
                         $("#ride_departure_first_option").attr("disabled", "disabled");
                         $("#ride_departure_second_option").attr("disabled", "disabled");
                         $("#btnAll").attr("disabled", "disabled");
                         $("#btn14").attr("disabled", "disabled");
                         $("#btn30").attr("disabled", "disabled");
-                        !$("#search-form").attr("disabled", "disabled");
+                        !$("#RideSearch").attr("disabled", "disabled");
                         return false;
                     }
                     else {
                         $(".city-option-same").hide();
                         $('#ride_to_location_id').removeClass("validation-error");
                         $('#ride_from_location_id').removeClass("validation-error");
-                        $("input#ride_departure_date").removeAttr("disabled", "disabled");
                         $("#ride_departure_all").removeAttr("disabled", "disabled");
                         $("#ride_departure_first_option").removeAttr("disabled", "disabled");
                         $("#ride_departure_second_option").removeAttr("disabled", "disabled");
                         $("#btnAll").removeAttr("disabled", "disabled");
                         $("#btn14").removeAttr("disabled", "disabled");
                         $("#btn30").removeAttr("disabled", "disabled");
-                        $("#search-form").submit();
+                        $("#RideSearch").submit();
                     }
                 }
             }
         });
 
-        $("#btnAll").click(function () {
-            $("input#ride_departure_date").attr("disabled", "disabled");
-        });
-        $("#btn14").click(function () {
-            $("input#ride_departure_date").attr("disabled", "disabled");
-        });
-        $("#btn30").click(function () {
-            $("input#ride_departure_date").attr("disabled", "disabled");
-        });
+        
 
-
-        $("#ride_departure_date").datepicker({
-            dateFormat:"yy-mm-dd",
-            minDate:0, maxDate:"+1Y"
-
-        });
-
-        $("input#ride_departure_date").change(function () {
-            if ($(this).val().length != 0)
-                $("#ride_departure_all").removeAttr("checked", "checked");
-            $("#ride_departure_first_option").removeAttr("checked", "checked");
-            $("#ride_departure_second_option").removeAttr("checked", "checked");
-            $("#search-form").submit();
-        });
-
+        
         $("#btnAll").click(function () {
             $("#ride_departure_all").attr("checked", "checked");
-            $("#search-form").submit();
+            $("#RideSearch").submit();
             return true;
 
         });
 
         $("#btn14").click(function () {
             $("#ride_departure_first_option").attr("checked", "checked");
-            $("#search-form").submit();
+            $("#RideSearch").submit();
             return true;
         });
 
         $("#btn30").click(function () {
             $("#ride_departure_second_option").attr("checked", "checked");
-            $("#search-form").submit();
+            $("#RideSearch").submit();
             return true;
         });
 
         if ($('#ride_departure_all').is(':checked'))
-            $('input#btnAll').addClass('active');
+            $('input#btnAll').addClass('Active');
         else if ($('#ride_departure_first_option').is(':checked'))
-            $('input#btn14').addClass('active');
+            $('input#btn14').addClass('Active');
         else
-            $('input#btn30').addClass('active');
+            $('input#btn30').addClass('Active');
 
-        if ($("input#ride_departure_date").val().length != 0) {
-            $("#ride_departure_all").removeAttr("checked", "checked");
-            $('input#btnAll').removeClass('active');
-        }
+
     });
 </script>
-<div class="clear"></div>
-<div id="search_run">
-  <div id="header_wrap" style="margin-top: 22px;">
-    <div id="header">
-      <%= link_to image_tag("shareshuttle_logo_sm.png", :class => "left"), root_path %>
-      <ul id="top_nav">
+
+
+
+
+
+
+
+
+
+
+<section id="FindaRide" class="Main">
+  <header>
+    <h1>Find a Ride</h1>
+    <h2>Find others from your neighborhood and take a taxi or black car together.</h2>
+  </header>
+  <%= form_for :ride, :url => search_rides_path, :method => "get", :html => {:id => "RideSearch"} do |f| %>
+    <fieldset>
+      <ul>
         <li>
-          <a id="post_ride" class="button post km_click_event_by_text" href="<%= new_ride_path %>">Post a ride</a>
+          <label for="">From:</label>
+          <%= f.select :from_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {},:style => "width:310px", :class=>"chzn-select"%>
+        </li>
+        <li><a class="LocationSwitch">Switch</a></li>
+        <li>
+          <label for="Select_Airlines">To:</label>
+          <%= f.select :to_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {},:style => "width:310px", :class=>"chzn-select"%>
+        </li>
+        <li class="SearchButtons">
+          <label>When:</label>
+          <input type="hidden" id="SearchTime"/>
+
+          <input type="button" id="btnAll" value="All" name="ride[departure]" class="SearchTime"/>
+          <input type="button" id="btn14" value="Next 14 Days" class="SearchTime"/>
+          <input type="button" id="btn30" value="Next 30 Days" class="SearchTime" />
+
+
+          <table style="display: none;">
+            <tr>
+              <td>
+                <%= f.radio_button :departure, 'all' %>
+              </td>
+              <td>
+                <%= f.label :departure, 'All', :for => 'ride_departure_all' %>
+              </td>
+              <td>
+                <%= f.radio_button :departure, 'first_option' %>
+              </td>
+              <td>
+                <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option" %>
+              </td>
+              <td>
+                <%= f.radio_button :departure, 'second_option' %>
+              </td>
+              <td>
+                <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option' %>
+              </td>
+            </tr>
+          </table>
+
+
+
+
+
         </li>
       </ul>
-    </div>
-  </div>
+    </fieldset>
+    <%= hidden_field_tag :search_posted, "true" %>
+  <% end %> <!-- #RideSearch -->
 
-  <div id="content_wrapper" class="new_style">
-    <div id="content_container" class="clearfix">
-      <div id="content">
-        <div id="head">
-          <%= form_for :ride, :url => search_rides_path, :method => "get", :html => {:id => "search-form"} do |f| %>                    <!-- form for post ride 2nd Step -->
-              <div id="schedule-container">
-                <%= f.select :from_location_id, Location.all.collect { |p| [p.name, p.id] }, {:include_blank => "--- select from ---"}, :style => "width:230px" %>
-                <%= f.select :to_location_id, Location.all.collect { |p| [p.name, p.id] }, {:include_blank => "--- select to ---"}, :style => "width:230px" %>
-                <%= f.text_field(:departure_date, :style => "height: 27px; margin-top: 0px; border-radius: 5px 5px 5px 5px; height: 25px; vertical-align: top; width: 110px;") %>
-                <%= image_tag ("calendar_input_icon.png"), :style => "margin-left: -24px; margin-top: 6px; float: left; position: absolute; " %>
-                <input type="button" id="btnAll" value="All" name="ride[departure]" class="form-post.active"/>
-                <input type="button" id="btn14" value="Next 14 Days"/>
-                <input type="button" id="btn30" value="Next 30 Days"/>
-                <table style="display: none;">
-                  <tr>
-                    <td>
-                      <%= f.radio_button :departure, 'all' %>
-                    </td>
-                    <td>
-                      <%= f.label :departure, 'All', :for => 'ride_departure_all' %>
-                    </td>
-                    <td>
-                      <%= f.radio_button :departure, 'first_option' %>
-                    </td>
-                    <td>
-                      <%= f.label :departure, "Next #{SEARCH_OPTION_ONE_IN_DAYS} days", :for => "ride_departure_first_option" %>
-                    </td>
-                    <td>
-                      <%= f.radio_button :departure, 'second_option' %>
-                    </td>
-                    <td>
-                      <%= f.label :departure, "Next #{SEARCH_OPTION_TWO_IN_DAYS} days", :for => 'ride_departure_second_option' %>
-                    </td>
-                  </tr>
-                </table>
-                <%= hidden_field_tag :search_posted, "true" %>
-              </div>
-          <% end %>
-          <div class="city-option-same" style="display: none"> Same Group Select</div>
-        </div>
-        <div id="results">
-          <div class="ride_list">
-            <% if @rides.empty? %>
-                <h3 class="headline first">
-                  No Records Found
-                </h3>
-            <% end %>
-            <% last_date = [] %>
-            <% @rides.each do |ride| %>
-                <% ride.friends_in_common ||= [] %>
 
-                <% unless last_date.include? ride.departure_date %>
-                    <h3 class="headline first">
-                      <%= ride.departure_date.strftime("Departing %A, %B #{ride.departure_date.day.ordinalize}") %>
-                    </h3>
-                    <% last_date << ride.departure_date %>
-                <% end %>
-                <a href="<%= (ride.remaining_seats > 0) ? (new_ride_ride_participant_path(ride, :return_url => request.query_string)) : (clone_ride_path(ride)) %>">
-                  <div class="entry">
-                    <% if ride.remaining_seats==0 %>                            <!-- here check if no reaming seat then price box change to sold out  -->
-                        <div class="price_box">
-                          <div class="seats">
-                            <span class="count1">SOLD OUT</span>
-                          </div>
-                          <p>Post Similar</p>
-                        </div>
-                    <% else %>
-                        <div class="price_box">
-                          <div class="seats">
-                            <span class="count"><%= number_to_currency(ride.total_price/ride.available_seats) %></span>
-                          </div>
-                          <p><b><%= ride.duration_in_minutes %>min</b></p>
-                        </div>
-                    <% end %>
-                    <div class="inner_content">
-                      <div class="info-rides">
-                        <div class="inner-info-line1">
-                          <p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= ride.departure_time.strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %>
-                            mins &nbsp;
-                            &nbsp<span class="info-line11"><%= ride.from_location && ride.from_location.name %></span>
-                          </p></div>
-                        <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp; &nbsp;
-                          <span class="info-line1"><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %>
-                          mins &nbsp;
-                          &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p>
-                        </div>
-                      </div>
-                      <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase.gsub(" ", "")}.jpg")%><%= ride.ride_type %></div>                <!-- here ride's riders fetch -->
-                      <div class="participant-pic">
-                        <% ride.ride_participants.active_participants.role_wise.each do |rider| %>
-                            <div class="riders-pics">
-                              <div class="riders-info"><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></div>
-                              <%= image_tag rider.user.user_image_url %>
-                              <span class="driver">
-                            <% if @graph.present? && rider.user_id != current_user.id && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>              <!--check if login through facebook then fetch his friends -->
-                              <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>
-                                    <% ride.friends_in_common << mutual_friends %>
-                            <% end %>
-                          </span>
-                            </div>
+  <div class="PostRideBanner">
+    <h3>Don't see what you're looking for?</h3>
+    <p>Get notified when new matches are found!</p>
+    <a href="/rides/new">Post a Ride</a>
+  </div> <!-- PostRideBanner -->
 
-                        <% end %>
-                        <% ride.remaining_seats.times do %>                      <!-- fetched how many remaing seats then accordingly empty seat pic appeared -->
-                            <div class="riders-pics">
-                              <div class="riders-info">open&nbsp;seat</div>
-                              <%= image_tag "car_seat_icon.gif" %>
-                              <span class="driver"></span>
-                            </div>
-                        <% end %>
-                      </div>
-                      <% if @graph.present? %>
-                          <div style="float:left; margin-top: -20px">
 
-                            <% mutual_friends = ride.friends_in_common.flatten.uniq %>                        <!--fetched unique mutual friends b/w current user and riders -->
-                            <% if mutual_friends.count > 0 %>
-                                <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
-                            <% end %>
-                            <% mutual_friends.each do |friend| %>
-                                <img src="http://graph.facebook.com/<%=friend["id"]%>/picture"/>
-                                <%#= image_tag ("http://graph.facebook.com/friend[id]/picture") %>
-                                <%= friend["name"] %>                                                         <!-- fetched mutual friend's name from facebook -->
-                                <% unless friend == mutual_friends.last %>
-                                    &nbsp;and&nbsp;
-                                <% end %>
-                            <% end %>
 
-                          </div>
-                      <% end %>
-                    </div>
-                  </div>
-                </a>
-            <% end %>
-            <div id="action">
-              <div class="item postride">
-                <h2>Didn't find what you were looking for?</h2>
 
-                <p>Post a ride as a driver or passenger and get notified when new matches are found!</p>
-                <a class="button post" href="<%= new_ride_path %>">Post a ride</a>
-              </div>
-            </div>
-          </div>
-          <div class="page_list">
-            <span class="showing">
-              Showing <%= number_of_records(params[:page], SEARCH_RIDES_PER_PAGE) %>                        <!-- Pagination applied for the search rides results if the no of rides increasd per page  -->
-              - <%= number_of_records(params[:page], SEARCH_RIDES_PER_PAGE, SEARCH_RIDES_PER_PAGE) %>
-              of <strong><%= @count %> results</strong>
-            </span>
 
-            <div class="pagination">
-              <span class="first_page">
-                <span>« Prev</span>
-              </span>
 
-              <%= will_paginate @rides, :previous_label => "<", :next_label => ">" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
+
+  			<div class="RidesWrapper">
+				<h3>Departing Today - Thursday, February 2</h3>
+				<div class="Legend">
+					<span class="Estimated">Prices &amp; Times <a class="HelpTooltip" title="Prices are estimated using taxi or black car fares given your location and airport. For example, a taxi to JFK is a flat $45 before tip &amp; toll, black car service is typically $60 to $80.<span class='TooltipArrow'>Arrow</span>">?</a></span>
+				</div>
+				<ul class="RidesList">
+					<li>
+						<div class="SelectRide">
+							<a class="RideInfoBtn">
+								<span>approx.</span>
+								<strong>$20</strong>
+								<span>45 min</span>
+							</a>
+							<a class="Select">Select</a>
+						</div> <!-- SelectRide -->
+						<table class="RideDetails">
+							<tr>
+								<th class="Leave" scope="row"><span class="Icon">Icon</span> Leave:</th>
+								<td class="LeaveArriveTime"><strong>4:00pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>New York University (NYU)</strong></td>
+							</tr>
+							<tr>
+								<th class="Arrive" scope="row"><span class="Icon">Icon</span> Arrive:</th>
+								<td class="LeaveArriveTime"><strong>4:45pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong></td>
+							</tr>
+						</table> <!-- RideDetails -->
+						<img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+						<ul class="UserList">
+							<li>
+								<a href="#" class="UserPhoto" id="Trigger_UserID_001"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+								<!-- HIDDEN TOOLTIP -->
+								<div class="UserTooltip" id="TT_UserID_001">
+									<h4><a href="#">Benjamin B.</a> from New York, NY</h4>
+									<p><em>Can't wait for Thanksgiving vacation!</em></p>
+									<div class="UserInfo">
+										<div class="UserPhoto">
+											<img src="images/temp_user_80x80.jpg" alt="temp_user_80x80" width="80" height="80" />
+										</div>
+										<ul>
+											<li>Facebook <em>(<a href="#">536 friends</a>)</em></li>
+											<li>12 past rides, <a href="#">8 feedback</a> (97%)</li>
+											<li><strong>Networks: </strong>UC Berkely, Miramonte High</li>
+										</ul>
+									</div>
+									<span class="TooltipArrow">Arrow</span>
+								</div> <!-- UserTooltip -->
+							</li>
+							<li>
+								<a href="#" class="UserPhoto" id="Trigger_UserID_002"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+								<!-- HIDDEN TOOLTIP -->
+								<div class="UserTooltip" id="TT_UserID_002">
+									<h4><a href="#">Benjamin B.</a> from New York, NY</h4>
+									<p><em>Can't wait for Thanksgiving vacation!</em></p>
+									<div class="UserInfo">
+										<div class="UserPhoto">
+											<img src="images/temp_user_80x80.jpg" alt="temp_user_80x80" width="80" height="80" />
+										</div>
+										<ul>
+											<li>Facebook <em>(<a href="#">536 friends</a>)</em></li>
+											<li>12 past rides, <a href="#">8 feedback</a> (97%)</li>
+											<li><strong>Networks: </strong>UC Berkely, Miramonte High</li>
+										</ul>
+									</div>
+									<span class="TooltipArrow">Arrow</span>
+								</div> <!-- UserTooltip -->
+							</li>
+							<li>
+								<a class="EmptySeat" id="Trigger_UserID_003"><img src="images/emptyseat_60x60.png" alt="emptyseat_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">+1 Seat Open</a>
+								<!-- HIDDEN TOOLTIP -->
+								<div class="UserTooltip" id="TT_UserID_003">
+									<h4><a href="#">Benjamin B.</a> from New York, NY</h4>
+									<p><em>Can't wait for Thanksgiving vacation!</em></p>
+									<div class="UserInfo">
+										<div class="UserPhoto">
+											<img src="images/temp_user_80x80.jpg" alt="temp_user_80x80" width="80" height="80" />
+										</div>
+										<ul>
+											<li>Facebook <em>(<a href="#">536 friends</a>)</em></li>
+											<li>12 past rides, <a href="#">8 feedback</a> (97%)</li>
+											<li><strong>Networks: </strong>UC Berkely, Miramonte High</li>
+										</ul>
+									</div>
+									<span class="TooltipArrow">Arrow</span>
+								</div> <!-- UserTooltip -->
+							</li>
+							<li class="Arrow">Arrow</li>
+						</ul> <!-- UserList -->
+					</li> <!-- END OF A RIDE -->
+					<li>
+						<div class="SelectRide">
+							<a class="RideInfoBtn">
+								<span>approx.</span>
+								<strong>$20</strong>
+								<span>45 min</span>
+							</a>
+							<a class="Select">Select</a>
+						</div> <!-- SelectRide -->
+						<table class="RideDetails">
+							<tr>
+								<th class="Leave" scope="row"><span class="Icon">Icon</span> Leave:</th>
+								<td class="LeaveArriveTime"><strong>4:00pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>New York University (NYU)</strong></td>
+							</tr>
+							<tr>
+								<th class="Arrive" scope="row"><span class="Icon">Icon</span> Arrive:</th>
+								<td class="LeaveArriveTime"><strong>4:45pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>JFK Terminal 5 <span class="NotSameLocationIcon">!</span></strong></td>
+							</tr>
+						</table> <!-- RideDetails -->
+						<img src="images/cartype_limo.png" class="RideType" alt="Black Car" width="93" height="51" />
+						<ul class="UserList">
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a class="EmptySeat"><img src="images/emptyseat_60x60.png" alt="emptyseat_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">+1 Seat Open</a>
+							</li>
+							<li class="Arrow">Arrow</li>
+						</ul> <!-- RiderList -->
+						<ul class="FriendsInCommon">
+							<li><strong><em>2 mutual friends!</em></strong></li>
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp_user_30x30.jpg" alt="temp_user_30x30" width="30" height="30" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp_user_30x30.jpg" alt="temp_user_30x30" width="30" height="30" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+						</ul>
+					</li> <!-- END OF A RIDE -->
+					<li>
+						<div class="SelectRide">
+							<a class="RideInfoBtn">
+								<span>approx.</span>
+								<strong>$20</strong>
+								<span>45 min</span>
+							</a>
+							<a class="Select">Select</a>
+						</div> <!-- SelectRide -->
+						<table class="RideDetails">
+							<tr>
+								<th class="Leave" scope="row"><span class="Icon">Icon</span> Leave:</th>
+								<td class="LeaveArriveTime"><strong>4:00pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>New York University (NYU)</strong></td>
+							</tr>
+							<tr>
+								<th class="Arrive" scope="row"><span class="Icon">Icon</span> Arrive:</th>
+								<td class="LeaveArriveTime"><strong>4:45pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong></td>
+							</tr>
+						</table> <!-- RideDetails -->
+						<img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+						<ul class="UserList">
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a class="EmptySeat"><img src="images/emptyseat_60x60.png" alt="emptyseat_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">+1 Seat Open</a>
+							</li>
+							<li class="Arrow">Arrow</li>
+						</ul> <!-- RiderList -->
+					</li> <!-- END OF A RIDE -->
+					<li>
+						<div class="SelectRide">
+							<a class="RideInfoBtn">
+								<span>approx.</span>
+								<strong>$20</strong>
+								<span>45 min</span>
+							</a>
+							<a class="Select">Select</a>
+						</div> <!-- SelectRide -->
+						<table class="RideDetails">
+							<tr>
+								<th class="Leave" scope="row"><span class="Icon">Icon</span> Leave:</th>
+								<td class="LeaveArriveTime"><strong>4:00pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>New York University (NYU)</strong></td>
+							</tr>
+							<tr>
+								<th class="Arrive" scope="row"><span class="Icon">Icon</span> Arrive:</th>
+								<td class="LeaveArriveTime"><strong>4:45pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong></td>
+							</tr>
+						</table> <!-- RideDetails -->
+						<img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+						<ul class="UserList">
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a class="EmptySeat"><img src="images/emptyseat_60x60.png" alt="emptyseat_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">+1 Seat Open</a>
+							</li>
+							<li class="Arrow">Arrow</li>
+						</ul> <!-- RiderList -->
+					</li> <!-- END OF A RIDE -->
+				</ul>
+				<h3>Departing Tomorrow - Friday, February 3</h3>
+				<ul class="RidesList">
+					<li>
+						<div class="SelectRide">
+							<a class="RideInfoBtn">
+								<span>Sold Out!</span>
+								<strong>Full</strong>
+								<span>Ride</span>
+							</a>
+							<a class="PostSimilar">Post Similar</a>
+						</div> <!-- SelectRide -->
+						<table class="RideDetails">
+							<tr>
+								<th class="Leave" scope="row"><span class="Icon">Icon</span> Leave:</th>
+								<td class="LeaveArriveTime"><strong>4:00pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>New York University (NYU)</strong></td>
+							</tr>
+							<tr>
+								<th class="Arrive" scope="row"><span class="Icon">Icon</span> Arrive:</th>
+								<td class="LeaveArriveTime"><strong>4:45pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong></td>
+							</tr>
+						</table> <!-- RideDetails -->
+						<img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+						<ul class="UserList">
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a class="EmptySeat"><img src="images/emptyseat_60x60.png" alt="emptyseat_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">+1 Seat Open</a>
+							</li>
+							<li class="Arrow">Arrow</li>
+						</ul> <!-- RiderList -->
+					</li></ul> <!-- END OF A RIDE -->
+					<ul class="RidesList">
+					<li>
+						<div class="SelectRide">
+							<a class="RideInfoBtn">
+								<span>approx.</span>
+								<strong>$20</strong>
+								<span>45 min</span>
+							</a>
+							<a class="Select">Select</a>
+						</div> <!-- SelectRide -->
+						<table class="RideDetails">
+							<tr>
+								<th class="Leave" scope="row"><span class="Icon">Icon</span> Leave:</th>
+								<td class="LeaveArriveTime"><strong>4:00pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>New York University (NYU)</strong></td>
+							</tr>
+							<tr>
+								<th class="Arrive" scope="row"><span class="Icon">Icon</span> Arrive:</th>
+								<td class="LeaveArriveTime"><strong>4:45pm</strong></td>
+								<td class="PlusMinus">&plusmn; 15 min.</td>
+								<td><strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong></td>
+							</tr>
+						</table> <!-- RideDetails -->
+						<img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+						<ul class="UserList">
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a href="#" class="UserPhoto"><img src="images/temp-user_60x60.jpg" alt="temp_user_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">Benjamin B.</a>
+							</li>
+							<li>
+								<a class="EmptySeat"><img src="images/emptyseat_60x60.png" alt="emptyseat_60x60" width="60" height="60" /></a>
+								<a href="#" class="UserName">+1 Seat Open</a>
+							</li>
+							<li class="Arrow">Arrow</li>
+						</ul> <!-- RiderList -->
+					</li> <!-- END OF A RIDE -->
+				</ul> <!-- RiderList -->
+			</div> <!-- RidesWrapper -->
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <p class="Pagination"><a href="#">1</a> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> | <a href="#">5</a> <a href="#">&raquo;</a></p>
+</section> <!-- Main #FindaRide -->
+
+
+
+
+
+
+
 
 
 

@@ -13,10 +13,14 @@ gem 'unicorn'
 gem 'koala'
 gem 'mysql2'
 gem 'exception_notification'
-gem 'letter_opener', group: :development
+gem 'letter_opener'
+gem 'multi_json', '~>1.3.2'
+group :development do 
+end
+
 group :production do
   gem 'therubyracer', :platforms => :ruby
- gem "pg"
+ #gem "pg"
 end
 
 group :development, :test do
