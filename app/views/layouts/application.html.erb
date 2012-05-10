@@ -1,70 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <title>SPC2</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "jquery-min", "jquery-ui.min" %>
-    <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
+    <title>Shairporter</title>
+    <%= stylesheet_link_tag 'reset','chosen','sp', :media => 'all' %>
 
-    <%= csrf_meta_tags %>
-    <% if production? &&  KISSMETRICS_TOGGLE=="ON"%>
-      <%= raw KISSMETRICS %>
-     <% end %>
-  </head>  
-  <body data-twttr-rendered="true">
-    <% if production? && false %>
-      <% if GOOGLE_ANALYTICS_TOGGLE=="ON"%>                                     <!-- google analytics toogle  -->
-        <%= raw GOOGLE_ANALYTICS %>
-      <% end %>
-      <% if MIXPANEL_TOGGLE=="ON"%>                                             <!-- mixpanel toogle -->
-        <%= raw MIXPANEL %>
-      <% end %>
-      <% if GETCLICKY_TOGGLE=="ON"%>                                            <!-- get clicky toogle -->
-        <%= raw GETCLICKY %>
-      <% end %>
-      <% if CRAZYEGG_TOGGLE=="ON"%>                                             <!-- crazyegg toogle -->
-        <%= raw CRAZYEGG %>
-      <% end %>
-    <% end %>
-    <div class="clear"> </div>
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    <% end %>
-    <div class="nav-bar">
-  <ul style="float: right; margin-right: 40px;" class="navigation-bar-main">
-    <% if current_user %>                                                       <!-- main navigation for current user -->
-    <div style="color: #FFFFFF;">
-      <li style="float: left;"><%= link_to "Post a Ride", new_ride_path  %></li>
-      <li style="float: left; width: 25px;"><%= image_tag current_user.user_image_url %></li>
-      <li style="float: left;">&nbsp;&nbsp;<a href="<%=  user_path(current_user) %>"><%= current_user.first_name %>&nbsp;<%= current_user.last_name.chars.first %></a></li>
-      <li style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "edit profile", edit_user_path(current_user) %></li>
-      <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to " Log out ", logout_path %></li></div>
-    <% else %>
-      <li style="float: left;"><%= link_to "Post a Ride", new_ride_path  %></li>
-      <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Login in", login_path  %></li>
-      <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Sign up", signup_path  %></li>
-   <% end %>
-   </ul>
-      <div style="float: left; color: #FFFFFF;"><%= Time.now.in_time_zone("Eastern Time (US & Canada)").strftime("%d-%m-%Y %H:%M %Z")%></div>           <!-- main navigation EDT time format -->
-      <% if current_user %>
-      <ul style="float: left; margin-left: 20px;"class="navigation-bar-main">
-       <li style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Dashboard", dashboard_path %></li>
-       <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Inbox", inbox_users_path %></li>
-       <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Feedback", feedback_users_path %></li>
-      </ul><%end%>
-   </div>
+
+
+    <!--[if lt IE 9]>
+	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <%= javascript_include_tag 'jquery-1.6.4.min', 'jquery.tools.min', 'chosen.jquery.min', 'jquery.cycle.lite', 'sp.js'%>
+    <%= javascript_include_tag 'jcarousellite_1.0.1c4' %>
+
+    <script src="http://use.typekit.com/ofi5buc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$('.CycleInnerWrapper').cycle();
+		});
+    </script>
+
+    <!-- Facebook Like Widget -->
+    <!-- NEED TO CHANGE THE APP ID TO SHAIRPORTER'S DEV ACCOUNT!!!! -->
+    <script type="text/javascript">(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123432363393"; /* NEED TO CHANGE THE APP ID TO SHAIRPORTER'S DEV ACCOUNT!!! */
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+
+  </head>
+  <body class="Homepage">
+    <div id="fb-root"></div> <!-- Facebook Application Thingamajig -->
+  <header>
+    <section>
+      <a href="/" class="Logo"><%= image_tag 'shairporter_logo_header.png' %></a>
+      <nav>
+        <ul>
+          <li><a href="/footers/how_it_works">How It Works</a></li>
+          <li><a href="#">Login</a></li>
+          <li><a href="#" class="SignUpButton">Sign Up</a></li>
+        </ul>
+      </nav>
+    </section>
+  </header>
+  <!-- end header -->
+  <div class="Container clearfix">
     <%= yield %>
+    <footer>
+      <section>
+        <span class="Copyright">&copy;2012 Shairporter, Inc. All Rights Reserved.</span>
+        <nav>
+          <ul>
+            <li><a href="/footers/how_it_works">How It Works</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Safety &amp; Guidelines</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </nav>
+        <div class="SocialWrapper">
+          <div style="display: inline-block; vertical-align: top;" class="fb-like" data-href="http://shairporter.com" data-send="true" data-layout="button_count" data-width="50" data-show-faces="false" data-font="lucida grande" send="false"></div>
+          <g:plusone size="medium"></g:plusone>
+          <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.shairporter.com" data-text="Awesome way to save money and time by sharing a cab or limo to the airport! http://shairporter.com via @shairporter" data-count="horizontal" data-related="shairporter">Tweet</a><a href="http://twitter.com/shairporter" class="twitter-follow-button" data-show-count="false">Follow @shairporter</a>
 
-    <div id="footer">                                                                                                   <!-- footer layout here -->
-      <a class="km_click_event_by_text" href="<%= about_footers_path %>">About</a>
-      <a class="km_click_event_by_text" href="<%= how_it_works_footers_path %>">How it Works & FAQ</a>
-      <a class="km_click_event_by_text" href="<%= terms_footers_path %>">Terms &amp; Privacy</a>
-      <span>
+          <!-- Place this render call where appropriate -->
+          <script type="text/javascript">
+					  (function() {
+					    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+					    po.src = 'https://apis.google.com/js/plusone.js';
+					    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+					  })();
+          </script>
+        </div>
 
-      </span>
-      <span id="copyright">© 2012 ShareShuttle</span>
-    </div>
+      </section>
 
-  </body>
+      <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) {return;}
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164910290244476";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>
+
+
+      <!-- Place this render call where appropriate -->
+      <script type="text/javascript">
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/plusone.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+      </script>
+
+
+    </footer>
+    <!-- end footer -->
+  </div>
+  <!-- end Container -->
+</body>
 </html>
