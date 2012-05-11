@@ -1,25 +1,27 @@
-<h1>Welcome to my site, <%= @req_user.first_name %></h1>                           <!--here send email to user when someone accept his request against ride (Ride Accepted Email Template) -->
+<h1>Hi all,</h1>
 <p>
-<%=@user.first_name%>&nbsp;<%=@user.last_name%> Accepted your Request.
+  <%= @user.full_name %> has just joined our ride.
 </p>
-<p> Details of the Owner are </p>
- <p> Email:  <%=@user.email%> <br/>
-     Contact: <%=@ride_participant.phone%><br/>
-     preference: <%= @ride_participant.mode_of_communications %>
+<p> His details are</p>
+<p> Email:  <%= @user.email %> <br/>
+  Contact: <%= @user.phone %><br/>
+  preference: <%= @user.mode_of_communications %>
 </p>
 <br/>
-  <%  ride = Ride.find(@ride.ride_id) %>
-<%if ride.ride_participants.confirmed_or_owner_participants.present? %>
-  <p> Other Contact info of all Ride Participants of this Ride is following <br/>
-    <% ride.ride_participants.confirmed_participants.each do |participant| %>
-    <li>Status: ride confirmed for
-      Name Participant: <%= participant.user.full_name %>
-      phone: <%= participant.phone %>, email: <%= participant.user.email %>;
-      preference: <%= participant.mode_of_communications %></li>
-  <% end %>
-  </p>
- <%else%>
-  <br/> On this ride there is no more particpants except ride's owner.
-  <%end%>
+<% if @ride.ride_participants.confirmed_or_owner_participants.where("user_id != #{@user.id}").present? %>
+    <p> Other Contact info of all Ride Participants of this Ride are as following <br/>
+    <ul>
+      <% @ride.ride_participants.confirmed_or_owner_participants.where("user_id != #{@user.id}").each do |participant| %>
+          <li>
+            Name Participant: <%= participant.user.full_name %>
+            phone: <%= participant.phone %>, email: <%= participant.user.email %>;
+            preference: <%= participant.user.mode_of_communications %>
+          </li>
+      <% end %>
+    </ul>
+    </p>
+<% else %>
+    <br/> On this ride there is no more particpants except ride's owner.
+<% end %>
 
 <p>Thanks for joining and have a great day!</p>
