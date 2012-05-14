@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "search-master", "search-yui-reset-min", "search-style", "search-custom_jqueryui", "application-login"%>
+<%= stylesheet_link_tag "search-master", "search-yui-reset-min", "search-style", "search-custom_jqueryui", "application-login" %>
 <%= javascript_include_tag 'windows' %>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -333,17 +333,21 @@
                           &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p>
                         </div>
                       </div>
-                      <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase.gsub(" ", "")}.jpg")%><%= ride.ride_type %></div>                <!-- here ride's riders fetch -->
+                      <div class="ride-image"><%= image_tag ("#{ride.ride_type.downcase.gsub(" ", "")}.jpg") %><%= ride.ride_type %></div>
+                      <!-- here ride's riders fetch -->
                       <div class="participant-pic">
                         <% ride.ride_participants.active_participants.role_wise.each do |rider| %>
                             <div class="riders-pics">
                               <div class="riders-info"><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></div>
                               <%= image_tag rider.user.user_image_url %>
                               <span class="driver">
+  <% begin %>
                             <% if @graph.present? && rider.user_id != current_user.id && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>              <!--check if login through facebook then fetch his friends -->
-                              <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>
-                                    <% ride.friends_in_common << mutual_friends %>
+                                        <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>
+                                        <% ride.friends_in_common << mutual_friends %>
                             <% end %>
+         <% rescue %>
+                                <% end %>
                           </span>
                             </div>
 
@@ -364,7 +368,7 @@
                                 <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
                             <% end %>
                             <% mutual_friends.each do |friend| %>
-                                <img src="http://graph.facebook.com/<%=friend["id"]%>/picture"/>
+                                <img src="http://graph.facebook.com/<%= friend["id"] %>/picture"/>
                                 <%#= image_tag ("http://graph.facebook.com/friend[id]/picture") %>
                                 <%= friend["name"] %>                                                         <!-- fetched mutual friend's name from facebook -->
                                 <% unless friend == mutual_friends.last %>

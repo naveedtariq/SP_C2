@@ -1,16 +1,16 @@
-<h1>Welcome to my site, <%= @user.first_name %></h1>                            <!-- here send eamil to user when cancel his some ride (Cancel Ride Email Template)-->
+<h1>Hi
+  all,</h1>                            <!-- here send eamil to user when cancel his some ride (Cancel Ride Email Template)-->
 <p>
-  You have successfully Cancel the Ride.
+  <%= @user.full_name %> has Cancelled his Ride.
 </p>
 <br/>
 
-<%  ride = Ride.find(@ride.id) %>
-<%if ride.ride_participants.confirmed_or_owner_participants.present? %>
-    Now Active Ride PArticipants of the ride following <br/>
-    <% ride.ride_participants.confirmed_or_owner_participants.each do |participant| %>
-      Name Participant: <%= participant.user.full_name %><br/>
-   <%end%>
-  <%else%>
-    Now There is no others RideParticipant
-  <%end%>
+Now the Active ride participants of the ride are following <br/>
+<ul>
+  <% @ride.ride_participants.confirmed_or_owner_participants.each do |participant| %>
+      <li> Name Participant: <%= participant.user.full_name %>
+        phone: <%= participant.phone %>, email: <%= participant.user.email %>;
+        preference: <%= participant.user.mode_of_communications %></li>
+  <% end %>
+</ul>
 <p>Thanks for joining and have a great day!</p>
