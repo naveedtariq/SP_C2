@@ -43,10 +43,8 @@ class UserMailer < ActionMailer::Base
     @user = current_user
     @ride = ride
     @ride_participant = participant
-    rr = Ride.find(participant.ride_id)
-    puts rr
-    puts rr
-    @req_user = User.find(@ride.user_id)
+    rr = participant.ride
+    @req_user = @ride.user
     participants = User.find_all_by_id(rr.ride_participants.confirmed_or_owner_participants.pluck(:user_id)).map(&:email)
     mail(:to => participants, :subject => "Ride Accepted")
   end
