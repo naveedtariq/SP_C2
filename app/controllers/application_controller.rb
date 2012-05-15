@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   before_filter :authenticate
   protect_from_forgery
   before_filter :save_request # Require save_request filter
