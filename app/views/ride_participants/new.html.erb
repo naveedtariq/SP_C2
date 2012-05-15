@@ -12,7 +12,9 @@
             left:50
         });
         <% if cookies[:contact] && cookies[:contact].to_i == @ride.id %>
-        $(".message-box").dialog();                                             // jquery for message dailog box message appear
+            <% if current_user && current_user.messages.where("ride_id = ?", @ride).blank? %>
+                $(".message-box").dialog();                                             // jquery for message dailog box message appear
+            <% end %>
         <% end %>
         <% if @ride.to_location.present? && @ride.from_location.present? %>               // here check if to and from location of ride present then show the google map by google map jquery
         $('#map_canvas').gmap('displayDirections', { 'origin':'<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'destination':'<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('resultstmp') }, function (result, status) {
@@ -80,6 +82,19 @@
             $(".price_tag").hide();
             $("#price_tag_" + $("#ride_participant_number_of_seats").find("option:selected").val()).show();
         });
+
+        <% if current_user && current_user.mode_of_communications.present?%>
+        if (<%=current_user.mode_of_communications == "sms_text"%>)
+            $("#ride_participant_mode_of_communications_sms_text").attr("checked", "checked");
+        else if (<%=current_user.mode_of_communications == "phone_call"%>)
+            $("#ride_participant_mode_of_communications_phone_call").attr("checked", "checked");
+        else
+            $("#ride_participant_mode_of_communications_email").attr("checked", "checked");
+        <%end%>
+
+        <% if current_user && current_user.phone.present?%>
+        $("#ride_participant_phone").val("<%=current_user.phone%>");
+        <%end%>
     });
 </script>
 <div id="container">
@@ -151,9 +166,12 @@
                           <a href="<%= user_path(rider.user_id) %>" style="color: #ffffff;"><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></a>
                         </div>
                         <a href="<%= user_path(rider.user_id) %>"><%= image_tag rider.user.user_image_url %></a>
-                        <% if @graph.present? && (rider.user_id != current_user.id) && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>     <!-- check if user login thorough facebook -->
+                        <% begin %>
+                      <% if @graph.present? && (rider.user_id != current_user.id) && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>     <!-- check if user login thorough facebook -->
                             <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>                  <!-- fetched mutual friends of current user w.r.t riders -->
                             <% @ride.friends_in_common << mutual_friends %>
+                        <% end %>
+                        <% rescue %>
                         <% end %>
                         <span class="driver"></span>
                       </div>
@@ -174,7 +192,7 @@
                         <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
                     <% end %>
                     <% mutual_friends.each do |friend| %>
-                        <img src="http://graph.facebook.com/<%=friend["id"]%>/picture"/>
+                        <img src="http://graph.facebook.com/<%= friend["id"] %>/picture"/>
                         <%#= image_tag("http://graph.facebook.com/friend[id]/picture") %>
                         <%= friend["name"] %>                                   <!-- fetched mutual friend's name from facebook -->
                         <% unless friend == mutual_friends.last %>
@@ -183,7 +201,11 @@
                     <% end %>
 
                   </div>
-              <% end %><b>Notes:  </b><%if @ride.notes.present?%><%=@ride.notes%><%else%>Empty Notes<%end%>
+              <% end %>
+              <b>Notes: </b>
+              <% if @ride.notes.present? %><%= @ride.notes %>
+              <% else %>Empty Notes
+              <% end %>
             </div>
           </div>
         </div>
@@ -301,8 +323,21 @@
           <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %>
               <% if logged_in? %>
 
-                  
-<%if current_user.messages.where("user_id = ? and owner_id = ?", current_user,@ride.owner).count > 0 %><a href="/users/inbox?iframe=/rides/<%=params[:ride_id]%>/message" style="color: #FFFFFF;"><button id="contact-info-button2" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>View Message</span></button></a><%else%><button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>Contact me</span></button><%end%>
+
+                  <% if Message.where("user_id = ? and ride_id = ?", @ride.owner, @ride).count > 0 %>
+                      <a href="/users/inbox?iframe=/rides/<%= params[:ride_id] %>/message" style="color: #FFFFFF;">
+                        <button id="contact-info-button2" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+                          <span>View Message</span></button>
+                      </a>
+                  <% else %>
+                      <% if current_user && current_user.messages.where("ride_id = ?", @ride).blank? %>
+                          <button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+                            <span>Contact me</span></button>
+                      <% else %>
+                          <button id="message-sent-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+                            <span>Message sent</span></button>
+                      <% end %>
+                  <% end %>
               <% else %>
                   <a href="<%= auth_at_provider_path(:provider => :facebook, contact: @ride.id) %>" class="contact-form">Contact
                     me</a>
@@ -321,31 +356,46 @@
 </div>
 <div class="clear"></div>
 <br/><br/>
-<%if @ride.active?%>
-  <div style="border: 1px solid;">
-    <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
-      <% feedback=Feedback.find_all_by_owner_id(rider.user_id)%>
-      <% feedback.each do |feedback| %>
-        From:&nbsp;<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %><br/>
-        To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
-        Status:     <%= feedback.status && feedback.status.titleize %><br/>
-        Feedback:   <%= feedback.feedback %><br/>
-        <hr/>
+<% if @ride.active? %>
+    <div style="border: 1px solid;">
+      <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
+          <% feedback=Feedback.find_all_by_owner_id(rider.user_id) %>
+          <% feedback.each do |feedback| %>
+              From:&nbsp;<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %>
+              <br/>
+              To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %>
+              <br/>
+              Status:     <%= feedback.status && feedback.status.titleize %>
+              <br/>
+              Feedback:   <%= feedback.feedback %>
+              <br/>
+              <%= link_to "Check A Ride", new_ride_ride_participant_path(feedback.ride_id) %>
+              <br/>
+              <hr/>
+          <% end %>
       <% end %>
-    <%end%>
-  </div><br/><br/>
-  <%else%>
-<div style="border: 1px solid;">
-  <% @ride.feedbacks.each do |feedback| %>
-      From:&nbsp;<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %><br/>
-      To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
-      Status:     <%= feedback.status && feedback.status.titleize %><br/>
-	    Feedback:   <%= feedback.feedback %><br/>
-      <hr/>
-  <% end %>
-  </div><br/><br/>
-<%end%>
-<div id="map_canvas" style="height:350px; width: 500px;"></div>      <!-- here google map show-->
+    </div>
+    <br/><br/>
+<% else %>
+    <div style="border: 1px solid;">
+      <% @ride.feedbacks.each do |feedback| %>
+          From:&nbsp;<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %>
+          <br/>
+          To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %>
+          <br/>
+          Status:     <%= feedback.status && feedback.status.titleize %>
+          <br/>
+          Feedback:   <%= feedback.feedback %>
+          <br/>
+          <%= link_to "Check A Ride", new_ride_ride_participant_path(feedback.ride_id) %>
+          <br/>
+          <hr/>
+      <% end %>
+    </div>
+    <br/><br/>
+<% end %>
+<div id="map_canvas" style="height:350px; width: 500px;"></div>
+<!-- here google map show-->
 <br/>
 
 <div id="results" style="display:none;">

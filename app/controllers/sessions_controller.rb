@@ -3,9 +3,6 @@ class SessionsController < ApplicationController
   before_filter :require_not_loggedin, :only => [:new, :create]                 # no login require for login page
   #before_filter :require_login, :only => [:facebook_callback]                 # no login require for login page
   def new
-    #return render :action => "404error_user", :layout => false
-    # @facebook_api_key = FB_CONFIG['api_key']
-
   end
 
   def create

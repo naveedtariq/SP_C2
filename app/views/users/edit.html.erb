@@ -76,6 +76,32 @@
         </div>
         <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
         <div class="field">
+            <%= f.label :mode_of_communications %>
+            <table>
+              <tr>
+                <td>
+                  <%= f.radio_button :mode_of_communications, 'sms_text' %>
+                </td>
+                <td>
+                  <%= f.label :mode_of_communications, 'Sms text', :for => 'user_mode_of_communications_sms_text' %>
+                </td>
+                <td>
+                  <%= f.radio_button :mode_of_communications, 'phone_call' %>
+                </td>
+                <td>
+                  <%= f.label :mode_of_communications, 'Phone call', :for => 'user_mode_of_communications_phone_call' %>
+                </td>
+                <td>
+                  <%= f.radio_button :mode_of_communications, 'email' %>
+                </td>
+                <td>
+                  <%= f.label :mode_of_communications, 'Email', :for => 'user_mode_of_communications_email' %>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+        <div class="field">
           <%= f.label :city %>
           <%= f.text_field :city %>
         </div>

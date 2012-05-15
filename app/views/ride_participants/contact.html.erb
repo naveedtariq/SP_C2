@@ -30,7 +30,21 @@
       $(".phone-check1").hide();
   });
   $("input#ride_participant_phone").mask("999-999-9999");                       // jquery for phone number format
-       });
+  
+   <% if current_user.mode_of_communications.present?%>
+    if (<%=current_user.mode_of_communications == "sms_text"%>)
+    $("#ride_participant_mode_of_communications_sms_text").attr("checked", "checked");
+    else if(<%=current_user.mode_of_communications == "phone_call"%>)
+    $("#ride_participant_mode_of_communications_phone_call").attr("checked", "checked");
+    else
+      $("#ride_participant_mode_of_communications_email").attr("checked", "checked");
+   <%end%>
+    
+   <% if current_user.phone.present?%>
+    $("#ride_participant_phone").val("<%=current_user.phone%>");
+   <%end%>
+ });
+
 
 </script>
 <%= form_for [@ride,@ride_participant], :url => ride_ride_participant_path(@ride, @ride_participant, :accept => params[:accept]) do |f| %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419022425) do
+ActiveRecord::Schema.define(:version => 20120508080356) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20120419022425) do
     t.text     "oauth_code"
     t.datetime "last_login"
     t.string   "phone"
+    t.string   "mode_of_communications"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

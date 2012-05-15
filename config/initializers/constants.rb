@@ -20,6 +20,7 @@ STATUS_FOR_RIDES = {                                                            
   :active => 1,
   :canceled => 2
 }
+
 GOOGLE_ANALYTICS = "<script type=\"text/javascript\">
 
   var _gaq = _gaq || [];
@@ -69,6 +70,6 @@ KISSMETRICS = "<script type='text/javascript'>
   GETCLICKY_TOGGLE = "ON"                                                       # getclicky_toggle on/off
   KISSMETRICS_TOGGLE = "ON"                                                     # kissmetrics_toggle on/off
   CRAZYEGG_TOGGLE = "ON"                                                        # crazyegg_toggle on/off
-
+  BASE_URL = "ec2-50-17-68-61.compute-1.amazonaws.com"
 
 

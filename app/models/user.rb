@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :about, :gender, :dob, :phone, :city, :town, :work, :title, :school, :photo, :user_image, :number_of_friends, :authentications_attributes, :photo_url
+  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :about, :gender, :dob, :phone, :city, :town, :work, :title, :school, :photo, :user_image, :number_of_friends, :authentications_attributes, :photo_url, :mode_of_communications
 
   authenticates_with_sorcery! do |config|                      # Authentication with sorcery gem
     config.authentications_class = Authentication

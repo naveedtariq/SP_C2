@@ -1,5 +1,4 @@
 <%= javascript_include_tag 'tooltips' %>
-
 <script type="text/javascript">
   $(document).ready(function () {
   $('#ride_to_location_id').change(function () {                          // here check to and from location ar not from same group
@@ -364,6 +363,7 @@
                   <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>
                   <% ride.friends_in_common << mutual_friends %>
                 <% end %>
+<<<<<<< HEAD
 
 
 
