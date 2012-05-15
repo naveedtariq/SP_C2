@@ -1,0 +1,2803 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #000;
+}
+
+body.Homepage,
+body.HowWorks {
+  background: url('/assets/bg_homepage.png') repeat-x 0 64px #fff;
+}
+
+body.FindaRide {
+  background: url('/assets/bg_postride.png') repeat-x 0 64px #fff;
+}
+
+a {
+  color: #069;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* GENERIC STYLES */
+a.UserIcon_50x50 {
+  height: 48px;
+  width: 48px;
+  display: block;
+  overflow: hidden;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.UserIcon_50x50:hover {
+  border: 1px solid #369;
+  -webkit-box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+  -moz-box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+  box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+}
+
+.UserIcon_50x50 img {
+  margin: -1px 0 0 -1px;
+}
+
+.Pagination {
+  margin: 1em 0;
+  text-align: center;
+  font-size: 14px;
+  color: #aaa;
+  font-weight: bold;
+}
+
+.Pagination a { 
+  padding: 0 4px;
+}
+
+/* HEADER */
+header {
+  width: 100%;
+  height: 62px;
+  position: relative;
+  border-top: 2px solid #003d60;
+  background-image: -o-linear-gradient(bottom, #002C43 0%, #005E95 100%);
+  background-image: -moz-linear-gradient(bottom, #002C43 0%, #005E95 100%);
+  background-image: -webkit-linear-gradient(bottom, #002C43 0%, #005E95 100%);
+  background-image: -ms-linear-gradient(bottom, #002C43 0%, #005E95 100%);
+  background-image: linear-gradient(bottom, #002C43 0%, #005E95 100%);
+  -webkit-box-shadow: 0 1px 0 #0079be inset;
+  -moz-box-shadow: 0 1px 0 #0079be inset;
+  box-shadow: 0 1px 0 #0079be inset;
+  z-index: 1000;
+}
+
+body.Homepage header,
+body.HowWorks header {
+  -webkit-box-shadow: 0 1px 0 #0079be inset, 0 5px 5px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 1px 0 #0079be inset, 0 5px 5px rgba(0,0,0,.15);
+  box-shadow: 0 1px 0 #0079be inset, 0 5px 5px rgba(0,0,0,.15);
+}
+
+header section {
+  width: 980px;
+  height: 62px;
+  margin: 0 auto;
+  position: relative;
+}
+
+header a.Logo {
+  display: block;
+  position: absolute;
+  top: 5px; left: -2px;
+}
+
+header section nav {
+  position: absolute;
+  bottom: 14px; right: 0px;
+}
+
+header section nav li {
+  display: inline-block;
+  margin: 0 0 0 20px;
+}
+
+header section nav a {
+  color: #fff;
+  text-decoration: none !important;
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  font-weight: 700;
+  text-shadow: 0 2px 2px #333;
+  display: block;
+  line-height: 24px;
+  height: 24px;
+}
+
+header section nav li.Active a {
+  color: #ffb000;
+}
+
+header section nav a.SignUpButton {
+  color: #000;
+  text-shadow: 0 1px 0 rgba(255,255,255,.75);
+  border: 1px solid #000;
+  display: block;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 0 14px;
+  background-image: -o-linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  background-image: -moz-linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  background-image: -webkit-linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  background-image: -ms-linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  background-image: linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  -webkit-box-shadow: 0 1px 0 #ffe7b0 inset, 0 1px 0 #30566c;
+  -moz-box-shadow: 0 1px 0 #ffe7b0 inset, 0 1px 0 #30566c;
+  box-shadow: 0 1px 0 #ffe7b0 inset, 0 1px 0 #30566c;
+}
+
+header section nav a.SignUpButton:hover {
+  background-image: -o-linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+  background-image: -moz-linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+  background-image: -webkit-linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+  background-image: -ms-linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+  background-image: linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+}
+
+/* CONTAINER */
+.Container {
+  min-height: 100%;
+  position: relative;
+  margin: -65px 0 0 0;
+}
+
+/* BODY */
+.Main {
+  padding: 65px 0 100px 0;
+  width: 980px;
+  margin: 0 auto;
+}
+
+/* HOMEPAGE */
+.Splash {
+  height: 452px; width: 1100px;
+  margin: 0 0 50px -60px;
+  position: relative;
+}
+
+.Splash h1 {
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  top: 80px;
+  width: 1100px;
+  text-shadow: 0 3px 3px rgba(0,0,0,.5);
+}
+
+.Splash h2 {
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.25em;
+  color: #ffb000;
+  position: absolute;
+  top: 150px;
+  top: 140px;
+  width: 410px;
+  padding: 0 350px;
+  text-shadow: 0 2px 2px rgba(0,0,0,.5);
+}
+
+.Splash a.HowItWorks {
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 2px rgba(0,0,0,.5);
+  position: absolute;
+  /* top: 172px; left: 770px; */
+  top: 210px; left: 500px;
+}
+
+.Splash form {
+  width: 840px; height: 40px;
+  padding: 20px;
+  position: absolute;
+  left: 110px; top: 250px;
+  background: #00334f;
+  background: rgba(0,25,50,.4);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.1) inset, 0 1px 0 #1e4a6a;
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,.1) inset, 0 1px 0 #1e4a6a;
+  box-shadow: 0 1px 0 rgba(0,0,0,.1) inset, 0 1px 0 #1e4a6a;
+  position: relative;
+}
+
+#Select_From_chzn {
+  margin: 0 5px 0 0;
+}
+
+#Select_To_chzn {
+  margin: 0 15px 0 0;
+}
+
+.LocationSwitch {
+  vertical-align: top;
+  display: inline-block;
+  height: 35px; width: 17px;
+  background: url('/assets/sp_sprites_24.png') -10px -10px no-repeat;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
+  -moz-opacity:0.75;
+  -khtml-opacity: 0.75;
+  opacity: 0.75;
+  text-indent: -9999px;
+  margin: 0 5px 0 0;
+}
+
+.LocationSwitch:hover {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  -moz-opacity:1;
+  -khtml-opacity: 1;
+  opacity: 1;
+}
+
+.SplashButton {
+  color: #000;
+  text-shadow: 0 1px 0 rgba(255,255,255,.75);
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid #000;
+  display: inline-block;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  height: 35px; width: 160px;
+  text-align: center;
+  line-height: 35px;
+  vertical-align: top;
+  background-image: -o-linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  background-image: -moz-linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  background-image: -webkit-linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  background-image: -ms-linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  background-image: linear-gradient(bottom, #FF7B00 0%, #FFAE00 100%);
+  -webkit-box-shadow: 0 1px 0 #ffe7b0 inset, 0 1px 0 #30566c;
+  -moz-box-shadow: 0 1px 0 #ffe7b0 inset, 0 1px 0 #30566c;
+  box-shadow: 0 1px 0 #ffe7b0 inset, 0 1px 0 #30566c;
+}
+
+.SplashButton:hover {
+  background-image: -o-linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+  background-image: -moz-linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+  background-image: -webkit-linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+  background-image: -ms-linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+  background-image: linear-gradient(bottom, #FF7B00 0%, #ffcc5d 100%);
+  text-decoration: none;
+}
+
+.Splash .AsSeenOn {
+  position: absolute;
+  left: 58px;
+  bottom: 0px;
+}
+
+/* HOMEPAGE CYCLER */
+.CycleWrapper {
+  height: 402px; width: 1100px;
+  position: absolute;
+  top: 0px; left: 0px;
+  z-index: 0;
+}
+
+.CycleInnerWrapper {
+  height: 402px; width: 1100px;
+  position: absolute;
+  top: 0px; left: 0px;
+}
+
+.CycleWrapper .Background1 {
+  height: 402px; width: 1100px;
+  background: url('/assets/background01.jpg');
+  position: absolute;
+  top: 0px; left: 0px;
+}
+
+.CycleWrapper .Background2 {
+  height: 402px; width: 1100px;
+  background: url('/assets/background02.jpg');
+  position: absolute;
+  top: 0px; left: 0px;
+}
+
+.CycleWrapper .Background3 {
+  height: 402px; width: 1100px;
+  background: url('/assets/background03.jpg');
+  position: absolute;
+  top: 0px; left: 0px;
+}
+
+.CycleWrapper .Background4 {
+  height: 402px; width: 1100px;
+  background: url('/assets/background04.jpg');
+  position: absolute;
+  top: 0px; left: 0px;
+}
+
+/* FACEBOOK TESTIMONIALS */
+.FacebookTestimonials {
+  width: 465px; height: 350px;
+  margin: 0 50px 30px 0;
+  float: left;
+}
+
+.fb-like {
+  margin: 0 0 50px;
+}
+
+.Testimonial {
+  padding: 0 0 0 105px;
+  position: relative;
+  min-height: 84px;
+}
+
+.Testimonial div {
+  position: absolute;
+  height: 82px; width: 82px;
+  left: -8px;
+  top: -10px;
+  border: 3px solid #fff;
+  -webkit-box-shadow: 0 0 4px #333;
+  -moz-box-shadow: 0 0 4px #333;
+  box-shadow: 0 0 4px #333;
+  -ms-transform:rotate(-5deg);
+  -moz-transform:rotate(-5deg);
+  -webkit-transform:rotate(-5deg);
+  -o-transform:rotate(-5deg);
+  transform:rotate(-5deg);
+}
+
+.Testimonial img {
+  border: 1px solid #069;
+}
+
+.Testimonial p {
+  position: relative;
+  font-size: 16px;
+  line-height: 1.25em;
+  margin: 0 0 .5em;
+}
+
+.Testimonial p .Q1 {
+  color: #99c2d6;
+  font-size: 48px;
+  height: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  display: block;
+  position: absolute;
+  left: -20px; top: -10px;
+  line-height: 1em;
+}
+
+.Testimonial p .Q2 {
+  color: #99c2d6;
+  font-size: 48px;
+  height: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  display: inline-block;
+  position: relative;
+  top: 12px; left: 5px;
+}
+
+.Testimonial cite {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #069;
+  font-size: 14px;
+  display: block;
+}
+
+/* RECENT ACTIVITY */
+.RecentActivity {
+  width: 465px; height: 350px;
+  margin: 0 0 30px;
+  float: left;
+}
+
+.RecentActivity h2 {
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  font-weight: 700;
+  color: #069;
+  margin: 0 0 1em;
+}
+
+.RecentActivity .RaTicker {
+  padding: 19px 19px 9px;
+  border: 1px solid #9ec4dc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #d5e9ff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e8f3ff), to(#d5e9ff));
+  background: -moz-linear-gradient(top,  #e8f3ff,  #d5e9ff);
+}
+
+.RecentActivity li {
+  border-bottom: 1px solid #9ec4dc;
+  padding: 10px 0 10px 64px;
+  margin: 0 0 10px;
+  min-height: 45px;
+  position: relative;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.RecentActivity .UserIcon_50x50 {
+  position: absolute;
+  top: 0px; left: 0px;
+}
+
+.RecentActivity .Activity {
+  font-size: 16px;
+}
+
+.RecentActivity .Notice {
+  font-size: 12px;
+  font-weight: bold;
+  font-style: italic;
+  color: #690;
+}
+
+.RecentActivity .Locations {
+  display: block;
+  font-size: 12px;
+  height: 15px;
+  font-weight: bold;
+  color: #333;
+  padding: 0 0 0 15px;
+  background: url('/assets/sp_sprites_24.png') -700px -10px no-repeat;
+  margin: .5em 0 0 0;
+}
+
+/* HOW IT WORKS */
+.HowItWorksSplash {
+  background: url('/assets/homepage_splash.jpg') no-repeat;
+  min-height: 422px; width: 1100px;
+  margin: 0 0 30px -60px;
+  position: relative;
+  padding: 30px 0 0 0;
+}
+
+.HowItWorksSplash h1 {
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 3px 3px rgba(0,0,0,.5);
+  margin: 0 0 .5em 0;
+}
+
+.HowItWorksSplash .AsSeenOn {
+  margin: 0 auto;
+  display: block;
+}
+
+.HowItWorksSplash .VideoWrapper {
+  display: block;
+  height: 409px; width: 718px;
+  margin: 0 auto 30px;
+  -webkit-box-shadow: 0 4px 10px rgba(0,0,0,.5);
+}
+
+.FourSteps {
+  background: #16415a;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #16415a;
+  -webkit-box-shadow: 0 1px 0 #738d9c inset, 0 5px 3px #ccc;
+  -moz-box-shadow: 0 1px 0 #738d9c inset, 0 5px 3px #ccc;
+  box-shadow: 0 1px 0 #738d9c inset, 0 5px 3px #ccc;
+
+
+  width: 980px;
+  margin: 0 0 0 -1px;
+}
+
+.FourSteps li {
+  width: 245px; height: 160px;
+  padding: 15px 0 5px 0;
+  text-align: center;
+  float: left;
+}
+
+.FourSteps h3 {
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  font-weight: 700;
+  color: #ffb000;
+  text-shadow: 0 2px 2px #000;
+  margin: 0 0 10px 0;
+}
+
+/* FIND A RIDE */
+#FindaRide header {
+  background: none;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  height: 110px;
+  position: relative;
+}
+
+#FindaRide header h1 {
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  font-weight: 700;
+  float: left;
+  margin: 40px 15px 0 0;
+}
+
+#FindaRide header h2 {
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 22px;
+  line-height: 50px;
+  font-weight: bold;
+  font-weight: 500;
+  color: #069;
+  float: left;
+  margin: 40px 0 0 0;
+}
+
+#FindaRide #RideSearch {
+  border: 1px solid #ccc;
+  position: relative;
+  margin: 0 0 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #eee;
+  background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#d9d9d9));
+  background: -moz-linear-gradient(top,  #eeeeee,  #d9d9d9);
+  -webkit-box-shadow: 0 1px 0 #fff inset, 0 1px 1px #666;
+  padding: 14px;
+}
+
+#FindaRide #RideSearch li {
+  float: left;
+  display: block;
+  position: relative;
+  margin: 0 10px 0 0;
+}
+
+#FindaRide #RideSearch li.SearchButtons {
+  margin: 0 0 0 20px;
+}
+
+#FindaRide #RideSearch label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  color: #069;
+  margin: 0 0 6px 0;
+  text-shadow: 0 1px 0 #f7f7f7;
+}
+
+#FindaRide #RideSearch .AirlineRadios {
+  position: absolute;
+  top: -1px; left: 90px;
+  z-index: 10;
+}
+
+#FindaRide #RideSearch .AirlineRadios label {
+  display: inline-block;
+  font-size: 12px;
+  color: #333;
+}
+
+#FindaRide #RideSearch .LocationSwitch {
+  height: 35px; width: 17px;
+  display: block;
+  margin: 20px 5px 0 0;
+  background: url('/assets/sp_sprites_24.png') -50px -10px
+}
+
+#FindaRide #RideSearch .SearchTime {
+  display: inline-block;
+  height: 34px;
+  line-height: 34px;
+  font-size: 13px;
+  color: #444;
+  padding: 0 8px;
+  border: 1px solid #aaa;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 0px #ccc;
+  -moz-box-shadow: 0 1px 0px #ccc;
+  box-shadow: 0 1px 0px #ccc;
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffffff 0%, #f7f7f7 50%, #f0f0f0 51%, #f3f3f3 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f7f7f7), color-stop(51%,#f0f0f0), color-stop(100%,#f3f3f3)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffffff 0%,#f7f7f7 50%,#f0f0f0 51%,#f3f3f3 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffffff 0%,#f7f7f7 50%,#f0f0f0 51%,#f3f3f3 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffffff 0%,#f7f7f7 50%,#f0f0f0 51%,#f3f3f3 100%); /* IE10+ */
+  background: linear-gradient(top, #ffffff 0%,#f7f7f7 50%,#f0f0f0 51%,#f3f3f3 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 ); /* IE6-9 */
+  text-decoration: none;
+}
+
+#FindaRide #RideSearch .Active {
+  color: #fff;
+  border: 1px solid #00476b;
+  background: #069;
+  background: -webkit-gradient(linear, left top, left bottom, from(#006699), to(#004161));
+  background: -moz-linear-gradient(top,  #006699,  #004161);
+  -webkit-box-shadow: 0 3px 5px #004161 inset, 0 1px 0 #fff;
+  -moz-box-shadow: 0 3px 5px #004161 inset, 0 1px 0 #fff;
+  box-shadow: 0 3px 5px #004161 inset, 0 1px 0 #fff;
+  text-shadow: 0 1px 0 #000;
+}
+
+.PostRideBanner {
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffea95;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffea95), to(#e8d588));
+  background: -moz-linear-gradient(top,  #ffea95,  #e8d588);
+  text-shadow: 0 1px 0 #fff;
+  -webkit-box-shadow: 0 1px 0 #fff inset, 0 1px 0 #aaa;
+  -moz-box-shadow: 0 1px 0 #fff inset, 0 1px 0 #aaa;
+  box-shadow: 0 1px 0 #fff inset, 0 1px 0 #aaa;
+  padding: 14px 14px 14px 24px;
+  height: 50px;
+  margin: 0 0 30px;
+}
+
+.PostRideBanner h3 {
+  float: left;
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  font-weight: 700;
+  margin: 15px 15px 0 0;
+}
+
+.PostRideBanner p {
+  float: left;
+  font-family: museo-sans, Tahoma, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  font-weight: 700;
+  margin: 24px 15px 0 0;
+}
+
+.PostRideBanner a {
+  display: block;
+  float: right;
+  border: 1px solid #b75f00;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  width: 180px;
+  text-decoration: none;
+  margin: 8px 0 0 0;
+  font-weight: bold;
+  color: #000;
+  background: #ffca00; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffca00 0%, #ffa200 50%, #ff8400 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffca00), color-stop(50%,#ffa200), color-stop(51%,#ff8400), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffca00', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+  -webkit-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+  -moz-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+  box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+}
+
+.PostRideBanner a:hover {
+  background: #ffd432; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffd432 0%, #ffb431 50%, #ffa916 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd432), color-stop(50%,#ffb431), color-stop(51%,#ffa916), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd432', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+}
+
+.RidesWrapper {
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-top: 124px;
+}
+
+.RidesWrapper h3 {
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 9px;
+  border: 1px solid #069;
+  margin: -1px 0 0 -1px;
+  width: 960px;
+  background: #069;
+  background: -webkit-gradient(linear, left top, left bottom, from(#005985), to(#006699));
+  background: -moz-linear-gradient(top,  #005985,  #006699);
+}
+
+.RidesWrapper h3:first-child {
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.RidesWrapper .Legend {
+  background: #eee;
+  font-size: 12px;
+  color: #069;
+  font-weight: bold;
+  padding: 8px 9px;
+  position: relative;
+}
+
+.RidesWrapper .Legend span {
+  display: inline-block;
+  margin: 0 50px 0 0;
+}
+
+.RidesWrapper .SameLocation {
+  position: absolute;
+  left: 360px;
+}
+
+.SameLocationIcon {
+  display: inline-block;
+  height: 10px; width: 12px;
+  text-indent: -9999px;
+  background: url('/assets/sp_sprites_24.png') -90px -10px;
+}
+
+.RidesWrapper .Legend .SameLocationIcon {
+  margin: 0 5px 0 0 !important;
+}
+
+.NotSameLocationIcon {
+  color: #c7a51c;
+  display: inline-block;
+}
+
+
+.RidesWrapper .Legend .Estimated .HelpTooltip {
+  display: inline-block;
+  height: 14px; width: 14px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 14px;
+  color: #fff;
+  background: #069;
+  -webkit-border-radius: 200px;
+  -moz-border-radius: 200px;
+  border-radius: 200px;
+  text-decoration: none;
+}
+
+.RidesList > li {
+  border-bottom: 1px solid #9ac1d5;
+  padding: 14px 0 0 0;
+  min-height: 120px;
+}
+
+.RidesList > li:hover {
+  background: #f1f7ff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#d8eaff));
+  background: -moz-linear-gradient(top,  #ffffff,  #d8eaff);
+}
+
+.RidesList .SelectRide {
+  float: left;
+  margin: 0 15px 0 14px;
+}
+
+.RidesList .SelectRide a.RideInfoBtn {
+  width: 98px; height: 60px;
+  padding: 10px 0 3px 0;
+  border: 1px solid #aaa;
+  border-bottom: none;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  text-shadow: 0 1px 0 #eee;
+  text-align: center;
+  background: #eee;
+  background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#cccccc));
+  background: -moz-linear-gradient(top,  #eeeeee,  #cccccc);
+  -webkit-box-shadow: 0 1px 0 #fff inset;
+  -moz-box-shadow: 0 1px 0 #fff inset;
+  box-shadow: 0 1px 0 #fff inset;
+  text-decoration: none;
+  display: block;
+  color: #000;
+}
+
+.RidesList .SelectRide a.RideInfoBtn:hover {
+  background: #ffffff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#dddddd));
+  background: -moz-linear-gradient(top,  #ffffff,  #dddddd);
+}
+
+.RidesList .SelectRide span {
+  display: block;
+  font-size: 11px;
+  color: #444;
+  margin: 0 0 2px;
+  font-weight: bold;
+}
+
+.RidesList .SelectRide strong {
+  font-size: 28px;
+}
+
+.RidesList .SelectRide a.Select {
+  display: block;
+  width: 98px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  background: #ffca00; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffca00 0%, #ffa200 50%, #ff8400 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffca00), color-stop(50%,#ffa200), color-stop(51%,#ff8400), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffca00', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+  border: 1px solid #b75f00;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 #ffcf69;
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5) inset;
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255,.5) inset;
+  box-shadow: 0 1px 0 rgba(255,255,255,.5) inset;
+}
+
+.RidesList .SelectRide a.Select:hover {
+  background: #ffd432; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffd432 0%, #ffb431 50%, #ffa916 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd432), color-stop(50%,#ffb431), color-stop(51%,#ffa916), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd432', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+}
+
+.RidesList .SelectRide a.PostSimilar {
+  display: block;
+  width: 98px;
+  height: 22px;
+  text-decoration: none;
+  line-height: 22px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  text-shadow: 0 1px 0 #2a3f00;
+  border: 1px solid #3b5900;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: #79b500; /* Old browsers */
+  background: -moz-linear-gradient(top, #79b500 0%, #68a500 50%, #679b00 51%, #507800 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#79b500), color-stop(50%,#68a500), color-stop(51%,#679b00), color-stop(100%,#507800)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #79b500 0%,#68a500 50%,#679b00 51%,#507800 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #79b500 0%,#68a500 50%,#679b00 51%,#507800 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #79b500 0%,#68a500 50%,#679b00 51%,#507800 100%); /* IE10+ */
+  background: linear-gradient(top, #79b500 0%,#68a500 50%,#679b00 51%,#507800 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#79b500', endColorstr='#507800',GradientType=0 ); /* IE6-9 */
+}
+
+.RidesList .SelectRide a.PostSimilar:hover {
+  background: #b5d38b; /* Old browsers */
+  background: -moz-linear-gradient(top, #b5d38b 0%, #85b225 50%, #679b00 51%, #507800 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b5d38b), color-stop(50%,#85b225), color-stop(51%,#679b00), color-stop(100%,#507800)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #b5d38b 0%,#85b225 50%,#679b00 51%,#507800 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #b5d38b 0%,#85b225 50%,#679b00 51%,#507800 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #b5d38b 0%,#85b225 50%,#679b00 51%,#507800 100%); /* IE10+ */
+  background: linear-gradient(top, #b5d38b 0%,#85b225 50%,#679b00 51%,#507800 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5d38b', endColorstr='#507800',GradientType=0 ); /* IE6-9 */}
+
+.RidesList .RideDetails {
+  float: left;
+  font-size: 14px;
+  margin: 20px 5px 0 0;
+  color: #666;
+  width: 430px;
+}
+
+.RidesList .RideDetails .Icon {
+  display: inline-block;
+  height: 15px; width: 9px;
+  text-indent: -9999px;
+  background-image: url('/assets/sp_sprites_24.png');
+  background-repeat: no-repeat;
+  margin: 0 2px 0 0;
+}
+
+.RidesList .RideDetails .Leave .Icon {
+  background-position: -140px -10px;
+}
+
+.RidesList .RideDetails .Arrive .Icon {
+  background-position: -160px -10px;
+}
+
+.RidesList .RideDetails strong { color: #000; }
+
+.RidesList .RideDetails th,
+.RidesList .RideDetails td {
+  padding: 7px 15px 7px 0;
+  font-weight: normal;
+}
+
+.RidesList .RideDetails .LeaveArriveTime {
+  padding: 7px 5px 0 0;
+  width: 63px;
+}
+
+.RidesList .RideDetails .PlusMinus {
+  padding: 7px 30px 0 0;
+}
+
+.RidesList .RideType {
+  display: block;
+  float: left;
+  margin: 22px 0 0 10px;
+}
+
+.RidesList .UserList {
+  float: right;
+  border: 1px solid #9ec4dc;
+  width: 270px;
+  display: block;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background: #e8f3ff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e8f3ff), to(#d4e9ff));
+  background: -moz-linear-gradient(top,  #e8f3ff,  #d4e9ff);
+  -webkit-box-shadow: 0 2px 0 #fff inset;
+  -moz-box-shadow: 0 2px 0 #fff inset;
+  box-shadow: 0 2px 0 #fff inset;
+  position: relative;
+  padding: 5px;
+  margin: 0 14px 2px 0;
+}
+
+.RidesList .UserList li {
+  float: left;
+  width: 90px; height: 90px;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+  position: relative;
+}
+
+.RidesList .UserList .UserPhoto,
+.RidesList .UserList .EmptySeat {
+  display: block;
+  height: 60px; width: 60px;
+  background: #fff;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 3px;
+  margin: 5px auto 2px;
+}
+
+.RidesList .UserList .UserPhoto:hover,
+.RidesList .UserList .EmptySeat:hover {
+  border: 1px solid #369;
+  -webkit-box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+  -moz-box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+  box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+}
+
+.RidesList .UserList .UserName {
+  font-size: 11px;
+  font-weight: bold;
+  display: block;
+  text-decoration: none;
+}
+
+.RidesList .UserList li.Arrow {
+  position: absolute;
+  left: -13px;
+  top: 36px;
+  height: 27px; width: 13px;
+  background: url('/assets/sp_sprites_24.png') -110px -10px no-repeat;
+  text-indent: -9999px;
+}
+
+.FriendsInCommon {
+  clear: both;
+  background: url('/assets/sp_sprites_24.png') -3px -60px;
+  height: 23px;
+  padding: 20px 0 0 0;
+  font-size: 12px;
+  color: #069;
+}
+
+.FriendsInCommon li {
+  float: left;
+  padding: 0 0 0 14px;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.FriendsInCommon li .UserPhoto {
+  display: block;
+  float: left;
+  margin: -15px 5px 0 0;
+  height: 30px; width: 30px;
+  background: #fff;
+  padding: 1px;
+  border: 1px solid #a9c5d4;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.FriendsInCommon li .UserPhoto:hover {
+  border: 1px solid #369;
+  -webkit-box-shadow: 0 0 1px rgba(0,54,80,.7);
+  -moz-box-shadow: 0 0 1px rgba(0,54,80,.7);
+  box-shadow: 0 0 1px rgba(0,54,80,.7);
+}
+
+.FriendsInCommon li .UserName {
+  font-weight: bold;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+/* USER LIST TOOLTIPS */
+.UserTooltip {
+  display: block;
+  display: none;
+  min-height: 130px; width: 270px;
+  position: absolute;
+  background: #ccc;
+  z-index: 2000;
+  bottom: 100px;
+
+  font-size: 11px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #369;
+
+  text-shadow: none !important;
+  text-align: left;
+  background: #fff;
+  background: rgba(255,255,255,.9);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  -moz-box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+}
+
+.UserTooltip h4 {
+  font-size: 14px;
+  margin: 0 0 .5em;
+}
+
+.UserTooltip p {
+  color: #6891b9;
+  font-size: 12px;
+}
+
+.UserTooltip .UserPhoto {
+  height: 80px !important; width: 80px !important;
+  float: left;
+  margin: 10px 5px 0 0 !important;
+}
+
+.UserTooltip ul {
+  float: left;
+  margin: 10px 0 0 0;
+}
+
+.UserTooltip li {
+  float: none !important;
+  width: 175px !important;
+  height: auto !important;
+  text-align: left !important;
+  text-shadow: none !important;
+  margin: 0 0 .5em 0 !important;
+  color: #333;
+}
+
+.UserTooltip .TooltipArrow {
+  display: block;
+  height: 11px; width: 23px;
+  background: url('/assets/sp_sprites_24.png') no-repeat -175px -10px;
+  text-indent: -9999px;
+  position: absolute;
+  bottom: -13px;
+  left: 132px;
+}
+.UserTooltip .mark{ display: block;
+                    height: 11px; width: 23px;
+                    background: url('/assets/sp_sprites_24.png') no-repeat -175px -10px;
+                    text-indent: -9999px;
+                    position: absolute;
+                    bottom: -13px;
+                    left:157px !important;}
+
+.SimpleTooltip {
+  width: 400px;
+  position: relative;
+  padding: 10px;
+  background: #fff;
+  background: rgba(255,255,255,.9);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  -moz-box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  font-size: 14px;
+  line-height: 1.25em;
+  border-radius: 5px;
+  border: 2px solid #369;
+}
+
+.SimpleTooltip .TooltipArrow {
+  display: block;
+  height: 11px; width: 23px;
+  background: url('/assets/sp_sprites_24.png') no-repeat -175px -10px;
+  text-indent: -9999px;
+  position: absolute;
+  bottom: -13px;
+  left: 200px;
+}
+
+/* FOOTER */
+footer {
+  height: 100px; width: 100%;
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
+}
+
+footer section {
+  height: 100px; width: 980px;
+  position: relative;
+  margin: 0 auto;
+}
+
+footer div.SocialWrapper {
+  display: block;
+  position: absolute;
+  top: 35px; left: 0px;
+  height: 20px;
+}
+
+footer .Copyright {
+  color: #666;
+  position: absolute;
+  top: 70px; right: 0;
+  text-align: right;
+}
+
+
+
+footer nav {
+  position: absolute;
+  top: 70px; left: 0;
+}
+
+footer nav li {
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
+
+/* CHOSEN OVERRIDES */
+.chzn-container a {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.chzn-container a:hover {
+  border: 1px solid #369;
+  -webkit-box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+  -moz-box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+  box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+}
+
+.chzn-container-single .chzn-single {
+  height: 34px;
+  line-height: 34px;
+}
+
+.chzn-container-single .chzn-single div {
+  width: 24px;
+  background: none;
+  border: none;
+}
+
+.chzn-container-single .chzn-single div b {
+  background: url('/assets/chosen-sprite.png') no-repeat 3px 5px;
+}
+
+/*  Profile page styles  */
+
+.left-col-sidebar { float:left; width:250px; padding:20px 0px; font-family:Arial, Helvetica, sans-serif;}
+.right-col-main { float:left; width:750px; padding:20px 0px; font-family:Arial, Helvetica, sans-serif;}
+.right-col-main .right-col-content { border: 1px solid #c1c1c1; position:relative; 
+
+                                     border-radius:14px;
+                                     -o-border-radius:14px;
+                                     -webkit-border-radius:14px;
+                                     -ms-border-radius:14px;
+                                     -moz-border-radius:14px;
+}
+
+.right-col-main .right-col-content .main-heading { height:41px; background:#069; overflow:hidden;
+                                                   border-radius:14px 14px 0 0;
+                                                   -webkit-border-radius:14px 14px 0 0;
+                                                   -ms-border-radius:14px 14px 0 0;
+                                                   -moz-border-radius:14px 14px 0 0;
+                                                   -o-border-radius:14px 14px 0 0;}
+.right-col-main .right-col-content .main-heading h2{ display:block; line-height:41px; font-size:24px; line-height:41px; color:#fff; display:block;text-align:center;
+
+                                                     background: #069;
+                                                     background: -webkit-gradient(linear, left top, left bottom, from(#005985), to(#006699));
+                                                     background: -moz-linear-gradient(top,  #005985,  #006699);;
+}
+.right-col-main .right-col-content .main-heading .view-profile { display:block; position: absolute; right:0px; top:0px; color:#d9d9d9; font-size:11px; padding-left:23px; background: url(/assets/profile.png) no-repeat left center; height:41px; line-height:41px; padding-right:17px;}
+
+.right-col-main .right-col-content .info-about{}
+.right-col-main .right-col-content .info-about p{}
+
+.right-col-main .right-col-content h3{ display:block; height:31px; line-height:31px; background:#039; font-size:16px; padding-left:17px; color:#fff; font-weight:bold;
+
+                                       background: #069;
+                                       background: -webkit-gradient(linear, left top, left bottom, from(#005985), to(#006699));
+                                       background: -moz-linear-gradient(top,  #005985,  #006699);}
+
+.right-col-main .right-col-content p{ font-size:13px; line-height:17px; color:#696969; font-family:Arial, Helvetica, sans-serif; margin:0 17px;}
+.right-col-main .right-col-content .info-about { padding:20px 0;}
+.right-col-main .right-col-content .info-about p strong { color:#196592; display:block; padding-bottom:3px;}
+.right-col-main .right-col-content hr{ height:1px; background:#e8e8e8; border:0px; }
+.right-col-main .right-col-content .info-about hr{ margin:8px 17px;}
+
+.right-col-main .right-col-content .reviews-and-feedbacks { padding:4px 0; display:block; list-style:none;}
+.right-col-main .right-col-content .reviews-and-feedbacks li{ display:block; padding:19px 0 17px 0; border-bottom:1px solid #e8e8e8;}
+.right-col-main .right-col-content .reviews-and-feedbacks li:last-child{ border: none;}
+.right-col-main .right-col-content .reviews-and-feedbacks a{ float:left; padding:0 17px;}
+.right-col-main .right-col-content .reviews-and-feedbacks a img{ display:block;}
+.right-col-main .right-col-content .reviews-and-feedbacks p{ }
+.right-col-main .right-col-content .reviews-and-feedbacks p strong{ color:#196592; display:block; padding-bottom:2px; line-height:25px;}
+.right-col-main .right-col-content .reviews-and-feedbacks p strong span{ color:#4f4f4f;}
+.break { clear:both; display:block;}
+
+.right-col-main .right-col-content .RideDetails { width:220px;}
+
+.right-col-main .right-col-content .RidesList .RideDetails strong { color: #525252; font-size:14px; font-family:Arial, Helvetica, sans-serif; }
+.right-col-main .right-col-content .RidesList .SelectRide a.RideInfoBtn{ width: 98px; height: 60px;
+                                                                         padding:8px 0 3px 0;
+                                                                         border: 1px solid #aaa;
+                                                                         border-bottom: none;
+                                                                         -webkit-border-radius: 5px 5px 0 0;
+                                                                         -moz-border-radius: 5px 5px 0 0;
+                                                                         border-radius: 5px 5px 0 0;
+                                                                         text-shadow: 0 1px 0 #eee;
+                                                                         text-align: center;
+                                                                         background: #eee;
+                                                                         background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#cccccc));
+                                                                         background: -moz-linear-gradient(top,  #eeeeee,  #cccccc);
+                                                                         -webkit-box-shadow: 0 1px 0 #fff inset;
+                                                                         -moz-box-shadow: 0 1px 0 #fff inset;
+                                                                         box-shadow: 0 1px 0 #fff inset;
+                                                                         text-decoration: none;
+                                                                         display: block;
+                                                                         color: #3d3d3d; font-weight:normal;}
+.right-col-main .right-col-content .RidesList .SelectRide a.RideInfoBtn:hover {
+  background: #ffffff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#dddddd));
+  background: -moz-linear-gradient(top,  #ffffff,  #dddddd);
+}
+.right-col-main .right-col-content .RidesList .SelectRide{float: left;
+                                                          margin: 0px 15px 0 14px;}
+.right-col-main .right-col-content .RidesList .SelectRide a.Select{	display: block;
+                                                                    width: 98px;
+                                                                    height: 22px;
+                                                                    line-height: 22px;
+                                                                    text-align: center;
+                                                                    background: #ffca00; /* Old browsers */
+                                                                    background: -moz-linear-gradient(top, #ffca00 0%, #ffa200 50%, #ff8400 51%, #ff9500 100%); /* FF3.6+ */
+                                                                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffca00), color-stop(50%,#ffa200), color-stop(51%,#ff8400), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+                                                                    background: -webkit-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+                                                                    background: -o-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Opera 11.10+ */
+                                                                    background: -ms-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* IE10+ */
+                                                                    background: linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* W3C */
+                                                                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffca00', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+                                                                    border: 1px solid #b75f00;
+                                                                    -webkit-border-radius: 0 0 5px 5px;
+                                                                    -moz-border-radius: 0 0 5px 5px;
+                                                                    border-radius: 0 0 5px 5px;
+                                                                    text-decoration: none;
+                                                                    font-size: 14px;
+                                                                    color: #000;
+                                                                    font-weight:bold;
+                                                                    text-transform: uppercase;
+                                                                    text-shadow: 0 1px 0 #ffcf69;
+                                                                    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5) inset;
+                                                                    -moz-box-shadow: 0 1px 0 rgba(255,255,255,.5) inset;
+                                                                    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset;}
+.right-col-main .right-col-content .RidesList .SelectRide a.Select:hover {
+  background: #ffd432; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffd432 0%, #ffb431 50%, #ffa916 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd432), color-stop(50%,#ffb431), color-stop(51%,#ffa916), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd432', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+}
+.right-col-main .right-col-content .RidesList .SelectRide a.PostSimilar {
+  display: block;
+  width: 98px;
+  height: 22px;
+  text-decoration: none;
+  line-height: 22px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  text-shadow: 0 1px 0 #2a3f00;
+  border: 1px solid #3b5900;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+
+  text-transform: uppercase;
+  font-weight: bold;
+  background: #79b500; /* Old browsers */
+  background: -moz-linear-gradient(top, #79b500 0%, #68a500 50%, #679b00 51%, #507800 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#79b500), color-stop(50%,#68a500), color-stop(51%,#679b00), color-stop(100%,#507800)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #79b500 0%,#68a500 50%,#679b00 51%,#507800 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #79b500 0%,#68a500 50%,#679b00 51%,#507800 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #79b500 0%,#68a500 50%,#679b00 51%,#507800 100%); /* IE10+ */
+  background: linear-gradient(top, #79b500 0%,#68a500 50%,#679b00 51%,#507800 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#79b500', endColorstr='#507800',GradientType=0 ); /* IE6-9 */
+}
+.right-col-main .right-col-content .RidesList > li {
+  border-bottom: 1px solid #9ac1d5;
+  padding: 14px 0 0 0;
+  min-height: 120px;
+}
+.right-col-main .right-col-content .RidesList .RideDetails {
+  float: left;
+  font-size: 14px;
+  margin: 20spx 0px 0 0;
+  color: #666;
+  width: 200px;
+}
+
+.right-col-main .right-col-content .RidesList .RideDetails .Icon {
+  display: inline-block;
+  height: 15px; width: 9px;
+  text-indent: -9999px;
+  background-image: url('/assets/sp_sprites_24.png');
+  background-repeat: no-repeat;
+  margin: 0 2px 0 0;
+}
+
+.right-col-main .right-col-content .RidesList .RideDetails .Leave .Icon {
+  background-position: -140px -10px;
+}
+
+.right-col-main .right-col-content .RidesList .RideDetails .Arrive .Icon {
+  background-position: -160px -10px;
+}
+
+.right-col-main .right-col-content .RidesList .RideDetails strong { color: #000; }
+
+.right-col-main .right-col-content .RidesList .RideDetails th,
+.right-col-main .right-col-content .RidesList .RideDetails td {
+  padding: 7px 0px 7px 0 !important;
+  font-weight: normal;
+}
+
+.right-col-main .right-col-content .RidesList .RideDetails .LeaveArriveTime {
+  padding: 7px 5px 0 0;
+  width: 60px;
+}
+
+.right-col-main .right-col-content .RidesList .RideDetails .PlusMinus {
+  padding: 7px 30px 0 0;
+}
+
+.right-col-main .right-col-content .RidesList .UserList .UserName {
+  font-size: 11px;
+  font-weight: bold;
+  display: block;
+  text-decoration: none;
+}
+
+.right-col-main .right-col-content .RidesList .UserList li {
+  float: left;
+  width: 90px; height: 90px;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+  position: relative;
+}
+
+.right-col-main .right-col-content .RidesList .UserList .UserPhoto,
+.right-col-main .right-col-content .RidesList .UserList .EmptySeat {
+  display: block;
+  height: 60px; width: 60px;
+  background: #fff;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 3px;
+  margin: 5px auto 2px;
+}
+
+.right-col-main .right-col-content .RidesList .UserList .UserPhoto:hover,
+.right-col-main .right-col-content .RidesList .UserList .EmptySeat:hover {
+  border: 1px solid #369;
+  -webkit-box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+  -moz-box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+  box-shadow: 0 0 1px 1px rgba(0,54,80,.7);
+}
+
+.right-col-main .right-col-content .RidesList .UserList .UserName {
+  font-size: 11px;
+  display: block;
+  text-decoration: none;
+  color:#006699 !important;
+  font-weight:bold;
+}
+
+.right-col-main .right-col-content .RidesList .UserList li.Arrow {
+  position: absolute;
+  left: -13px;
+  top: 36px;
+  height: 27px; width: 13px;
+  background: url('/assets/sp_sprites_24.png') -110px -10px no-repeat;
+  text-indent: -9999px;
+}
+.right-col-main .right-col-content .RidesList .RideDetails th,
+.right-col-main .right-col-content .RidesList .RideDetails td {
+  padding: 7px 15px 7px 0;
+  font-weight: normal;
+}
+.right-col-main .right-col-content .RidesList .SelectRide strong {
+  font-size: 28px; font-weight:bold; color:#000;
+}
+
+.right-col-main .right-col-content .RidesList .SelectRide span { font-size:11px; font-weight:normal;}
+.right-col-main .right-col-content .SameLocationIcon {
+  display: inline-block;
+  height: 17px;
+  width: 19px;
+  text-indent: -9999px;
+  background: url('/assets/big-check.png');
+}
+
+.right-col-main .right-col-content .RidesList .RideType { display: block;float: left; margin: 22px 0 0 10px;}
+.right-col-main .right-col-content .RidesList .UserList {}
+
+
+.left-col-sidebar .user-details { padding-left:18px; padding-bottom:16px;}
+.left-col-sidebar .user-widget { border-top:1px solid #e2e2e2; margin-left:18px; margin-right:3px; padding-bottom:25px;}
+
+.left-col-sidebar p {font-size:13px; line-height:17px; color:#696969; font-family:Arial, Helvetica, sans-serif;}
+.left-col-sidebar .user-details p { padding-top:8px;}
+.left-col-sidebar .user-widget h3{ font-size:16px; font-weight:bold; color:#434343; line-height:42px; padding-top:6px;}
+.left-col-sidebar .user-widget ul.verification{ list-style:none;}
+.left-col-sidebar .user-widget ul.verification li{ display:block; padding:10px 0;}
+.left-col-sidebar .user-widget ul.verification li img{ float:left; margin-right:6px;}
+.left-col-sidebar .user-widget ul.verification li p{ padding:0;}
+.left-col-sidebar .user-widget .mutual-friends { list-style:none;}
+.left-col-sidebar .user-widget .mutual-friends li{ float:left; padding:0 3px 6px 0; position:relative; cursor:pointer;transition:all 0.2s;
+                                                   -o-transition:all 0.2s;
+                                                   -webkit-transition:all 0.2s;
+                                                   -ms-transition:all 0.2s;
+                                                   -moz-transition:all 0.2s;}
+.left-col-sidebar .user-widget .mutual-friends li .tooltip-title { position:absolute; display: block; width:112px; height:40px; font-size:11px; color:#eee; text-align:center; background:#666; top:-50px; left:-30px; display:none; background:url(/assets/popup-title.png); line-height:33px; z-index:999; opacity:0;
+
+
+}
+.left-col-sidebar .user-widget .mutual-friends li:hover .tooltip-title { display:block; opacity:1;}
+
+/*  popups   */
+
+.facebook-popup { height:100%; width:100%; position:fixed; z-index:2000;}
+.facebook-popup .facebook-popup-overlay { background:rgba(0,0,0,0.5); height:100%; width:100%; position: absolute;}
+.facebook-popup .facebook-popup-centered { width:480px; height:523px; margin:0 auto; position: relative; top:50%;}
+.facebook-popup .vertically-centered { width:100%; height:100%; position:relative; bottom:50%;}
+.facebook-popup .window{ width:100%; height:100%; background:#fff; border-size:6px; position:absolute; left:0px; top:0px; border:6px solid #666;
+
+                         border-radius:11px;
+                         -o-border-radius:11px;
+                         -webkit-border-radius:11px;
+                         -ms-border-radius:11px;
+                         -moz-border-radius:11px;}
+.facebook-popup .closed{ background:url(/assets/closed.png) left top no-repeat; width:31px; height:31px; display:block; position:absolute; right:-17px; top:-17px;}
+.facebook-popup .window h2{ font-size:26px; color:#434343; padding-top:18px; line-height:44px; display:block; text-align: center;}
+.facebook-popup .window h4{ text-align: center; display:block; line-height:30px; color:#434343; font-size:12px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;}
+.facebook-popup .window h4 a{ color:#196592; text-decoration:none;}
+.facebook-popup .window h4 img{ margin:5px; vertical-align: middle;}
+
+.facebook-popup .window .user-images { display:block; list-style:none; font-size:0px; font-family:Arial, Helvetica, sans-serif; width:440px; margin:0 auto; padding-bottom:6px; border-bottom:1px solid #d9d9d9;}
+.facebook-popup .window .user-images li{ display:inline-block; width:50px; margin:0 2px 0 3px;}
+.facebook-popup .window .user-images li img{ display:block; width:50px; height:50px;}
+.facebook-popup .window .user-images li p{ line-height:23px; text-align:center; font-size:9px; color:#808080; padding-bottom:3px;}
+.facebook-popup .window .sign-up-btn{ display:block; width:308px; height:54px; margin:30px auto 17px auto; background: url(/assets/sign-up-with-facebook.jpg) no-repeat;}
+.facebook-popup .window .sign-up-btn:hover{ display:block; width:308px; height:54px; margin:30px auto 17px auto; background: url(/assets/sign-up-with-facebook.jpg) no-repeat 0px -54px;}
+.facebook-popup .window .question { width:340px; font-family:Arial, Helvetica, sans-serif; margin:0 auto;}
+.facebook-popup .window .question h3{ display:block; padding-left:20px; line-height:45px; font-size:22px; color:#434343;}
+.facebook-popup .window .question ul{ list-style:none;}
+.facebook-popup .window .question ul li{ display:block; line-height:21px; font-size:15px; color:#434343; padding-left:32px; background:url(/assets/small-check.png) no-repeat 10px 3px;}
+
+.toggle-next { cursor:row-resize;}
+/* profile cass */
+
+.Main_wide {
+  font-family:Arial, Helvetica, sans-serif;
+  padding: 65px 0 100px 0;
+  width: 1000px;
+  margin: 0 auto;
+}
+.Main_wide .view_profile_left_container{ width:250px; float:left; padding-top:20px;}
+.Main_wide .view_profile_left_container p{ background:url(/assets/person_image.jpg) 18px top no-repeat; color:#196592;
+                                           padding:215px 15px 0 18px; font-size:12px; font-weight:bold;}
+.Main_wide .view_profile_left_container fieldset{ width:230px; padding-top:3px; padding-left:18px;}
+.Main_wide .view_profile_left_container fieldset .image_text{ border:1px solid #bdc7d8; padding:2px; font-size:12px; float:left; width:134px; line-height:22px; height:18px;}
+.Main_wide .view_profile_left_container fieldset .image_text:hover{ border-color:#404040;}
+.Main_wide .view_profile_left_container fieldset .image_text:focus{  border-color:#95b0db;}
+.Main_wide .view_profile_left_container fieldset .image_search{ font-size:12px; line-height:22px; padding:0 10px; border:1px solid #a6a6a6; font-weight:bold; float:left; margin:1px 0 0 4px; color:#5b5b5b; height:22px; cursor:pointer;}
+.Main_wide .view_profile_left_container fieldset .image_search:hover{color:#196592;}
+.Main_wide .view_profile_right_container{ border:1px solid #c1c1c1; float:left; width:748px; margin-top:20px; position:relative;
+
+                                          border-radius:14px;
+                                          -webkit-border-radius:14px;
+                                          -ms-border-radius:14px;
+                                          -moz-border-radius:14px;
+                                          -o-border-radius:14px;}
+
+
+
+.Main_wide .view_profile_right_container .main-heading { height:41px; background:#069;  margin-bottom:28px; display:block; overflow:hidden;
+
+                                                         border-radius:14px;
+                                                         -webkit-border-radius:14px 14px 0 0;
+                                                         -ms-border-radius:14px 14px 0 0;
+                                                         -moz-border-radius:14px 14px 0 0;
+                                                         -o-border-radius:14px 14px 0 0;
+}
+.Main_wide .view_profile_right_container .main-heading h2{ display:block; line-height:41px; font-size:24px; line-height:41px; color:#fff; display:block;text-align:center;
+
+                                                           background: #02628f;
+                                                           background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAyNjI4ZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwZDdjYjQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                                                           background: -moz-linear-gradient(top,  #02628f 0%, #0d7cb4 100%);
+                                                           background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#02628f), color-stop(100%,#0d7cb4));
+                                                           background: -webkit-linear-gradient(top,  #02628f 0%,#0d7cb4 100%);
+                                                           background: -o-linear-gradient(top,  #02628f 0%,#0d7cb4 100%);
+                                                           background: -ms-linear-gradient(top,  #02628f 0%,#0d7cb4 100%);
+                                                           background: linear-gradient(top,  #02628f 0%,#0d7cb4 100%);
+                                                           filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#02628f', endColorstr='#0d7cb4',GradientType=0 );
+}
+.Main_wide .view_profile_right_container .main-heading .view-profile { display:block; position: absolute; right:0px; top:0px; color:#d9d9d9; font-size:11px; padding-left:37px; background: url(/assets/eye.png) no-repeat left center; height:41px; line-height:41px; padding-right:17px;}
+
+
+.Main_wide .view_profile_right_container .profile_inner_part{ padding:0 36px 42px 18px; display:block;}
+.Main_wide .view_profile_right_container .profile_inner_part h2{ font-size:13px; color:#196592; line-height:15px; font-weight:bold; display:block; padding-left:10px; padding-bottom:5px;}
+.Main_wide .view_profile_right_container .profile_inner_part p{ border:1px solid #bdc7d8; font-size:13px; color:#6a6a6a; line-height:17px; padding:7px 0 7px 10px; margin-bottom:24px;}
+.Main_wide .view_profile_right_container .profile_inner_part  .profile_form{ width:650px; display:block;}
+.Main_wide .view_profile_right_container .profile_inner_part  .profile_form fieldset{ float:left; border:none; margin-bottom:10px;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset label{
+  width:114px;
+  float:left;
+  text-align:left;
+  font-size:12px;
+  color:#196592;
+  font-weight:bold;
+  padding-left:10px;
+  padding-top:5px;
+}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .form_text{border:1px solid #bdc7d8; padding:2px; font-size:12px; float:left; height:18px; width:268px; line-height:21px; font-size:12px; color:#6a6a6a;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .form_text:hover{ border-color:#404040;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .form_text:focus{ border-color:#95b0db; }
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form hr{ background:url(/assets/hr_image.gif) left top no-repeat; width:628px; height:1px; float:left; margin:20px 0 14px 10px; border:none;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form .primary_email{ font-size:12px; color:#6a6a6a; float:left; line-height:18px; padding-top:3px;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form .form_checkbox{ margin:5px 0 0 20px; float:left; cursor:pointer;}
+
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .list_checkbox{ float:left;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset.check{ display:block; margin-left:120px;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form .checkbox_text{ float:left; padding-left:5px; color:#6a6a6a; font-size:12px; padding-top:5px; border:none;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form .list_text{ margin:0 !important; padding: 0 0 0 5px !important;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form .checkbox_text strong{ font-weight:bold;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .profile_submit{ float:left; height:38px; line-height:38px; font-size:18px; font-weight: bold; color:#46300d; border: 1px solid #c7974c; padding:0 19px 0 17px; margin-top:22px; letter-spacing:-0.3px; cursor:pointer; margin-left:50px;
+
+                                                                                                     background: #f2c326;
+                                                                                                     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyYzMyNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMzhmMjEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                                                                                                     background: -moz-linear-gradient(top,  #f2c326 0%, #f38f21 100%);
+                                                                                                     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2c326), color-stop(100%,#f38f21));
+                                                                                                     background: -webkit-linear-gradient(top,  #f2c326 0%,#f38f21 100%);
+                                                                                                     background: -o-linear-gradient(top,  #f2c326 0%,#f38f21 100%);
+                                                                                                     background: -ms-linear-gradient(top,  #f2c326 0%,#f38f21 100%);
+                                                                                                     background: linear-gradient(top,  #f2c326 0%,#f38f21 100%);
+                                                                                                     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2c326', endColorstr='#f38f21',GradientType=0 );
+
+                                                                                                     text-shadow:0 1px 1px #fff;
+                                                                                                     -webkit-text-shadow:0 1px 1px #fff;
+                                                                                                     -ms-text-shadow:0 1px 1px #fff;
+                                                                                                     -moz-text-shadow:0 1px 1px #fff;
+                                                                                                     -o-text-shadow:0 1px 1px #fff;
+
+                                                                                                     border-radius:4px;
+                                                                                                     -ms-border-radius:4px;
+                                                                                                     -webkit-border-radius:4px;
+                                                                                                     -moz-border-radius:4px;
+                                                                                                     -o-border-radius:4px;
+
+}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .profile_submit:hover{ box-shadow:inset 0 0 4px #6A6A6A;
+                                                                                                           -webkit-box-shadow: 0 0 4px #6A6A6A;
+                                                                                                           -ms-box-shadow: 0 0 4px #6A6A6A;
+                                                                                                           -moz-box-shadow: 0 0 4px #6A6A6A;
+                                                                                                           -o-box-shadow: 0 0 4px #6A6A6A;
+                                                                                                           drop-shadow:1px 1px 2px #6A6A6A;
+                                                                                                           -webkit-drop-shadow:1px 1px 2px #6A6A6A;
+                                                                                                           -ms-drop-shadow:1px 1px 2px #6A6A6A;
+                                                                                                           -moz-drop-shadow:1px 1px 2px #6A6A6A;
+                                                                                                           -o-drop-shadow:1px 1px 2px #6A6A6A;
+
+                                                                                                           position:relative; top:-1px; left:-1px;}
+.Main_wide .deactive{ font-size:12px; float:left; color:#196592; text-decoration:underline; margin:34px 0 0 25px;}
+
+
+/* post a ride popups   */
+
+.post_ride-popup { height:100%; width:100%; position:fixed; z-index:2000;}
+.post_ride-popup .post_ride-popup-overlay { background:rgba(0,0,0,0.5); height:100%; width:100%; position: absolute;}
+.post_ride-popup .post_ride-popup-centered { width:880px; height:371px; margin:0 auto; position: relative; top:50%;}
+.post_ride-popup .post_ride_vertically-centered { width:100%; height:100%; position:relative; bottom:50%;}
+.post_ride-popup .post_ride_vertically-centered .closed{ background:url(/assets/close_btn.png) left top no-repeat; width:24px; height:24px; display:block; position:absolute; right:-12px; top:0px; z-index:999;}
+.post_ride-popup .post_ride_window{
+  width:100%;
+  height:100%;
+  background:#fff;
+  position:absolute;
+  left:2px;
+  top:9px;
+  box-shadow:0 0 13px #000;
+  -webkit-box-shadow:0 0 13px #000;
+  -ms-box-shadow:0 0 13px #000;
+  -moz-box-shadow:0 0 13px #000;
+  -o-box-shadow:0 0 13px #000;
+  border-radius:11px;
+  -o-border-radius:11px;
+  -webkit-border-radius:11px;
+  -ms-border-radius:11px;
+  -moz-border-radius:11px;
+}
+.closed{ background:url(/assets/closed_btn.png) left top no-repeat; width:31px; height:31px; display:block; position:absolute; right:-17px; top:-17px;}
+.post_ride-popup .post_ride_window ul#post_ride_heading{ background:#086797; width:880px; display:block; height:81px; list-style:none;
+
+                                                         border-radius:11px 11px 0 0;
+                                                         -o-border-radius:11px 11px 0 0;
+                                                         -webkit-border-radius:11px 11px 0 0;
+                                                         -ms-border-radius:11px 11px 0 0;
+                                                         -moz-border-radius:11px 11px 0 0;}
+.post_ride-popup .post_ride_window ul#post_ride_heading li{ float:left; width:160px; height:50px; margin:0 66px; padding:18px 0 13px 0; opacity:0.4;
+                                                            filter:alpha(opacity=40); /* For IE8 and earlier */}
+.post_ride-popup .post_ride_window ul#post_ride_heading li .number{ background:url(/assets/postride_number_bg.png) left center no-repeat; width:49px; height:49px; float:left; font-family:Arial, Helvetica, sans-serif; font-size:24px; color:#086797; text-align:center; line-height:49px; font-weight:bold;}
+.post_ride-popup .post_ride_window ul#post_ride_heading li .number_done{ background:url(/assets/done.png) left center no-repeat; width:49px; height:49px; float:left; font-size:0px;}
+.post_ride-popup .post_ride_window ul#post_ride_heading li .post_heading_content{ color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:18px; font-weight:bold; line-height:50px; padding-left:8px; }
+.post_ride-popup .post_ride_window ul#post_ride_heading li.current{opacity:1;
+                                                                   filter:alpha(opacity=100); /* For IE8 and earlier */}
+.post_ride-popup .post_ride_window .post_ride_popup_container{ float:left; padding:20px 0 0 30px; width:550px;}
+.post_ride_popup_container .Container_position{ height:202px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset{ border:none; width:252px; float:left;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label{ font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000; line-height:24px; font-weight:bold; display:block;}
+.post_ride-popup .post_ride_window .post_ride_popup_container  .LocationSwitch {
+  height: 35px; width: 17px; float:left;
+  margin: 20px 5px 0 5px;
+  background: url('/assets/sp_sprites_24.png') -50px -5px no-repeat;
+}
+.post_ride-popup .post_ride_window .post_ride_popup_container  .what_take{ margin:37px 0 0 0; display:block;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset.radio_btn{ width:240px; float:left;
+                                                                                  margin:0 25px 0 8px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset.for_car{ margin:0 0px 0 16px !important;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset.radio_btn_act{opacity:1;
+                                                                                     filter:alpha(opacity=100);}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset.radio_btn label{ line-height:none; float:left;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride{opacity:0.4;
+                                                                                        filter:alpha(opacity=40);float:left; height:53px; cursor:pointer;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .ride_cab{ background:url(/assets/cartype_taxi.png) left center no-repeat; width:100px; height:57px; float:left;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .ride_car{ background:url(/assets/cartype_limo.png) left center no-repeat; width:83px; height:57px; float:left; padding:0 12px 0 5px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .radio-selectride{ margin:25px 7px 0 0; float:left;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset.for_cab label .radio_text{ padding-top:22px; padding-left:6px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label .radio_text{ line-height:19px !important; color:#333333; font-size:14px; font-weight:bold; float:right; padding-top:14px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset.full{ margin:0px 0 0 175px; width:auto;}
+.bank{ display:block; margin-bottom:11px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset .submit{ cursor:pointer;
+                                                                                display: block;
+                                                                                border: 1px solid #b75f00;
+                                                                                -webkit-border-radius: 4px;
+                                                                                -moz-border-radius: 4px;
+                                                                                border-radius: 4px;
+                                                                                height: 37px;
+                                                                                line-height: 37px;
+                                                                                text-align: center;
+                                                                                width: 163px;
+                                                                                text-decoration: none;
+                                                                                font-family:Arial, Helvetica, sans-serif;
+                                                                                font-size:18px;
+                                                                                font-weight:bold;
+                                                                                color: #000;
+                                                                                background: #ffca00; /* Old browsers */
+                                                                                background: -moz-linear-gradient(top, #ffca00 0%, #ffa200 50%, #ff8400 51%, #ff9500 100%); /* FF3.6+ */
+                                                                                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffca00), color-stop(50%,#ffa200), color-stop(51%,#ff8400), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+                                                                                background: -webkit-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+                                                                                background: -o-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Opera 11.10+ */
+                                                                                background: -ms-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* IE10+ */
+                                                                                background: linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* W3C */
+                                                                                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffca00', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+                                                                                -webkit-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                                                                -moz-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                                                                box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                                                                -webkit-text-shadow: 0 1px 0 #FFCF69;
+                                                                                -ms-text-shadow: 0 1px 0 #FFCF69;
+                                                                                -moz-text-shadow: 0 1px 0 #FFCF69;
+                                                                                -o-text-shadow: 0 1px 0 #FFCF69;
+                                                                                text-shadow: 0 1px 0 #FFCF69;
+}
+
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset .submit:hover {
+  background: #ffd432; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffd432 0%, #ffb431 50%, #ffa916 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd432), color-stop(50%,#ffb431), color-stop(51%,#ffa916), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd432', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+}
+.post_ride-popup .post_ride_window .area_detail{ width:270px; float:right; margin:20px 20px 0 0;}
+.post_ride-popup .post_ride_window .area_detail .map{ background:url(/assets/map.jpg) left top no-repeat; width:267px; height:207px; display:block;
+}
+.post_ride-popup .post_ride_window .area_detail p{ text-align:center; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:15px; padding-top:5px;}
+.post_ride-popup .post_ride_window .area_detail p .small_text{ font-size:10px; text-align:center; line-height:15px;}
+
+/*post a ride time */
+.timing .Container_position{ float:left; height:202px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.mediam{width:156px; float:left}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.mediam label{ font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000; cursor:pointer;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.mediam  .date{ border:2px solid #9e9d9d; height:30px; float:left; width:92px; padding:0 6px;
+
+                                                                                              box-shadow:inset 0px 2px 3px #9e9d9d;
+                                                                                              -webkit-box-shadow:inset0px 2px 3px #9e9d9d;
+                                                                                              -ms-box-shadow:inset 0px 2px 3px #9e9d9d;
+                                                                                              -moz-box-shadow:inset 0px 2px 3px #9e9d9d;
+                                                                                              -o-box-shadow:inset 0px 2px 3px #9e9d9d;
+                                                                                              border-radius:6px;
+                                                                                              -webkit-border-radius:6px;
+                                                                                              -ms-border-radius:6px;
+                                                                                              -moz-border-radius:6px;
+                                                                                              -o-border-radius:6px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.mediam .calander{ background:url(/assets/calander.gif) left top no-repeat; width:21px; height:21px; float:left; margin:8px 0 0 5px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.small{ width:100px; float:left;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.duration{ width:130px !important;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.small p{ font-size:14px; font-family:Arial, Helvetica, sans-serif; color:#086797; padding-top:5px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.mediam .small_text{ font-size:11px; text-align:center; }
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing{ float:left; margin-bottom:15px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .fadeout{opacity:0.5;
+                                                                       filter:alpha(opacity=50);}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.big{ width:550px; display:block; margin-top:10px;}  
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.big .Previous{background: #eeeeee;
+                                                                                             background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2NjY2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                                                                                             background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee 50%, #dddddd 51%, #cccccc 100%);
+                                                                                             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(50%,#eeeeee), color-stop(51%,#dddddd), color-stop(100%,#cccccc));
+                                                                                             background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                                                                             background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                                                                             background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                                                                             background: linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                                                                             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+
+                                                                                             cursor:pointer;
+                                                                                             float:left;
+                                                                                             border: 1px solid #cccccc;
+                                                                                             -webkit-border-radius: 4px;
+                                                                                             -moz-border-radius: 4px;
+                                                                                             border-radius: 4px;
+                                                                                             height: 37px;
+                                                                                             line-height: 37px;
+                                                                                             text-align: center;
+                                                                                             width: 163px;
+                                                                                             text-decoration: none;
+                                                                                             font-family:Arial, Helvetica, sans-serif;
+                                                                                             font-size:18px;
+                                                                                             font-weight:bold;
+                                                                                             color: #666666;
+                                                                                             margin-right:12px;
+}
+.post_ride-popup .post_ride_window .post_ride_popup_container .timing fieldset.big .Previous:hover{ background:#eeeeee; }
+/* what else */
+.post_ride-popup .post_ride_window .post_ride_popup_container .what_leftside{ width:550px; float:left;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .what_leftside .left_list{ width:200px; float:left;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .what_leftside fieldset.small{ width:185px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .what_leftside fieldset.small .per_seat{  width:50px; border: 2px solid #9E9D9D;
+                                                                                                        border-radius: 5px 5px 5px 5px;
+                                                                                                        -webkit-border-radius: 5px 5px 5px 5px;
+                                                                                                        -ms-border-radius: 5px 5px 5px 5px;
+                                                                                                        -moz-border-radius: 5px 5px 5px 5px;
+                                                                                                        -o-border-radius: 5px 5px 5px 5px;
+                                                                                                        box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                                        -webkit-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                                        -ms-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                                        -moz-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                                        -o-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                                        font-family: Arial,Helvetica,sans-serif;
+                                                                                                        font-size: 14px; font-weight:bold; color:#333333;
+                                                                                                        padding:8px 10px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .what_leftside fieldset.small .small_text{ float:right; line-height:32px; padding-right:43px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .what_leftside fieldset.colom{ width:300px; float:left; margin-bottom:34px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .what_leftside fieldset.colom textarea{ width:300px; border:2px solid #9E9D9D; border-radius:5px;
+                                                                                                      -webkit-border-radius:5px;
+                                                                                                      -ms-border-radius:5px;
+                                                                                                      -moz-border-radius:5px;
+                                                                                                      -o-border-radius:5px;
+                                                                                                      -o-box-shadow:0 2px 3px #9E9D9D inset;
+                                                                                                      -moz-box-shadow:0 2px 3px #9E9D9D inset;
+                                                                                                      -ms-box-shadow:0 2px 3px #9E9D9D inset;
+                                                                                                      -webkit-box-shadow:0 2px 3px #9E9D9D inset;
+                                                                                                      box-shadow:0 2px 3px #9E9D9D inset;
+                                                                                                      font-family:Arial, Helvetica, sans-serif; font-size:14px; padding:10px; color:#333333; resize:none; min-height:89px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container .what_leftside fieldset.big { margin-top:10px;
+                                                                                            display: block;
+                                                                                            width: 550px;
+}
+.Previous{background: #eeeeee;
+          background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2NjY2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+          background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee 50%, #dddddd 51%, #cccccc 100%);
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(50%,#eeeeee), color-stop(51%,#dddddd), color-stop(100%,#cccccc));
+          background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+          background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+          background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+          background: linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+
+          cursor:pointer;
+          float:left;
+          border: 1px solid #cccccc;
+          -webkit-border-radius: 4px;
+          -moz-border-radius: 4px;
+          border-radius: 4px;
+          height: 37px;
+          line-height: 37px;
+          text-align: center;
+          width: 163px;
+          text-decoration: none;
+          font-family:Arial, Helvetica, sans-serif;
+          font-size:18px;
+          font-weight:bold;
+          color: #666666;
+          margin-right:12px;
+}
+.Previous:hover{ background:#eeeeee; }
+
+/* rider detail */
+.backbotton{ display:block; padding:20px 0 15px 0;}
+.backbotton a{ background:url(/assets/back_search.png) left top no-repeat; width:179px; height:25px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#666666; display:block; text-align:center; line-height:25px;}
+.backbotton a:hover{ color:#333; text-decoration:none;}
+.RidesdetailWrapper {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.RidesdetailWrapper .ridesdetail_heading{width: 978px; 	border: 1px solid #069; position:relative;
+                                         background: #069;
+                                         background: -webkit-gradient(linear, left top, left bottom, from(#005985), to(#006699));
+                                         background: -moz-linear-gradient(top,  #005985,  #006699);
+                                         -webkit-border-radius: 5px 5px 0 0;
+                                         -moz-border-radius: 5px 5px 0 0;
+                                         border-radius: 5px 5px 0 0;}
+.RidesdetailWrapper .ridesdetail_heading h3 {
+  color: #fff; font-size: 16px; padding: 7px 9px; font-family:Arial, Helvetica, sans-serif; float:left;
+}
+.RidesdetailWrapper .ridesdetail_heading p{ font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; color:#ffffff; line-height:30px; float:right; padding-right:20px;}
+.RidesdetailWrapper .ridesdetail_heading p span{ color:#ffcc00;}
+
+.RidesdetailWrapper .RidesList > li {
+  border-bottom: 1px solid #9AC1D5;
+  min-height: 120px;
+  padding: 14px 0 0;
+}
+.RidesdetailWrapper .RidesList .RideDetails {
+  color: #666666;
+  float: left;
+  font-size: 14px;
+  margin: 20px 5px 0 0;
+  width: 430px;
+}
+.RidesdetailWrapper .RidesList .RideDetails th, .RidesList .RideDetails td {
+  font-weight: normal;
+  padding: 7px 15px 7px 0;
+}
+.RidesdetailWrapper .RidesList .RideDetails .LeaveArriveTime {
+  padding: 7px 5px 0 0;
+  width: 60px;
+}
+.RidesdetailWrapper .RidesList .RideDetails .Icon {
+  background-image: url("/assets/sp_sprites_24.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 15px;
+  margin: 0 2px 0 0;
+  text-indent: -9999px;
+  width: 9px;
+}
+.RidesdetailWrapper .RidesList .RideDetails .Leave .Icon {
+  background-position: -140px -10px;
+}
+.RidesdetailWrapper .RidesList .RideDetails .PlusMinus {
+  padding: 7px 30px 0 0;
+}
+.RidesdetailWrapper .SameLocationIcon {
+  background: url("/assets/sp_sprites_24.png") repeat scroll -90px -10px transparent;
+  display: inline-block;
+  height: 10px;
+  text-indent: -9999px;
+  width: 12px;
+}
+.RidesdetailWrapper .RidesList .RideType {
+  display: block; float: left; margin: 22px 0 0 10px;
+}
+.RidesdetailWrapper .RidesList .UserList {float: right; border: 1px solid #9ec4dc; width: 395px; display: block;
+                                          -webkit-border-radius: 4px;
+                                          -moz-border-radius: 4px;
+                                          border-radius: 4px;
+
+                                          background: #e8f3ff;
+                                          background: -webkit-gradient(linear, left top, left bottom, from(#e8f3ff), to(#d4e9ff));
+                                          background: -moz-linear-gradient(top,  #e8f3ff,  #d4e9ff);
+                                          -webkit-box-shadow: 0 2px 0 #fff inset;
+                                          -moz-box-shadow: 0 2px 0 #fff inset;
+                                          box-shadow: 0 2px 0 #fff inset;
+
+                                          position: relative; padding: 5px; margin: 0 0px 2px 0;
+}
+
+.RidesdetailWrapper .RidesList .UserList li { float: left; width: 395px; height: 96px; text-align:left; text-shadow: 0 1px 0 #fff; position: relative;
+}
+
+.RidesdetailWrapper .RidesList .UserList li.Arrow {
+  background: url("/assets/sp_sprites_24.png") no-repeat scroll -110px -10px transparent; height: 27px; left: -13px; position: absolute; text-indent: -9999px; top: 36px; width: 13px;
+}
+.RidesdetailWrapper .RidesList .UserList li p{ font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; font-style:italic; color:#056899; padding:10px 10px 0 10px;}
+.RidesdetailWrapper .trip_map{ width:980px; display:block; padding-top:20px;}
+.RidesdetailWrapper .trip{ width:465px; border:1px solid #cccccc; background:#eee; min-height:256px; float:left;
+                           border-radius:6px;
+                           -webkit-border-radius:6px;
+                           -ms-border-radius:6px;
+                           -moz-border-radius:6px;
+                           -o-border-radius:6px;}
+.RidesdetailWrapper .trip_detail{ padding:30px 30px 15px 30px; float:left;}
+.RidesdetailWrapper .trip_detail h4{ font-family:Arial, Helvetica, sans-serif; font-size:18px; font-weight:bold; color:#006699; float:left; margin-bottom:17px; width:300px;}
+.RidesdetailWrapper .trip_detail .trip_cost{ float:right; font-size:18px; font-weight:bold; color:#333333;}
+.RidesdetailWrapper .trip_detail h4 span{ font-size:12px; color:#666666; font-family:Arial, Helvetica, sans-serif; font-style:italic;}
+.RidesdetailWrapper .trip_detail hr{ border:none; height:2px; background:#006699; float:left; width:405px;}
+.RidesdetailWrapper .trip_detail h4 .answer{ color:#006699 !important;}
+.jcarousel-container  p{ font-size:14px; font-family:Arial, Helvetica, sans-serif; color:#076a9c; padding-bottom:10px; font-weight:bold;}
+.RidesdetailWrapper .trip_map .form_map{ border:1px solid #a5bfdd; float:right; width:465px; height:255px; overflow:hidden;
+
+                                         border-radius:6px;
+                                         -webkit-border-radius:6px;
+                                         -ms-border-radius:6px;
+                                         -moz-border-radius:6px;
+                                         -o-border-radius:6px;}
+.RidesdetailWrapper .trip_map .form_map p{ background:url(/assets/nyu_icon.jpg) left center no-repeat; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#669900; line-height:23px; height:23px; margin-left:10px; padding-left:20px; font-weight:bold;}
+.RidesdetailWrapper ul#about_person{ width:978px; display:block; border:1px solid #9ec4dc; min-height:105px; margin-top:20px;
+                                     background: #e8f3ff;
+                                     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U4ZjNmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkNGU5ZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                                     background: -moz-linear-gradient(top,  #e8f3ff 0%, #d4e9ff 100%);
+                                     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e8f3ff), color-stop(100%,#d4e9ff));
+                                     background: -webkit-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                     background: -o-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                     background: -ms-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                     background: linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8f3ff', endColorstr='#d4e9ff',GradientType=0 );
+
+                                     border-radius:6px;
+                                     -webkit-border-radius:6px;
+                                     -ms-border-radius:6px;
+                                     -moz-border-radius:6px;
+                                     -o-border-radius:6px;
+}
+.RidesdetailWrapper ul#about_person li{ float:left; padding-left:20px; margin-top:20px; width:300px;}
+.RidesdetailWrapper ul#about_person li .person_image{ background:#fff; float:left; padding:3px 3px 1px 3px; border:1px solid #cccccc; margin-right:7px;
+
+                                                      border-radius:4px;
+                                                      -webkit-border-radius:4px;
+                                                      -ms-border-radius:4px;
+                                                      -moz-border-radius:4px;
+                                                      -o-border-radius:4px;
+                                                      box-shadow:1px 1px 3px #cacaca;
+                                                      -webkit-box-shadow:1px 1px 3px #cacaca;
+                                                      -ms-box-shadow:1px 1px 3px #cacaca;
+                                                      -moz-box-shadow:1px 1px 3px #cacaca;
+                                                      -o-box-shadow:1px 1px 3px #cacaca;}
+.RidesdetailWrapper ul#about_person li p{ font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#666666; margin-top:7px; line-height:18px;}
+.RidesdetailWrapper ul#about_person li p strong{ font-size:18px; color:#056899;}
+.RidesdetailWrapper ul#about_person li p .small_text{ color:#056899; font-size:14px;}
+.RidesdetailWrapper ul#about_person a{background: #eeeeee;
+                                      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2NjY2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                                      background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee 50%, #dddddd 51%, #cccccc 100%);
+                                      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(50%,#eeeeee), color-stop(51%,#dddddd), color-stop(100%,#cccccc));
+                                      background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                      background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                      background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                      background: linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+
+                                      cursor:pointer;
+                                      float:left;
+                                      border: 1px solid #cccccc;
+                                      -webkit-border-radius: 4px;
+                                      -moz-border-radius: 4px;
+                                      border-radius: 4px;
+                                      line-height: 14px;
+                                      width:80px;
+                                      margin-top:3px;
+                                      text-align: center;
+                                      text-decoration: none;
+                                      font-family:Arial, Helvetica, sans-serif;
+                                      font-size:11px;
+                                      font-weight:bold;
+                                      color: #666666;
+                                      margin-right:12px;}
+.RidesdetailWrapper ul#about_person a:hover{ background:#eeeeee;} 
+.RidesdetailWrapper .information_cantainer{ width:978px;  display:block; margin-top:40px;}
+.RidesdetailWrapper h2{ font-size:24px; color:#333333; display:block; margin-bottom:12px; font-weight:normal;}
+.RidesdetailWrapper .information_cantainer .inform_form{ border:1px solid #9ec4dc; width:924px; display:block; padding:27px; 
+
+                                                         border-radius:9px;
+                                                         -webkit-border-radius:9px;
+                                                         -ms-border-radius:9px;
+                                                         -moz-border-radius:9px;
+                                                         -o-border-radius:9px;}
+.RidesdetailWrapper .information_cantainer .inform_form fieldset{ float:left; width:300px; border:none;}
+.RidesdetailWrapper .information_cantainer .inform_form fieldset label{ display:block; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; margin-bottom:5px;}
+.RidesdetailWrapper .information_cantainer .inform_form fieldset .inform_text{ border: 2px solid #9E9D9D;
+                                                                               border-radius: 5px 5px 5px 5px;
+                                                                               -webkit-border-radius: 5px 5px 5px 5px;
+                                                                               -ms-border-radius: 5px 5px 5px 5px;
+                                                                               -moz-border-radius: 5px 5px 5px 5px;
+                                                                               -o-border-radius: 5px 5px 5px 5px;
+                                                                               box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               -webkit-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               -ms-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               -moz-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               -o-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               font-family: Arial,Helvetica,sans-serif;
+                                                                               font-size: 14px;
+                                                                               padding:8px 10px;
+                                                                               width: 230px;}
+.RidesdetailWrapper .information_cantainer .inform_form fieldset label.preferred{ float:left; margin-right:12px;}
+.RidesdetailWrapper .information_cantainer .inform_form fieldset label.preferred	.method_radiotext{ font-size:12px; font-weight:bold; cursor:pointer;}
+.RidesdetailWrapper .information_cantainer .inform_form fieldset .options{ float:left; padding-top:9px;}
+
+.RidesdetailWrapper .information_cantainer ul.triger_section{ width:420px; float:left; list-style:none;}
+.RidesdetailWrapper .information_cantainer ul.triger_section li{
+  border-radius:10px 10px 0 0;
+  -webkit-border-radius:10px 10px 0 0;
+  -ms-border-radius:10px 10px 0 0;
+  -moz-border-radius:10px 10px 0 0;
+  -o-	border-radius:10px 10px 0 0;
+
+  border-top:1px solid #9ec4dc; border-left:1px solid #9ec4dc; border-right:1px solid #9ec4dc; border-bottom:none; padding:0px 19px 0; float:left; margin-right:5px; font-family:Arial, Helvetica, sans-serif; font-size:12px; background:#eee; height:29px; line-height:28px; font-weight:bold; color:#9e9e9e; cursor:pointer;}
+.RidesdetailWrapper .information_cantainer ul.triger_section li.active{ background:#fff; height:29px; position:relative; top:1px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard{
+  border-radius:0 10px 10px 10px;
+  -webkit-border-radius:0 10px 10px 10px;
+  -ms-border-radius:0 10px 10px 10px;
+  -moz-border-radius:0 10px 10px 10px;
+  -o-border-radius:0 10px 10px 10px;
+
+  border:1px solid #9ec4dc; width:978px; display:block; min-height:300px; padding:28px 0 0 8px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard .form_row{ margin-bottom:15px; float:left; width:980px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset{ float:left; border:none; margin:0 20px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset label{display:block; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; margin-bottom:5px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset .paytext{border: 2px solid #9E9D9D;
+                                                                             border-radius: 5px 5px 5px 5px;
+                                                                             -webkit-border-radius: 5px 5px 5px 5px;
+                                                                             -ms-border-radius: 5px 5px 5px 5px;
+                                                                             -moz-border-radius: 5px 5px 5px 5px;
+                                                                             -o-border-radius: 5px 5px 5px 5px;
+                                                                             box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                             -webkit-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                             -ms-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                             -moz-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                             -o-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                             font-family: Arial,Helvetica,sans-serif;
+                                                                             font-size: 14px;
+                                                                             padding:8px 10px;
+                                                                             width: 230px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.big_row{ width:350px; float:left;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.big_row .billing_text{border: 2px solid #9E9D9D;
+                                                                                          border-radius: 5px 5px 5px 5px;
+                                                                                          -webkit-border-radius: 5px 5px 5px 5px;
+                                                                                          -ms-border-radius: 5px 5px 5px 5px;
+                                                                                          -moz-border-radius: 5px 5px 5px 5px;
+                                                                                          -o-border-radius: 5px 5px 5px 5px;
+                                                                                          box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                          -webkit-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                          -ms-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                          -moz-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                          -o-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                          font-family: Arial,Helvetica,sans-serif;
+                                                                                          font-size: 14px;
+                                                                                          padding:8px 10px;
+                                                                                          width: 325px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard  .card_types{ background:url(/assets/cards.jpg) left top no-repeat; width:222px; height:35px; float:left; margin-top:22px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.City{ width:168px; margin:0 5px 0 20px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.City .citytext{ width:144px;border: 2px solid #9E9D9D;
+                                                                                    border-radius: 5px 5px 5px 5px;
+                                                                                    -webkit-border-radius: 5px 5px 5px 5px;
+                                                                                    -ms-border-radius: 5px 5px 5px 5px;
+                                                                                    -moz-border-radius: 5px 5px 5px 5px;
+                                                                                    -o-border-radius: 5px 5px 5px 5px;
+                                                                                    box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                    -webkit-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                    -ms-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                    -moz-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                    -o-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                    font-family: Arial,Helvetica,sans-serif;
+                                                                                    font-size: 14px;
+                                                                                    padding:8px 10px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.state{ width:66px; margin:0 5px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.state .select_state{ border-radius: 5px 5px 5px 5px;
+                                                                                         -webkit-border-radius: 5px 5px 5px 5px;
+                                                                                         -ms-border-radius: 5px 5px 5px 5px;
+                                                                                         -moz-border-radius: 5px 5px 5px 5px;
+                                                                                         -o-border-radius: 5px 5px 5px 5px;
+                                                                                         box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                         -webkit-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                         -ms-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                         -moz-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                         -o-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                         font-family: Arial,Helvetica,sans-serif;
+                                                                                         background: #eeeeee;
+                                                                                         background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2NjY2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                                                                                         background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee 50%, #dddddd 51%, #cccccc 100%);
+                                                                                         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(50%,#eeeeee), color-stop(51%,#dddddd), color-stop(100%,#cccccc));
+                                                                                         background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                                                                         background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                                                                         background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                                                                         background: linear-gradient(top,  #eeeeee 0%,#eeeeee 50%,#dddddd 51%,#cccccc 100%);
+                                                                                         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.zip{ width:98px; margin:0;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.zip .ziptext{ width:74px; border: 2px solid #9E9D9D;
+                                                                                  border-radius: 5px 5px 5px 5px;
+                                                                                  -webkit-border-radius: 5px 5px 5px 5px;
+                                                                                  -ms-border-radius: 5px 5px 5px 5px;
+                                                                                  -moz-border-radius: 5px 5px 5px 5px;
+                                                                                  -o-border-radius: 5px 5px 5px 5px;
+                                                                                  box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                  -webkit-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                  -ms-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                  -moz-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                  -o-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                                  font-family: Arial,Helvetica,sans-serif;
+                                                                                  font-size: 14px;
+                                                                                  padding:8px 10px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard .other_logos{ background:url(/assets/logos.jpg) left top no-repeat; width:271px; height:46px; float:left; margin:17px 0 0 14px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset label .small_date{ font-size:12px;  font-weight:normal;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset .ccv_code{ float:right; width:74px; border: 2px solid #9E9D9D;
+                                                                               border-radius: 5px 5px 5px 5px;
+                                                                               -webkit-border-radius: 5px 5px 5px 5px;
+                                                                               -ms-border-radius: 5px 5px 5px 5px;
+                                                                               -moz-border-radius: 5px 5px 5px 5px;
+                                                                               -o-border-radius: 5px 5px 5px 5px;
+                                                                               box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               -webkit-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               -ms-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               -moz-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               -o-box-shadow: 0 2px 3px #9E9D9D inset;
+                                                                               font-family: Arial,Helvetica,sans-serif;
+                                                                               font-size: 14px;
+                                                                               padding:8px 10px; margin-left:5px; color:#999999;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.check_box{ float:left; margin-top:38px;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset.check_box label{ cursor:pointer;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset .save_card{ font-size:12px; color:#000;
+                                                                                font-family:Arial, Helvetica, sans-serif;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset .submit{ cursor:pointer;
+                                                                             display: block;
+                                                                             border: 1px solid #b75f00;
+                                                                             -webkit-border-radius: 4px;
+                                                                             -moz-border-radius: 4px;
+                                                                             border-radius: 4px;
+                                                                             height: 37px;
+                                                                             line-height: 37px;
+                                                                             text-align: center;
+                                                                             padding:0 12px;
+                                                                             text-decoration: none;
+                                                                             font-family:Arial, Helvetica, sans-serif;
+                                                                             font-size:18px;
+                                                                             font-weight:bold;
+                                                                             color: #000;
+                                                                             background: #ffca00; /* Old browsers */
+                                                                             background: -moz-linear-gradient(top, #ffca00 0%, #ffa200 50%, #ff8400 51%, #ff9500 100%); /* FF3.6+ */
+                                                                             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffca00), color-stop(50%,#ffa200), color-stop(51%,#ff8400), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+                                                                             background: -webkit-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+                                                                             background: -o-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Opera 11.10+ */
+                                                                             background: -ms-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* IE10+ */
+                                                                             background: linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* W3C */
+                                                                             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffca00', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+                                                                             -webkit-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                                                             -moz-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                                                             box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                                                             -webkit-text-shadow: 0 1px 0 #FFCF69;
+                                                                             -ms-text-shadow: 0 1px 0 #FFCF69;
+                                                                             -moz-text-shadow: 0 1px 0 #FFCF69;
+                                                                             -o-text-shadow: 0 1px 0 #FFCF69;
+                                                                             text-shadow: 0 1px 0 #FFCF69;
+}
+.RidesdetailWrapper .information_cantainer .pay_creditcard fieldset .submit:hover {
+  background: #ffd432; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffd432 0%, #ffb431 50%, #ffa916 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd432), color-stop(50%,#ffb431), color-stop(51%,#ffa916), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd432', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+}
+.RidesdetailWrapper .information_cantainer .pay_creditcard .form_row p{ font-size:12px; font-family:Arial, Helvetica, sans-serif; line-height:40px; font-style:italic;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard .form_row p a{ color:#056899;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard  fieldset.paypal_area{ width:980px !important; display:block;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard  fieldset.paypal_area .paypal_feild{ font-size:12px; color:#767676; width:662px; padding:0 10px; display:block; line-height:33px; height:33px; border:1px solid #c7c7c7;}
+.RidesdetailWrapper .information_cantainer .pay_creditcard  p.paypal_text{ background:url(/assets/paypal.jpg) left top no-repeat; padding-left:222px; height:80px; font-size:13px; line-height:19px; color:#606060; float:left; margin:56px 0 56px 20px;}
+.expires{ float:left;}
+
+.trip .tooltip {
+  display:none;
+  background: rgba(255,255,255,.9);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  -moz-box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  padding:10px 0px 10px 0px;
+
+  font-size:11px;
+  color:#fff;
+  border: 2px solid #336699;
+
+}
+.trip .tooltip p{color: #696969;
+                 font-family: Arial,Helvetica,sans-serif;
+                 font-size: 13px;
+                 line-height: 17px;
+                 margin: 0 17px;}
+
+.trip .tooltip .TooltipArrow {
+  background: url("/assets/sp_sprites_24.png") no-repeat scroll -175px -10px transparent;
+  bottom: -13px;
+  display: block;
+  height: 11px;
+  left: 79px;
+  position: absolute;
+  text-indent: -9999px;
+  width: 23px;
+}
+.inform_form .tooltip {
+  display:none;
+  background: rgba(255,255,255,.9);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  -moz-box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  box-shadow: 0 0 5px 2px rgba(0,45,89,.5);
+  padding:10px 0px 10px 0px;
+
+  font-size:11px;
+  color:#fff;
+  border: 2px solid #336699;
+
+}
+.inform_form .tooltip p{color: #696969;
+                        font-family: Arial,Helvetica,sans-serif;
+                        font-size: 13px;
+                        line-height: 17px;
+                        margin: 0 17px;}
+
+.inform_form .tooltip .TooltipArrow {
+  background: url("/assets/sp_sprites_24.png") no-repeat scroll -175px -10px transparent;
+  bottom: -13px;
+  display: block;
+  height: 11px;
+  left: 145px;
+  position: absolute;
+  text-indent: -9999px;
+  width: 23px;
+}
+
+
+/*feedback page */
+.RidesdetailWrapper .book_ride{ padding:15px 30px 2px; 30px; float:left;}
+.trip_detail fieldset{ width:285px; float:left; margin-bottom:15px;}
+.trip_detail fieldset label{ font-size:16px; font-family:Arial, Helvetica, sans-serif; display:block; color:#006699; font-weight:bold; margin-bottom:5px;}
+.trip_detail p{ float:left; margin-left:11px;}
+.trip_detail p a{ float:left; font-size:14px; font-style:italic; margin-bottom:10px; font-weight:bold;}
+.trip_detail p .total{ font:20px; font-weight:bold; color:#333333; background:url(/assets/ques_mark.gif) right center no-repeat; padding-right:20px;}
+
+.trip_detail fieldset .submit{ cursor:pointer;
+                               display: block;
+                               border: 1px solid #b75f00;
+                               -webkit-border-radius: 4px;
+                               -moz-border-radius: 4px;
+                               border-radius: 4px;
+                               height:58px;
+                               line-height: 58px;
+                               text-align: center;
+                               width: 402px;
+                               text-decoration: none;
+                               font-family:Arial, Helvetica, sans-serif;
+                               font-size:27px;
+                               font-weight:bold;
+                               color: #000;
+                               background: #ffca00; /* Old browsers */
+                               background: -moz-linear-gradient(top, #ffca00 0%, #ffa200 50%, #ff8400 51%, #ff9500 100%); /* FF3.6+ */
+                               background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffca00), color-stop(50%,#ffa200), color-stop(51%,#ff8400), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+                               background: -webkit-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+                               background: -o-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Opera 11.10+ */
+                               background: -ms-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* IE10+ */
+                               background: linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* W3C */
+                               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffca00', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+                               -webkit-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                               -moz-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                               box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                               -webkit-text-shadow: 0 1px 0 #FFCF69;
+                               -ms-text-shadow: 0 1px 0 #FFCF69;
+                               -moz-text-shadow: 0 1px 0 #FFCF69;
+                               -o-text-shadow: 0 1px 0 #FFCF69;
+                               text-shadow: 0 1px 0 #FFCF69;
+}
+
+.trip_detail fieldset .submit:hover {
+  background: #ffd432; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffd432 0%, #ffb431 50%, #ffa916 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd432), color-stop(50%,#ffb431), color-stop(51%,#ffa916), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd432', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+}
+
+.trip_detail p .total{ float:left;}
+.information_cantainer h3{ font-size:18px; font-family:Arial, Helvetica, sans-serifl; display:block; color:#333333l; font-weight:normal; margin-bottom:25px;}
+.information_cantainer ul#reviews{ width:590px; display:block; list-style:none;}
+.information_cantainer ul#reviews li{ float:left; margin:10px 0;}
+.information_cantainer ul#reviews li .person_image {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 1px 1px 3px #CACACA;
+  float: left;
+  margin-right: 7px;
+  padding: 3px 3px 1px;
+}
+.information_cantainer ul#reviews li .feed_text{ float:left; width:510px;}
+.information_cantainer ul#reviews li p{ font-size:14px; float:left; line-height:16px; color:#333333;}
+.information_cantainer ul#reviews li h4{ color:#056899; font-size:14px; font-weight:bold; display:block; font-family:Arial, Helvetica, sans-serif; padding:4px 0;}
+.information_cantainer ul#reviews li h4 .thumb{ color:#666666; background:url(/assets/thumb.jpg) right center no-repeat; padding-right:18px; }
+.information_cantainer ul#reviews li p{}
+
+/*messages page */
+
+
+.messagesWrapper {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  float:left; width:482px; margin-top:55px;
+  border:1px solid #9ec4dc;
+}
+.messagesWrapper .ridesdetail_heading{width: 482px; 	border: 1px solid #069; position:relative;
+                                      background: #069;
+                                      background: -webkit-gradient(linear, left top, left bottom, from(#005985), to(#006699));
+                                      background: -moz-linear-gradient(top,  #005985,  #006699);
+                                      -webkit-border-radius: 5px 5px 0 0;
+                                      -moz-border-radius: 5px 5px 0 0;
+                                      border-radius: 5px 5px 0 0;}
+.messagesWrapper .ridesdetail_heading h3 {
+  color: #fff; font-size: 16px; padding: 7px 9px; font-family:Arial, Helvetica, sans-serif; float:left;
+}
+.messagesWrapper ul{ list-style:none; display:block; padding-top:20px; }
+.messagesWrapper ul li{ width:440px; display:block; padding-left:15px; padding-top:10px;}
+.messagesWrapper ul li.firstchild{ padding-top:0;}
+.messagesWrapper ul li:hover{background:#fff5ca 
+                               url(/assets/feedback_arrow.png) 400px center no-repeat; display:block;}
+.messagesWrapper ul li .inbox_section{background: #e8f3ff;
+                                      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U4ZjNmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkNGU5ZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                                      background: -moz-linear-gradient(top,  #e8f3ff 0%, #d4e9ff 100%);
+                                      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e8f3ff), color-stop(100%,#d4e9ff));
+                                      background: -webkit-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                      background: -o-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                      background: -ms-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                      background: linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8f3ff', endColorstr='#d4e9ff',GradientType=0 );
+
+                                      border-radius:4px;
+                                      -webkit-border-radius:4px;
+                                      -ms-border-radius:4px;
+                                      -moz-border-radius:4px;
+                                      -o-border-radius:4px;
+                                      width:98px; border:1px solid #9ec4dc; min-height:100px; float:left;
+}
+.messagesWrapper ul li .inbox_section .person_image {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 1px 1px 3px #CACACA;
+  float: left;
+  margin:11px 15px 0 15px;
+  padding: 3px 3px 1px;
+
+}
+.messagesWrapper ul li .inbox_section a{ font-size:11px; text-align:center; float:left; width:100%; text-decoration:none; line-height:30px;}
+.messagesWrapper ul li .find_out{ float:left; position:relative; width:295px; margin-left:15px;}
+.messagesWrapper ul li .find_out .place_date_contant{ position:absolute; top:10px; right:21px; font-size:12px; color:#717171; font-family:Arial, Helvetica, sans-serif; font-weight:bold; float:left; }
+.messagesWrapper ul li .find_out .place_date_contant a{
+  background:url(/assets/link_icon.png) right center no-repeat;
+  width:21px;
+  height:21px;
+  float:right;
+  position:absolute;
+  top:-11px;
+  margin-left:5px;
+  left: 133px;
+}
+.messagesWrapper ul li .find_out .index_main_cout{ display:block; padding-top:39px;}
+.messagesWrapper ul li .find_out .index_main_cout h3{ font-size:15px; font-weight:bold; color:#06699b;}
+.messagesWrapper ul li .find_out .index_main_cout .timing{ font-size:12px; font-weight:bold; color:#717171; display:block;}
+
+.message_dialogue{
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  float:right; width:482px; margin-top:55px;
+  border:1px solid #9ec4dc;
+}
+.message_dialogue .ridesdetail_heading{width: 481px; 	border: 1px solid #069; position:relative;
+                                       background: #069;
+                                       background: -webkit-gradient(linear, left top, left bottom, from(#005985), to(#006699));
+                                       background: -moz-linear-gradient(top,  #005985,  #006699);
+                                       -webkit-border-radius: 5px 5px 0 0;
+                                       -moz-border-radius: 5px 5px 0 0;
+                                       border-radius: 5px 5px 0 0;}
+.message_dialogue .ridesdetail_heading h3 {
+  color: #fff; font-size: 16px; padding: 7px 9px; font-family:Arial, Helvetica, sans-serif; float:left;
+}
+
+.message_dialogue .dialogue_count{ display:block; width:435px; padding:14px 0px 3px 17px;}
+
+.message_dialogue .dialogue_count .inbox_section{
+  width:75px; float:left;
+}
+.message_dialogue .dialogue_count .odd_img{ float:right !important;}
+.message_dialogue .dialogue_count .inbox_section .person_image {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 1px 1px 3px #CACACA;
+  float: left;
+  padding: 3px 3px 1px;
+
+}
+.message_dialogue .dialogue_count .inbox_section a {
+  font-size: 11px;
+  line-height: 20px;
+  text-align: center; text-decoration:none; float:left; width:100%;
+}
+.message_dialogue .dialogue_count .even {
+  background: -moz-linear-gradient(center top , #E8F3FF 0%, #D4E9FF 100%) repeat scroll 0 0 transparent;
+  border: 1px solid #9EC4DC;
+  border-radius: 4px 4px 4px 4px;
+  float: right;
+  height: 80px;
+  width: 320px; position:relative; margin-right:11px; display:table;
+}
+.message_dialogue .dialogue_count .odd{ float:left !important; display:table;}
+.message_dialogue .dialogue_count .even .dialogue_arrow{ background:url(/assets/dialogue_arrow.gif) no-repeat; width:21px; height:20px; display:block; position:absolute; top:30px; left:-20px;}
+.message_dialogue .dialogue_count .even .odd_arrow{ background:url(/assets/odd_arrow.gif) no-repeat; width:21px; height:20px; display:block; position:absolute; top:30px; right:-20px;}
+.message_dialogue .dialogue_count  p{ display:table-cell; font-size:12px; color:#717171; font-weight:bold; line-height:16px; padding:20px; font-family:Arial, Helvetica, sans-serif; vertical-align:middle;}
+.message_dialogue .dialogue_count .vertical_center{ display:table-cell; width:100%; height:100%; }
+.message_dialogue .dialogue_count .vertical_center *{ vertical-align:middle;}
+.message_dialogue .messages_submit{ float:right;
+                                    border: 1px solid #b75f00;
+                                    -webkit-border-radius: 4px;
+                                    -moz-border-radius: 4px;
+                                    border-radius: 4px;
+                                    height:24px;
+                                    line-height:24px;
+                                    text-align: center;
+                                    width: 77px;
+                                    text-decoration: none;
+                                    font-family:Arial, Helvetica, sans-serif;
+                                    font-size:14px;
+                                    font-weight:bold;
+                                    margin-top:10px;
+                                    color: #000;
+                                    margin-right:112px;
+                                    background: #ffca00; /* Old browsers */
+                                    background: -moz-linear-gradient(top, #ffca00 0%, #ffa200 50%, #ff8400 51%, #ff9500 100%); /* FF3.6+ */
+                                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffca00), color-stop(50%,#ffa200), color-stop(51%,#ff8400), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+                                    background: -webkit-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+                                    background: -o-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Opera 11.10+ */
+                                    background: -ms-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* IE10+ */
+                                    background: linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* W3C */
+                                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffca00', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+                                    -webkit-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                    -moz-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                    box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                    -webkit-text-shadow: 0 1px 0 #FFCF69;
+                                    -ms-text-shadow: 0 1px 0 #FFCF69;
+                                    -moz-text-shadow: 0 1px 0 #FFCF69;
+                                    -o-text-shadow: 0 1px 0 #FFCF69;
+                                    text-shadow: 0 1px 0 #FFCF69;}
+.message_dialogue .messages_submit:hover {
+  background: #ffd432; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffd432 0%, #ffb431 50%, #ffa916 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd432), color-stop(50%,#ffb431), color-stop(51%,#ffa916), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd432', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+}
+
+/* feedback page */
+
+
+
+.feedbackWrapper {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  float:left; width:482px; margin-top:55px;
+  border:1px solid #9ec4dc;
+}
+.feedbackWrapper .ridesdetail_heading{width: 482px; 	border: 1px solid #069; position:relative;
+                                      background: #069;
+                                      background: -webkit-gradient(linear, left top, left bottom, from(#005985), to(#006699));
+                                      background: -moz-linear-gradient(top,  #005985,  #006699);
+                                      -webkit-border-radius: 5px 5px 0 0;
+                                      -moz-border-radius: 5px 5px 0 0;
+                                      border-radius: 5px 5px 0 0;}
+.feedbackWrapper .ridesdetail_heading h3 {
+  color: #fff; font-size: 16px; padding: 7px 9px; font-family:Arial, Helvetica, sans-serif; float:left;
+}
+.feedbackWrapper .feedbackcolom{ width:440px; display:block; padding-left:15px; padding-top:10px; position:relative;}
+.feedbackWrapper .feedbackcolom:hover{background:#fff5ca url(/assets/feedback_arrow.png) 420px center no-repeat;}
+.feedbackWrapper .firstchild{ padding-top:20px !important;}
+.feedbackWrapper .feedbackcolom .place_date_contant{ position:absolute; top:18px; right:34px; font-size:12px; color:#717171; font-family:Arial, Helvetica, sans-serif; font-weight:bold; float:left; }
+.feedbackWrapper .feedbackcolom  .place_date_contant a{
+  background:url(/assets/link_icon.png) right center no-repeat;
+  width:21px;
+  height:21px;
+  float:right;
+  position:absolute;
+  top:-11px;
+  margin-left:5px;
+  left: 72px;
+}
+.feedbackWrapper .feedbackcolom .inbox_section{background: #e8f3ff;
+                                               background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U4ZjNmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkNGU5ZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                                               background: -moz-linear-gradient(top,  #e8f3ff 0%, #d4e9ff 100%);
+                                               background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e8f3ff), color-stop(100%,#d4e9ff));
+                                               background: -webkit-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                               background: -o-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                               background: -ms-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                               background: linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8f3ff', endColorstr='#d4e9ff',GradientType=0 );
+
+                                               border-radius:4px;
+                                               -webkit-border-radius:4px;
+                                               -ms-border-radius:4px;
+                                               -moz-border-radius:4px;
+                                               -o-border-radius:4px;
+                                               width:98px; border:1px solid #9ec4dc; min-height:100px;  float:left;
+}
+.feedbackWrapper .feedbackcolom  .big_section{ width:188px !important;}
+.feedbackWrapper .feedbackcolom  .big_section .section{ float:left; width:70px; margin:11px 12px 0}
+.feedbackWrapper .feedbackcolom .inbox_section .person_image {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #CCCCCC;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  -ms-border-radius: 4px 4px 4px 4px;
+  -moz-border-radius: 4px 4px 4px 4px;
+  -o-border-radius: 4px 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 1px 1px 3px #CACACA;
+  -webkit-box-shadow: 1px 1px 3px #CACACA;
+  -ms-box-shadow: 1px 1px 3px #CACACA;
+  -moz-box-shadow: 1px 1px 3px #CACACA;
+  -o-box-shadow: 1px 1px 3px #CACACA;
+  float: left;
+  padding: 3px 3px 1px;
+
+}
+
+.feedbackWrapper .feedbackcolom .find_out{ padding-right:50px; float:right; padding-top:35px;}
+
+.feedbackWrapper .feedbackcolom .inbox_section .one_person{ margin:11px 15px 0 !important;}
+.feedbackWrapper .feedbackcolom .inbox_section a{ font-size:11px; text-align:center; float:left; width:100%; text-decoration:none; line-height:30px;}
+.feedbackWrapper .feedbackcolom .index_main_cout h3 {
+  color: #06699B;
+  font-size: 15px;
+  font-weight: bold; font-family:Arial, Helvetica, sans-serif;
+}
+.feedbackWrapper .feedbackcolom .find_out{ padding-right:50px; float:right; padding-top:35px;}
+.feedbackWrapper .feedbackcolom  .timing{ font-size:12px; font-weight:bold; color:#06699b; display:block; line-height:18px;}
+.message_dialogue .feedback_big_box{ width:440px; float:left; border-bottom:1px solid #9ec4dc; margin:0 15px; padding-bottom:35px;}
+.message_dialogue .feedback_big_box .person_container{ margin-top:20px; float:left;;}
+.message_dialogue .feedback_big_box .person_container .inbox_section{background: #e8f3ff;
+                                                                     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U4ZjNmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkNGU5ZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                                                                     background: -moz-linear-gradient(top,  #e8f3ff 0%, #d4e9ff 100%);
+                                                                     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e8f3ff), color-stop(100%,#d4e9ff));
+                                                                     background: -webkit-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                                                     background: -o-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                                                     background: -ms-linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                                                     background: linear-gradient(top,  #e8f3ff 0%,#d4e9ff 100%);
+                                                                     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8f3ff', endColorstr='#d4e9ff',GradientType=0 );
+
+                                                                     border-radius:4px;
+                                                                     -webkit-border-radius:4px;
+                                                                     -ms-border-radius:4px;
+                                                                     -moz-border-radius:4px;
+                                                                     -o-border-radius:4px;
+                                                                     width:98px; border:1px solid #9ec4dc; min-height:100px;  float:left;
+}
+.message_dialogue .feedback_big_box .person_container .inbox_section .person_image {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #CCCCCC;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  -ms-border-radius: 4px 4px 4px 4px;
+  -moz-border-radius: 4px 4px 4px 4px;
+  -o-border-radius: 4px 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 1px 1px 3px #CACACA;
+  -webkit-box-shadow: 1px 1px 3px #CACACA;
+  -ms-box-shadow: 1px 1px 3px #CACACA;
+  -moz-box-shadow: 1px 1px 3px #CACACA;
+  -o-box-shadow: 1px 1px 3px #CACACA;
+  float: left;
+  padding: 3px 3px 1px;
+  margin:11px 15px 0;
+}
+.message_dialogue .feedback_big_box .person_container .inbox_section a{ font-size:11px; text-align:center; float:left; width:100%; line-height:30px; text-decoration:none;}
+.target{ background:url(/assets/target.gif) left center no-repeat; width:16px; height:7px; float:left; margin:55px 18px 0 18px;}
+.message_dialogue .feedback_big_box .person_container .rating{ width:75px; float:left; margin-left:18px;}
+.message_dialogue .feedback_big_box .person_container .rating .rating_icon{ float:left; margin-top:40px;}
+.message_dialogue .feedback_big_box .person_container .rating  .rating_text{ font-size:12px; color:#333333; font-family:Arial, Helvetica, sans-serif; line-height:26px;}
+.message_dialogue .feedback_big_box .person_container .feedback_area{ float:left; width:300px; border:2px solid #9E9D9D; border-radius:5px;
+                                                                      -webkit-border-radius:5px;
+                                                                      -ms-border-radius:5px;
+                                                                      -moz-border-radius:5px;
+                                                                      -o-border-radius:5px;
+                                                                      -o-box-shadow:0 2px 3px #9E9D9D inset;
+                                                                      -moz-box-shadow:0 2px 3px #9E9D9D inset;
+                                                                      -ms-box-shadow:0 2px 3px #9E9D9D inset;
+                                                                      -webkit-box-shadow:0 2px 3px #9E9D9D inset;
+                                                                      box-shadow:0 2px 3px #9E9D9D inset;
+                                                                      font-family:Arial, Helvetica, sans-serif; font-size:14px; padding:10px; color:#333333; resize:none; min-height:89px;}
+.message_dialogue .feedback_big_box .person_container .submit{ float:right;
+                                                               border: 1px solid #b75f00;
+                                                               -webkit-border-radius: 4px;
+                                                               -moz-border-radius: 4px;
+                                                               border-radius: 4px;
+                                                               height:24px;
+                                                               line-height:24px;
+                                                               text-align: center;
+                                                               width: 77px;
+                                                               text-decoration: none;
+                                                               font-family:Arial, Helvetica, sans-serif;
+                                                               font-size:14px;
+                                                               font-weight:bold;
+                                                               margin-top:52px;
+                                                               margin-left:18px;
+                                                               color: #000;
+                                                               margin-right:15px;
+                                                               background: #ffca00; /* Old browsers */
+                                                               background: -moz-linear-gradient(top, #ffca00 0%, #ffa200 50%, #ff8400 51%, #ff9500 100%); /* FF3.6+ */
+                                                               background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffca00), color-stop(50%,#ffa200), color-stop(51%,#ff8400), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+                                                               background: -webkit-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+                                                               background: -o-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* Opera 11.10+ */
+                                                               background: -ms-linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* IE10+ */
+                                                               background: linear-gradient(top, #ffca00 0%,#ffa200 50%,#ff8400 51%,#ff9500 100%); /* W3C */
+                                                               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffca00', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+                                                               -webkit-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                                               -moz-box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                                               box-shadow: 0 1px 0 #fff2bd inset, 0 1px 2px rgba(0,0,0,.25);
+                                                               -webkit-text-shadow: 0 1px 0 #FFCF69;
+                                                               -ms-text-shadow: 0 1px 0 #FFCF69;
+                                                               -moz-text-shadow: 0 1px 0 #FFCF69;
+                                                               -o-text-shadow: 0 1px 0 #FFCF69;
+                                                               text-shadow: 0 1px 0 #FFCF69;}
+.message_dialogue .feedback_big_box .person_container .submit:hover {
+  background: #ffd432; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffd432 0%, #ffb431 50%, #ffa916 51%, #ff9500 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd432), color-stop(50%,#ffb431), color-stop(51%,#ffa916), color-stop(100%,#ff9500)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* IE10+ */
+  background: linear-gradient(top, #ffd432 0%,#ffb431 50%,#ffa916 51%,#ff9500 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd432', endColorstr='#ff9500',GradientType=0 ); /* IE6-9 */
+}
+hr{ width:430px; margin:0; margin-top:10px;  height:1px; border:none; background:#9ec4dc; display:block;}
+.other_feedback{ margin-top:20px !important;}
+.message_dialogue .feedback_big_box .person_container p{ float:left; font-size:12px; font-family:Arial, Helvetica, sans-serif; color:#333333; background:#f5f5f5; width:316px; height:55px; border-radius:2px;
+                                                         -webkit-border-radius:2px;
+                                                         -ms-border-radius:2px;
+                                                         -moz-border-radius:2px;
+                                                         -o-border-radius:2px;
+                                                         padding:21px 0 0 21px;}
+.vertical_center{ display:table-cell; width:100%; height:100%; }
+.vertical_center *{ vertical-align:middle;}

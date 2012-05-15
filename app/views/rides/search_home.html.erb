@@ -1,244 +1,67 @@
-<%= javascript_include_tag "jQuery.autoscroll.1.01"%>
 <script type="text/javascript">
+
   $(document).ready(function() {
-
-      if(opener){
-          window.close();
-          opener.location.reload(true);
-      }
-    $('#ride_to_location_id').change(function() {                               // here chech to and from location are not from the same group
-      var A = [1,2,3];
-      var i = 0;
-      var j =0;
-      var k=0;
-      var IsFound = false;
-      var IsFound2 = false;
-
-     if($(this).val() != "" && $('#ride_from_location_id').val()!=""){
-      while(i< A.length){
-        if($('#ride_to_location_id').val() == A[i]){
-          IsFound = true;
-          break;
-        }
-          i = i+1;
-      }
-      while(k< A.length){
-         if($('#ride_from_location_id').val() == A[k]){
-           IsFound2 = true;
-           break;
-         }
-         k = k+1;
-       }
-       if(IsFound){
-        while(j<A.length){
-        if ($('#ride_from_location_id').val() <= A[j]) {
-          $(".city-option-same").show();
-          $('#ride_to_location_id').addClass("validation-error");
-          $('#ride_from_location_id').addClass("validation-error");
-          $("#btn-search").attr("disabled", "disabled");
-          return false;
-        }
-        else {
-          $(".city-option-same").hide();
-          $('#ride_to_location_id').removeClass("validation-error");
-          $('#ride_from_location_id').removeClass("validation-error");
-          $("#btn-search").removeAttr("disabled");
-        }
-        j = j+1; }
-       }
-      else{
-        if (!IsFound2) {
-          $(".city-option-same").show();
-          $('#ride_to_location_id').addClass("validation-error");
-          $('#ride_from_location_id').addClass("validation-error");
-          $("#btn-search").attr("disabled", "disabled");
-            return false;
-        }
-        else {
-          $(".city-option-same").hide();
-          $('#ride_to_location_id').removeClass("validation-error");
-          $('#ride_from_location_id').removeClass("validation-error");
-          $("#btn-search").removeAttr("disabled");
-        }
-      }
-     }
-    });
-
-
-    $('#ride_from_location_id').change(function() {                             // here check to and from location are not from the same group
-
-      var A = [1,2,3];
-      var i = 0;
-      var j =0;
-      var k=0;
-      var IsFound = false;
-      var IsFound2 = false;
-
-      if($(this).val() != "" && $('#ride_to_location_id').val()!="" ){
-       while(i< A.length){
-        if($('#ride_from_location_id').val() == A[i]){
-          IsFound = true;
-          break;
-         }
-        i = i+1;
-       }
-       while(k< A.length){
-        if($('#ride_to_location_id').val() == A[k]){
-          IsFound2 = true;
-          break;
-        }
-       k = k+1;
-      }
-
-      if(IsFound){
-       while(j<A.length){
-        if ($('#ride_to_location_id').val() <= A[j]) {
-          $(".city-option-same").show();
-          $('#ride_to_location_id').addClass("validation-error");
-          $('#ride_from_location_id').addClass("validation-error");
-          $("#btn-search").attr("disabled", "disabled");
-        }
-        else {
-          $(".city-option-same").hide();
-          $('#ride_to_location_id').removeClass("validation-error");
-          $('#ride_from_location_id').removeClass("validation-error");
-          $("#btn-search").removeAttr("disabled");
-        }
-        j = j+1;
-       }
-      }
-      else{
-       if (!IsFound2) {
-          $(".city-option-same").show();
-          $('#ride_to_location_id').addClass("validation-error");
-          $('#ride_from_location_id').addClass("validation-error");
-          $("#btn-search").attr("disabled", "disabled");
-        }
-        else {
-          $(".city-option-same").hide();
-          $('#ride_to_location_id').removeClass("validation-error");
-          $('#ride_from_location_id').removeClass("validation-error");
-          $("#btn-search").removeAttr("disabled");
-        }
-      }
-    
-  
-
-
-      }});
-
-      $( "#ride_departure" ).datepicker({
-      dateFormat: "yy-mm-dd"             ,
-          minDate: 0, maxDate: "+1Y"
-    });
-var scrollTime = 20000;
-	function scrollup(){                                                          // jquery auto scroll for latest rides
-			$('.ride-scroll').animate({
-		    scrollTop: $('.ride-scroll').get(0).newScrollHeight
-		},-100, 'linear', function(){scroll();});
-
-		
-	}
-	function scroll(){
-		$('.ride-scroll').animate({
-	    scrollTop: $('.ride-scroll').get(0).scrollHeight
-	}, scrollTime, 'linear', function(){scrollup();});
-	}
-
-    $('.ride-scroll').animate({
-    scrollTop: $('.ride-scroll').get(0).scrollHeight
-}, scrollTime, 'linear', function(){scrollup();});
-
-
+  $(".newsticker-jcarousellite").jCarouselLite({
+  vertical: true,
+  hoverPause:true,
+  visible: 3,
+  auto:500,
+  speed:1000
+  });
   });
 </script>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {                                                   // facebook jssdk for like button
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=365401603490972";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<div class="clear"></div>
 
-<div id="static_splash2">
 
-  <div id="header_wrap" style="margin-top: 0px;">
-    <div id="header">
-        <%= link_to image_tag("shareshuttle_logo_sm.png", :class=>"left"), root_path %>
-      <ul id="top_nav">
-        <li>
-          <a id="post_ride" class="button post km_click_event_by_text" href="<%= new_ride_path %>">Post a ride</a>
-        </li>
-      </ul>
+<section class="Main">
+  <div class="Splash">
+    <div class="CycleWrapper">
+      <div class="CycleInnerWrapper">
+        <div class="Background1">&nbsp;</div>
+        <div class="Background2">&nbsp;</div>
+        <div class="Background3">&nbsp;</div>
+        <div class="Background4">&nbsp;</div>
+      </div>
+    </div> <!-- CycleWrapper -->
+    <h1>Share a Direct Ride to the Airport.</h1>
+    <h2>Find others from your neighborhood and take a taxi or black car together.</h2>
+    <a href="/footers/how_it_works" class="HowItWorks">How it works &raquo;</a>
+    <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
+      <fieldset>
+        <%= f.select :from_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {},:style => "width:310px", :class=>"chzn-select"%>
+        <a class="LocationSwitch">Switch</a>
+        <%= f.select :to_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {},:style => "width:310px", :class=>"chzn-select"%>
+        <%= hidden_field_tag :search_posted, "true" %>
+        <%= f.submit "View Rides Now", :class => "SplashButton", :id => "btn-search"%>
+      </fieldset>
+    <% end %>
+
+  </div> <!-- Splash -->
+  <section class="FacebookTestimonials">
+    <div class="fb-like" data-href="http://www.shairporter.com" data-send="false" data-width="465" data-show-faces="true" data-font="arial"></div> <!-- Facebook Like Widget -->
+
+    <div class="Testimonial">
     </div>
-  </div>
-  <div class="stagewrap" style="background: #0D77B6;" ></div>
-  <div id="content_wrapper" class="new_style">
-    <div id="content_container" class="clearfix">
-      <div id="content">
-        <div id="routes">
-          <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>                                 <!-- form for search rides w.r.t to and from location -->
-            <div class="box">
-              <div class="text_input">
-                 <%= hidden_field_tag :search_posted, "true" %>
-          <label for="search_s" class="pin start"></label>
-                 <%= f.select :from_location_id, Location.all.collect {|p| [ p.name, p.id ] }, {:include_blank => "--- select from ---"}, :style => "width:275px"%>
-               </div>
-              <div class="text_input">
-                <label for="search_e" class="pin end"></label>
-                <%= f.select :to_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {:include_blank => "--- select to ---"}, :style => "width:275px"%>
-              </div>
-               <%= f.submit "Search", :class => "button confirm clickaway_confirm", :id => "btn-search"%>
-            </div>
-        
 
-            <div class="heading">
-              <h1 style="color:white;background: transparent;">Share a Direct Ride<br /></h1>
-              <p>
-                Find others from your neighborhood <br/>and take a car together.<br />
-              </p>
-            </div>
+
+  </section> <!-- FacebookTestimonials -->
+  <section class="RecentActivity">
+    <h2>Recent Activity</h2>
+    <div class="RaTicker">
+      <div class="newsticker-jcarousellite">
+        <ul>
+          <% @rides.each do |ride| %>
+            <li>
+              <a href="<%= new_ride_ride_participant_path(ride) %>" class="UserIcon_50x50"><%= image_tag ride.owner.user_image_url %></a>
+              <a href="<%= new_ride_ride_participant_path(ride) %>" class="Activity"><%= ride.owner.first_name %> just posted a new ride!</a>
+              <span class="Notice"><%= (ride.remaining_seats > 0)? ('just matched!'):('Sold out') %></span>
+              <span class="Locations"><%= ride.from_location && ride.from_location.name %> to <%= ride.to_location && ride.to_location.name %></span>
+            </li>
           <% end %>
-        </div>
-        <div class="city-option-same" style="font-weight: bold;color: red; display: none"> Same Group Select </div>
+        </ul>
       </div>
-      <div id="content">
-        <div id="results" class="subsection">
-          <div class="ride_list rides">
-            <h3 class="headline first">
-              Latest Rides
-            </h3>
-            <ul class="non-blue-h1 ride-scroll"><%@rides.each do |ride| %>      <!-- here fetched latest 20 rides in auto scroller -->
-              <li style="">
-                  <a class="km_click_event_by_href" href="<%= new_ride_ride_participant_path(ride) %>">
-                    <div class="price_box"> 
-                      <% if ride.remaining_seats > 0 %>
-                      <h1><%= number_to_currency(ride.per_price_seat)%></h1>
-                      <p>per seat</p>
-                      <% else %>
-                        <h1>Sold out</h1>
-                      <% end %>
-                    </div>
-                    <%= image_tag ride.owner.user_image_url %>
-                    <h1><%= ride.from_location && ride.from_location.name %><span class="trip_type"></span><%= ride.to_location && ride.to_location.name %></h1>
-                    <p>
-                      <span class="driver"></span>
-                      <% if ride.remaining_seats > 0 %>
-                      <%= ride.owner.first_name%> / <%= ride.remaining_seats %> seats left
-                      <% else %>
-                        Sold out
-                      <% end %>
-                    </p>
-                  </a>
-                </li>
-              <%end%>
-            </ul>
-          </div>
-                      <div style="float: left; margin-top: 50px; padding-left: 650px;"><div class="fb-like" data-href="http://apps.facebook.com/splaunch/" data-send="false" data-width="450" data-show-faces="true" data-font="arial"></div></div>
-        </div>
-      </div>
+      <% if @rides.blank? %>
+        <span class="Notice">No recent activity found...</span>
+      <% end %>
     </div>
-  </div>
-</div>
+  </section> <!-- RecentActivity -->
+</section>
