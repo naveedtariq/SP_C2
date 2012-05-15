@@ -13,8 +13,9 @@ class MessagesController < ApplicationController
       cookies[:contact] = nil                                                   # assign contact cookies nil
       UserMailer.inbox_message_email(current_user, @ride.owner, @message).deliver   # Mail sent to the owner of ride for message created by current user
       flash[:notice] = "Message Sent"
-      return redirect_to inbox_users_path(iframe: ride_message_path(@ride, req_id: params[:req_id])) if params[:contact_me]
-      redirect_to ride_message_path(@ride, req_id: params[:req_id])
+     #return redirect_to inbox_users_path(iframe: ride_message_path(@ride, req_id: params[:req_id])) if params[:contact_me]
+      #redirect_to ride_message_path(@ride, req_id: params[:req_id])
+      redirect_to :back
     else
       render :action => 'new'
     end

@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     ride_attributes.delete("created_at")
     ride_attributes.delete("updated_at")
 
-    cookies[:ride] = "#{ride_attributes.to_s}, return_trip_checkbox=>#{ride_return_trip_checkbox}, return_trip_departure_time=>#{ride_return_trip_departure_time}, departure_date=>#{ride_departure_date}, return_trip_departure_date=>#{ride_return_trip_departure_date}".gsub(/^nil|\\r|\\n$/, "")
+    cookies[:ride] = "#{ride_attributes.to_s}, return_trip_checkbox=>#{ride_return_trip_checkbox}, return_trip_departure_time=>#{ride_return_trip_departure_time}, departure_date=>#{ride_departure_date}, return_trip_departure_date=>#{ride_return_trip_departure_date}".gsub("nil", "").strip
 
   end
 
