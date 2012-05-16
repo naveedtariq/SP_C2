@@ -49,6 +49,7 @@ class RidesController < ApplicationController
   def update # update ride here
     if @ride.valid?(params[:ride])
       @ride.modify!(params[:ride], current_user) # modify attributes
+      @ride.departure_time = @ride.departuredatetime
       unless params[:next_step] == "update"
         return render :action => params[:next_step]
       end

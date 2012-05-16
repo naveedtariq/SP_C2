@@ -125,9 +125,13 @@
      if (($("#ride_departure_time_4i").val() >= <%=RequestLogger.sp_clock_time_with_zone.hour%>) && ($("#ride_departure_time_5i").val() > <%=RequestLogger.sp_clock_time_with_zone.min%>) )
      $(".before-1hr-booking").hide();
     });
-  });
-</script>
 
+     // new_hour = <%#=  @ride.departuredatetime.hour %>
+     // new_min = <%#=  @ride.departuredatetime.min %>
+  //    $('#ride_departure_time_4i').val(new_hour);
+;
+ });
+</script>
 <div id="container">
   <div id="header_wrap" style="margin-top: 22px;">
     <div id="header">

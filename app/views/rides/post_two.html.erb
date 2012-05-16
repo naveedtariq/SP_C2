@@ -81,6 +81,15 @@
     });
 
     $("input#ride_departure_date").change(function(){
+       departure_date = $(this).datepicker('getDate');
+       departure_date_day = departure_date.getDate();
+       departure_date_month = departure_date.getMonth();
+       departure_date_year = departure_date.getFullYear();
+       $("#ride_departuredatetime_1i").val(departure_date_year);
+       $("#ride_departuredatetime_2i").val(departure_date_month+1);
+       $("#ride_departuredatetime_3i").val(departure_date_day);
+       
+
       if($(this).val() != "")
         $(".date-check-step2").hide();
     });
@@ -152,16 +161,19 @@
 <% end %>
 
     $('#ride_departure_time_4i').change(function() {
-       if ($("#ride_departure_time_4i").val() >= <%=RequestLogger.sp_clock_time_with_zone.hour%>)
-         $(".before-1hr-booking").hide();
-         $(".after-1hr-booking").hide();
-
+      departure_time_hour = $(this).val();
+      $("#ride_departuredatetime_4i").val(departure_time_hour);
+      if ($("#ride_departure_time_4i").val() >= <%=RequestLogger.sp_clock_time_with_zone.hour%>)
+      $(".before-1hr-booking").hide();
+      $(".after-1hr-booking").hide();
     });
 
     $('#ride_departure_time_5i').change(function() {
-     if (($("#ride_departure_time_4i").val() >= <%=RequestLogger.sp_clock_time_with_zone.hour%>) && ($("#ride_departure_time_5i").val() > <%=RequestLogger.sp_clock_time_with_zone.min%>) )
-     $(".before-1hr-booking").hide();
-     $(".after-1hr-booking").hide();
+      departure_time_min = $(this).val();
+      $("#ride_departuredatetime_5i").val(departure_time_min);
+      if (($("#ride_departure_time_4i").val() >= <%=RequestLogger.sp_clock_time_with_zone.hour%>) && ($("#ride_departure_time_5i").val() > <%=RequestLogger.sp_clock_time_with_zone.min%>) )
+      $(".before-1hr-booking").hide();
+      $(".after-1hr-booking").hide();
     });
 
     $("#ride_return_trip_checkbox").click(function () {
@@ -184,6 +196,51 @@
       $(".departure-1hr-arrival").hide();
     });
 
+    $("#ride_new_departure_time").change(function(){
+      new_time = $(this).val();
+      new_time_split = new_time.split(":");
+      new_time_hour = parseFloat(new_time_split[0]);
+      new_time_min = parseFloat(new_time_split[1]);
+      if(new_time_hour == 12 && $("#ride_ampm_time").val() == "AM"){
+        $("select#ride_departuredatetime_4i").val('00');
+        $("select#ride_departuredatetime_5i").val(new_time_min);
+      }
+      else if(new_time_hour < 12 && $("#ride_ampm_time").val() == "AM"){
+        $("select#ride_departuredatetime_4i").val(new_time_split[0]);
+        $("select#ride_departuredatetime_5i").val(new_time_min);
+      }
+      else if (new_time_hour < 12 && $("#ride_ampm_time").val() == "PM"){
+        $("select#ride_departuredatetime_4i").val(new_time_hour + 12);
+        $("select#ride_departuredatetime_5i").val(new_time_min);
+      }
+      else if (new_time_hour == 12 && $("#ride_ampm_time").val() == "PM"){
+       $("select#ride_departuredatetime_4i").val(12);
+       $("select#ride_departuredatetime_5i").val(new_time_min);
+      }
+    });
+
+  $("#ride_ampm_time").change(function(){
+    new_time = $("#ride_new_departure_time").val();
+    new_time_split = new_time.split(":");
+    new_time_hour = parseFloat(new_time_split[0]);
+    new_time_min = parseFloat(new_time_split[1]);
+    if(new_time_hour == 12 && $(this).val() == "AM"){
+      $("select#ride_departuredatetime_4i").val('00');
+      $("select#ride_departuredatetime_5i").val(new_time_min);
+    }
+    else if(new_time_hour < 12 && $(this).val() == "AM"){
+      $("select#ride_departuredatetime_4i").val(new_time_split[0]);
+      $("select#ride_departuredatetime_5i").val(new_time_min);
+    }
+    else if (new_time_hour < 12 && $(this).val() == "PM"){
+      $("select#ride_departuredatetime_4i").val(new_time_hour + 12);
+      $("select#ride_departuredatetime_5i").val(new_time_min);
+    }
+    else if (new_time_hour == 12 && $(this).val() == "PM"){
+      $("select#ride_departuredatetime_4i").val(12);
+      $("select#ride_departuredatetime_5i").val(new_time_min);
+    }
+  });
 
   });
 </script>
@@ -228,6 +285,17 @@
         <%= f.time_select :departure_time, {:minute_step => 15, :ampm => true}, {:style => "width:110px"} %>
         <div class="before-1hr-booking" style="display: none; color: red;">Booking from current time</div>
         <div class="after-1hr-booking" style="display: none; color: red;">After 1 hour Booking allowed</div>
+      </div>
+
+     <div class="left" style="margin-right:20px;">
+        <p><b>New Time</b></p>
+        <%= f.select :new_departure_time, NEW_DEPARTURE_TIME %>
+        <%= f.select :ampm_time, AM_PM_TIME %>
+      </div>
+
+      <div class="left" style="margin-right:20px;">
+        <p><b>Departure Datetime</b></p>
+        <%= f.datetime_select :departuredatetime %>
       </div>
 
       <div class="left" style="margin-right:20px;">
