@@ -11,6 +11,11 @@ class Ride < ActiveRecord::Base
   attr_accessor :return_trip_checkbox
   attr_accessor :return_trip_departure_date
   attr_accessor :return_trip_departure_time
+
+
+  attr_accessor :return_new_departure_time
+  attr_accessor :return_new_ampm_time
+
   scope :past_rides, lambda { |ride_departure_time|
     where("rides.departuredatetime < ?", ride_departure_time)
   }

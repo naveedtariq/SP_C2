@@ -126,10 +126,11 @@
      $(".before-1hr-booking").hide();
     });
 
-     // new_hour = <%#=  @ride.departuredatetime.hour %>
-     // new_min = <%#=  @ride.departuredatetime.min %>
-  //    $('#ride_departure_time_4i').val(new_hour);
-;
+      new_hour = <%=  @ride.departuredatetime.hour %>
+      new_min = <%=  @ride.departuredatetime.min %>
+
+      alert(new_hour + new_min);
+
  });
 </script>
 <div id="container">
@@ -172,6 +173,15 @@
         <%= f.time_select :departure_time, {:minute_step => 15, :ampm => true}, {:style => "width:110px"} %>
         <div class="before-1hr-booking" style="display: none; color: red;">Booking from current time</div>
         <div class="after-1hr-booking" style="display: none; color: red;">After 1 hour Booking allowed</div>
+      </div>
+
+     <div class="left" style="margin-right:20px;">
+        <p><b>New Time</b></p>
+        <%= f.select :new_departure_time, NEW_DEPARTURE_TIME %>
+        <%= f.select :ampm_time, AM_PM_TIME %>
+        <div class="before-1hr-booking" style="display: none; color: red;">Booking from current time</div>
+        <div class="after-1hr-booking" style="display: none; color: red;">After 1 hour Booking allowed</div>
+        <div class="passed-booking" style="display: none; color: red;">booking time has been passed select another</div>
       </div>
 
       <div class="left" style="margin-right:20px;">
