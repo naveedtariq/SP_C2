@@ -30,7 +30,7 @@
                             $(".city-option-same").show();
                             $('#ride_to_location_id').addClass("validation-error");
                             $('#ride_from_location_id').addClass("validation-error");
-                            $("input#ride_departure_date").attr("disabled", "disabled");
+                            $("input#ride_departuredatetime").attr("disabled", "disabled");
                             $("#ride_departure_all").attr("disabled", "disabled");
                             $("#ride_departure_first_option").attr("disabled", "disabled");
                             $("#ride_departure_second_option").attr("disabled", "disabled");
@@ -44,7 +44,7 @@
                             $(".city-option-same").hide();
                             $('#ride_to_location_id').removeClass("validation-error");
                             $('#ride_from_location_id').removeClass("validation-error");
-                            $("input#ride_departure_date").removeAttr("disabled", "disabled");
+                            $("input#ride_departuredatetime").removeAttr("disabled", "disabled");
                             $("#ride_departure_all").removeAttr("disabled", "disabled");
                             $("#ride_departure_first_option").removeAttr("disabled", "disabled");
                             $("#ride_departure_second_option").removeAttr("disabled", "disabled");
@@ -62,7 +62,7 @@
                         $(".city-option-same").show();
                         $('#ride_to_location_id').addClass("validation-error");
                         $('#ride_from_location_id').addClass("validation-error");
-                        $("input#ride_departure_date").attr("disabled", "disabled");
+                        $("input#ride_departuredatetime").attr("disabled", "disabled");
                         $("#ride_departure_all").attr("disabled", "disabled");
                         $("#ride_departure_first_option").attr("disabled", "disabled");
                         $("#ride_departure_second_option").attr("disabled", "disabled");
@@ -76,7 +76,7 @@
                         $(".city-option-same").hide();
                         $('#ride_to_location_id').removeClass("validation-error");
                         $('#ride_from_location_id').removeClass("validation-error");
-                        $("input#ride_departure_date").removeAttr("disabled", "disabled");
+                        $("input#ride_departuredatetime").removeAttr("disabled", "disabled");
                         $("#ride_departure_all").removeAttr("disabled", "disabled");
                         $("#ride_departure_first_option").removeAttr("disabled", "disabled");
                         $("#ride_departure_second_option").removeAttr("disabled", "disabled");
@@ -117,7 +117,7 @@
                             $(".city-option-same").show();
                             $('#ride_to_location_id').addClass("validation-error");
                             $('#ride_from_location_id').addClass("validation-error");
-                            $("input#ride_departure_date").attr("disabled", "disabled");
+                            $("input#ride_departuredatetime").attr("disabled", "disabled");
                             $("#ride_departure_all").attr("disabled", "disabled");
                             $("#ride_departure_first_option").attr("disabled", "disabled");
                             $("#ride_departure_second_option").attr("disabled", "disabled");
@@ -131,7 +131,7 @@
                             $(".city-option-same").hide();
                             $('#ride_to_location_id').removeClass("validation-error");
                             $('#ride_from_location_id').removeClass("validation-error");
-                            $("input#ride_departure_date").removeAttr("disabled", "disabled");
+                            $("input#ride_departuredatetime").removeAttr("disabled", "disabled");
                             $("#ride_departure_all").removeAttr("disabled", "disabled");
                             $("#ride_departure_first_option").removeAttr("disabled", "disabled");
                             $("#ride_departure_second_option").removeAttr("disabled", "disabled");
@@ -149,7 +149,7 @@
                         $(".city-option-same").show();
                         $('#ride_to_location_id').addClass("validation-error");
                         $('#ride_from_location_id').addClass("validation-error");
-                        $("input#ride_departure_date").attr("disabled", "disabled");
+                        $("input#ride_departuredatetime").attr("disabled", "disabled");
                         $("#ride_departure_all").attr("disabled", "disabled");
                         $("#ride_departure_first_option").attr("disabled", "disabled");
                         $("#ride_departure_second_option").attr("disabled", "disabled");
@@ -163,7 +163,7 @@
                         $(".city-option-same").hide();
                         $('#ride_to_location_id').removeClass("validation-error");
                         $('#ride_from_location_id').removeClass("validation-error");
-                        $("input#ride_departure_date").removeAttr("disabled", "disabled");
+                        $("input#ride_departuredatetime").removeAttr("disabled", "disabled");
                         $("#ride_departure_all").removeAttr("disabled", "disabled");
                         $("#ride_departure_first_option").removeAttr("disabled", "disabled");
                         $("#ride_departure_second_option").removeAttr("disabled", "disabled");
@@ -177,23 +177,23 @@
         });
 
         $("#btnAll").click(function () {
-            $("input#ride_departure_date").attr("disabled", "disabled");
+            $("input#ride_departuredatetime").attr("disabled", "disabled");
         });
         $("#btn14").click(function () {
-            $("input#ride_departure_date").attr("disabled", "disabled");
+            $("input#ride_departuredatetime").attr("disabled", "disabled");
         });
         $("#btn30").click(function () {
-            $("input#ride_departure_date").attr("disabled", "disabled");
+            $("input#ride_departuredatetime").attr("disabled", "disabled");
         });
 
 
-        $("#ride_departure_date").datepicker({
+        $("#ride_departuredatetime").datepicker({
             dateFormat:"yy-mm-dd",
             minDate:0, maxDate:"+1Y"
 
         });
 
-        $("input#ride_departure_date").change(function () {
+        $("input#ride_departuredatetime").change(function () {
             if ($(this).val().length != 0)
                 $("#ride_departure_all").removeAttr("checked", "checked");
             $("#ride_departure_first_option").removeAttr("checked", "checked");
@@ -227,7 +227,7 @@
         else
             $('input#btn30').addClass('active');
 
-        if ($("input#ride_departure_date").val().length != 0) {
+        if ($("input#ride_departuredatetime").val().length != 0) {
             $("#ride_departure_all").removeAttr("checked", "checked");
             $('input#btnAll').removeClass('active');
         }
@@ -254,7 +254,7 @@
               <div id="schedule-container">
                 <%= f.select :from_location_id, Location.all.collect { |p| [p.name, p.id] }, {:include_blank => "--- select from ---"}, :style => "width:230px" %>
                 <%= f.select :to_location_id, Location.all.collect { |p| [p.name, p.id] }, {:include_blank => "--- select to ---"}, :style => "width:230px" %>
-                <%= f.text_field(:departure_date, :style => "height: 27px; margin-top: 0px; border-radius: 5px 5px 5px 5px; height: 25px; vertical-align: top; width: 110px;") %>
+                <%= f.text_field(:departuredatetime, :style => "height: 27px; margin-top: 0px; border-radius: 5px 5px 5px 5px; height: 25px; vertical-align: top; width: 110px;") %>
                 <%= image_tag ("calendar_input_icon.png"), :style => "margin-left: -24px; margin-top: 6px; float: left; position: absolute; " %>
                 <input type="button" id="btnAll" value="All" name="ride[departure]" class="form-post.active"/>
                 <input type="button" id="btn14" value="Next 14 Days"/>
@@ -299,7 +299,7 @@
 
                 <% unless last_date.include? ride.departure_date %>
                     <h3 class="headline first">
-                      <%= ride.departure_date.strftime("Departing %A, %B #{ride.departure_date.day.ordinalize}") %>
+                      <%= ride.departuredatetime.strftime("Departing %A, %B #{ride.departuredatetime.day.ordinalize}") %>
                     </h3>
                     <% last_date << ride.departure_date %>
                 <% end %>
@@ -323,12 +323,12 @@
                     <div class="inner_content">
                       <div class="info-rides">
                         <div class="inner-info-line1">
-                          <p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= ride.departure_time.strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %>
+                          <p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= ride.departuredatetime.strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %>
                             mins &nbsp;
                             &nbsp<span class="info-line11"><%= ride.from_location && ride.from_location.name %></span>
                           </p></div>
                         <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp; &nbsp;
-                          <span class="info-line1"><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %>
+                          <span class="info-line1"><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= ride.flexibility_in_minutes %>
                           mins &nbsp;
                           &nbsp<span class="info-line11"><%= ride.to_location && ride.to_location.name %></span></p>
                         </div>

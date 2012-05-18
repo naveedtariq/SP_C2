@@ -48,10 +48,10 @@
         else if("<%=  @ride.to_location.name %>" == "(JFK) John F. Kennedy"){
           $('#fare').text("Estimated Taxi Fare: $45");
         }
-        else if((<%=  @ride.departure_time.hour %> > 20 && <%=@ride.departure_time.hour %> < 24) || (<%=  @ride.departure_time.hour %> > 1 && <%=@ride.departure_time.hour %> < 7)  ){
+        else if((<%=  @ride.departuredatetime.hour %> > 20 && <%=@ride.departuredatetime.hour %> < 24) || (<%=  @ride.departuredatetime.hour %> > 1 && <%=@ride.departuredatetime.hour %> < 7)  ){
          $('#fare').text("Estimated Taxi Fare: $"+fare2);
         }
-        else if((1 <= <%=@ride.departure_date.wday%> && <%=@ride.departure_date.wday%> < 6) && (<%=  @ride.departure_time.hour %> >= 16 && <%=  @ride.departure_time.hour %> <= 19 && <%=  @ride.departure_time.min %> >= 0 && <%=  @ride.departure_time.min %> <= 59 )){
+        else if((1 <= <%=@ride.departuredatetime.wday%> && <%=@ride.departuredatetime.wday%> < 6) && (<%=  @ride.departuredatetime.hour %> >= 16 && <%=  @ride.departuredatetime.hour %> <= 19 && <%=  @ride.departuredatetime.min %> >= 0 && <%=  @ride.departuredatetime.min %> <= 59 )){
          $('#fare').text("Estimated Taxi Fare: $"+fare3);
         }
         else{

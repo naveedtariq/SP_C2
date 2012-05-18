@@ -1,29 +1,32 @@
 class Ride < ActiveRecord::Base
   after_find do |ride|
-    ride.departure_time = "2012-03-06 13:00:00 +0000".to_time if ride.departure_time.blank?
+    ride.new_departure_time = "01:00" if ride.new_departure_time.blank?
   end
   before_save do |ride|
-    ride.departure_time = "2012-03-06 13:00:00 +0000".to_time if ride.departure_time.blank?
-    ride.departuredatetime = ("#{self.departure_time.strftime("#{self.departure_date} %H:%M #{RequestLogger.sp_clock_time_with_zone.to_s.split(" ").last}")}").to_time
+#    ride.new_departure_time = "01:00" if ride.new_departure_time.blank?
+#    ride.departuredatetime = ("#{self.new_departure_time.strftime("#{self.departure_date} %H:%M #{RequestLogger.sp_clock_time_with_zone.to_s.split(" ").last}")}").to_time
   end
   attr_accessor :friends_in_common
   attr_accessor :count
   attr_accessor :return_trip_checkbox
   attr_accessor :return_trip_departure_date
   attr_accessor :return_trip_departure_time
-
+  attr_accessor :new_departure_time
+  attr_accessor :departure_date
+  attr_accessor :ampm_time
 
   attr_accessor :return_new_departure_time
   attr_accessor :return_new_ampm_time
+  attr_accessor :return_departuredatetime
 
   scope :past_rides, lambda { |ride_departure_time|
     where("rides.departuredatetime < ?", ride_departure_time)
   }
-  scope :sorted_recent_at_top, order("departure_date Desc")
+  scope :sorted_recent_at_top, order("departuredatetime Desc")
 
   has_many :ride_participants # Association with ride_participants model
   has_many :users, :through => :ride_participants # Association with user model
-  validates :available_seats, :total_price, :departure_date, :departure_time, :duration_in_minutes, :ride_type, :presence => true
+  validates :available_seats, :total_price, :duration_in_minutes, :ride_type, :presence => true
   validate :departure_date_inclusion
   validate :from_and_to_location #Validation
   def price_per_seat(number_of_seats = 1)
@@ -39,7 +42,7 @@ class Ride < ActiveRecord::Base
   end
 
   def departure_date_inclusion #Departure date check must be with in year
-    errors.add(:departure_date, "must be within a year") if (self.departure_date && (self.departure_date > (RequestLogger.sp_clock_date + 1.year)))
+    errors.add(:departuredatetime, "must be within a year") if (self.departuredatetime && (self.departuredatetime > (RequestLogger.sp_clock_date + 1.year)))
                                #    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (RequestLogger.sp_clock_date)))
   end
 
@@ -67,11 +70,11 @@ class Ride < ActiveRecord::Base
   validates_numericality_of :total_price, :greater_than_or_equal_to => 0 # check the input is numerical based or not
   validates_numericality_of :flexibility_in_minutes, :greater_than_or_equal_to => 0, :allow_nil => true # check the input is numerical based or not
 
-  scope :scoped_departure, lambda { |date_departure| where("departure_date < ?", date_departure) } #Select rides where departure date have been passed
+  scope :scoped_departure, lambda { |date_departure| where("departuredatetime < ?", date_departure) } #Select rides where departure date have been passed
+  scope :scoped_departuredatetime, lambda { |date_departure| where("departuredatetime >= ? and departuredatetime < ?", date_departure, (date_departure+1.days)) } #Select rides where departure date have been passed
   scope :active, where(:status => STATUS_FOR_RIDES[:active]) # Select rides where status is '1', '1' for active
   scope :current_rides, lambda { |ride_departure_time| where("departuredatetime >= ?", ride_departure_time)} # Select current rides where departure date is today date or coming date
-  scope :orderby_date, order("departure_date ASC") # order the rides by departure_date in Ascending ordered
-  scope :orderby_time, order("departure_time ASC") # order the rides by departure_time in Ascending ordered
+  scope :orderby_time, order("departuredatetime ASC") # order the rides by departure_time in Ascending ordered
   scope :orderby_price, order("total_price ASC") # order the rides by total_price in Ascending ordered
 
   belongs_to :to_location, :class_name => Location # Association with Location model
@@ -90,7 +93,9 @@ class Ride < ActiveRecord::Base
       end
     end
     departure_date = params && params.delete(:departure)
+    departuredate_time = params && params.delete(:departuredatetime)
     rides = self.where(params)
+    rides = rides.scoped_departuredatetime(departuredate_time.to_time) if departuredate_time.present?
     if departure_date && ["first_option", "second_option"].include?(departure_date)
       if departure_date == "first_option"
         dep_date = RequestLogger.sp_clock_date + SEARCH_OPTION_ONE_IN_DAYS.days
@@ -99,7 +104,7 @@ class Ride < ActiveRecord::Base
       end
       rides = rides.scoped_departure(dep_date)
     end
-    rides.current_rides(RequestLogger.sp_clock_time).active.orderby_date.orderby_time.orderby_price.includes(:ride_participants)
+    rides.current_rides(RequestLogger.sp_clock_time).active.orderby_time.orderby_price.includes(:ride_participants)
   end
 
 

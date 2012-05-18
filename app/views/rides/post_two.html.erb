@@ -3,9 +3,9 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    website_time_hour = <%=  RequestLogger.sp_clock_time_with_zone.hour %>
-    website_time_min = <%=  RequestLogger.sp_clock_time_with_zone.min %>
-    twelve_hour_edt = <%=  RequestLogger.sp_clock_time_with_zone.hour %> % 12
+    website_time_hour = <%= RequestLogger.sp_clock_time_with_zone.hour %>
+    website_time_min = <%= RequestLogger.sp_clock_time_with_zone.min %>
+    twelve_hour_edt = <%= RequestLogger.sp_clock_time_with_zone.hour %> % 12
     $( "#ride_departure_date" ).datepicker({
       dateFormat: "yy-mm-dd",
       minDate: 0, maxDate: "+1Y"
@@ -289,6 +289,70 @@
     }
   });
 
+    $("input#ride_return_trip_departure_date").change(function(){
+       departure_date = $(this).datepicker('getDate');
+       departure_date_day = departure_date.getDate();
+       departure_date_month = departure_date.getMonth();
+       departure_date_year = departure_date.getFullYear();
+       $("#ride_return_departuredatetime_1i").val(departure_date_year);
+       $("#ride_return_departuredatetime_2i").val(departure_date_month+1);
+       $("#ride_return_departuredatetime_3i").val(departure_date_day);
+
+
+      if($(this).val() != "")
+        $(".date-check-step2").hide();
+    });
+
+
+   $("#ride_return_new_departure_time").change(function(){
+      new_time = $(this).val();
+      new_time_split = new_time.split(":");
+      new_time_hour = parseFloat(new_time_split[0]);
+      new_time_min = parseFloat(new_time_split[1]);
+      if(new_time_hour == 12 && $("#ride_return_new_ampm_time").val() == "AM"){
+        $("select#ride_return_departuredatetime_4i").val('00');
+        $("select#ride_return_departuredatetime_5i").val(new_time_min);
+      }
+      else if(new_time_hour < 12 && $("#ride_return_new_ampm_time").val() == "AM"){
+        $("select#ride_return_departuredatetime_4i").val(new_time_split[0]);
+        $("select#ride_return_departuredatetime_5i").val(new_time_min);
+      }
+      else if (new_time_hour < 12 && $("#ride_return_new_ampm_time").val() == "PM"){
+        $("select#ride_return_departuredatetime_4i").val(new_time_hour + 12);
+        $("select#ride_return_departuredatetime_5i").val(new_time_min);
+      }
+      else if (new_time_hour == 12 && $("#ride_return_new_ampm_time").val() == "PM"){
+       $("select#ride_return_departuredatetime_4i").val(12);
+       $("select#ride_return_departuredatetime_5i").val(new_time_min);
+      }
+    });
+
+  $("#ride_return_new_ampm_time").change(function(){
+    new_time = $("#ride_return_new_departure_time").val();
+    new_time_split = new_time.split(":");
+    new_time_hour = parseFloat(new_time_split[0]);
+    new_time_min = parseFloat(new_time_split[1]);
+    if(new_time_hour == 12 && $(this).val() == "AM"){
+      $("select#ride_return_departuredatetime_4i").val('00');
+      $("select#ride_return_departuredatetime_5i").val(new_time_min);
+    }
+    else if(new_time_hour < 12 && $(this).val() == "AM"){
+      $("select#ride_return_departuredatetime_4i").val(new_time_split[0]);
+      $("select#ride_return_departuredatetime_5i").val(new_time_min);
+    }
+    else if (new_time_hour < 12 && $(this).val() == "PM"){
+      $("select#ride_return_departuredatetime_4i").val(new_time_hour + 12);
+      $("select#ride_return_departuredatetime_5i").val(new_time_min);
+    }
+    else if (new_time_hour == 12 && $(this).val() == "PM"){
+      $("select#ride_return_departuredatetime_4i").val(12);
+      $("select#ride_return_departuredatetime_5i").val(new_time_min);
+    }
+  });
+
+
+
+
       $("#ride_return_new_departure_time").change(function(){
       $(".arrival-date-check").hide();
       $(".departure-greater-arrival").hide();
@@ -336,11 +400,6 @@
         <div class="date-check-step2" style="display:none; color: red; margin-bottom: -6px">Departure Date can't be blank</div>
       </div>
 
-      <div class="left" style="margin-right:20px;">
-        <p><b>Time</b></p>
-        <%= f.time_select :departure_time, {:minute_step => 15, :ampm => true}, {:style => "width:110px"} %>
-      </div>
-
      <div class="left" style="margin-right:20px;">
         <p><b>New Time</b></p>
         <%= f.select :new_departure_time, NEW_DEPARTURE_TIME %>
@@ -386,16 +445,16 @@
           </div>
 
           <div class="left" style="margin-right:20px;">
-           <p><b>Time</b></p>
-           <%= f.time_select :return_trip_departure_time, {:minute_step => 15, :ampm => true, :include_blank => false}, {:style => "width:110px"} %>
-          </div>
-
-          <div class="left" style="margin-right:20px;">
            <p><b>New Time</b></p>
            <%= f.select :return_new_departure_time, NEW_DEPARTURE_TIME %>
            <%= f.select :return_new_ampm_time, AM_PM_TIME %>
           </div>
           
+          <div class="left" style="margin-right:20px;">
+           <p><b>Departure Datetime</b></p>
+           <%= f.datetime_select :return_departuredatetime %>
+          </div>
+
          </div>
       </div>
       <div style="clear:both">

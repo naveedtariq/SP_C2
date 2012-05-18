@@ -83,8 +83,8 @@
               <!-- fetched all ride informations -->
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
-              <td><%= ride.departure_time.strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
-              <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
+              <td><%= ride.departuredatetime.strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
+              <td><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
               <td><%= ride.flexibility_in_minutes %> mins</td>
               <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
               <td><%= ride.ride_type %></td>
@@ -199,8 +199,8 @@
               <td><%= ride.from_location && ride.from_location.name %></td>
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
-              <td><%= ride.departure_time.strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
-              <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
+              <td><%= ride.departuredatetime.strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
+              <td><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
               <td><%= ride.flexibility_in_minutes %> mins</td>
               <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
               <td><%= ride.ride_type %></td>
