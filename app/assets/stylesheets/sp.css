@@ -1767,7 +1767,7 @@ footer nav li {
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride{opacity:0.4;
                                                                                         filter:alpha(opacity=40);float:left; height:53px; cursor:pointer;}
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .ride_cab{ background:url(/assets/cartype_taxi.png) left center no-repeat; width:100px; height:57px; float:left;}
-.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .ride_car{ background:url(/assets/cartype_limo.png) left center no-repeat; width:83px; height:57px; float:left; padding:0 12px 0 5px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .ride_car{ background:url(/assets/cartype_blackcar.png) left center no-repeat; width:83px; height:57px; float:left; padding:0 12px 0 5px;}
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .radio-selectride{ margin:25px 7px 0 0; float:left;}
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset.for_cab label .radio_text{ padding-top:22px; padding-left:6px;}
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset label .radio_text{ line-height:19px !important; color:#333333; font-size:14px; font-weight:bold; float:right; padding-top:14px;}
