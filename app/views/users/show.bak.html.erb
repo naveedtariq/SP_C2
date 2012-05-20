@@ -1,0 +1,207 @@
+<h4>My Profile</h4><br/>
+<%= image_tag @user.user_image_url, :style => "width: 200px" %><br/>
+<% if @graph.present? %>                                                                                <!-- check if user login through facebook account  -->
+    <% if @user.authentications.present? %>
+        <% fb_id = @user.authentications.first.uid %>
+        <a href="https://www.facebook.com/profile.php?id=<%= fb_id %>">Facebook
+          Profile </a>            <!-- facebook profile link if the user login through facebook -->
+    <% end %>
+<% end %>
+<br/><br/>
+<% begin %>
+    <% if @graph.present? && (@user.id != current_user.id) && (current_user.authentications.first.present?) && (@user.authentications.first.present?) %>          <!--here user common friends in his profile with respect to current user -->
+        <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{@user.authentications.first.uid}") %>
+        <% if mutual_friends.count > 0 %>
+            <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
+        <% end %>
+        <% mutual_friends.each do |friend| %>
+            <img src="http://graph.facebook.com/<%= friend["id"] %>/picture"/>
+            <%#= image_tag("http://graph.facebook.com/friend[id]/picture") %>
+            <%= friend["name"] %>
+            <% unless friend == mutual_friends.last %>
+                &nbsp;and&nbsp;
+            <% end %>
+        <% end %>
+    <% end %>
+<% rescue %>
+<% end %>
+
+
+<table border="1" cellpadding="10px" cellspacing="10">
+  <tr>
+    <th>First Name</th>
+    <td><%= @user.first_name %></td>
+  </tr>
+  <tr>
+    <th>Last Name</th>
+    <td><%= @user.last_name %></td>
+  </tr>
+  <tr>
+    <th>About</th>
+    <td><%= @user.about %></td>
+  </tr>
+  <tr>
+    <th>Bithday</th>
+    <td><%= @user.dob %></td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <th>Gender</th>
+    <td><%= @user.gender %></td>
+  </tr>
+  <tr>
+    <th>Phone</th>
+    <td><%= @user.phone %></td>
+  </tr>
+  <tr>
+    <th>Mode of Communication</th>
+    <td><%= @user.mode_of_communications %></td>
+  </tr>
+  <tr>
+    <th>City</th>
+    <td><%= @user.city %></td>
+  </tr>
+  <tr>
+    <th>Town</th>
+    <td><%= @user.town %></td>
+  </tr>
+  <tr>
+    <th>Work</th>
+    <td><%= @user.work %></td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td><%= @user.title %></td>
+  </tr>
+  <tr>
+    <th>School</th>
+    <td><%= @user.school %></td>
+  </tr>
+  <tr>
+    <th>Total Friends</th>
+    <td><%= @user.number_of_friends %></td>
+  </tr>
+  <tr>
+    <th>Member since</th>
+    <td><%= @user.created_at.strftime("%B %Y") %></td>
+  </tr>
+  <tr>
+    <th>Last Login</th>
+    <td>
+      <% if @user.last_login.present? %><%= time_ago_in_words(@user.last_login) %>
+      <% else %>Never
+      <% end %></td>
+  </tr>
+</table> <br/>
+<h4> Current Rides</h4>                                                         <!-- here current rides of user -->
+<table border="1" cellpadding="3">
+  <tr>
+    <th>Owner</th>
+    <th>Riders</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Departure date</th>
+    <th>Departure time</th>
+    <th>Arrival time</th>
+    <th>Flexibility</th>
+    <th>Duration</th>
+    <th>Vehicle Type</th>
+    <th>Available Seats</th>
+    <th>Total Price</th>
+    <th>Notes</th>
+    <th>Link</th>
+  </tr>
+  <% if @ride_participants.empty? %>
+      <tr>
+        <td colspan="12">No records</td>
+      </tr>
+  <% end %>
+  <% @ride_participants.each do |ride_participant| %>
+      <% ride = ride_participant.ride %>
+      <tr align="center">
+        <td><a href="<%= user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
+        <td>
+          <% ride.ride_participants.confirmed_participants.each do |p| %>
+              <a href="<%= user_path(p.user) %>"><%= p.user && "#{p.user.full_name}" %></a>&nbsp;
+          <% end %>
+        </td>
+        <td><%= ride.from_location && ride.from_location.name %></td>
+        <td><%= ride.to_location && ride.to_location.name %></td>
+        <td><%= ride.departure_date %></td>
+        <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+        <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z") %></td>
+        <td><%= ride.flexibility_in_minutes %> mins</td>
+        <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+        <td><%= ride.ride_type %></td>
+        <td><%= ride.remaining_seats %></td>
+        <td><%= number_to_currency(ride.total_price) %></td>
+        <td><%= ride.notes %></td>
+        <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
+      </tr>
+  <% end %>
+</table>
+
+<hr/>
+<h4> Past Rides</h4>                                                            <!-- here all past rides of user -->
+<table border="1" cellpadding="3">
+  <tr>
+    <th>Owner</th>
+    <th>Riders</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Departure date</th>
+    <th>Departure time</th>
+    <th>Arrival time</th>
+    <th>Flexibility</th>
+    <th>Duration</th>
+    <th>Vehicle Type</th>
+    <th>Available Seats</th>
+    <th>Total Price</th>
+    <th>Notes</th>
+    <th>link</th>
+  </tr>
+  <% if @past_rides.empty? %>
+      <tr>
+        <td colspan="12">No records</td>
+      </tr>
+  <% end %>
+  <% @past_rides.each do |ride_participant| %>
+      <% ride = ride_participant.ride %>
+      <tr align="center">
+        <td><a href="<%= user_path(ride.owner) %>"><%= ride.owner && "#{ride.owner.full_name}" %></a></td>
+        <td>
+          <% ride.ride_participants.confirmed_participants.each do |p| %>
+              <a href="<%= user_path(p.user) %>"><%= p.user && "#{p.user.full_name}" %></a>&nbsp;
+          <% end %>
+        </td>
+        <td><%= ride.from_location && ride.from_location.name %></td>
+        <td><%= ride.to_location && ride.to_location.name %></td>
+        <td><%= ride.departure_date %></td>
+        <td><%= ride.departure_time.strftime("%H:%M %Z") %></td>
+        <td><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%H:%M %Z") %></td>
+        <td><%= ride.flexibility_in_minutes %> mins</td>
+        <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
+        <td><%= ride.ride_type %></td>
+        <td><%= ride.remaining_seats %></td>
+        <td><%= number_to_currency(ride.total_price) %></td>
+        <td><%= ride.notes %></td>
+        <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
+      </tr>
+  <% end %>
+</table>
+<br/><br/>
+
+
+<% @feedbacks = Feedback.find_all_by_owner_id(params[:id]) %>                   <!-- here all feedback of the user in his profile -->
+<% @feedbacks.each do |feedback| %>
+    <% user = feedback.user %>
+    <% ride = feedback.ride %>
+    <a href="<%= user_path(user) %>"><%= user.full_name %></a> |
+    <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%= ride.departure_date %></a>
+    <br/><%= image_tag user.user_image_url %><br/>
+    <%= feedback.status %> &nbsp; by &nbsp; <%= user.full_name %><br/>
+    Feedback: <%= feedback.feedback %><br/>
+<% end %>

@@ -405,10 +405,6 @@
                   <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>
                   <% ride.friends_in_common << mutual_friends %>
                 <% end %>
-<<<<<<< HEAD
-
-
-
                 <li>
                   <a href="#" class="UserPhoto" id="Trigger_UserID_001">
                     <%= image_tag rider.user.user_image_url, :width=>"60", :height=>"60" %>
@@ -420,7 +416,7 @@
 
                   <!-- HIDDEN TOOLTIP -->
                   <div class="UserTooltip" id="TT_UserID_001">
-                    <h4><a href="#"><%= rider.user.city %></a> from <%= rider.user.city %></h4>
+                    <h4><a href="#"><%= rider.user.full_name %></a> from <%= rider.user.city %></h4>
                     <p><em>Can't wait for Thanksgiving vacation!</em></p>
                     <div class="UserInfo">
                       <div class="UserPhoto">

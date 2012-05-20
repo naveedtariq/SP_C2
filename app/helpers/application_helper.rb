@@ -33,4 +33,5 @@ module ApplicationHelper
     hours = (hours%24).to_i
     "#{days}d #{hours}h #{mins}m"
   end
+
 end
