@@ -26,31 +26,31 @@
   }
   if (IsFound) {
   while (j < A.length) {
-  if ($('#ride_from_location_id').val() <= A[j]) {
-  $(".city-option-same").show();
-  $('#ride_to_location_id').addClass("validation-error");
-  $('#ride_from_location_id').addClass("validation-error");
-  $("#ride_departure_all").attr("disabled", "disabled");
-  $("#ride_departure_first_option").attr("disabled", "disabled");
-  $("#ride_departure_second_option").attr("disabled", "disabled");
-  $("#btnAll").attr("disabled", "disabled");
-  $("#btn14").attr("disabled", "disabled");
-  $("#btn30").attr("disabled", "disabled");
-  $("#RideSearch").attr("disabled", "disabled");
-  return false;
+    if ($('#ride_from_location_id').val() <= A[j]) {
+      $(".city-option-same").show();
+      $('#ride_to_location_id').addClass("validation-error");
+      $('#ride_from_location_id').addClass("validation-error");
+      $("#ride_departure_all").attr("disabled", "disabled");
+      $("#ride_departure_first_option").attr("disabled", "disabled");
+      $("#ride_departure_second_option").attr("disabled", "disabled");
+      $("#btnAll").attr("disabled", "disabled");
+      $("#btn14").attr("disabled", "disabled");
+      $("#btn30").attr("disabled", "disabled");
+      $("#RideSearch").attr("disabled", "disabled");
+      return false;
   }
   else {
-  $(".city-option-same").hide();
-  $('#ride_to_location_id').removeClass("validation-error");
-  $('#ride_from_location_id').removeClass("validation-error");
-  $("#ride_departure_all").removeAttr("disabled", "disabled");
-  $("#ride_departure_first_option").removeAttr("disabled", "disabled");
-  $("#ride_departure_second_option").removeAttr("disabled", "disabled");
-  $("#btnAll").removeAttr("disabled", "disabled");
-  $("#btn14").removeAttr("disabled", "disabled");
-  $("#btn30").removeAttr("disabled", "disabled");
-  //$("#RideSearch").submit();
-  }
+      $(".city-option-same").hide();
+      $('#ride_to_location_id').removeClass("validation-error");
+      $('#ride_from_location_id').removeClass("validation-error");
+      $("#ride_departure_all").removeAttr("disabled", "disabled");
+      $("#ride_departure_first_option").removeAttr("disabled", "disabled");
+      $("#ride_departure_second_option").removeAttr("disabled", "disabled");
+      $("#btnAll").removeAttr("disabled", "disabled");
+      $("#btn14").removeAttr("disabled", "disabled");
+      $("#btn30").removeAttr("disabled", "disabled");
+      //$("#RideSearch").submit();
+    }
   j = j + 1;
   }
   $("#RideSearch").submit();
@@ -203,8 +203,45 @@
   });
 </script>
 
+<div class="post_ride-popup" style="display: none;">
+  <div class="post_ride-popup-overlay"></div>
+  <div class="post_ride-popup-centered">
+    <div class="post_ride_vertically-centered">
+      <a class="closed" href="#" title="Closed" onclick="$('.post_ride-popup').hide();"> </a>
+      <div class="post_ride_window">
+
+        <ul id="post_ride_heading">
+          <li class="current" id="where_to_heading"><span class="number">1</span><span class="post_heading_content">Where to?</span></li>
+          <li><span class="number" id="what-time_heading">2</span><span class="post_heading_content">What time?</span></li>
+          <li><span class="number" id="what-else_heading">3</span><span class="post_heading_content">What else?</span></li>
+        </ul>
+
+        <div id="ajax-containers">
+        </div>
 
 
+
+        <div class="area_detail">
+          <div class="map"></div>
+          <p><strong>Distance:</strong>  25 miles  &nbsp;  <strong>Duration:</strong> 34 mins<br>
+            <strong>Estimated Fare:</strong> $40 (Taxi)  $60 (Black Car)<br>
+            <span class="small_text"><i>*before tip and toll</i></span>
+          </p>
+
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 
 
 
@@ -213,6 +250,10 @@
 
 
 <section id="FindaRide" class="Main">
+
+
+
+
   <header>
     <h1>Find a Ride</h1>
     <h2>Find others from your neighborhood and take a taxi or black car together.</h2>
@@ -275,7 +316,8 @@
   <div class="PostRideBanner">
     <h3>Don't see what you're looking for?</h3>
     <p>Get notified when new matches are found!</p>
-    <a href="/rides/new">Post a Ride</a>
+    <a href="#" id="post-a-ride" onclick="$('.post_ride-popup').show();$.ajax( { url: '/rides/new', context: document.body, success: function(data){ $('#ajax-containers').html(data); } });return false;">Post a Ride</a>
+
   </div> <!-- PostRideBanner -->
 
 
@@ -438,6 +480,14 @@
 
 
 </section> <!-- Main #FindaRide -->
+
+
+
+
+
+
+
+
 
 
 
