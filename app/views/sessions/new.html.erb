@@ -3,29 +3,15 @@
   <div class="facebook-popup-centered">
     <div class="vertically-centered">
       <div class="window">
-        <a title="Closed" href="#" class="closed"> </a>
+        <a title="Closed" href="#" class="closed" onclick="$('.facebook-popup').hide();"> </a>
         <h2>Log in to Continue</h2>
-        <h4>
-          <img alt="facebook" src="/assets/facebook-small.png" /><a>Greg Bateman,</a> <a>Sara Beth Turner</a> and 25 others use <a>Shairporter </a><br><br>
-        </h4>
-        <ul class="user-images">
-          <li><img alt="picture" src="/assets/popup-user-1.jpg"/><p>Steve</p></li>
-          <li><img alt="picture" src="/assets/popup-user-2.jpg"/><p>Abdurahma</p></li>
-          <li><img alt="picture" src="/assets/popup-user-3.jpg" /><p>Enrioue</p></li>
-          <li><img alt="picture" src="/assets/popup-user-4.jpg" /><p>Will</p></li>
-          <li><img alt="picture" src="/assets/popup-user-1.jpg" /><p>Steve</p></li>
-          <li><img alt="picture" src="/assets/popup-user-2.jpg" /><p>Abdurahma</p></li>
-          <li><img alt="picture" src="/assets/popup-user-3.jpg" /><p>Enrioue</p></li>
-          <li><img alt="picture" src="/assets/popup-user-4.jpg" /><p>Will</p></li>
-          <li><img alt="picture" src="/assets/popup-user-1.jpg" /><p>Steve</p></li>
-          <li><img alt="picture" src="/assets/popup-user-2.jpg" /><p>Abdurahma</p></li>
-          <li><img alt="picture" src="/assets/popup-user-3.jpg" /><p>Enrioue</p></li>
-          <li><img alt="picture" src="/assets/popup-user-4.jpg" /><p>Will</p></li>
-          <li><img alt="picture" src="/assets/popup-user-1.jpg" /><p>Steve</p></li>
-          <li><img alt="picture" src="/assets/popup-user-2.jpg" /><p>Abdurahma</p></li>
-          <li><img alt="picture" src="/assets/popup-user-3.jpg" /><p>Enrioue</p></li>
-          <li><img alt="picture" src="/assets/popup-user-4.jpg" /><p>Will</p></li>
-        </ul>
+
+        <div class="user-images">
+          <iframe src="//www.facebook.com/plugins/facepile.php?href=https%3A%2F%2Fwww.facebook.com%2FShairporter&amp;action&amp;size=large&amp;max_rows=2&amp;width=458&amp;colorscheme=light" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:458px;" allowTransparency="true"></iframe>
+          <div id="fb-root" class="user-images"></div>
+          <div class="fb-facepile" data-href="https://www.facebook.com/Shairporter" data-size="large" data-max-rows="2" data-width="460"></div>
+        </div>
+        
         <a class="sign-up-btn" href="<%= auth_at_provider_path(:provider => :facebook) %>"></a>
         <div class="question">
           <h3 class="toggle-next">Why we use Facebook?</h3>
