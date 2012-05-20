@@ -9,7 +9,7 @@ class RidesController < ApplicationController
   def new
     create_or_store_ride(Ride.new) # create new ride instance
     @ride= Ride.new(retrieve_ride)
-    render :action => "post_one"
+    render :layout=>false
   end
 
                                                                                                     #  def edit
