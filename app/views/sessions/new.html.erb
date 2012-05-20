@@ -1,64 +1,50 @@
-
-<%= javascript_include_tag "jquery-1.7.1.min", "jquery.popupWindow"%>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#child_toolbar").val(window.toolbar.visible);
-
-        $('.contact-form').popupWindow({                          // jquery for popup window
-            height:500,
-            width:800,
-            top:50,
-            left:50
-        });
-    });
-</script>
-<div id="fb-root"></div>
-<script>
-
-    (function (d, s, id) {                                                      //  facebook jssdk
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=365401603490972";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'))
-
-</script>
-<div class="fb-login-button"></div>
-<div class="row">
-  <div class="span12">
-    <%= form_tag sessions_path :class => 'form-horizontal' do %>                <!-- form for login user -->
-        <fieldset>
-          <legend>Sign in with your existing account</legend>
-          <div class="control-group">
-            <%= label_tag :email, nil, :class => 'control-label' %>
-            <div class="controls">
-              <%= text_field_tag :email, params[:email], :class => 'input-xlarge' %>
-            </div>
-          </div>
-          <div class="control-group">
-            <%= label_tag :password, nil, :class => 'control-label' %>
-            <div class="controls">
-              <%= password_field_tag :password, nil, :class => 'input-xlarge' %>
-            </div>
-            <%= hidden_field_tag :child_toolbar %>
-          </div>
-          <div class="control-group">
-            <%= check_box_tag :remember_me, 1, params[:remember_me], :class => 'pull-left', :style => 'margin-right:5px;' %>
-            <%= label_tag :remember_me, nil, :class => 'pull-left' %>
-          </div>
-          <br style="clear:both;float:none;"/>
-
-          <div class="actions">
-            <%= submit_tag "Sign in", :class => "btn btn-primary" %>
-          </div>
-          <div class="control-group">
-            <a href="<%= auth_at_provider_path(:provider => :facebook) %>" class="contact-form"><%= image_tag ("facebookconnect.gif") %></a>
-            <%= link_to 'Login with Facebook', auth_at_provider_path(:provider => :facebook) %>
-
-          </div>
-        </fieldset>
-    <% end %>
+<div class="facebook-popup">
+  <div class="facebook-popup-overlay"></div>
+  <div class="facebook-popup-centered">
+    <div class="vertically-centered">
+      <div class="window">
+        <a title="Closed" href="#" class="closed"> </a>
+        <h2>Log in to Continue</h2>
+        <h4>
+          <img alt="facebook" src="/assets/facebook-small.png" /><a>Greg Bateman,</a> <a>Sara Beth Turner</a> and 25 others use <a>Shairporter </a><br><br>
+        </h4>
+        <ul class="user-images">
+          <li><img alt="picture" src="/assets/popup-user-1.jpg"/><p>Steve</p></li>
+          <li><img alt="picture" src="/assets/popup-user-2.jpg"/><p>Abdurahma</p></li>
+          <li><img alt="picture" src="/assets/popup-user-3.jpg" /><p>Enrioue</p></li>
+          <li><img alt="picture" src="/assets/popup-user-4.jpg" /><p>Will</p></li>
+          <li><img alt="picture" src="/assets/popup-user-1.jpg" /><p>Steve</p></li>
+          <li><img alt="picture" src="/assets/popup-user-2.jpg" /><p>Abdurahma</p></li>
+          <li><img alt="picture" src="/assets/popup-user-3.jpg" /><p>Enrioue</p></li>
+          <li><img alt="picture" src="/assets/popup-user-4.jpg" /><p>Will</p></li>
+          <li><img alt="picture" src="/assets/popup-user-1.jpg" /><p>Steve</p></li>
+          <li><img alt="picture" src="/assets/popup-user-2.jpg" /><p>Abdurahma</p></li>
+          <li><img alt="picture" src="/assets/popup-user-3.jpg" /><p>Enrioue</p></li>
+          <li><img alt="picture" src="/assets/popup-user-4.jpg" /><p>Will</p></li>
+          <li><img alt="picture" src="/assets/popup-user-1.jpg" /><p>Steve</p></li>
+          <li><img alt="picture" src="/assets/popup-user-2.jpg" /><p>Abdurahma</p></li>
+          <li><img alt="picture" src="/assets/popup-user-3.jpg" /><p>Enrioue</p></li>
+          <li><img alt="picture" src="/assets/popup-user-4.jpg" /><p>Will</p></li>
+        </ul>
+        <a class="sign-up-btn" href="<%= auth_at_provider_path(:provider => :facebook) %>"></a>
+        <div class="question">
+          <h3 class="toggle-next">Why we use Facebook?</h3>
+          <ul class="checked-list" style="display: block;">
+            <li>Minimum info like first name &amp; profile pic</li>
+            <li>Validation = real people with real friends</li>
+            <li>We preserve all privacy settings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('.sign-up-btn').popupWindow({                          // jquery for popup window
+  height:500,
+  width:800,
+  top:50,
+  left:50
+  });
+</script>
