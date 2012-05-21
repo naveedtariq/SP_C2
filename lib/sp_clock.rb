@@ -8,7 +8,4 @@ class SpClock
   def self.day                      # return day
     23.hours + 59.minutes
   end
-  def self.zone_offset                                        # return time zone of EST
-    Time.zone.now.zone
-    end
 end

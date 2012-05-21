@@ -145,12 +145,12 @@
               <div class="inner_content">
                 <div class="info-rides">
                   <div class="inner-info-line1">                                <!-- fetched rides info -->
-                    <p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= @ride.departure_time.strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %>
+                    <p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= @ride.departuredatetime.strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %>
                       mins &nbsp;
                       &nbsp<span class="info-line11"><%= @ride.from_location && @ride.from_location.name %></span>
                     </p></div>
                   <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp; &nbsp;
-                    <span class="info-line1"><%= (@ride.departure_time + @ride.duration_in_minutes.minutes).strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %>
+                    <span class="info-line1"><%= (@ride.departuredatetime + @ride.duration_in_minutes.minutes).strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %>
                     mins &nbsp;
                     &nbsp<span class="info-line11"><%= @ride.to_location && @ride.to_location.name %></span></p>
                   </div>
