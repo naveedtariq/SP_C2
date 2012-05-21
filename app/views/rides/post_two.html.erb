@@ -29,6 +29,26 @@
         $(".check-flexibility").show();
         return false;
       }
+      else if(($("input#ride_departure_date").val() == "<%=  RequestLogger.sp_clock_time_with_zone.strftime("%Y-%m-%d") %>" && <%=  RequestLogger.sp_clock_time_with_zone.hour %> == 0  && $("#ride_ampm_time").val() == "AM") && (<%=RequestLogger.sp_clock_time_with_zone.hour %> == (parseFloat($("#ride_new_departure_time").val().split(":")[0])-12) && parseFloat($("#ride_new_departure_time").val().split(":")[1]) == <%=  RequestLogger.sp_clock_time_with_zone.min %>)){
+         $(".before-1hr-booking").show();
+         return false;
+        }
+        else if(($("input#ride_departure_date").val() == "<%=  RequestLogger.sp_clock_time_with_zone.strftime("%Y-%m-%d") %>" && <%=  RequestLogger.sp_clock_time_with_zone.hour %> == 0  && $("#ride_ampm_time").val() == "AM") && (<%=  RequestLogger.sp_clock_time_with_zone.hour %> == (parseFloat($("#ride_new_departure_time").val().split(":")[0])-12) && (parseFloat($("#ride_new_departure_time").val().split(":")[1]) < <%=RequestLogger.sp_clock_time_with_zone.min%>))){
+         $(".before-1hr-booking").show();
+         return false;
+        }
+        else if(($("input#ride_departure_date").val() == "<%=  RequestLogger.sp_clock_time_with_zone.strftime("%Y-%m-%d") %>" && <%=  RequestLogger.sp_clock_time_with_zone.hour %> == 0  && $("#ride_ampm_time").val() == "AM") && (<%=  RequestLogger.sp_clock_time_with_zone.hour %> == (parseFloat($("#ride_new_departure_time").val().split(":")[0])-12) && (parseFloat($("#ride_new_departure_time").val().split(":")[1]) <= 59 ))){
+         $(".after-1hr-booking").show();
+         return false;
+        }
+        else if(($("input#ride_departure_date").val() == "<%=  RequestLogger.sp_clock_time_with_zone.strftime("%Y-%m-%d") %>" && <%=  RequestLogger.sp_clock_time_with_zone.hour %> == 0  && $("#ride_ampm_time").val() == "AM") && (<%=  RequestLogger.sp_clock_time_with_zone.hour %> > (parseFloat($("#ride_new_departure_time").val().split(":")[0])-12))){
+         $(".before-1hr-booking").show();
+         return false;
+        }
+        else if( ($("input#ride_departure_date").val() == "<%=  RequestLogger.sp_clock_time_with_zone.strftime("%Y-%m-%d") %>" && <%=  RequestLogger.sp_clock_time_with_zone.hour %> == 0  && $("#ride_ampm_time").val() == "AM") && ((<%=  RequestLogger.sp_clock_time_with_zone.hour %> + 1) == (parseFloat($("#ride_new_departure_time").val().split(":")[0])-12) && (parseFloat($("#ride_new_departure_time").val().split(":")[1]) < <%=  RequestLogger.sp_clock_time_with_zone.min %> ))){
+         $(".after-1hr-booking").show();
+         return false;
+        }
        else if(($("input#ride_departure_date").val() == "<%=  RequestLogger.sp_clock_time_with_zone.strftime("%Y-%m-%d") %>" && <%=  RequestLogger.sp_clock_time_with_zone.hour %> < 12  && $("#ride_ampm_time").val() == "AM") && (<%=RequestLogger.sp_clock_time_with_zone.hour %> == parseFloat($("#ride_new_departure_time").val().split(":")[0]) && parseFloat($("#ride_new_departure_time").val().split(":")[1]) == <%=  RequestLogger.sp_clock_time_with_zone.min %>)){
          $(".before-1hr-booking").show();
          return false;
@@ -114,6 +134,10 @@
         $(".departure-dt-same-arrival").show();
         return false;
       }
+      else if(($("#ride_departure_date").val() == $("#ride_return_trip_departure_date").val()) && (($("#ride_ampm_time").val() == "PM") && ($("#ride_return_new_ampm_time").val() == "AM"))){
+      $(".pm-to-am-check").show();
+      return false;
+    }
       }
       else{
         return true;
@@ -442,6 +466,7 @@
             <div class="departure-min-greater-arrival" style="display:none; color: red; margin-bottom: -6px">Departure Min later than Arrival</div>
             <div class="departure-1hr-arrival" style="display:none; color: red; margin-bottom: -6px">Arrival should be after an hour </div>
             <div class="arrival-date-check" style="display:none; color: red; margin-bottom: -6px">Arrival date can't be empty </div>
+            <div class="pm-to-am-check" style="display:none; color: red; margin-bottom: -6px">Not Travel from PM to AM </div>
           </div>
 
           <div class="left" style="margin-right:20px;">
