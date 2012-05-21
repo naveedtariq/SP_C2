@@ -57,7 +57,8 @@ class RidesController < ApplicationController
       params[:ride].delete("return_departuredatetime(5i)")
     end
     @ride = Ride.new(retrieve_ride)
-    @ride.attributes = params[:ride]
+ @ride.return_departuredatetime = @ride.return_departuredatetime.to_time rescue @ride.return_departuredatetime = nil
+ @ride.attributes = params[:ride]
     store_ride(@ride)
     #
     #    return render :json => cookies
