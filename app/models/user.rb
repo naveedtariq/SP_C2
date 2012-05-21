@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :owned_messages, :class_name => Message, :foreign_key => "owner_id"   # Add foreign key in messages table
   
   has_many :feedbacks                                          # Association feedback model
-  has_many :owned_feedacks, :class_name => Feedback, :foreign_key => "owner_id"   # Add foreign key in feedbacks table
+  has_many :owned_feedbacks, :class_name => Feedback, :foreign_key => "owner_id"   # Add foreign key in feedbacks table
 
   def created_rides                                             # return the created rides
     Ride.where(:id => self.ride_participants_owners.pluck(:ride_id))
@@ -55,4 +55,9 @@ class User < ActiveRecord::Base
 #    messages << self.owned_messages
 #    messages.flatten!
 #  end
+
+  def age
+    now = Time.now.to_date
+    return now.year - dob.year - (((now.month > dob.month) || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1).to_i if dob
+  end
 end

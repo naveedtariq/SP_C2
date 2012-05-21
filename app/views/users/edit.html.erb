@@ -1,133 +1,56 @@
-<%= javascript_include_tag "jquery-1.7.1.min", "jquery.phonemask"%>
-<script type="text/javascript">
-    $(document).ready(function () {
-    $(".edit_user").submit(function (){
-      if ($('input#user_phone').val().length < 1) {
-        $(".phone-check1").show();
-      }
-      else{
-        return true;
-      }
-      return false;
-    });
-
-    $("input#user_phone").change(function () {
-      if ($(this).val() != "")
-        $(".phone-check1").hide();
-    });
-    $("input#user_phone").mask("999-999-9999");                                 // jquery for phone number format
-
-    });
-</script>
-<div class="container">
-  <section id="forms">                                                          <!-- here User update his information -->
-    <%= form_for @user, :html => {:multipart => true} do |f| %>
-        <% if @user.errors.any? %>
-            <div class="error_messages">
-              <h2>Form is invalid</h2>
-              <ul>
-                <% for message in @user.errors.full_messages %>
-                    <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-
-        <div class="field">
-          <%= f.label :first_name %>
-          <%= f.text_field :first_name, :disabled => true %>
-        </div>
-        <div class="field">
-          <%= f.label :last_name %>
-          <%= f.text_field :last_name, :disabled => true %>
-        </div>
-        <div class="field">
-          <%= f.label :about %>
-          <%= f.text_area :about %>
-        </div>
-        <div class="field">
-          <%= f.label :email %>
-          <%= f.text_field :email, :disabled => true %>
-        </div>
-        <% unless @user.password.blank? %>
-            <div class="field">
-              <%= f.label :password %>
-              <%= f.password_field :password %>
-              <span class="password_strength"></span>
-            </div>
-        <div class="field">
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation %>
-        </div>
-
-        <% end %>
-        <div class="field">
-          <%= f.label :gender %>
-          <%= f.select :gender, GENDER,{}, :disabled => true %>
-        </div>
-        <div class="field">
-          <%= f.label :Date_of_birth %>
-          <br/>
-          <%= f.date_select :dob, :start_year => 100.years.ago.year, :disabled => true %>
-        </div>
-        <div class="field">
-          <%= f.label :phone %>
-          <%= f.text_field :phone %>
-        </div>
-        <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter Phone#</div>
-        <div class="field">
-            <%= f.label :mode_of_communications %>
-            <table>
-              <tr>
-                <td>
-                  <%= f.radio_button :mode_of_communications, 'sms_text' %>
-                </td>
-                <td>
-                  <%= f.label :mode_of_communications, 'Sms text', :for => 'user_mode_of_communications_sms_text' %>
-                </td>
-                <td>
-                  <%= f.radio_button :mode_of_communications, 'phone_call' %>
-                </td>
-                <td>
-                  <%= f.label :mode_of_communications, 'Phone call', :for => 'user_mode_of_communications_phone_call' %>
-                </td>
-                <td>
-                  <%= f.radio_button :mode_of_communications, 'email' %>
-                </td>
-                <td>
-                  <%= f.label :mode_of_communications, 'Email', :for => 'user_mode_of_communications_email' %>
-                </td>
-              </tr>
-            </table>
-          </div>
-
-        <div class="field">
-          <%= f.label :city %>
-          <%= f.text_field :city %>
-        </div>
-        <div class="field">
-          <%= f.label :town %>
-          <%= f.text_field :town %>
-        </div>
-        <div class="field">
-          <%= f.label :work %>
-          <%= f.text_field :work %>
-        </div>
-        <div class="field">
-          <%= f.label :title %>
-          <%= f.text_field :title %>
-        </div>
-        <div class="field">
-          <%= f.label :school %>
-          <%= f.text_field :school %>
-        </div>
-        <div style="margin-left: 250px; "><%= image_tag current_user.user_image_url %></div>
-        <div class="field">
-          <%= f.label :user_image, "Image Upload" %>
-          <br/>
-          <%= f.file_field :user_image %>
-        </div>
-        <div class="actions"><%= f.submit %></div>
-    <% end %>
-  </section>
-</div>
+<section id="FindaRide" class="Main_wide">			          
+<%= form_for @user, :html => {:multipart => true} do |f| %>
+  <div class="view_profile_left_container">
+    <p>Select an image file to upload</p>
+    <fieldset>
+      <%= f.file_field :user_image %>
+    </fieldset>
+  </div>
+  <div class="view_profile_right_container">
+    <div class="main-heading">
+      <h2><%= @user.full_name %></h2>
+    </div>
+    <div class="profile_inner_part">
+      <h2>About me</h2>
+      <p><%= @user.about %></p>
+      <h2>Interests</h2>
+      <p>I love to listen to podcasts on the road. Favorites include This American Life, Democracy Now! Madness Radio, Camping, Skiing, running, dinners with friends.</p>
+      <div class="profile_form">
+          <fieldset><label>Work</label>
+            <%= f.text_field :work, :class => "form_text"  %>
+          </fieldset>
+          <fieldset><label>School</label>
+            <%= f.text_field :school, :class => "form_text"  %>
+          </fieldset>
+          <fieldset><label>Current City</label>
+            <%= f.text_field :city, :class => "form_text"  %>
+          </fieldset>
+          <fieldset><label>Hometown</label>
+            <%= f.text_field :town, :class => "form_text"  %>
+          </fieldset>
+          <fieldset><label>Phone Number (kept private)</label>
+            <%= f.text_field :phone, :class => "form_text"  %>
+          </fieldset>
+          <hr />
+          <fieldset><label>Primary Email</label>
+            <span class="primary_email"><%= @user.email %></span>
+          </fieldset>
+          <hr />
+          <fieldset class="check"><br />
+            <input type="checkbox" name="checkbox" class="list_checkbox" /><p class="checkbox_text list_text"><strong>Special email announcements</strong><br />srevice changes, holiday travel, etc.</p>
+          </fieldset>
+          <fieldset class="check">
+            <input type="checkbox" name="checkbox" class="list_checkbox" /><p class="checkbox_text list_text"><strong>Ride Success Surveys</strong><br /> 
+              occasional email to find out if you have</p>
+          </fieldset>
+          <fieldset  class="check">
+            <input type="submit" name="submit" class="profile_submit" value="Save Changes &amp; Update" />
+            <a href="#" title="Deactivate Account" class="deactive">Deactivate Account</a>
+          </fieldset>
+        <span class="break"></span>
+      </div>
+    </div>
+  </div>
+  <span class="break"></span>
+  <% end %>
+</section> <!-- Main #FindaRide -->

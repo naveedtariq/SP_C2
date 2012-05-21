@@ -750,7 +750,6 @@ header section nav a.SignUpButton:hover {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  margin-top: 124px;
 }
 
 .RidesWrapper h3 {
@@ -1767,7 +1766,7 @@ footer nav li {
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride{opacity:0.4;
                                                                                         filter:alpha(opacity=40);float:left; height:53px; cursor:pointer;}
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .ride_cab{ background:url(/assets/cartype_taxi.png) left center no-repeat; width:100px; height:57px; float:left;}
-.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .ride_car{ background:url(/assets/cartype_limo.png) left center no-repeat; width:83px; height:57px; float:left; padding:0 12px 0 5px;}
+.post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .ride_car{ background:url(/assets/cartype_blackcar.png) left center no-repeat; width:83px; height:57px; float:left; padding:0 12px 0 5px;}
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset label.selectride .radio-selectride{ margin:25px 7px 0 0; float:left;}
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset.for_cab label .radio_text{ padding-top:22px; padding-left:6px;}
 .post_ride-popup .post_ride_window .post_ride_popup_container fieldset label .radio_text{ line-height:19px !important; color:#333333; font-size:14px; font-weight:bold; float:right; padding-top:14px;}
@@ -1979,7 +1978,7 @@ footer nav li {
 }
 .RidesdetailWrapper .RidesList .RideDetails .LeaveArriveTime {
   padding: 7px 5px 0 0;
-  width: 60px;
+  width: 62px;
 }
 .RidesdetailWrapper .RidesList .RideDetails .Icon {
   background-image: url("/assets/sp_sprites_24.png");
@@ -2146,7 +2145,7 @@ footer nav li {
   -webkit-border-radius:10px 10px 0 0;
   -ms-border-radius:10px 10px 0 0;
   -moz-border-radius:10px 10px 0 0;
-/*  -o-	border-radius:10px 10px 0 0;*/
+  -o-	border-radius:10px 10px 0 0;
 
   border-top:1px solid #9ec4dc; border-left:1px solid #9ec4dc; border-right:1px solid #9ec4dc; border-bottom:none; padding:0px 19px 0; float:left; margin-right:5px; font-family:Arial, Helvetica, sans-serif; font-size:12px; background:#eee; height:29px; line-height:28px; font-weight:bold; color:#9e9e9e; cursor:pointer;}
 .RidesdetailWrapper .information_cantainer ul.triger_section li.active{ background:#fff; height:29px; position:relative; top:1px;}
@@ -2155,7 +2154,7 @@ footer nav li {
   -webkit-border-radius:0 10px 10px 10px;
   -ms-border-radius:0 10px 10px 10px;
   -moz-border-radius:0 10px 10px 10px;
-/*  -o-border-radius:0 10px 10px 10px;*/
+  -o-border-radius:0 10px 10px 10px;
 
   border:1px solid #9ec4dc; width:978px; display:block; min-height:300px; padding:28px 0 0 8px;}
 .RidesdetailWrapper .information_cantainer .pay_creditcard .form_row{ margin-bottom:15px; float:left; width:980px;}
@@ -2379,7 +2378,7 @@ footer nav li {
 
 
 /*feedback page */
-.RidesdetailWrapper .book_ride{ padding:15px 30px 2px 30px; float:left;}
+.RidesdetailWrapper .book_ride{ padding:15px 30px 2px; 30px; float:left;}
 .trip_detail fieldset{ width:285px; float:left; margin-bottom:15px;}
 .trip_detail fieldset label{ font-size:16px; font-family:Arial, Helvetica, sans-serif; display:block; color:#006699; font-weight:bold; margin-bottom:5px;}
 .trip_detail p{ float:left; margin-left:11px;}
