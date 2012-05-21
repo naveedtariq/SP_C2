@@ -8,3 +8,4 @@ db/development.mysql
 public/uploads/
 .idea/
 .bundle/config
+*.sw*
