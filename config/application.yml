@@ -1,16 +1,16 @@
 development:
   storage: file
-  facebook_app_id: 365401603490972
-  facebook_app_key: ba9d936788748804710532f5918348bc
-  facebook_return_url: http://localhost:3000/oauth/callback?provider=facebook
+  facebook_app_id: 405500709480319
+  facebook_app_key: 5a73e4923b9003f1e5e7b2d5d1dcb69e
+  facebook_return_url: http://beta.shairporter.com/oauth/callback?provider=facebook
 test:
   storage: file
-  facebook_app_id: 365401603490972
-  facebook_app_key: ba9d936788748804710532f5918348bc
-  facebook_return_url: http://localhost:3000/oauth/callback?provider=facebook
+  facebook_app_id: 405500709480319
+  facebook_app_key: 5a73e4923b9003f1e5e7b2d5d1dcb69e
+  facebook_return_url: http://beta.shairporter.com/oauth/callback?provider=facebook
 production:
   storage: fog
-  facebook_app_id: 363994853644871
-  facebook_app_key: d227eb43c0609721f6d921f4b8a243ca
-  facebook_return_url: http://ec2-50-17-68-61.compute-1.amazonaws.com/oauth/callback?provider=facebook
+  facebook_app_id: 405500709480319
+  facebook_app_key: 5a73e4923b9003f1e5e7b2d5d1dcb69e
+  facebook_return_url: http://beta.shairporter.com/oauth/callback?provider=facebook
   
