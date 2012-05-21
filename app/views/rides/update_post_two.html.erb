@@ -8,6 +8,9 @@
       minDate: 0, maxDate: "+1Y"
     });
 
+     departure_datetime = "<%= @ride.departuredatetime.to_date.strftime("%Y-%m-%d")%>"
+     $("#ride_departure_date").val(departure_datetime);
+
     $(".edit_ride").submit(function(){
       if($('#ride_departure_date').val()==""){
         $(".date-check-step2").show()
