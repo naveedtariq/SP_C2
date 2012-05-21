@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Shairporter</title>
-    <%= stylesheet_link_tag 'reset','chosen','sp','fancybox/jquery.fancybox-1.3.4','jquery-ui-1.8.20.custom', :media => 'all' %>
+    <%= stylesheet_link_tag 'reset','chosen','sp','jquery-ui-1.8.20.custom', :media => 'all' %>
 
 
 
@@ -10,7 +10,7 @@
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
     <%= javascript_include_tag 'jquery-1.6.4.min', 'jquery.tools.min', 'chosen.jquery.min', 'jquery.cycle.lite', 'sp.js', 'jquery-ui-1.8.20.custom.min.js'%>
-    <%= javascript_include_tag 'jcarousellite_1.0.1c4', 'fancybox/jquery.fancybox-1.3.4.pack.js' %>
+    <%= javascript_include_tag 'jcarousellite_1.0.1c4' %>
 
 
 
@@ -36,7 +36,8 @@
 
 
   </head>
-  <body class="FindaRide">
+
+  <body class="<%= @body_css_class %>">
     <div id="login-popup"></div>
 
     <div id="fb-root"></div> <!-- Facebook Application Thingamajig -->
