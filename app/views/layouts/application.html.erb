@@ -46,7 +46,7 @@
       <li style="float: left;">&nbsp;&nbsp;&nbsp;<%= link_to "Sign up", signup_path  %></li>
    <% end %>
    </ul>
-      <div style="float: left; color: #FFFFFF;"><%= Time.now.in_time_zone("Eastern Time (US & Canada)").strftime("%d-%m-%Y %H:%M %Z")%></div>           <!-- main navigation EDT time format -->
+      <div style="float: left; color: #FFFFFF;"><%= Time.zone.now.strftime("%d-%m-%Y %H:%M %Z")%></div>           <!-- main navigation EDT time format -->
       <% if current_user %>
       <ul style="float: left; margin-left: 20px;"class="navigation-bar-main">
        <li style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Dashboard", dashboard_path %></li>

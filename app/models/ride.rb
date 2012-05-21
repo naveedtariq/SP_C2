@@ -2,10 +2,6 @@ class Ride < ActiveRecord::Base
   after_find do |ride|
     ride.new_departure_time = "01:00" if ride.new_departure_time.blank?
   end
-  before_save do |ride|
-#    ride.new_departure_time = "01:00" if ride.new_departure_time.blank?
-#    ride.departuredatetime = ("#{self.new_departure_time.strftime("#{self.departure_date} %H:%M #{RequestLogger.sp_clock_time_with_zone.to_s.split(" ").last}")}").to_time
-  end
   attr_accessor :friends_in_common
   attr_accessor :count
   attr_accessor :return_trip_checkbox
@@ -34,7 +30,7 @@ class Ride < ActiveRecord::Base
   end
 
   def active?
-    (((self.departuredatetime - Time.now) > 0) && self.status == 1)
+    (((self.departuredatetime - Time.zone.now) > 0) && self.status == 1)
   end
 
   def from_and_to_location #check for if from and to location names are same
@@ -42,8 +38,8 @@ class Ride < ActiveRecord::Base
   end
 
   def departure_date_inclusion #Departure date check must be with in year
-    errors.add(:departuredatetime, "must be within a year") if (self.departuredatetime && (self.departuredatetime > (RequestLogger.sp_clock_date + 1.year)))
-                               #    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (RequestLogger.sp_clock_date)))
+    errors.add(:departuredatetime, "must be within a year") if (self.departuredatetime && (self.departuredatetime > (SpClock.date + 1.year)))
+                               #    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (SpClock.date)))
   end
 
   attr_accessor :departure, "all"
@@ -98,13 +94,13 @@ class Ride < ActiveRecord::Base
     rides = rides.scoped_departuredatetime(departuredate_time.to_time) if departuredate_time.present?
     if departure_date && ["first_option", "second_option"].include?(departure_date)
       if departure_date == "first_option"
-        dep_date = RequestLogger.sp_clock_date + SEARCH_OPTION_ONE_IN_DAYS.days
+        dep_date = SpClock.date + SEARCH_OPTION_ONE_IN_DAYS.days
       elsif departure_date == "second_option"
-        dep_date = RequestLogger.sp_clock_date + SEARCH_OPTION_TWO_IN_DAYS.days
+        dep_date = SpClock.date + SEARCH_OPTION_TWO_IN_DAYS.days
       end
       rides = rides.scoped_departure(dep_date)
     end
-    rides.current_rides(RequestLogger.sp_clock_time).active.orderby_time.orderby_price.includes(:ride_participants)
+    rides.current_rides(SpClock.time).active.orderby_time.orderby_price.includes(:ride_participants)
   end
 
 

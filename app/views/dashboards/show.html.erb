@@ -82,15 +82,15 @@
               <td><%= ride.from_location && ride.from_location.name %></td>
               <!-- fetched all ride informations -->
               <td><%= ride.to_location && ride.to_location.name %></td>
-              <td><%= ride.departure_date %></td>
-              <td><%= ride.departuredatetime.strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
-              <td><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
+              <td><%= ride.departuredatetime.to_date %></td>
+              <td><%= ride.departuredatetime.strftime("%H:%M %Z") %></td>
+              <td><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%H:%M %Z") %></td>
               <td><%= ride.flexibility_in_minutes %> mins</td>
               <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
               <td><%= ride.ride_type %></td>
               <td><%= ride.remaining_seats %></td>
               <td><%= number_to_currency(ride.total_price) %></td>
-              <td><%= (secs_to_time(ride.departuredatetime - Time.now)) %></td>
+              <td><%= (secs_to_time(ride.departuredatetime - Time.zone.now)) %></td>
               <td><%= ride.notes %></td>
               <td><%= link_to "link", new_ride_ride_participant_path(ride) %></td>
               <td><%if (ride.ride_participants.confirmed_or_owner_participants.pluck(:number_of_seats).sum) > 0 %><%= number_to_currency((ride.total_price/ride.ride_participants.confirmed_or_owner_participants.pluck(:number_of_seats).sum)*(ride.ride_participants.where(:user_id => current_user).first.number_of_seats || 1)) %><%end%></td>
@@ -112,7 +112,7 @@
                                     <%= link_to "Accept", "#{contact_ride_ride_participant_path(ride, ride.ride_participants.owners.where(:user_id => current_user.id).first)}?accept=#{participant.id}", :class => 'contact-form' %>
                                 <% end %>
                                 or <%= link_to "Deny", deny_ride_ride_participant_path(ride, participant) %>
-                                ; <%= ((participant.created_at + RequestLogger.sp_clock_day)-RequestLogger.sp_clock_time.to_i).strftime("%H:%M") %>
+                                ; <%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>
                                 left to respond
                               </li>
                           <% end %>
@@ -132,7 +132,7 @@
                     <% end %> <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %></span>
                 <% when ROLES_FOR_RIDES[:pending] %>
                     Status: still
-                    pending; <%= ((ride_participant.created_at + RequestLogger.sp_clock_day)-RequestLogger.sp_clock_time.to_i).strftime("%H:%M") %>
+                    pending; <%= ((ride_participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>
                     left in expiry
                     | <%= link_to "Cancel ride", cancel_ride_ride_participant_path(ride, ride_participant) %>
                 <% when ROLES_FOR_RIDES[:confirmed] %>
@@ -199,8 +199,8 @@
               <td><%= ride.from_location && ride.from_location.name %></td>
               <td><%= ride.to_location && ride.to_location.name %></td>
               <td><%= ride.departure_date %></td>
-              <td><%= ride.departuredatetime.strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
-              <td><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%H:%M #{RequestLogger.sp_clock_zone_offset}") %></td>
+              <td><%= ride.departuredatetime.strftime("%H:%M #{SpClock.zone_offset}") %></td>
+              <td><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%H:%M #{SpClock.zone_offset}") %></td>
               <td><%= ride.flexibility_in_minutes %> mins</td>
               <td><%= time_to_minutes(ride.duration_in_minutes) %></td>
               <td><%= ride.ride_type %></td>
