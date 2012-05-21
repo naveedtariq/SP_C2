@@ -130,7 +130,7 @@
         </td>
         <td><%= ride.from_location && ride.from_location.name %></td>
         <td><%= ride.to_location && ride.to_location.name %></td>
-        <td><%= ride.departure_date %></td>
+        <td><%= ride.departuredatetime.to_date %></td>
         <td><%= ride.departuredatetime.strftime("%H:%M %Z") %></td>
         <td><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%H:%M %Z") %></td>
         <td><%= ride.flexibility_in_minutes %> mins</td>
@@ -179,7 +179,7 @@
         </td>
         <td><%= ride.from_location && ride.from_location.name %></td>
         <td><%= ride.to_location && ride.to_location.name %></td>
-        <td><%= ride.departure_date %></td>
+        <td><%= ride.departuredatetime.to_date %></td>
         <td><%= ride.departuredatetime.strftime("%H:%M %Z") %></td>
         <td><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%H:%M %Z") %></td>
         <td><%= ride.flexibility_in_minutes %> mins</td>
@@ -200,7 +200,7 @@
     <% user = feedback.user %>
     <% ride = feedback.ride %>
     <a href="<%= user_path(user) %>"><%= user.full_name %></a> |
-    <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%= ride.departure_date %></a>
+    <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;on&nbsp;<%= ride.departuredatetime.to_date %></a>
     <br/><%= image_tag user.user_image_url %><br/>
     <%= feedback.status %> &nbsp; by &nbsp; <%= user.full_name %><br/>
     Feedback: <%= feedback.feedback %><br/>

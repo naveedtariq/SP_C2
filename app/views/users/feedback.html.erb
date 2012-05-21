@@ -5,7 +5,7 @@
         <%ride = past_ride.ride %>
         <%if ride.ride_participants.active_participants.count > 1%>
         <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;&nbsp;
-          on <%= ride.departure_date %></a>
+          on <%= ride.departuredatetime.to_date %></a>
         | <%= link_to "feedback", new_ride_feedback_path(ride), :target => "frame-a" %>
         <br/>
         <%end%>

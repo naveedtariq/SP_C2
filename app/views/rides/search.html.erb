@@ -297,11 +297,11 @@
             <% @rides.each do |ride| %>
                 <% ride.friends_in_common ||= [] %>
 
-                <% unless last_date.include? ride.departure_date %>
+                <% unless last_date.include? ride.departuredatetime.to_date %>
                     <h3 class="headline first">
                       <%= ride.departuredatetime.strftime("Departing %A, %B #{ride.departuredatetime.day.ordinalize}") %>
                     </h3>
-                    <% last_date << ride.departure_date %>
+                    <% last_date << ride.departuredatetime.to_date %>
                 <% end %>
                 <a href="<%= (ride.remaining_seats > 0) ? (new_ride_ride_participant_path(ride, :return_url => request.query_string)) : (clone_ride_path(ride)) %>">
                   <div class="entry">

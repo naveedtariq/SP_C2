@@ -118,7 +118,7 @@
         <div id="results">
           <div class="ride_list">
             <h3 class="headline first">
-              <%= @ride.departure_date.strftime("Departing %A, %B #{@ride.departure_date.day.ordinalize}") %>
+              <%= @ride.departuredatetime.strftime("Departing %A, %B #{@ride.departuredatetime.day.ordinalize}") %>
 
               <% @ride.friends_in_common ||= [] %>
             </h3>

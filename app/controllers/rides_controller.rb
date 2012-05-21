@@ -86,7 +86,8 @@ class RidesController < ApplicationController
   def posted_one # Post Ride 1st step ride create
                  #    return redirect_to new_ride_path if cookies[:ride].blank?
     @ride = Ride.new(retrieve_ride)
-    return render :action => "post_two"
+        @ride.return_departuredatetime = @ride.return_departuredatetime.to_time rescue @ride.return_departuredatetime = nil
+            return render :action => "post_two"
   end
 
   def post_two # Post ride 2nd step ride create
