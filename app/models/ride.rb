@@ -167,4 +167,7 @@ class Ride < ActiveRecord::Base
     self.total_price / ((self.available_seats) + 1)
   end
 
+  def actual_departure_time
+    self.departure_time.change(:year => self.departure_date.year, :day => self.departure_date.day, :month => self.departure_date.month )
+  end
 end
