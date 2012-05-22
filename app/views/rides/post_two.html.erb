@@ -11,6 +11,20 @@
       minDate: 0, maxDate: "+1Y"
     });
 
+     trip_duration = "<%= @ride.duration_in_minutes %>"
+     
+     <% if @ride.departuredatetime.present? %>
+       $("#ride_departure_date").val("<%= @ride.departuredatetime.strftime("%Y-%m-%d") %>");
+       $("#ride_new_departure_time").val("<%= @ride.departuredatetime.strftime("%I:%M") %>");
+       $("#ride_ampm_time").val("<%= @ride.departuredatetime.strftime("%p") %>");
+       <%  end %>
+         
+     <% if @ride.return_departuredatetime.present? %>
+       $("#ride_return_trip_departure_date").val("<%= @ride.return_departuredatetime.strftime("%Y-%m-%d") %>");
+       $("#ride_return_new_departure_time").val("<%= @ride.return_departuredatetime.strftime("%I:%M") %>");
+       $("#ride_return_new_ampm_time").val("<%= @ride.return_departuredatetime.strftime("%p") %>");
+       <%  end %>
+
     $( "#ride_return_trip_departure_date" ).datepicker({
       dateFormat: "yy-mm-dd",
       minDate: 0, maxDate: "+1Y"
@@ -232,9 +246,15 @@
             }
           });
           if(aa%5 == 0)
-            $("#ride_duration_minutes").val(aa);
+            if(<%= @ride.duration_in_minutes.blank?%>)
+              $("#ride_duration_minutes").val(aa);
+            else
+              $("#ride_duration_minutes").val(trip_duration);
           else
-            $("#ride_duration_minutes").val(duration_final);
+            if(<%= @ride.duration_in_minutes.blank? %>)
+              $("#ride_duration_minutes").val(duration_final);
+            else
+              $("#ride_duration_minutes").val(trip_duration);
           }
         });
 <% end %>
@@ -374,9 +394,6 @@
     }
   });
 
-
-
-
       $("#ride_return_new_departure_time").change(function(){
       $(".arrival-date-check").hide();
       $(".departure-greater-arrival").hide();
@@ -385,7 +402,6 @@
       $(".departure-min-greater-arrival").hide();
       $(".departure-1hr-arrival").hide();
     });
-
   });
 </script>
 

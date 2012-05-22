@@ -11,6 +11,9 @@
      departure_datetime = "<%= @ride.departuredatetime.to_date.strftime("%Y-%m-%d")%>"
      $("#ride_departure_date").val(departure_datetime);
 
+     trip_duration = "<%= @ride.duration_in_minutes %>"
+     $("#ride_duration_minutes").val(trip_duration);
+
     $(".edit_ride").submit(function(){
       if($('#ride_departure_date').val()==""){
         $(".date-check-step2").show()
