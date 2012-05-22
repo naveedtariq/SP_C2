@@ -19,7 +19,7 @@
                     "&nbsp;&nbsp;<%= u.created_at.strftime("%d/%m/%y") %>&nbsp;&nbsp;<%= time_ago_in_words(u.created_at) %> ago</a></td>
                 <td>
                   <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;&nbsp;
-                    on <%= ride.departure_date %></a></td>
+                    on <%= ride.departuredatetime.to_date %></a></td>
               </tr>
           <% end %>
       <% end %>

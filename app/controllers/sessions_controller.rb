@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     user = login(params[:email], params[:password], params[:remember_me])       # build a session of a user here
     if user
-      user.last_login = Time.now                                                # time of login save
+    user.last_login = Time.zone.now                                                # time of login save
       user.save(:validate => false)
       redirect_back_or_to dashboard_path
       #      end
@@ -56,7 +56,7 @@ class SessionsController < ApplicationController
     current_user.photo_url = photo
     current_user.oauth_code = oauth_code
     current_user.number_of_friends = friends.count
-    current_user.last_login = Time.now
+    current_user.last_login = Time.zone.now
     current_user.save(:validate => false)
     friend_list = []
     friends.each do |friend|                                                                          # fetch user's friend of facebook

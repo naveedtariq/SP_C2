@@ -34,8 +34,8 @@ describe Ride do
       :to_location_id => Location.last.id,
       :available_seats => 2,
       :total_price => 2,
-      :departure_date => RequestLogger.sp_clock_date,
-      :departure_time => RequestLogger.sp_clock_time,
+      :departure_date => SpClock.date,
+      :departure_time => SpClock.time,
       :duration_in_minutes => 15,
       :ride_type => "sudan"
     }
