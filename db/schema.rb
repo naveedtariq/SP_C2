@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508080356) do
+ActiveRecord::Schema.define(:version => 20120518114654) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -103,8 +103,6 @@ ActiveRecord::Schema.define(:version => 20120508080356) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.integer  "duration_in_minutes"
-    t.date     "departure_date"
-    t.time     "departure_time"
     t.integer  "to_location_id"
     t.integer  "from_location_id"
     t.integer  "flexibility_in_minutes"
