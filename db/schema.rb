@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120518114654) do
+ActiveRecord::Schema.define(:version => 20120525205847) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20120518114654) do
     t.datetime "last_login"
     t.string   "phone"
     t.string   "mode_of_communications"
+    t.text     "interest"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
