@@ -1314,7 +1314,7 @@ footer nav li {
 .right-col-main .right-col-content .info-about { padding:20px 0;}
 .right-col-main .right-col-content .info-about p strong { color:#196592; display:block; padding-bottom:3px;}
 .right-col-main .right-col-content hr{ height:1px; background:#e8e8e8; border:0px; }
-.right-col-main .right-col-content .info-about hr{ margin:8px 17px;}
+.right-col-main .right-col-content .info-about hr{ margin:8px 17px; width: 95%;}
 
 .right-col-main .right-col-content .reviews-and-feedbacks { padding:4px 0; display:block; list-style:none;}
 .right-col-main .right-col-content .reviews-and-feedbacks li{ display:block; padding:19px 0 17px 0; border-bottom:1px solid #e8e8e8;}
@@ -1599,8 +1599,8 @@ footer nav li {
   margin: 0 auto;
 }
 .Main_wide .view_profile_left_container{ width:250px; float:left; padding-top:20px;}
-.Main_wide .view_profile_left_container p{ background:url(/assets/person_image.jpg) 18px top no-repeat; color:#196592;
-                                           padding:215px 15px 0 18px; font-size:12px; font-weight:bold;}
+.Main_wide .view_profile_left_container p{ color:#196592;
+                                           padding:10px 0 0 0; font-size:12px; font-weight:bold;}
 .Main_wide .view_profile_left_container fieldset{ width:230px; padding-top:3px; padding-left:18px;}
 .Main_wide .view_profile_left_container fieldset .image_text{ border:1px solid #bdc7d8; padding:2px; font-size:12px; float:left; width:134px; line-height:22px; height:18px;}
 .Main_wide .view_profile_left_container fieldset .image_text:hover{ border-color:#404040;}
@@ -1658,6 +1658,9 @@ footer nav li {
 .Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .form_text{border:1px solid #bdc7d8; padding:2px; font-size:12px; float:left; height:18px; width:268px; line-height:21px; font-size:12px; color:#6a6a6a;}
 .Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .form_text:hover{ border-color:#404040;}
 .Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .form_text:focus{ border-color:#95b0db; }
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .form_text_area {border:1px solid #bdc7d8; padding:2px; font-size:12px; float:left; height:18px; width:670px; height: 40px; line-height:21px; font-size:12px; color:#6a6a6a; margin-top: 5px;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .form_text_area:hover { border-color:#404040;}
+.Main_wide .view_profile_right_container .profile_inner_part .profile_form fieldset .form_text_area:focus { border-color:#95b0db; }
 .Main_wide .view_profile_right_container .profile_inner_part .profile_form hr{ background:url(/assets/hr_image.gif) left top no-repeat; width:628px; height:1px; float:left; margin:20px 0 14px 10px; border:none;}
 .Main_wide .view_profile_right_container .profile_inner_part .profile_form .primary_email{ font-size:12px; color:#6a6a6a; float:left; line-height:18px; padding-top:3px;}
 .Main_wide .view_profile_right_container .profile_inner_part .profile_form .form_checkbox{ margin:5px 0 0 20px; float:left; cursor:pointer;}
@@ -2800,3 +2803,43 @@ hr{ width:430px; margin:0; margin-top:10px;  height:1px; border:none; background
                                                          padding:21px 0 0 21px;}
 .vertical_center{ display:table-cell; width:100%; height:100%; }
 .vertical_center *{ vertical-align:middle;}
+div.fancy-file {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+div.fancy-file-name {
+  float: left;
+  border-radius: 3px;
+  background-color: #aaa;
+  box-shadow:
+  inset 1px 1px 3px #eee,
+  inset -1px -1px 3px #888,
+  1px 1px 3px #222;
+  font-weight: bold;
+  font-family: Courier New, fixed;
+  width: 155px;
+  font-size: 12px;
+  padding: 1px 4px;
+}
+
+button.fancy-file-button {
+/*  float: left;
+  border-radius: 3px;
+  border: 1px solid red;
+  background-color: #F5BD07;
+  font-weight: bold;
+  vertical-align: top;
+  margin: 0 0 0 3px;*/
+  cursor: pointer;
+}
+
+div.input-container {
+  position: absolute;
+  top: 0; left: 0;
+}
+
+div.input-container input {
+  opacity: 0;
+}
