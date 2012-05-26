@@ -2504,7 +2504,7 @@ footer nav li {
 
 }
 .messagesWrapper ul li .inbox_section a{ font-size:11px; text-align:center; float:left; width:100%; text-decoration:none; line-height:30px;}
-.messagesWrapper ul li .find_out{ float:left; position:relative; width:295px; margin-left:15px;}
+.messagesWrapper ul li .find_out{ float:left; position:relative; width:315px; margin-left:15px;}
 .messagesWrapper ul li .find_out .place_date_contant{ position:absolute; top:10px; right:21px; font-size:12px; color:#717171; font-family:Arial, Helvetica, sans-serif; font-weight:bold; float:left; }
 .messagesWrapper ul li .find_out .place_date_contant a{
   background:url(/assets/link_icon.png) right center no-repeat;
@@ -2514,7 +2514,7 @@ footer nav li {
   position:absolute;
   top:-11px;
   margin-left:5px;
-  left: 133px;
+  left: 285px;
 }
 .messagesWrapper ul li .find_out .index_main_cout{ display:block; padding-top:39px;}
 .messagesWrapper ul li .find_out .index_main_cout h3{ font-size:15px; font-weight:bold; color:#06699b;}
