@@ -83,7 +83,7 @@
           
             <fieldset>
               <label>Availability</label>
-              <select style="width: 282px; float: left;" class="chzn-select" name="Select_From" id="selRW5" onchange='$(".total_amount").html($("#selRW5").val());'>
+              <select style="width: 282px; float: left;" class="chzn-select" name="Select_From" id="selRW5" onchange='$(".total_amount").html($("#selRW5").val());$("#ride_participant_number_of_seats").val($("#selRW5").prop("selectedIndex")+1)'>
                 <% @ride.remaining_seats.times do |seat_count| %>
                   <option value="<%= number_to_currency(@ride.price_per_seat*(seat_count+1)) %>"><%= seat_count+1 %> seat - <%= number_to_currency(@ride.price_per_seat*(seat_count+1)) %> one-way</option>
                 <% end %>
@@ -112,7 +112,7 @@
           <span class="trip_cost total_amount"><%= number_to_currency(@ride.price_per_seat) %></span>
           <h4>Service Fee <span>free for a limited time!</span></h4>
           <span class="trip_cost"> 0.00</span>
-          <hr>
+          <hr />
           <h4>TOTAL</h4>
           <span class="trip_cost answer total_amount"><%= number_to_currency(@ride.price_per_seat) %></span>
         </div>
