@@ -26,31 +26,31 @@
   }
   if (IsFound) {
   while (j < A.length) {
-    if ($('#ride_from_location_id').val() <= A[j]) {
-      $(".city-option-same").show();
-      $('#ride_to_location_id').addClass("validation-error");
-      $('#ride_from_location_id').addClass("validation-error");
-      $("#ride_departure_all").attr("disabled", "disabled");
-      $("#ride_departure_first_option").attr("disabled", "disabled");
-      $("#ride_departure_second_option").attr("disabled", "disabled");
-      $("#btnAll").attr("disabled", "disabled");
-      $("#btn14").attr("disabled", "disabled");
-      $("#btn30").attr("disabled", "disabled");
-      $("#RideSearch").attr("disabled", "disabled");
-      return false;
+  if ($('#ride_from_location_id').val() <= A[j]) {
+  $(".city-option-same").show();
+  $('#ride_to_location_id').addClass("validation-error");
+  $('#ride_from_location_id').addClass("validation-error");
+  $("#ride_departure_all").attr("disabled", "disabled");
+  $("#ride_departure_first_option").attr("disabled", "disabled");
+  $("#ride_departure_second_option").attr("disabled", "disabled");
+  $("#btnAll").attr("disabled", "disabled");
+  $("#btn14").attr("disabled", "disabled");
+  $("#btn30").attr("disabled", "disabled");
+  $("#RideSearch").attr("disabled", "disabled");
+  return false;
   }
   else {
-      $(".city-option-same").hide();
-      $('#ride_to_location_id').removeClass("validation-error");
-      $('#ride_from_location_id').removeClass("validation-error");
-      $("#ride_departure_all").removeAttr("disabled", "disabled");
-      $("#ride_departure_first_option").removeAttr("disabled", "disabled");
-      $("#ride_departure_second_option").removeAttr("disabled", "disabled");
-      $("#btnAll").removeAttr("disabled", "disabled");
-      $("#btn14").removeAttr("disabled", "disabled");
-      $("#btn30").removeAttr("disabled", "disabled");
-      //$("#RideSearch").submit();
-    }
+  $(".city-option-same").hide();
+  $('#ride_to_location_id').removeClass("validation-error");
+  $('#ride_from_location_id').removeClass("validation-error");
+  $("#ride_departure_all").removeAttr("disabled", "disabled");
+  $("#ride_departure_first_option").removeAttr("disabled", "disabled");
+  $("#ride_departure_second_option").removeAttr("disabled", "disabled");
+  $("#btnAll").removeAttr("disabled", "disabled");
+  $("#btn14").removeAttr("disabled", "disabled");
+  $("#btn30").removeAttr("disabled", "disabled");
+  //$("#RideSearch").submit();
+  }
   j = j + 1;
   }
   $("#RideSearch").submit();
@@ -330,7 +330,7 @@
       <% last_date = [] %>
 
 
-      <h3><%= @rides.first.departure_date.strftime("Departing %A, %B #{@rides.first.departure_date.day.ordinalize}") %></h3>
+      <h3><%= @rides.first.departuredatetime.strftime("Departing %A, %B #{@rides.first.departuredatetime.day.ordinalize}") %></h3>
       <% last_date = [@rides.first.departure_date] %>
       <div class="Legend">
         <span class="Estimated">Prices &amp; Times <a class="HelpTooltip" title="Prices are estimated using taxi or black car fares given your location and airport. For example, a taxi to JFK is a flat $45 before tip &amp; toll, black car service is typically $60 to $80.<span class='TooltipArrow'>Arrow</span>">?</a></span>
@@ -343,7 +343,7 @@
 
           <% unless last_date.include? ride.departure_date %>
             <h3 class="headline first">
-              <%= ride.departure_date.strftime("Departing %A, %B #{ride.departure_date.day.ordinalize}") %>
+              <%= ride.departuredatetime.strftime("Departing %A, %B #{ride.departuredatetime.day.ordinalize}") %>
             </h3>
             <% last_date << ride.departure_date %>
           <% end %>
@@ -379,13 +379,13 @@
               <tr>
                 <th class="Leave" scope="row"><span class="Icon">Icon</span> Leave:</th>
 
-                <td class="LeaveArriveTime"><strong><%= ride.departure_time.strftime("%I:%M %p") %></strong></td>
+                <td class="LeaveArriveTime"><strong><%= ride.departuredatetime.strftime("%I:%M %p") %></strong></td>
                 <td class="PlusMinus">&plusmn; <%= ride.flexibility_in_minutes %> min.</td>
                 <td><strong><%= ride.from_location && ride.from_location.name %></strong></td>
               </tr>
               <tr>
                 <th class="Arrive" scope="row"><span class="Icon">Icon</span> Arrive:</th>
-                <td class="LeaveArriveTime"><strong><%= (ride.departure_time + ride.duration_in_minutes.minutes).strftime("%I:%M %p") %></strong></td>
+                <td class="LeaveArriveTime"><strong><%= (ride.departuredatetime + ride.duration_in_minutes.minutes).strftime("%I:%M %p") %></strong></td>
                 <td class="PlusMinus">&plusmn; <%= ride.flexibility_in_minutes %> min.</td>
                 <td><strong><%= ride.to_location && ride.to_location.name %> <span class="SameLocationIcon">Check</span></strong></td>
               </tr>
@@ -406,25 +406,28 @@
                   <% ride.friends_in_common << mutual_friends %>
                 <% end %>
                 <li>
-                  <a href="#" class="UserPhoto" id="Trigger_UserID_001">
+                  <a href="#" class="UserPhoto" id="Trigger_UserID_<%= rider.id %>">
                     <%= image_tag rider.user.user_image_url, :width=>"60", :height=>"60" %>
                   </a>
                   <a href="#" class="UserName">
                     <%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %>.
                   </a>
 
+                  <script type="text/javascript">
+                    user_tool_tips["#Trigger_UserID_<%= rider.id %>"] = "#TT_UserID_<%= rider.id %>";
+                  </script>
 
                   <!-- HIDDEN TOOLTIP -->
-                  <div class="UserTooltip" id="TT_UserID_001">
-                    <h4><a href="#"><%= rider.user.full_name %></a> from <%= rider.user.city %></h4>
+                  <div class="UserTooltip" id="TT_UserID_<%= rider.id %>">
+                    <h4><a href="<%=user_path(rider.user)%>"><%= rider.user.full_name %></a> from <%= rider.user.city %></h4>
                     <p><em>Can't wait for Thanksgiving vacation!</em></p>
                     <div class="UserInfo">
                       <div class="UserPhoto">
                         <%= image_tag rider.user.user_image_url, :width=>"80", :height=>"80" %>
                       </div>
                       <ul>
-                        <li>Facebook <em>(<a href="#"><%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}" %></a>)</em></li>
-                        <li><%= rider.user.ride_participants.past_rides(RequestLogger.sp_clock_time).active_rides.confirmed_or_owner_participants.count %> past rides, <a href="#"><%= rider.user.feedbacks.count %> feedback</a> (97%)</li>
+                        <li>Facebook <em>(<a href="<%=user_path(rider.user)%>"><%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}" %></a>)</em></li>
+                        <li><%= rider.user.ride_participants.past_rides(SpClock.time).active_rides.confirmed_or_owner_participants.count %> past rides, <a href="<%=user_path(rider.user)%>"><%= rider.user.feedbacks.count %> feedback</a></li>
                         <li><strong>Networks: </strong>UC Berkely, Miramonte High</li>
                       </ul>
                     </div>
