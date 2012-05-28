@@ -2,14 +2,15 @@ class Ride < ActiveRecord::Base
   after_find do |ride|
     ride.new_departure_time = "01:00" if ride.new_departure_time.blank?
   end
+  
   attr_accessor :friends_in_common
   attr_accessor :count
   attr_accessor :return_trip_checkbox
   attr_accessor :return_trip_departure_date
   attr_accessor :return_trip_departure_time
   attr_accessor :new_departure_time
-  attr_accessor :departure_date
-  attr_accessor :ampm_time
+  attr_accessor :departure_datetime
+  
 
   attr_accessor :return_new_departure_time
   attr_accessor :return_new_ampm_time
@@ -23,7 +24,7 @@ class Ride < ActiveRecord::Base
   has_many :ride_participants # Association with ride_participants model
   has_many :users, :through => :ride_participants # Association with user model
   validates :available_seats, :total_price, :duration_in_minutes, :ride_type, :presence => true
-  validate :departure_date_inclusion
+  validate :departure_datetime_inclusion
   validate :from_and_to_location #Validation
   def price_per_seat(number_of_seats = 1)
     (self.total_price/(self.ride_participants.active_participants.count + number_of_seats))
@@ -39,7 +40,7 @@ class Ride < ActiveRecord::Base
 
   def departure_date_inclusion #Departure date check must be with in year
     errors.add(:departuredatetime, "must be within a year") if (self.departuredatetime && (self.departuredatetime > (SpClock.date + 1.year)))
-                               #    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (SpClock.date)))
+    #    errors.add(:departure_date, "can't be before today") if(self.departure_date && (self.departure_date < (SpClock.date)))
   end
 
   attr_accessor :departure, "all"
@@ -174,6 +175,10 @@ class Ride < ActiveRecord::Base
   end
 
   def actual_departure_time
-    self.departure_time.change(:year => self.departure_date.year, :day => self.departure_date.day, :month => self.departure_date.month )
+    self.departuredatetime.change(:year => self.departuredatetime.year, :day => self.departuredatetime.day, :month => self.departuredatetime.month )
+  end
+
+  def departure_date
+    self.departuredatetime.to_date
   end
 end
