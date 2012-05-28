@@ -1,0 +1,32 @@
+<div class=" jcarousel-skin-tango">
+  <div class="jcarousel-container jcarousel-container-horizontal" style="position: relative; display: block;">
+    <p>Friends in common with riders:</p>
+    <div class="jcarousel-clip jcarousel-clip-horizontal" style="position: relative;">
+      <ul class="jcarousel-list jcarousel-list-horizontal" id="mycarousel" style="overflow: hidden; position: relative; top: 0px; margin: 0px; padding: 0px; left: 0px; width: 540px;">
+        <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
+          <% if @graph.present? && (rider.user_id != current_user.id) && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>     <!-- check if user login thorough facebook -->
+            <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>                  <!-- fetched mutual friends of current user w.r.t riders -->
+            <% @ride.friends_in_common << mutual_friends %>
+          <% end %>
+        <% end %>
+        <% mutual_friends = (@ride.friends_in_common.blank?) ? []:@ride.friends_in_common.flatten.uniq  %>
+        <%  mutual_friends.each do |mf| %>
+          <li jcarouselindex="1" style="float: left; list-style: none outside none;" class="jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal">
+            <img src="http://graph.facebook.com/<%=friend["id"]%>/picture" alt="" height="34" width="34" />
+          </li>
+        <% end %>
+        <% if mutual_friends.count==0 %>
+          <li>No common friends found.</li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="jcarousel-prev jcarousel-prev-horizontal jcarousel-prev-disabled jcarousel-prev-disabled-horizontal" style="display: block;" disabled="disabled">
+
+    </div>
+    <div class="jcarousel-next jcarousel-next-horizontal" style="display: block;">
+
+    </div>
+
+  </div>
+
+</div>
