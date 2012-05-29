@@ -12,24 +12,6 @@ class RidesController < ApplicationController
     render :layout=>false
   end
 
-                                                                                                    #  def edit
-                                                                                                    #    create_ride_cookie(@ride)
-                                                                                                    #    return render :json => retrieve_ride
-                                                                                                    #    @ride.attributes = retrieve_ride
-                                                                                                    #    render :action => "post_one"
-                                                                                                    #  end
-
-                                                                                                    #def create
-                                                                                                    #  @ride = Ride.new(params[:ride])
-                                                                                                    #  if @ride.save
-                                                                                                    #    @ride.make_owner!(current_user)
-                                                                                                    #    flash[:notice] = "Successfully created ride"
-                                                                                                    #    redirect_to root_url
-                                                                                                    #  else
-                                                                                                    #    render :action => 'new'
-                                                                                                    #  end
-                                                                                                    #end
-
   def search # function for search ride
     @ride = Ride.new(params[:ride])
     @ride.departure = params[:ride] && params[:ride]["departure"] || "all" # by default all rides show against search rides
@@ -49,6 +31,7 @@ class RidesController < ApplicationController
   def update # update ride here
     if @ride.valid?(params[:ride])
       @ride.modify!(params[:ride], current_user) # modify attributes
+#      @ride.departure_time = @ride.departuredatetime
       unless params[:next_step] == "update"
         return render :action => params[:next_step]
       end
@@ -59,34 +42,23 @@ class RidesController < ApplicationController
     end
   end
 
-  def updated # function for update ride
-              #    hash = retrieve_ride
-              #    @ride = Ride.find hash[:id]
-              #    @ride.attributes = hash
-              #    @ride.attributes = params[:ride]
-              #    store_ride(@ride)
-              #    return render :action => params[:next_step] unless params[:step] == "3"
-              #    return redirect_to update_ride_rides_path
-
+  def updated 
     @ride.modify!(params[:ride], current_user)
     redirect_to(dashboard_path, :notice => 'Ride was successfully updated.')
   end
 
   def posted
-    params[:ride]["departure_time(1i)"], params[:ride]["departure_time(2i)"], params[:ride]["departure_time(3i)"] = params[:ride]["departure_date"].split("-") if params[:step] == "2"
-    if params[:step] == "2"
-      params[:ride]["return_trip_departure_time"] = "#{params[:ride][:return_trip_departure_date]} #{params[:ride]["return_trip_departure_time(4i)"]}:#{params[:ride]["return_trip_departure_time(5i)"]}"
-      params[:ride].delete("return_trip_departure_time(1i)")
-      params[:ride].delete("return_trip_departure_time(2i)")
-      params[:ride].delete("return_trip_departure_time(3i)")
-      params[:ride].delete("return_trip_departure_time(4i)")
-      params[:ride].delete("return_trip_departure_time(5i)")
+ if params[:step] == "2"
+      params[:ride]["return_departuredatetime"] = "#{params[:ride][:return_trip_departure_date]} #{params[:ride]["return_departuredatetime(4i)"]}:#{params[:ride]["return_departuredatetime(5i)"]}"
+      params[:ride].delete("return_departuredatetime(1i)")
+      params[:ride].delete("return_departuredatetime(2i)")
+      params[:ride].delete("return_departuredatetime(3i)")
+      params[:ride].delete("return_departuredatetime(4i)")
+      params[:ride].delete("return_departuredatetime(5i)")
     end
-
-    #return redirect_to new_ride_path if cookies[:ride].blank?
-    #      return render :json => params[:ride]
     @ride = Ride.new(retrieve_ride)
-    @ride.attributes = params[:ride]
+ @ride.return_departuredatetime = @ride.return_departuredatetime.to_time rescue @ride.return_departuredatetime = nil
+ @ride.attributes = params[:ride]
     store_ride(@ride)
     #
     #    return render :json => cookies
@@ -101,8 +73,7 @@ class RidesController < ApplicationController
       @ride_return = Ride.new(retrieve_ride)
       @ride_return.to_location_id = @ride.from_location_id
       @ride_return.from_location_id = @ride.to_location_id
-      @ride_return.departure_time = @ride.return_trip_departure_time
-      @ride_return.departure_date = @ride.return_trip_departure_date
+      @ride_return.departuredatetime = @ride.return_departuredatetime
       @ride_return.save!
       @ride_return.make_owner!(current_user)
     end
@@ -116,7 +87,8 @@ class RidesController < ApplicationController
   def posted_one # Post Ride 1st step ride create
                  #    return redirect_to new_ride_path if cookies[:ride].blank?
     @ride = Ride.new(retrieve_ride)
-    return render :action => "post_two"
+        @ride.return_departuredatetime = @ride.return_departuredatetime.to_time rescue @ride.return_departuredatetime = nil
+            return render :action => "post_two"
   end
 
   def post_two # Post ride 2nd step ride create
