@@ -3,45 +3,65 @@
   <head>
     <title>Shairporter</title>
     <%= stylesheet_link_tag 'reset','chosen','sp','jquery-ui-1.8.20.custom', :media => 'all' %>
+    <%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui" %>
 
+  <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 
-
-    <!--[if lt IE 9]>
-	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
     <%= javascript_include_tag 'jquery-1.6.4.min', 'jquery.tools.min', 'chosen.jquery.min', 'jquery.cycle.lite', 'sp.js', 'jquery-ui-1.8.20.custom.min.js'%>
     <%= javascript_include_tag 'jcarousellite_1.0.1c4' %>
-
-
 
 
     <script src="http://use.typekit.com/ofi5buc.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
 
     <script type="text/javascript">
-		$(document).ready(function() {
-			$('.CycleInnerWrapper').cycle();
-		});
+      $(document).ready(function() {
+        $('.CycleInnerWrapper').cycle();
+      });
     </script>
 
-    <!-- Facebook Like Widget -->
-    <!-- NEED TO CHANGE THE APP ID TO SHAIRPORTER'S DEV ACCOUNT!!!! -->
-    <script type="text/javascript">(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123432363393"; /* NEED TO CHANGE THE APP ID TO SHAIRPORTER'S DEV ACCOUNT!!! */
-      fjs.parentNode.insertBefore(js, fjs);
+<!-- Facebook Like Widget -->
+<!-- NEED TO CHANGE THE APP ID TO SHAIRPORTER'S DEV ACCOUNT!!!! -->
+    <script type="text/javascript">
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123432363393"; /* NEED TO CHANGE THE APP ID TO SHAIRPORTER'S DEV ACCOUNT!!! */
+        fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+    <%= csrf_meta_tags %>
 
+  <% if production? &&  KISSMETRICS_TOGGLE=="ON"%>
+    <%= raw KISSMETRICS %>
+  <% end %>
 
-  </head>
+</head>  
+<body data-twttr-rendered="true" class="<%= @body_css_class %>">
+  <div id="login-popup"></div>
 
-  <body class="<%= @body_css_class %>">
-    <div id="login-popup"></div>
-
-    <div id="fb-root"></div> <!-- Facebook Application Thingamajig -->
+  <div id="fb-root"></div> <!-- Facebook Application Thingamajig -->
+  <% if production? && false %>
+    <% if GOOGLE_ANALYTICS_TOGGLE=="ON"%>                                     <!-- google analytics toogle  -->
+      <%= raw GOOGLE_ANALYTICS %>
+    <% end %>
+    <% if MIXPANEL_TOGGLE=="ON"%>                                             <!-- mixpanel toogle -->
+      <%= raw MIXPANEL %>
+    <% end %>
+    <% if GETCLICKY_TOGGLE=="ON"%>                                            <!-- get clicky toogle -->
+      <%= raw GETCLICKY %>
+    <% end %>
+    <% if CRAZYEGG_TOGGLE=="ON"%>                                             <!-- crazyegg toogle -->
+      <%= raw CRAZYEGG %>
+    <% end %>
+  <% end %>
+  <div class="clear"> </div>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
 
   <header>
     <section>
@@ -62,7 +82,7 @@
       </nav>
     </section>
   </header>
-  <!-- end header -->
+<!-- end header -->
   <div class="Container clearfix">
     <%= yield %>
     <footer>

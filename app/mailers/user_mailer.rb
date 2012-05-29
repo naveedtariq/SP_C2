@@ -59,7 +59,6 @@ class UserMailer < ActionMailer::Base
     @old_owner = old_owner
     @ride = ride
     @new_owner = @ride.ride_participants.owners.first
-
     participants = User.find_all_by_id(@ride.ride_participants.confirmed_or_owner_participants.pluck(:user_id)).map(&:email)
     mail(:to => participants, :subject => "New Owner")
   end
