@@ -1,0 +1,31 @@
+<%= javascript_include_tag "jquery-1.7.2.min" %>
+<h6>My Inbox</h6><br/><br/>
+<div class="main-msg-box" style="border: 1px solid;">
+  <div class="left-all-msgs" style="border: 1px solid; float: left; height: 700px; margin-left: 5px; margin-top: 5px;">
+    <table border="1" cellpadding="10px" cellspacing="10">
+      <% if @user.owned_messages.blank? %>
+          No messages
+      <% else %>
+          <thead>
+          <td>Title</td>
+          <td>Ride</td>
+          </thead>
+          <% @user.owned_messages.rev_ordered.each do |u| %>                    <!--here user owned message fetched -->
+              <% sender=User.find(u.user_id) %>
+              <% ride=Ride.find(u.ride_id) %>
+              <tr>
+                <td>
+                  <a href="<%= ride_message_path(u.ride_id)+"?req_id=#{sender.id.to_s}" %>" target="frame-a">From: <%= sender.first_name %>&nbsp;<%= sender.last_name.chars.first %>&nbsp;&nbsp;"<%= u.message %>
+                    "&nbsp;&nbsp;<%= u.created_at.strftime("%d/%m/%y") %>&nbsp;&nbsp;<%= time_ago_in_words(u.created_at) %> ago</a></td>
+                <td>
+                  <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;&nbsp;
+                    on <%= ride.departuredatetime.to_date %></a></td>
+              </tr>
+          <% end %>
+      <% end %>
+    </table>
+  </div>
+  <div class="right-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px;">                               <!-- iframe for message send b/w sender and receiver  -->
+    <iframe src="<%= params[:iframe] %>" name="frame-a" width="600" height="650"></iframe>
+  </div>
+</div>

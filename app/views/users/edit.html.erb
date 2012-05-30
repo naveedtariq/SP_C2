@@ -1,9 +1,30 @@
+<% body_css_class('FindaRide') %>
+<% content_for :top_js do %>
+  <script type="text/javascript">
+    $(function () {
+      $('div.fancy-file input:file').bind('change blur', function() {
+        var $inp = $(this), fn;
+        fn = $inp.val();
+        if (/fakepath/.test(fn))
+        fn = fn.replace(/^.*\\/, '');
+        $('.image_text').val(fn);
+      });
+    });
+  </script>
+<% end %>
 <section id="FindaRide" class="Main_wide">			          
 <%= form_for @user, :html => {:multipart => true} do |f| %>
   <div class="view_profile_left_container">
+    <%= image_tag @user.user_image_url, :alt => "user" %><br/>
     <p>Select an image file to upload</p>
-    <fieldset>
-      <%= f.file_field :user_image %>
+    <fieldset style="padding-left: 0px;">
+      <div class='fancy-file'>
+        <input type="text" class="image_text" name="image_text" />
+        <button class='fancy-file-button image_search'>Browse</button>
+        <div class='input-container'>
+          <%= f.file_field :user_image %>
+        </div>
+      </div>
     </fieldset>
   </div>
   <div class="view_profile_right_container">
@@ -11,11 +32,13 @@
       <h2><%= @user.full_name %></h2>
     </div>
     <div class="profile_inner_part">
-      <h2>About me</h2>
-      <p><%= @user.about %></p>
-      <h2>Interests</h2>
-      <p>I love to listen to podcasts on the road. Favorites include This American Life, Democracy Now! Madness Radio, Camping, Skiing, running, dinners with friends.</p>
       <div class="profile_form">
+          <fieldset><label>About me</label>
+            <%= f.text_area :about, :class => "form_text_area"  %>
+          </fieldset>
+          <fieldset><label>Interests</label>
+            <%= f.text_area :interest, :class => "form_text_area"  %>
+          </fieldset>
           <fieldset><label>Work</label>
             <%= f.text_field :work, :class => "form_text"  %>
           </fieldset>

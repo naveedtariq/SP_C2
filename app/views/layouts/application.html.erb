@@ -39,6 +39,8 @@
     <%= raw KISSMETRICS %>
   <% end %>
 
+  <%= yield :top_js %>
+  <%= yield :top_css %>
 </head>  
 <body data-twttr-rendered="true" class="<%= @body_css_class %>">
   <div id="login-popup"></div>
