@@ -1,3 +1,4 @@
+<% body_css_class('FindaRide') %>
 <section id="FindaRide" class="Main_wide">			          
   <div class="left-col-sidebar">
     <div class="user-details">
@@ -55,7 +56,7 @@
         <hr/>
         <p>
           <strong>Interests</strong>
-          I love to listen to podcasts on the road. Favorites include This American Life, Democracy Now! Madness Radio, Camping, Skiing, running, dinners with friends
+          <%= @user.interest %>
         </p>
       </div>
       <h3>Upcoming Rides</h3>
@@ -120,7 +121,7 @@
           <% end %>
         </ul>
       <% else %>
-        <p>No Upcoming Rides</p>
+        <p style="margin: 5px 17px;">No Upcoming Rides</p>
       <% end %>
       <h3>Past Rides</h3>
       <% if @past_rides.count > 0 %>
@@ -183,7 +184,7 @@
           <% end %>
         </ul>
       <% else %>
-        <p>No Past Rides</p>
+        <p style="margin: 5px 17px;">No Past Rides</p>
       <% end %>
       <div class="ride"></div>
       <h3>Feedback</h3>
@@ -203,9 +204,7 @@
           <% end %>
         </ul>
       <% else %>
-        <p>
-          No Feedbacks!
-        </p>
+        <p style="margin: 5px 17px;">No Feedbacks</p>
       <% end %>
     </div>
   </div>

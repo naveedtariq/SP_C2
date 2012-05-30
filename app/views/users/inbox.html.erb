@@ -1,31 +1,103 @@
-<%= javascript_include_tag "jquery-1.7.2.min" %>
-<h6>My Inbox</h6><br/><br/>
-<div class="main-msg-box" style="border: 1px solid;">
-  <div class="left-all-msgs" style="border: 1px solid; float: left; height: 700px; margin-left: 5px; margin-top: 5px;">
-    <table border="1" cellpadding="10px" cellspacing="10">
-      <% if @user.owned_messages.blank? %>
-          No messages
-      <% else %>
-          <thead>
-          <td>Title</td>
-          <td>Ride</td>
-          </thead>
-          <% @user.owned_messages.rev_ordered.each do |u| %>                    <!--here user owned message fetched -->
-              <% sender=User.find(u.user_id) %>
-              <% ride=Ride.find(u.ride_id) %>
-              <tr>
-                <td>
-                  <a href="<%= ride_message_path(u.ride_id)+"?req_id=#{sender.id.to_s}" %>" target="frame-a">From: <%= sender.first_name %>&nbsp;<%= sender.last_name.chars.first %>&nbsp;&nbsp;"<%= u.message %>
-                    "&nbsp;&nbsp;<%= u.created_at.strftime("%d/%m/%y") %>&nbsp;&nbsp;<%= time_ago_in_words(u.created_at) %> ago</a></td>
-                <td>
-                  <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;&nbsp;
-                    on <%= ride.departuredatetime.to_date %></a></td>
-              </tr>
-          <% end %>
-      <% end %>
-    </table>
-  </div>
-  <div class="right-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px;">                               <!-- iframe for message send b/w sender and receiver  -->
-    <iframe src="<%= params[:iframe] %>" name="frame-a" width="600" height="650"></iframe>
-  </div>
+<% content_for :top_js do %>
+  <%= javascript_include_tag "jquery.tinyscrollbar.min.js" %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#scrollbar1').tinyscrollbar({ sizethumb: 15 });
+      $('#scrollbar5').tinyscrollbar({ sizethumb: 15 });
+    });
+  </script>	
+<% end %>
+<% content_for :top_css do %>
+  <%= stylesheet_link_tag :website %>
+  <%= stylesheet_link_tag :skin %>
+<% end %>
+<section id="FindaRide" class="Main">
+  <div class="messagesWrapper">
+    <div class="ridesdetail_heading">
+      <h3>Inbox</h3>
+      <span class="break"></span>
+    </div>
+    <div id="scrollbar1">
+      <div class="scrollbar">
+        <div class="track">
+          <div class="thumb">
+            <div class="end">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="viewport">
+        <div class="overview">
+          <ul>
+            <% @messages.each do |msg| %>
+              <% sender=User.find(msg.user_id) %>
+              <% ride=Ride.find(msg.ride_id) %>
+              <li>
+                <div class="inbox_section">
+                  <span class="person_image">
+                    <img src="<%= sender.user_image.url %>" style ="width: 58px; height: 58px;" alt="image">
+                  </span>
+                  <a title="William B."><%= sender.full_name %></a>
+                </div>
+                <div class="find_out">
+                  <div class="place_date_contant">
+                    <%= ride.from_location && ride.from_location.name  %> >> <%= ride.to_location && ride.to_location.name %> on <%= ride.departuredatetime.strftime("%m/%d")%>
+                    <a href='#'></a>
+                  </div>
+                  <div class="index_main_cout">
+                    <h3><%= msg.message %></h3>
+                    <span class="timing">sent <%= time_ago_in_words(msg.created_at) %> ago</span>
+                  </div>
+                </div>
+                <span class="break"></span>
+                <hr>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+<div class="message_dialogue">
+<div class="ridesdetail_heading">
+<h3>Message Dialogue</h3>
+<span class="break"></span>
 </div>
+<div id="scrollbar5">
+<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+<div class="viewport">
+<div class="overview">
+<div style="padding-top:6px;">
+<div class="dialogue_count"><div class="inbox_section"><span class="person_image"><img src="/assets/william_B.jpg" alt="image"></span>
+<a title="William B.">William B.</a></div>
+<div class="even"><p>Hi i'd like to find out more about your ride 
+can we talk on the phone?</p><span class="dialogue_arrow"></span></div> <span class="break"></span></div>
+
+<div class="dialogue_count"><div class="inbox_section odd_img"><span class="person_image"><img src="/assets/empty_58-58.jpg" alt="image"></span>
+<a title="William B.">You</a></div>
+<div class="even odd"><div class="vertical_center"><p>Yeah what day would you like to chat?</p></div><span class="odd_arrow"></span></div> <span class="break"></span></div>
+<div class="dialogue_count"><div class="inbox_section"><span class="person_image"><img src="/assets/william_B.jpg" alt="image"></span>
+<a title="William B.">William B.</a></div>
+<div class="even"><p>How about tomorrow sometime?</p><span class="dialogue_arrow"></span></div> <span class="break"></span></div>
+<div class="dialogue_count"><div class="inbox_section odd_img"><span class="person_image"><img src="/assets/empty_58-58.jpg" alt="image"></span>
+<a title="William B.">You</a></div>
+<div class="even odd"><p>Yeah what day would you like to chat?</p><span class="odd_arrow"></span></div> <span class="break"></span></div>
+<div class="dialogue_count"><div class="inbox_section"><span class="person_image"><img src="/assets/william_B.jpg" alt="image"></span>
+<a title="William B.">William B.</a></div>
+<div class="even"><p>How about tomorrow sometime?</p><span class="dialogue_arrow"></span></div> <span class="break"></span></div>
+<div class="dialogue_count"><div class="inbox_section odd_img"><span class="person_image"><img src="/assets/empty_58-58.jpg" alt="image"></span>
+<a title="William B.">You</a></div>
+<div class="even odd"><p>type your reply...</p>
+<span class="odd_arrow"></span></div> 
+<span class="break"></span></div>
+
+<a href="#" title="Submit" class="messages_submit">Submit</a>
+
+
+
+
+</div></div></div>
+</div></div>
+<span class="break"></span>
+</section> <!-- Main #FindaRide -->
