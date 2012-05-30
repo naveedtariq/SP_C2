@@ -1,0 +1,355 @@
+<%= javascript_include_tag "jquery-1.7.1.min", "jquery.ui.dialog", "jquery.ui.core", "jquery.ui.widget", "jquery.ui.position", "jquery.ui.mouse", "jquery.ui.draggable", "jquery.ui.droppable", "jquery.ui.button", "jquery.ui.resizable", "jquery.ui.dialog.min" %>
+<%= stylesheet_link_tag "search-yui-reset-min", "search-style", "search-master", "search-custom_jqueryui", "bootstrap", "jquery.ui.dialog" %>
+<%= javascript_include_tag "jquery.ui.map.full.min", "jquery.phonemask" %>
+<%= javascript_include_tag "jquery.popupWindow" %>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.contact-form').popupWindow({                                        // jquery for popup window for contact-form
+            height:500,
+            width:800,
+            top:50,
+            left:50
+        });
+        <% if cookies[:contact] && cookies[:contact].to_i == @ride.id %>
+        $(".message-box").dialog();                                             // jquery for message dailog box message appear
+        <% end %>
+        <% if @ride.to_location.present? && @ride.from_location.present? %>               // here check if to and from location of ride present then show the google map by google map jquery
+        $('#map_canvas').gmap('displayDirections', { 'origin':'<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'destination':'<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('resultstmp') }, function (result, status) {
+        });
+        <% end %>
+        $("#btn-book-ride").click(function () {                                 // for book ride button info view div appear
+            $("#btn-book-ride").hide();
+            $(".info_view").show();
+        });
+
+        $("#new_ride_participant").submit(function () {
+            if ($('input#ride_participant_phone').val().length < 1) {
+                $(".phone-check1").show();
+            }
+
+            else if (!($('input#ride_participant_mode_of_communications_sms_text').is(':checked') || $('#ride_participant_mode_of_communications_phone_call').is(':checked') || $('#ride_participant_mode_of_communications_email').is(':checked'))) {
+                $(".method-type-check").show();                   // check no mpde of communication is selected
+            }
+            else {
+                return true;
+            }
+            return false;
+        });
+
+        $("input#ride_participant_mode_of_communications_sms_text").click(function () {
+            $(".method-type-check").hide();
+        });
+
+        $("#ride_participant_mode_of_communications_phone_call").click(function () {
+            $(".method-type-check").hide();
+        });
+
+        $("#ride_participant_mode_of_communications_email").click(function () {
+            $(".method-type-check").hide();
+        });
+
+        $("input#ride_participant_phone").change(function () {
+            if ($(this).val() != "")
+                $(".phone-check1").hide();
+            if ($(this).val().length == 12)
+                $(".phone-check").hide();
+            if ($(this).val().match(/[0-9]{10}/))
+                $(".phone-check2").hide();
+        });
+
+        $('input#ride_participant_phone').keypress(function () {
+            var string = $(this).val();
+            var str1 = $(this).val().length;
+            if (str1 == 3)
+                $(this).val(string.substring(0, 3) + '-')
+            else if (str1 == 7)
+                $(this).val(string.substring(0, 7) + '-')
+        });
+
+        $("button#contact-info").click(function () {
+            //$("button#contact-info").hide();
+            // $(".message-box").show();
+            $(".message-box").dialog();
+
+        });
+
+        $("input#ride_participant_phone").mask("999-999-9999");                 // jquery for phone number format
+        $("#price_tag_1").show();
+        $("#ride_participant_number_of_seats").change(function () {
+            $(".price_tag").hide();
+            $("#price_tag_" + $("#ride_participant_number_of_seats").find("option:selected").val()).show();
+        });
+    });
+</script>
+<div id="container">
+<div id="header_wrap" style="margin-top: 22px;">
+  <div id="header">
+    <%= link_to image_tag("shareshuttle_logo_sm.png", :class => "left"), root_path %>
+    <a id="post_ride" class="button post km_click_event_by_text right" href="<%= new_ride_path %>">Post a ride</a>
+
+    <div style="clear:both"></div>
+  </div>
+</div>
+
+<div id="trip-container" style="height:auto;overflow: none;width:auto;">
+<%= link_to "Back to search results", "#{search_rides_path}?#{params[:return_url]}", :class => "button post km_click_event_by_text", :id => "A1" %>
+<h2><b>Ride Details</b></h2>
+
+<div id="search_run">
+  <div id="content_wrapper" class="new_style">
+    <div id="content_container" class="clearfix">
+      <div id="content">
+        <div id="results">
+          <div class="ride_list">
+            <h3 class="headline first">
+              <%= @ride.departure_date.strftime("Departing %A, %B #{@ride.departure_date.day.ordinalize}") %>
+
+              <% @ride.friends_in_common ||= [] %>
+            </h3>
+
+            <div class="entry">
+              <% if @ride.remaining_seats==0 %>                                 <!--  cheak if remaing seats is zero then price box appear sold out  -->
+                  <a href="<%= clone_ride_path(@ride) %>">
+                    <div class="price_box">
+                      <div class="seats">
+                        <span class="count1">Sold out</span>
+                      </div>
+                      <p>Post Similar</p>
+                    </div>
+                  </a>
+              <% else %>
+                  <div class="price_box">
+                    <div class="seats">
+                      <span class="count"><%= @ride.remaining_seats %></span>
+                      <span class="left">seats left</span>
+                    </div>
+                    <p><b><%= number_to_currency(@ride.price_per_seat) %></b> / seat</p>
+                  </div>
+              <% end %>
+              <div class="inner_content">
+                <div class="info-rides">
+                  <div class="inner-info-line1">                                <!-- fetched rides info -->
+                    <p class="inner-l1">Leave: &nbsp; &nbsp;&nbsp;<span class="info-line1"><%= @ride.departure_time.strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %>
+                      mins &nbsp;
+                      &nbsp<span class="info-line11"><%= @ride.from_location && @ride.from_location.name %></span>
+                    </p></div>
+                  <div class="inner-info-line1"><p class="inner-l1">Arrival: &nbsp; &nbsp;
+                    <span class="info-line1"><%= (@ride.departure_time + @ride.duration_in_minutes.minutes).strftime("%I:%M %p") %></span> &nbsp; &nbsp;±<%= @ride.flexibility_in_minutes %>
+                    mins &nbsp;
+                    &nbsp<span class="info-line11"><%= @ride.to_location && @ride.to_location.name %></span></p>
+                  </div>
+                </div>
+                <div class="ride-image">
+                  <% if @ride.ride_type=="blackcar" %><%= image_tag ("blackcar.jpg") %>
+                      <% else %><%= image_tag ("taxi.jpg") %>
+                      <% end %><%= @ride.ride_type %></div>
+                <div class="participant-pic">
+                  <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>                      <!-- fetched all riders of the ride -->
+                      <div class="riders-pics">
+                        <div class="riders-info">
+                          <a href="<%= user_path(rider.user_id) %>" style="color: #ffffff;"><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></a>
+                        </div>
+                        <a href="<%= user_path(rider.user_id) %>"><%= image_tag rider.user.user_image_url %></a>
+                        <% if @graph.present? && (rider.user_id != current_user.id) && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>     <!-- check if user login thorough facebook -->
+                            <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>                  <!-- fetched mutual friends of current user w.r.t riders -->
+                            <% @ride.friends_in_common << mutual_friends %>
+                        <% end %>
+                        <span class="driver"></span>
+                      </div>
+                  <% end %>
+                  <% @ride.remaining_seats.times do %>                          <!-- fetched how many remaing seats then accordingly empty seat pic appeared -->
+                      <div class="riders-pics">
+                        <div class="riders-info">open&nbsp;seat</div>
+                        <%= image_tag "car_seat_icon.gif" %>
+                        <span class="driver"></span>
+                      </div>
+                  <% end %>
+                </div>
+              </div>
+              <% if @graph.present? %>
+                  <div style="float:left; margin-top: -20px">
+                    <% mutual_friends = @ride.friends_in_common.flatten.uniq %>             <!--fetched unique mutual friends b/w current user and riders -->
+                    <% if mutual_friends.count > 0 %>
+                        <%= "#{mutual_friends.count} friend".pluralize(mutual_friends.count) %>  in common,
+                    <% end %>
+                    <% mutual_friends.each do |friend| %>
+                        <img src="http://graph.facebook.com/<%=friend["id"]%>/picture"/>
+                        <%#= image_tag("http://graph.facebook.com/friend[id]/picture") %>
+                        <%= friend["name"] %>                                   <!-- fetched mutual friend's name from facebook -->
+                        <% unless friend == mutual_friends.last %>
+                            &nbsp;and&nbsp;
+                        <% end %>
+                    <% end %>
+
+                  </div>
+              <% end %><b>Notes:  </b><%if @ride.notes.present?%><%=@ride.notes%><%else%>Empty Notes<%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% if @ride.active? %>
+
+    <div id="divPrice">
+      <% ts = @ride.remaining_seats %>
+      <% if ts > 0 %>
+          <% if current_user && (@ride.ride_participants.active_participants.pluck(:user_id).include? current_user.id) %>                     <!--check for if the person want to join is own ride -->
+              <span>You're already in this ride</span>
+          <% else %>
+            <%= form_for @ride_participant, :url => ride_ride_participants_path(@ride), :html => {:class => "book-ride-child-window"} do |f| %>
+                  <%= f.select "number_of_seats", options_for_select((1..ts).map { |i| ["#{"#{i} seat".pluralize(i)}  @ #{number_to_currency(@ride.price_per_seat(i))} each", i] }) %>          <!-- number of seats available w.r.t price in bookride div-->
+                  <br/><a style="margin: 0px;" id="how" href="/footers/how_it_works">How it works?</a><br/><br/>
+
+                  <div class="price_view">Total =
+                    <% ts.times do |i| %>
+                        <% j = i + 1 %>
+                        <span id="price_tag_<%= j %>" class="price_tag" style="display: none;"><%= number_to_currency(@ride.price_per_seat(j)*(j)) %></span>
+                    <% end %>
+                  </div>
+                  <br/>
+                  <dd style="margin-left: 0px;" class="changestep"><span class="errormsg"></span>
+
+                    <button id="btn-book-ride" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; ">
+                      <span>Join this ride</span>
+                    </button>
+                  </dd>
+
+                  <div class="info_view" style="float: none; display: none">
+                    <b>Please fill out to complete booking</b><br/>
+                    <%= f.label :phone, "Enter your phone number", :style => "margin-left: 0px;" %>
+                    <%= f.text_field :phone, :maxlength => "12" %>
+                    <br/>
+
+                    <div class="phone-check" style="display: none; color: red; font-weight: bold;">Phone# must
+                      be up to
+                      10 digits
+                    </div>
+                    <div class="phone-check1" style="display: none; color: red; font-weight: bold;">Enter
+                      Phone#
+                    </div>
+                    <div class="phone-check2" style="display: none; color: red; font-weight: bold;">Phone format
+                      is
+                      wrong
+                    </div>
+                    <div>
+                      <br/>Preferred method of communication<br/><br/>
+                      <table>
+                        <tr>
+                          <td>
+                            <%= f.radio_button :mode_of_communications, 'sms_text' %>
+                          </td>
+                          <td>
+                            <%= f.label :mode_of_communications, 'Sms text', :for => 'ride_participant_mode_of_communications_sms_text' %>
+                          </td>
+                          <td>
+                            <%= f.radio_button :mode_of_communications, 'phone_call' %>
+                          </td>
+                          <td>
+                            <%= f.label :mode_of_communications, 'Phone call', :for => 'ride_participant_mode_of_communications_phone_call' %>
+                          </td>
+                          <td>
+                            <%= f.radio_button :mode_of_communications, 'email' %>
+                          </td>
+                          <td>
+                            <%= f.label :mode_of_communications, 'Email', :for => 'ride_participant_mode_of_communications_email' %>
+                          </td>
+                        </tr>
+                      </table>
+                      <div class="method-type-check" style="display: none; color: red; font-weight: bold;">No
+                        Method
+                        Selected
+                      </div>
+                    </div>
+                    <dd class="changestep" style="margin-left: 0px;"><span class="errormsg"></span>
+                      <%= f.submit "Book this ride now", :style => "border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; " %>
+                    </dd>
+              <% end %>
+          <% end %>
+          </div>
+      <% else %>
+          <span>Sold out</span>
+      <% end %>
+    </div>
+<% end %>
+<% @ride.ride_participants.active_participants.role_wise.each do |rider| %>                 <!-- fetch info of active participants of ride-->
+
+    <div class="profiles left">
+      <div class="riders-pics" style="height: auto;">
+        <a href="<%= user_path(rider.user_id) %>"><%= image_tag rider.user.user_image_url %></a>
+      </div>
+      <div class="info-right left">
+        <b><%= rider.user.first_name %>&nbsp; <%= rider.user.last_name.chars.first %></b><br/>
+        Currently city: <%= rider.user.city %>
+        <br/>
+        Education: <%= rider.user.school %>
+        <br/>
+        Facebook connected
+        (<%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}" %>
+        )
+        <br/>
+        <% if rider.user.authentications.present? %>                                            <!-- check if user login through facebook then show his facebook profile link -->
+            <% fb_id = rider.user.authentications.first.uid %>
+            <a href="https://www.facebook.com/profile.php?id=<%= fb_id %>">Facebook Profile </a>
+        <% end %>
+        <br/><br/>
+      </div>
+      <div style="clear:both"></div>
+      <% if @ride.active? %>
+          <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %>
+              <% if logged_in? %>
+
+                  
+<%if current_user.messages.where("user_id = ? and owner_id = ?", current_user,@ride.owner).count > 0 %><a href="/users/inbox?iframe=/rides/<%=params[:ride_id]%>/message" style="color: #FFFFFF;"><button id="contact-info-button2" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>View Message</span></button></a><%else%><button id="contact-info" type="button" style="border-color: #2F571C #2F571C #284D17; border-style: solid; border-width: 1px; color: #FFFFFF; padding: 3px 12px; background: #6EA953; "><span>Contact me</span></button><%end%>
+              <% else %>
+                  <a href="<%= auth_at_provider_path(:provider => :facebook, contact: @ride.id) %>" class="contact-form">Contact
+                    me</a>
+              <% end %>
+          <% end %>
+      <% end %>
+
+
+      <% if (@ride.owner == rider.user) && (@ride.owner != current_user) %>     <!--here message dailog appear for rideparticipant contact me  -->
+          <div class="message-box" style="display: none;">
+            <%= render "messages/conversations", contact_me: true %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+</div>
+<div class="clear"></div>
+<br/><br/>
+<%if @ride.active?%>
+  <div style="border: 1px solid;">
+    <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
+      <% feedback=Feedback.find_all_by_owner_id(rider.user_id)%>
+      <% feedback.each do |feedback| %>
+        From:&nbsp;<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %><br/>
+        To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
+        Status:     <%= feedback.status && feedback.status.titleize %><br/>
+        Feedback:   <%= feedback.feedback %><br/>
+        <hr/>
+      <% end %>
+    <%end%>
+  </div><br/><br/>
+  <%else%>
+<div style="border: 1px solid;">
+  <% @ride.feedbacks.each do |feedback| %>
+      From:&nbsp;<a href="<%= user_path(feedback.user) %>"><%= image_tag feedback.user.user_image_url, :style => "width: 40px" %></a> <%= feedback.user.full_name %><br/>
+      To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= user_path(feedback.owner) %>"><%= image_tag feedback.owner.user_image_url, :style => "width: 40px" %></a> <%= feedback.owner.full_name %><br/>
+      Status:     <%= feedback.status && feedback.status.titleize %><br/>
+	    Feedback:   <%= feedback.feedback %><br/>
+      <hr/>
+  <% end %>
+  </div><br/><br/>
+<%end%>
+<div id="map_canvas" style="height:232px; width: 465px;"></div>      <!-- here google map show-->
+<br/>
+
+<div id="results" style="display:none;">
+  <div id="directions"></div>
+</div>
+</div>
+</div>

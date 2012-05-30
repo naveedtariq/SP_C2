@@ -76,16 +76,11 @@
         <fieldset class="mediam">
           <label>
             Departing</label>
-          <%= f.text_field :departure_date, :value => (f.object.departure_date || RequestLogger.sp_clock_date), :class=>'date' %>
+          <%= f.datetime_select :departuredatetime, :value => (f.object.departuredatetime || SpClock.date), :class=>'date' %>
           <span class="calander"></span></fieldset>
         <fieldset class="mediam">
           <label>Time</label>
-          <%= f.time_select :departure_time, {:minute_step => 15, :ampm => true}, {:style => "width:110px", :class=>'chzn-select'} %>
           
-          <select style="width: 59px; display: none;" class="chzn-select chzn-done" name="Select_From" id="selATD">
-            <option>AM</option>
-            <option>PM</option>
-          </select><div id="selATD_chzn" class="chzn-container chzn-container-single" style="width: 59px;"><a class="chzn-single" href="javascript:void(0)"><span>AM</span><div><b></b></div></a><div style="left: -9000px; width: 57px; top: 36px;" class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" style="width: 22px;"></div><ul class="chzn-results"><li style="" class="active-result result-selected" id="selATD_chzn_o_0">AM</li><li style="" class="active-result" id="selATD_chzn_o_1">PM</li></ul></div></div></fieldset>
         <fieldset class="small">
           <label>
             Flexibility</label>

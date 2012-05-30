@@ -6,8 +6,8 @@ class AddNewDepartureTimeAmpmTimeToRides < ActiveRecord::Migration
   end
 
   def self.down
-    add_column :rides, :new_departure_time
-    add_column :rides, :ampm_time
+    remove_column :rides, :new_departure_time
+    remove_column :rides, :ampm_time
   end
 
 end

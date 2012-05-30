@@ -1,0 +1,54 @@
+<%= form_for @ride_participant, :url => ride_ride_participants_path(@ride) do |f| %>
+  <div class="information_cantainer">
+    <h2>Contact Information</h2>
+    <div class="inform_form">
+      <fieldset><label id="best_number">What number to reach you on?</label>
+
+        <%= f.text_field :phone, :maxlength => "12",:class=>'inform_text' %>
+        <%= f.hidden_field :number_of_seats %>
+        <%= image_tag "ques_mark.gif", :id=>"ques_mark" %>
+
+        <div style="position: absolute; top: 35px; left: 210px; opacity: 1; display: none;" class="tooltip" id="ques_mark_tip"><p><i>we do not share your phone number until you and the<br> ride owner have confirmed and accepted</i></p>
+          <span class="TooltipArrow" style="left:157px;">Arrow</span></div>
+      </fieldset>
+
+      <fieldset>
+        <label>Preferred method of communication</label>
+        <div class="options">
+          <label class="preferred"><%= f.radio_button :mode_of_communications, 'sms_text' %><span class="method_radiotext">SMS Text</span></label>
+          <label class="preferred"><%= f.radio_button :mode_of_communications, 'phone_call' %><span class="method_radiotext">Phone Call</span></label>
+          <label class="preferred"><%= f.radio_button :mode_of_communications, 'email' %><span class="method_radiotext">Email</span></label></div>
+      </fieldset>
+
+      <span class="break"></span>
+
+    </div>
+  </div>
+
+
+  <div class="information_cantainer" >
+
+    <h2>Confirm</h2>
+    <ul class="triger_section">
+
+    </ul>
+    <span class="break"></span>
+    <div class="pay_creditcard" id="paycredit-tab">
+
+      <div class="form_row">
+        <div class=" form_row"><fieldset> <input type="submit" class="submit" name="submit" value="Book this Ride Now!"></fieldset><p>By clicking, I agree to the <a href="#">privacy and terms.</a></p></div>
+        <span class=" break"></span>
+      </div>
+
+      <div class="pay_creditcard" id="paypaypal-tab" style="display:none;">
+        <fieldset class="paypal_area">
+          <input type="text" class="paypal_feild" value="This payment transacts in $USD. Your total charge is $84." readonly ></fieldset>
+        <p  class="paypal_text"><strong>Instructions:</strong><br>
+          After clicking "Book it" you will be redirected to PayPal to complete payment.<br>
+          <strong>You must complete the process or the transaction will not occur.</strong></p>
+        <div class=" form_row"><fieldset> <input type="submit" class="submit useing_paypal" name="submit" value="Book Using PayPal"></fieldset><p>By clicking "Book Using Credit Cards", I agree to the <a href="#">cancellation & refund policy.</a></p></div>
+      </div>
+
+    </div>
+  </div> <!-- RidesWrapper -->
+<% end %>
