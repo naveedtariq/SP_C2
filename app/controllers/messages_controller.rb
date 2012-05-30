@@ -31,8 +31,9 @@ class MessagesController < ApplicationController
       @req_user = @ride.owner
     end
     req_users << @req_user.id
-    @messages = @ride.messages.where("user_id in (?) and owner_id in (?)", req_users, req_users).ordered  # show the message b/w sender and receiver
-    render :layout => false
+    @conversation = @ride.messages.where("user_id in (?) and owner_id in (?)", req_users, req_users).ordered  # show the message b/w sender and receiver
+    @user = current_user
+    @messages = current_user.owned_messages.rev_ordered
   end
 
   private
