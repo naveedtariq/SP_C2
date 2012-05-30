@@ -20,7 +20,7 @@ end
 
 group :production do
   gem 'therubyracer', :platforms => :ruby
-  gem "pg"
+  gem "mysql2"
 end
 
 group :development, :test do

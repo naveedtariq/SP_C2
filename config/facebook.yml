@@ -1,6 +1,6 @@
 defaults: &defaults
-  api_id: '365401603490972'
-  secret_key: 'ba9d936788748804710532f5918348bc'
+  api_id: '405500709480319'
+  secret_key: '5a73e4923b9003f1e5e7b2d5d1dcb69e'
 
 development:
   <<: *defaults
