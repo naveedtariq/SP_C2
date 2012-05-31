@@ -2847,3 +2847,6 @@ div.input-container {
 div.input-container input {
   opacity: 0;
 }
+.clear {
+  clear: both;
+}
