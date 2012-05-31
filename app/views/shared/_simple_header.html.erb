@@ -1,0 +1,14 @@
+<nav>
+  <ul>
+    <li><a href="/footers/how_it_works">How It Works</a></li>
+    <% if current_user %>
+      <li><%= image_tag current_user.user_image_url %></li>
+      <li><a href="<%=  user_path(current_user) %>"><%= current_user.first_name %>&nbsp;<%= current_user.last_name.chars.first %></a></li>
+      <li><%= link_to "edit profile", edit_user_path(current_user) %></li>
+      <li>&nbsp;&nbsp;&nbsp;<%= link_to " Log out ", logout_path %></li>
+    <% else %>
+      <li><%= link_to 'Login', login_path, :onclick=>"$.ajax( { url: '#{login_path}', context: document.body, success: function(data){ $('#login-popup').html(data); } });return false;" %></li>
+      <li><%= link_to 'Signup', signup_path,:class=>"SignUpButton" %></li>
+    <% end %>
+  </ul>
+</nav>
