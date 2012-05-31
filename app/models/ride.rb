@@ -29,7 +29,7 @@ class Ride < ActiveRecord::Base
   has_many :ride_participants # Association with ride_participants model
   has_many :users, :through => :ride_participants # Association with user model
   validates :available_seats, :total_price, :duration_in_minutes, :ride_type, :presence => true
-  validate :departure_datetime_inclusion
+#  validate :departure_datetime_inclusion 
   validate :from_and_to_location #Validation
   def price_per_seat(number_of_seats = 1)
     (self.total_price/(self.ride_participants.active_participants.count + number_of_seats))

@@ -70,6 +70,13 @@ class ApplicationController < ActionController::Base
     cookies[:ride] = nil
   end
 
+  def get_proper_attributes(params)
+    params[:ride][:departuredatetime] = "#{params[:ride][:departure_date]} #{params[:ride][:new_departure_time]} #{params[:ride][:ampm_time]}"
+    params[:ride].delete(:departure_date)
+    params[:ride].delete(:new_departure_time)
+    params[:ride].delete(:ampm_time)
+  end
+
   protected
 
   def authenticate

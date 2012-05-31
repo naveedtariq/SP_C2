@@ -68,13 +68,15 @@ class RidesController < ApplicationController
   end
 
   def create_ride # Create new ride
-    return render text: params.inspect
-    @ride = Ride.create!(params[:ride])
-    if(@ride.return_trip_checkbox.to_s == "1")
-      @ride_return = Ride.new(retrieve_ride)
+#  return render text: params[:ride].inspect
+    @ride = Ride.create(:available_seats => params[:ride][:available_seats], :notes => params[:ride][:notes], :ride_type => params[:ride][:ride_type], :duration_in_minutes => params[:ride][:duration_in_minutes], :to_location_id => params[:ride][:to_location_id], :from_location_id => params[:ride][:from_location_id], :flexibility_in_minutes => params[:ride][:flexibility_in_minutes], :total_price => params[:ride][:total_price], :departuredatetime => "#{params[:ride][:departure_date]} #{params[:ride][:new_departure_time]} #{params[:ride][:ampm_time]}")
+    if(params[:ride][:return_trip_checkbox].to_s == "1")
+      @ride_return = Ride.new(@ride.attributes)
       @ride_return.to_location_id = @ride.from_location_id
       @ride_return.from_location_id = @ride.to_location_id
-      @ride_return.departuredatetime = @ride.return_departuredatetime
+      @ride_return.departuredatetime = params[:ride][:return_trip_departure_date] + " " + params[:ride][:return_new_departure_time] + " " + params[:ride][:return_new_ampm_time]
+      @ride_return.flexibility_in_minutes = params[:ride][:return_flexibility_in_minutes]
+      @ride_return.duration_in_minutes = params[:ride][:retrun_duration_minutes]
       @ride_return.save!
       @ride_return.make_owner!(current_user)
     end
@@ -84,7 +86,6 @@ class RidesController < ApplicationController
     flash[:notice] = "Successfully created ride"
     redirect_to dashboard_path
   end
-
   def posted_one # Post Ride 1st step ride create
                  #    return redirect_to new_ride_path if cookies[:ride].blank?
     @ride = Ride.new(retrieve_ride)
