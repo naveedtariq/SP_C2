@@ -394,7 +394,7 @@
 
             <ul class="UserList">
 
-
+              <% ride.friends_in_common ||= []%>
               <% ride.ride_participants.active_participants.role_wise.each do |rider| %>
 
                 <% ride.friends_in_common ||= [] %>
