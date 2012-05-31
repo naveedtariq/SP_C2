@@ -401,6 +401,7 @@
               <% ride.friends_in_common ||= []%>
               <% ride.ride_participants.active_participants.role_wise.each do |rider| %>
 
+                <% ride.friends_in_common ||= [] %>
                 <% if @graph.present? && rider.user_id != current_user.id && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>              <!--check if login through facebook then fetch his friends -->
                   <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>
                   <% ride.friends_in_common << mutual_friends %>
@@ -420,7 +421,7 @@
                   <!-- HIDDEN TOOLTIP -->
                   <div class="UserTooltip" id="TT_UserID_<%= rider.id %>">
                     <h4><a href="<%=user_path(rider.user)%>"><%= rider.user.full_name %></a> from <%= rider.user.city %></h4>
-                    <p><em>Can't wait for Thanksgiving vacation!</em></p>
+                    <p><em><%= rider.user.interest %></em></p>
                     <div class="UserInfo">
                       <div class="UserPhoto">
                         <%= image_tag rider.user.user_image_url, :width=>"80", :height=>"80" %>
