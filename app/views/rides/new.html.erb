@@ -6,7 +6,7 @@
     $('#what-else').show(); $('#what-time').hide();return false;
   }
 </script>
-<%= form_for(@ride, :url => posted_rides_path, :id => 'RideSearch') do |f| %>
+<%= form_for(@ride, :url => create_ride_rides_path, :id => 'RideSearch') do |f| %>
 
 
   <div class="post_ride_popup_container" id="where-to">
@@ -164,29 +164,23 @@
 
   <div class="post_ride_popup_container" id="what-else" style="display:none;">
     <div class="what_leftside">
-
       <div class="Container_position">
         <div class="left_list">
           <fieldset class="small">
-            <label>
-              Total estimated fare?</label>
-            <input type="text" onblur="if(this.value==''){this.value='$20.00'}" onfocus="if(this.value=='$20.00'){this.value=''}" value="$20.00" class="per_seat" name="per_seat" />
+            <label>Total estimated fare?</label>
+            <%= f.text_field :total_price, :class => "per_seat" %>
             <span class="small_text">one way</span>
           </fieldset>
           <fieldset class="small"><br>
             <label>
               Number of available seats</label>
-            <select style="width: 73px; display: none;" class="chzn-select chzn-done" name="Select_From" id="sel16Z">
-              <option>Two</option>
-              <option>One</option>
-            </select><div id="sel16Z_chzn" class="chzn-container chzn-container-single" style="width: 73px;"><a class="chzn-single" href="javascript:void(0)"><span>Two</span><div><b></b></div></a><div style="left: -9000px; width: 71px; top: 36px;" class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" style="width: 36px;"></div><ul class="chzn-results"><li style="" class="active-result result-selected" id="sel16Z_chzn_o_0">Two</li><li style="" class="active-result" id="sel16Z_chzn_o_1">One</li></ul></div></div>
+            <%  numbers = %w(zero one two three four five six seven eight nine) %>
+            <%= f.select :available_seats, (1..2).collect{|t| [numbers[t.to_i], t]}, {}, {:class => "chzn-select", :style => "width:72px"} %>
           </fieldset>
         </div>
-
         <fieldset class="colom">
           <label>Notes</label>
-          <textarea class="textarea" rows="4" cols="30">Any other details?... (example:
-                        I prefer to meet at Starbucks...)</textarea>
+          <%= f.text_area :notes, :size => "30x4", :class => "textarea", :placeholder => "Any other details?... (example:\nI prefer to meet at Starbuks..." %>
         </fieldset>
       </div>
       <span class="break"></span>
@@ -194,10 +188,6 @@
         <input type="submit" value="Previous Step" name="Previous_Step" class="Previous" />
         <input type="submit" value="Next Step" name="submit" class="submit" />
       </fieldset>
-
-
-
-
     </div>
   </div>
 
