@@ -1,9 +1,14 @@
 <script type="text/javascript" >
   function goto_what_time(){
-  $('#what-time').show(); $('#where-to').hide();return false;
+    $('#what-time').show(); $('#where-to').hide();return false;
+  }
+  function goto_what_else(){
+    $('#what-else').show(); $('#what-time').hide();return false;
   }
 </script>
 <%= form_for(@ride, :url => posted_rides_path, :id => 'RideSearch') do |f| %>
+
+
   <div class="post_ride_popup_container" id="where-to">
 
 
@@ -33,7 +38,7 @@
         <fieldset class="radio_btn for_cab">
 
           <label style="opacity: 1;" class="selectride" id="taxi-box" onclick="$('#taxi-box').css('opacity','1');$('#black-car-box').css('opacity','0.4');">
-            <%= f.radio_button :ride_type, 'taxi',:class=>'radio-selectride' %>
+            <%= f.radio_button :ride_type, 'taxi',:class=>'radio-selectride',:checked=>"checked" %>
             <span class="ride_cab"></span>
             <span class="radio_text">I'm taking a cab</span>
           </label>
@@ -74,163 +79,69 @@
 
       <div class="Container_position">
         <fieldset class="mediam">
-          <label>
-            Departing</label>
-          <%= f.datetime_select :departuredatetime, :value => (f.object.departuredatetime || SpClock.date), :class=>'date' %>
-          <span class="calander"></span></fieldset>
+          <label>Departing</label>
+          <%= f.text_field :departure_date, :value => (f.object.departure_date || SpClock.date),:class=>'date' %>
+          <span class="calander"></span>
+        </fieldset>
+
         <fieldset class="mediam">
-          <label>Time</label>
-          
+          <label>
+            Time</label>
+          <%= f.select :new_departure_time, NEW_DEPARTURE_TIME, {}, {:class=>"chzn-select",:style=>"width:75px;"} %>
+          <%= f.select :ampm_time, AM_PM_TIME, {}, {:class=>"chzn-select",:style=>"width:59px;"} %>
+        </fieldset>
+
         <fieldset class="small">
           <label>
             Flexibility</label>
-          <select style="width: 90px; display: none;" class="chzn-select chzn-done" name="Select_From" id="sel7J6">
-            <option>± 15min</option>
-            <option>± 15min</option>
-            <option>± 15min</option>
-            <option>± 15min</option>
-          </select><div id="sel7J6_chzn" class="chzn-container chzn-container-single" style="width: 90px;"><a class="chzn-single" href="javascript:void(0)"><span>± 15min</span><div><b></b></div></a><div style="left: -9000px; width: 88px; top: 36px;" class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" style="width: 53px;"></div><ul class="chzn-results"><li style="" class="active-result result-selected" id="sel7J6_chzn_o_0">± 15min</li><li style="" class="active-result" id="sel7J6_chzn_o_1">± 15min</li><li style="" class="active-result" id="sel7J6_chzn_o_2">± 15min</li><li style="" class="active-result" id="sel7J6_chzn_o_3">± 15min</li></ul></div></div>
+          <%= f.select :flexibility_in_minutes, ((5..30).step(5).collect{|t| ["±#{t} mins", t]}), {}, {:style => "width:90px",:class=>"chzn-select"} %>
+
         </fieldset>
         <fieldset class="small duration">
-          <label>
-            Duration</label>
-          <select style="width: 72px; display: none;" class="chzn-select chzn-done" name="Select_From" id="sel369">
-
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-            <option>5min</option>
-          </select><div id="sel369_chzn" class="chzn-container chzn-container-single" style="width: 72px;"><a class="chzn-single" href="javascript:void(0)"><span>5min</span><div><b></b></div></a><div style="left: -9000px; width: 70px; top: 36px;" class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" style="width: 35px;"></div><ul class="chzn-results"><li style="" class="active-result result-selected" id="sel369_chzn_o_0">5min</li><li style="" class="active-result" id="sel369_chzn_o_1">5min</li><li style="" class="active-result" id="sel369_chzn_o_2">5min</li><li style="" class="active-result" id="sel369_chzn_o_3">5min</li><li style="" class="active-result" id="sel369_chzn_o_4">5min</li><li style="" class="active-result" id="sel369_chzn_o_5">5min</li><li style="" class="active-result" id="sel369_chzn_o_6">5min</li><li style="" class="active-result" id="sel369_chzn_o_7">5min</li><li style="" class="active-result" id="sel369_chzn_o_8">5min</li><li style="" class="active-result" id="sel369_chzn_o_9">5min</li><li style="" class="active-result" id="sel369_chzn_o_10">5min</li><li style="" class="active-result" id="sel369_chzn_o_11">5min</li><li style="" class="active-result" id="sel369_chzn_o_12">5min</li><li style="" class="active-result" id="sel369_chzn_o_13">5min</li><li style="" class="active-result" id="sel369_chzn_o_14">5min</li><li style="" class="active-result" id="sel369_chzn_o_15">5min</li><li style="" class="active-result" id="sel369_chzn_o_16">5min</li><li style="" class="active-result" id="sel369_chzn_o_17">5min</li><li style="" class="active-result" id="sel369_chzn_o_18">5min</li><li style="" class="active-result" id="sel369_chzn_o_19">5min</li><li style="" class="active-result" id="sel369_chzn_o_20">5min</li><li style="" class="active-result" id="sel369_chzn_o_21">5min</li><li style="" class="active-result" id="sel369_chzn_o_22">5min</li><li style="" class="active-result" id="sel369_chzn_o_23">5min</li><li style="" class="active-result" id="sel369_chzn_o_24">5min</li><li style="" class="active-result" id="sel369_chzn_o_25">5min</li><li style="" class="active-result" id="sel369_chzn_o_26">5min</li><li style="" class="active-result" id="sel369_chzn_o_27">5min</li><li style="" class="active-result" id="sel369_chzn_o_28">5min</li><li style="" class="active-result" id="sel369_chzn_o_29">5min</li></ul></div></div>
-          <p>(~2:30 pm arrival)</p>
+          <label>Duration</label>
+          <%= f.select :duration_minutes, (5..90).step(5).collect{|t| [to_minutes(t), t]}, {}, {:class => "chzn-select", :style => "width:72px"} %>
+          <%#*<p id="arrival_time">(~2:30 pm arrival)</p>%>
         </fieldset>
-        <fieldset class="mediam">
-          <label style="margin-top: -10px;" id="onewaytrip-label"><input type="checkbox" class="checkbox" name="checkbox" id="twowaytrip_edit" checked="">
-            <span class="small_text">This is a one-way trip</span></label></fieldset>
+
+        <fieldset class="mediam" style="margin-top:10px">
+          <label style="margin-top: -10px;" id="onewaytrip-label">
+            <input type="checkbox" class="checkbox" name="checkbox" id="twowaytrip_edit" checked="" onchange="$('#twowaytrip_details').toggleClass('fadeout');$('#twowaytrip_cover').toggleClass('cove_it');">
+            <span class="small_text">This is a one-way trip</span></label>
+        </fieldset>
         <span class="break"></span><br>
+
+
+        <div id="twowaytrip_cover" class="cove_it"></div>
         <div id="twowaytrip_details" class="fadeout">
-          <fieldset class="mediam">
-            <label>
-              Returning</label><input type="text" class="date hasDatepicker" id="datepicker_return">
-            <span class="calander"></span></fieldset>
-          <fieldset class="mediam">
-            <label>
-              Time</label>
-            <select style="width: 75px; display: none;" class="chzn-select chzn-done" name="Select_From" id="selTKA">
 
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-              <option>01:30</option>
-            </select><div id="selTKA_chzn" class="chzn-container chzn-container-single" style="width: 75px;"><a class="chzn-single" href="javascript:void(0)"><span>01:30</span><div><b></b></div></a><div style="left: -9000px; width: 73px; top: 36px;" class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" style="width: 38px;"></div><ul class="chzn-results"><li style="" class="active-result result-selected" id="selTKA_chzn_o_0">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_1">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_2">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_3">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_4">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_5">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_6">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_7">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_8">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_9">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_10">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_11">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_12">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_13">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_14">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_15">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_16">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_17">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_18">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_19">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_20">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_21">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_22">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_23">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_24">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_25">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_26">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_27">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_28">01:30</li><li style="" class="active-result" id="selTKA_chzn_o_29">01:30</li></ul></div></div>
-            <select style="width: 59px; display: none;" class="chzn-select chzn-done" name="Select_From" id="selMQ3">
-              <option>AM</option>
-              <option>PM</option>
-            </select><div id="selMQ3_chzn" class="chzn-container chzn-container-single" style="width: 59px;"><a class="chzn-single" href="javascript:void(0)"><span>AM</span><div><b></b></div></a><div style="left: -9000px; width: 57px; top: 36px;" class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" style="width: 22px;"></div><ul class="chzn-results"><li style="" class="active-result result-selected" id="selMQ3_chzn_o_0">AM</li><li style="" class="active-result" id="selMQ3_chzn_o_1">PM</li></ul></div></div></fieldset>
-          <fieldset class="small">
-            <label>
-              Flexibility</label>
-            <select style="width: 90px; display: none;" class="chzn-select chzn-done" name="Select_From" id="selQMV">
-              <option>± 15min</option>
-              <option>± 15min</option>
-              <option>± 15min</option>
-              <option>± 15min</option>
-            </select><div id="selQMV_chzn" class="chzn-container chzn-container-single" style="width: 90px;"><a class="chzn-single" href="javascript:void(0)"><span>± 15min</span><div><b></b></div></a><div style="left: -9000px; width: 88px; top: 36px;" class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" style="width: 53px;"></div><ul class="chzn-results"><li style="" class="active-result result-selected" id="selQMV_chzn_o_0">± 15min</li><li style="" class="active-result" id="selQMV_chzn_o_1">± 15min</li><li style="" class="active-result" id="selQMV_chzn_o_2">± 15min</li><li style="" class="active-result" id="selQMV_chzn_o_3">± 15min</li></ul></div></div>
+          <fieldset class="mediam">
+            <label>Returning</label>
+            <%= f.text_field :return_trip_departure_date, :class=>'datepicker_return date' %>
+            <span class="calander"></span>
           </fieldset>
-          <fieldset class="small duration">
-            <label>
-              Duration</label>
-            <select style="width: 72px; display: none;" class="chzn-select chzn-done" name="Select_From" id="selLTL">
 
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-              <option>5min</option>
-            </select><div id="selLTL_chzn" class="chzn-container chzn-container-single" style="width: 72px;"><a class="chzn-single" href="javascript:void(0)"><span>5min</span><div><b></b></div></a><div style="left: -9000px; width: 70px; top: 36px;" class="chzn-drop"><div class="chzn-search"><input type="text" autocomplete="off" style="width: 35px;"></div><ul class="chzn-results"><li style="" class="active-result result-selected" id="selLTL_chzn_o_0">5min</li><li style="" class="active-result" id="selLTL_chzn_o_1">5min</li><li style="" class="active-result" id="selLTL_chzn_o_2">5min</li><li style="" class="active-result" id="selLTL_chzn_o_3">5min</li><li style="" class="active-result" id="selLTL_chzn_o_4">5min</li><li style="" class="active-result" id="selLTL_chzn_o_5">5min</li><li style="" class="active-result" id="selLTL_chzn_o_6">5min</li><li style="" class="active-result" id="selLTL_chzn_o_7">5min</li><li style="" class="active-result" id="selLTL_chzn_o_8">5min</li><li style="" class="active-result" id="selLTL_chzn_o_9">5min</li><li style="" class="active-result" id="selLTL_chzn_o_10">5min</li><li style="" class="active-result" id="selLTL_chzn_o_11">5min</li><li style="" class="active-result" id="selLTL_chzn_o_12">5min</li><li style="" class="active-result" id="selLTL_chzn_o_13">5min</li><li style="" class="active-result" id="selLTL_chzn_o_14">5min</li><li style="" class="active-result" id="selLTL_chzn_o_15">5min</li><li style="" class="active-result" id="selLTL_chzn_o_16">5min</li><li style="" class="active-result" id="selLTL_chzn_o_17">5min</li><li style="" class="active-result" id="selLTL_chzn_o_18">5min</li><li style="" class="active-result" id="selLTL_chzn_o_19">5min</li><li style="" class="active-result" id="selLTL_chzn_o_20">5min</li><li style="" class="active-result" id="selLTL_chzn_o_21">5min</li><li style="" class="active-result" id="selLTL_chzn_o_22">5min</li><li style="" class="active-result" id="selLTL_chzn_o_23">5min</li><li style="" class="active-result" id="selLTL_chzn_o_24">5min</li><li style="" class="active-result" id="selLTL_chzn_o_25">5min</li><li style="" class="active-result" id="selLTL_chzn_o_26">5min</li><li style="" class="active-result" id="selLTL_chzn_o_27">5min</li><li style="" class="active-result" id="selLTL_chzn_o_28">5min</li><li style="" class="active-result" id="selLTL_chzn_o_29">5min</li></ul></div></div>
-            <p>(~7:30 pm arrival)</p>
+          <fieldset class="mediam">
+            <label>Time</label>
+            <%= f.select :return_new_departure_time, NEW_DEPARTURE_TIME, {}, {:class=>"chzn-select",:style=>"width:75px;"}  %>
+            <%= f.select :return_new_ampm_time, AM_PM_TIME, {}, {:class=>"chzn-select",:style=>"width:59px;"}  %>
+          </fieldset>
+
+          <fieldset class="small">
+            <label>Flexibility</label>
+            <%= f.select :return_flexibility_in_minutes, ((5..30).step(5).collect{|t| ["±#{t} mins", t]}), {}, {:style => "width:90px",:class=>"chzn-select"} %>
+          </fieldset>
+
+          <fieldset class="small duration">
+            <label>Duration</label>
+            <%= f.select :retrun_duration_minutes, (5..90).step(5).collect{|t| [to_minutes(t), t]}, {}, {:class => "chzn-select", :style => "width:72px"} %>
+            <%#*<p>(~7:30 pm arrival)</p>%>
           </fieldset>
         </div>
         <span class="break"></span>
       </div>                            <fieldset class="big">
-        <input type="submit" value="Previous Step" name="Previous_Step" class="Previous">
-        <input type="submit" value="Next Step" name="submit" class="submit">
+        <input type="button" value="Previous Step" name="Previous_Step" class="Previous">
+        
+        <input type="button" value="Next Step" name="submit" class="submit" onclick="return goto_what_else()" />
       </fieldset>
 
 
@@ -275,7 +186,7 @@
         <fieldset class="colom">
           <label>Notes</label>
           <textarea class="textarea" rows="4" cols="30">Any other details?... (example:
-  I prefer to meet at Starbucks...)</textarea>
+                        I prefer to meet at Starbucks...)</textarea>
         </fieldset>
       </div>
       <span class="break"></span>
@@ -295,12 +206,12 @@
 <script type="text/javascript">
   $(".chzn-select").chosen();
 
-  $( "#ride_departure_date" ).datepicker({
+  $("#ride_departure_date").datepicker({
   dateFormat: "yy-mm-dd",
   minDate: 0, maxDate: "+1Y"
   });
 
-  $( "#ride_return_trip_departure_date" ).datepicker({
+  $("#ride_return_trip_departure_date").datepicker({
   dateFormat: "yy-mm-dd",
   minDate: 0, maxDate: "+1Y"
   });

@@ -398,7 +398,7 @@
 
             <ul class="UserList">
 
-
+              <% ride.friends_in_common ||= []%>
               <% ride.ride_participants.active_participants.role_wise.each do |rider| %>
 
                 <% if @graph.present? && rider.user_id != current_user.id && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>              <!--check if login through facebook then fetch his friends -->
