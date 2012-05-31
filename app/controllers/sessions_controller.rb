@@ -72,7 +72,7 @@ class SessionsController < ApplicationController
   def destroy
     cookies[:contact] = nil                                                                          # session destroy and cookies clear
     logout
-    redirect_to login_path, :notice => "Logged out!"
+    redirect_to root_path
   end
 
   def temp_redirect                                                                                  # temporary session
