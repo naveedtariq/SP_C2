@@ -28,7 +28,7 @@ SPC2::Application.routes.draw do
       get "searchclone"
       post "post_one"
       post "posted"
-      get "create_ride"
+      post "create_ride"
       get "post_one" => "rides#posted_one"
       post "post_two"
       get "update_post_two"

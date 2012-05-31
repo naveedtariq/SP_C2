@@ -68,7 +68,8 @@ class RidesController < ApplicationController
   end
 
   def create_ride # Create new ride
-    @ride = Ride.create!(retrieve_ride)
+    return render text: params.inspect
+    @ride = Ride.create!(params[:ride])
     if(@ride.return_trip_checkbox.to_s == "1")
       @ride_return = Ride.new(retrieve_ride)
       @ride_return.to_location_id = @ride.from_location_id
