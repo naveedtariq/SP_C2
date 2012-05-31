@@ -60,7 +60,7 @@
         <%= image_tag "cartype_#{@ride.ride_type}.png" %>
 
         <ul class="UserList">
-          <li><p><%= @ride.notes|| 'notes not available...' %></p></li>
+          <li><p><%= @ride.notes|| 'Not ride notes available' %></p></li>
           <li class="Arrow">Arrow</li>
         </ul> <!-- UserList -->
       </li> <!-- END OF A RIDE -->
@@ -80,28 +80,28 @@
 
 
         <div class="trip_detail book_ride">
-          
-            <fieldset>
-              <label>Availability</label>
-              <select style="width: 282px; float: left;" class="chzn-select" name="Select_From" id="selRW5" onchange='$(".total_amount").html($("#selRW5").val());$("#ride_participant_number_of_seats").val($("#selRW5").prop("selectedIndex")+1)'>
-                <% @ride.remaining_seats.times do |seat_count| %>
-                  <option value="<%= number_to_currency(@ride.price_per_seat*(seat_count+1)) %>"><%= seat_count+1 %> seat - <%= number_to_currency(@ride.price_per_seat*(seat_count+1)) %> one-way</option>
-                <% end %>
-              </select>
-            </fieldset>
 
-            <p><a title="How It Works Â»">How It Works »</a><br/>
-              <span id="best_number" class="total"><span class="total_amount"><%= number_to_currency(@ride.price_per_seat) %></span> Total</span>
-            </p>
+          <fieldset>
+            <label>Availability</label>
+            <select style="width: 282px; float: left;" class="chzn-select" name="Select_From" id="selRW5" onchange='$(".total_amount").html($("#selRW5").val());$("#ride_participant_number_of_seats").val($("#selRW5").prop("selectedIndex")+1)'>
+              <% @ride.remaining_seats.times do |seat_count| %>
+                <option value="<%= number_to_currency(@ride.price_per_seat*(seat_count+1)) %>"><%= seat_count+1 %> seat - <%= number_to_currency(@ride.price_per_seat*(seat_count+1)) %> one-way</option>
+              <% end %>
+            </select>
+          </fieldset>
 
-            <div class="tooltip" style="position: absolute; top: 35px; left: 498px; opacity: 1; display: none;"><p><i>Total is calculated by number of seats and total ride price</i></p>
-              <span style="left: 209px;" class="TooltipArrow">Arrow</span>
-            </div>
+          <p><a title="How It Works Â»">How It Works »</a><br/>
+            <span id="best_number" class="total"><span class="total_amount"><%= number_to_currency(@ride.price_per_seat) %></span> Total</span>
+          </p>
 
-            <fieldset>
-              <input type="submit" value="Book This Ride Now!" class="submit" onclick="$('.book_ride').hide(); $('#trip_cost_slip').show();return false;" />
-            </fieldset>
-          
+          <div class="tooltip" style="position: absolute; top: 35px; left: 498px; opacity: 1; display: none;"><p><i>Total is calculated by number of seats and total ride price</i></p>
+            <span style="left: 209px;" class="TooltipArrow">Arrow</span>
+          </div>
+
+          <fieldset>
+            <input type="submit" value="Book This Ride Now!" class="submit" onclick="$('.book_ride').hide(); $('#trip_cost_slip').show();$('#feedback').hide();$('#form').show();return false;" />
+          </fieldset>
+
         </div>
 
 
@@ -117,7 +117,7 @@
           <span class="trip_cost answer total_amount"><%= number_to_currency(@ride.price_per_seat) %></span>
         </div>
 
-        <%#= render :partial=>'friend_in_common' %>
+<%#= render :partial=>'friend_in_common' %>
       </div>
 
 
@@ -154,7 +154,30 @@
           <% if current_user && (@ride.ride_participants.active_participants.pluck(:user_id).include? current_user.id) %>                     <!--check for if the person want to join is own ride -->
             <span>You're already in this ride</span>
           <% else %>
-            <%= render :partial=>'form' %>
+            <div class="information_cantainer" id="feedback">
+              <h3>Feedback</h3>
+              <ul id="reviews">
+                <% if @ride.owner.feedbacks.count==0 %>
+                  <li><p>No Feedback</p></li>
+                <% end %>
+                <% @ride.owner.feedbacks.each do |feedback| %>
+                  <li>
+                    <span class="person_image">
+                      <%= image_tag feedback.owner.user_image_url %>
+                    </span>
+                    <div class="feed_text">
+                      <h4><% "(#{feedback.owner.city})" unless feedback.owner.city.blank? %> <%= feedback.owner.full_name %> <span class="thumb">says:</span></h4>
+                      <p><%= feedback.feedback %></p></div>
+                    <span class="break"></span>
+                  </li>
+                <% end %>
+
+              </ul>
+              <span class="break"></span>
+            </div>
+            <div id="form" style="display:none;">
+              <%= render :partial=>'form' %>
+            </div>
           <% end %>
         </div>
       <% else %>
