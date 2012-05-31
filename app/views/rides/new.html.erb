@@ -5,6 +5,12 @@
   function goto_what_else(){
     $('#what-else').show(); $('#what-time').hide();return false;
   }
+  function goback_where_to(){
+    $('#where-to').show(); $('#what-time').hide();return false;
+  }
+  function goback_what_time(){
+    $('#what-time').show(); $('#what-else').hide();return false;
+  }
 </script>
 <%= form_for(@ride, :url => create_ride_rides_path, :id => 'RideSearch') do |f| %>
 
@@ -100,7 +106,7 @@
         <fieldset class="small duration">
           <label>Duration</label>
           <%= f.select :duration_in_minutes, (5..90).step(5).collect{|t| [to_minutes(t), t]}, {}, {:class => "chzn-select", :style => "width:72px"} %>
-          <%#*<p id="arrival_time">(~2:30 pm arrival)</p>%>
+  <%#*<p id="arrival_time">(~2:30 pm arrival)</p>%>
         </fieldset>
 
         <fieldset class="mediam" style="margin-top:10px">
@@ -134,13 +140,13 @@
           <fieldset class="small duration">
             <label>Duration</label>
             <%= f.select :retrun_duration_minutes, (5..90).step(5).collect{|t| [to_minutes(t), t]}, {}, {:class => "chzn-select", :style => "width:72px"} %>
-            <%#*<p>(~7:30 pm arrival)</p>%>
+  <%#*<p>(~7:30 pm arrival)</p>%>
           </fieldset>
         </div>
         <span class="break"></span>
       </div>                            <fieldset class="big">
-        <input type="button" value="Previous Step" name="Previous_Step" class="Previous">
-        
+        <input type="button" value="Previous Step" name="Previous_Step" class="Previous" onclick="return goback_where_to()" />
+
         <input type="button" value="Next Step" name="submit" class="submit" onclick="return goto_what_else()" />
       </fieldset>
 
@@ -185,13 +191,14 @@
       </div>
       <span class="break"></span>
       <fieldset class="big">
-        <input type="submit" value="Previous Step" name="Previous_Step" class="Previous" />
+        <input type="button" value="Previous Step" name="Previous_Step" class="Previous"  onclick="return goback_what_time()"/>
         <input type="submit" value="Next Step" name="submit" class="submit" />
       </fieldset>
     </div>
   </div>
 
 <% end %>
+
 
 <script type="text/javascript">
   $(".chzn-select").chosen();
