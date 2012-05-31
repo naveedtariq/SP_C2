@@ -8,7 +8,12 @@ class Ride < ActiveRecord::Base
   attr_accessor :return_trip_checkbox
   attr_accessor :return_trip_departure_date
   attr_accessor :return_trip_departure_time
+
+  attr_accessor :return_flexibility_in_minutes
+  attr_accessor :retrun_duration_minutes
+
   attr_accessor :new_departure_time
+  attr_accessor :ampm_time
   attr_accessor :departure_datetime
   
 
@@ -179,6 +184,6 @@ class Ride < ActiveRecord::Base
   end
 
   def departure_date
-    self.departuredatetime.to_date
+    self.departuredatetime.to_date if self.departuredatetime
   end
 end

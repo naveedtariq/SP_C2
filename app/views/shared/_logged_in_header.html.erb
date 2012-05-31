@@ -1,0 +1,28 @@
+<div class="nav">
+  <%= link_to "Dashboard", "/dashboard", :class => "text-link01 active" %>
+  <%= link_to inbox_users_path(current_user), :class => "text-link01" do %>
+    Inbox<span class="number"><%= current_user.owned_messages.count %></span>
+  <% end %>
+  <%= link_to feedback_users_path, :class => "text-link01 feedback" do %>
+    Feedback<span class="number"><%= current_user.owned_feedbacks.count %></span>
+  <% end %>
+  <a href="#" class="post"> Post Ride</a><span class="spretor"></span>
+  <p>
+      <%= image_tag current_user.user_image_url, :width => "27px", :height => "27px" %>
+      &nbsp;
+      <%= current_user.full_name %>
+  </p>
+  <div class="login">
+    <ul>
+      <li>
+        <%= link_to "view/edit profile", edit_user_path(current_user), :class => "edit" %>
+      </li>
+      <li>
+        <a href="#" class="account">account</a>
+      </li>
+      <li class="last">
+        <%= link_to "logout", logout_path, :class => "logout" %>
+      </li>
+    </ul>
+  </div>
+</div>
