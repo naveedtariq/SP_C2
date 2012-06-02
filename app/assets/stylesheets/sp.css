@@ -2691,7 +2691,7 @@ footer nav li {
 
 }
 
-.feedbackWrapper .feedbackcolom .find_out{ padding-right:50px; float:right; padding-top:35px;}
+.feedbackWrapper .feedbackcolom .find_out{ padding-right:20px; float:none; padding-top:40px;}
 
 .feedbackWrapper .feedbackcolom .inbox_section .one_person{ margin:11px 15px 0 !important;}
 .feedbackWrapper .feedbackcolom .inbox_section a{ font-size:11px; text-align:center; float:left; width:100%; text-decoration:none; line-height:30px;}
@@ -2700,7 +2700,6 @@ footer nav li {
   font-size: 15px;
   font-weight: bold; font-family:Arial, Helvetica, sans-serif;
 }
-.feedbackWrapper .feedbackcolom .find_out{ padding-right:50px; float:right; padding-top:35px;}
 .feedbackWrapper .feedbackcolom  .timing{ font-size:12px; font-weight:bold; color:#06699b; display:block; line-height:18px;}
 .message_dialogue .feedback_big_box{ width:440px; float:left; border-bottom:1px solid #9ec4dc; margin:0 15px; padding-bottom:35px;}
 .message_dialogue .feedback_big_box .person_container{ margin-top:20px; float:left;;}
@@ -2741,7 +2740,7 @@ footer nav li {
 .message_dialogue .feedback_big_box .person_container .inbox_section a{ font-size:11px; text-align:center; float:left; width:100%; line-height:30px; text-decoration:none;}
 .target{ background:url(/assets/target.gif) left center no-repeat; width:16px; height:7px; float:left; margin:55px 18px 0 18px;}
 .message_dialogue .feedback_big_box .person_container .rating{ width:75px; float:left; margin-left:18px;}
-.message_dialogue .feedback_big_box .person_container .rating .rating_icon{ float:left; margin-top:40px;}
+.message_dialogue .feedback_big_box .person_container .rating .rating_icon{ float:left; margin-top:40px;width:100px;}
 .message_dialogue .feedback_big_box .person_container .rating  .rating_text{ font-size:12px; color:#333333; font-family:Arial, Helvetica, sans-serif; line-height:26px;}
 .message_dialogue .feedback_big_box .person_container .feedback_area{ float:left; width:300px; border:2px solid #9E9D9D; border-radius:5px;
                                                                       -webkit-border-radius:5px;
@@ -2853,4 +2852,22 @@ div.input-container input {
 .send-message-inbox {
   height: 90px;
   width: 314px;
+}
+#thumbs_up {
+  background: url("rating_icon.gif") no-repeat scroll 0 0 transparent;
+  display: block;
+  height: 16px;
+  width: 22px;
+}
+#neutral {
+  background: url("rating_icon.gif") no-repeat scroll -25px 0 transparent;
+  display: block;
+  height: 16px;
+  width: 22px;
+}
+#thumbs_down {
+  background: url("rating_icon.gif") no-repeat scroll -50px 0 transparent;
+  display: block;
+  height: 16px;
+  width: 22px;
 }
