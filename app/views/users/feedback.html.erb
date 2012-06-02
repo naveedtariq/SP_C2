@@ -4,22 +4,25 @@
   <script type="text/javascript">
     $(document).ready(function(){
       $('#scrollbar2').tinyscrollbar({ sizethumb: 15 });
-      $.ajax({
-        type: "GET",
-        url: $(".give").first().attr("href"),
-        success: function(data){
-          $(".message_dialogue").html(data);
-          $(".message_dialogue").show();
-          $('#scrollbar3').tinyscrollbar({ sizethumb: 15 });
-          $(".feedback-submit").click(function () {
-            $(this).closest("form").submit();
+      if($(".give").length > 0)
+      {
+        $.ajax({
+          type: "GET",
+          url: $(".give").first().attr("href"),
+          success: function(data){
+            $(".message_dialogue").html(data);
+            $(".message_dialogue").show();
+            $('#scrollbar3').tinyscrollbar({ sizethumb: 15 });
+            $(".feedback-submit").click(function () {
+              $(this).closest("form").submit();
+            });
+            $(".ratings").click(function () {
+              $("#feedback_status").val(this.id);
+              return false;
+            });
+            }
           });
-          $(".ratings").click(function () {
-            $("#feedback_status").val(this.id);
-            return false;
-          });
-          }
-        });
+        }
       $('.give').click(function () {
         $(".message_dialogue").hide();
         $.ajax({
