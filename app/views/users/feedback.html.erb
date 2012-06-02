@@ -1,18 +1,97 @@
-<div class="main-msg-box" style="border: 1px solid;">
-  <div class="left-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px; width: 632px;">
-    <h6>Feedbacks</h6>
-    <% @past_rides.each do |past_ride| %>
-        <%ride = past_ride.ride %>
-        <%if ride.ride_participants.active_participants.count > 1%>
-        <a href="<%= new_ride_ride_participant_path(ride) %>"><%= ride.to_location && ride.to_location.name %>&nbsp;&nbsp;
-          on <%= ride.departuredatetime.to_date %></a>
-        | <%= link_to "feedback", new_ride_feedback_path(ride), :target => "frame-a" %>
-        <br/>
-        <%end%>
-    <% end %>
+<% body_css_class('FindaRide') %>
+<% content_for :top_js do %>
+  <%= javascript_include_tag "jquery.tinyscrollbar.min.js" %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#scrollbar2').tinyscrollbar({ sizethumb: 15 });
+      $.ajax({
+        type: "GET",
+        url: $(".give").first().attr("href"),
+        success: function(data){
+          $(".message_dialogue").html(data);
+          $(".message_dialogue").show();
+          $('#scrollbar3').tinyscrollbar({ sizethumb: 15 });
+          $(".feedback-submit").click(function () {
+            $(this).closest("form").submit();
+          });
+          $(".ratings").click(function () {
+            $("#feedback_status").val(this.id);
+            return false;
+          });
+          }
+        });
+      $('.give').click(function () {
+        $(".message_dialogue").hide();
+        $.ajax({
+          type: "GET",
+          url: this.href,
+          success: function(data){
+            $(".message_dialogue").html(data);
+            $(".message_dialogue").show();
+            $('#scrollbar3').tinyscrollbar({ sizethumb: 15 });
+            $(".feedback-submit").click(function () {
+              $(this).closest("form").submit();
+            });
+            $(".ratings").click(function () {
+              $("#feedback_status").val(this.id);
+              return false;
+            });
+            }
+          });
+          return false;
+      });
+    });
+  </script>	
+<% end %>
+<% content_for :top_css do %>
+  <%= stylesheet_link_tag :website %>
+  <%= stylesheet_link_tag :skin %>
+<% end %>
+<section id="FindaRide" class="Main">
+  <div class="feedbackWrapper">
+    <div class="ridesdetail_heading">
+      <h3>Feedback by Trip</h3>
+      <span class="break"></span>
+    </div>
+    <div id="scrollbar2">
+      <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+      <div class="viewport">
+        <div class="overview">
+          <% @past_rides.each_with_index do |past_ride, i| %>
+            <% ride = past_ride.ride %>
+            <% if ride.ride_participants.active_participants.count > 1 %>
+              <div class="feedbackcolom firstchild">
+                <div class="inbox_section big_section">
+                  <% ride.ride_participants.active_participants.each do |p| %>
+                    <div class="section">
+                      <span class="person_image">
+                        <%= image_tag p.user.user_image_url.to_s, :alt => p.user.full_name %>
+                      </span>
+                      <%= link_to p.user.full_name, user_path(p.user.id) %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="find_out">
+                  <div class="place_date_contant">
+                    on <%= ride.departuredatetime.strftime("%m/%d/%Y") %>
+                    <a href="#"></a>
+                    <%= link_to "", new_ride_feedback_path(ride), :class => "give" %>
+                  </div>
+                  <div class="index_main_cout">
+                    <h3>Trip from <%= ride.from_location && ride.from_location.name %> to <%= ride.to_location && ride.to_location.name %></h3>
+                  </div>
+                </div>
+                <span class="break"></span>
+                <hr />
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div> 
+        
+  <div class="message_dialogue" style="display: none;">
   </div>
-  <div class="right-all-msgs" style="border: 1px solid; float: left; margin-left: 5px; margin-top: 5px;">
-    <iframe src="<%= params[:iframe] %>" name="frame-a" width="600" height="650"></iframe>
-    <!-- iframe div for feedback given -->
-  </div>
-</div>
+  <span class="break"></span>
+</section> <!-- Main #FindaRide -->
