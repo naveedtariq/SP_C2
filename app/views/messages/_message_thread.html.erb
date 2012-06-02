@@ -15,7 +15,7 @@
     <div class="overview">
       <div style="padding-top:6px;">
         <% @thread.each_with_index do |message, index| %>
-          <% if index.even? %>
+          <% unless current_user == message.user %>
             <div class="dialogue_count">
               <div class="inbox_section">
                 <span class="person_image">
