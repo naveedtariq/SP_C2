@@ -1,0 +1,75 @@
+<div class="ridesdetail_heading">
+  <h3>Message Dialogue</h3>
+  <span class="break"></span>
+</div>
+<div id="scrollbar5">
+  <div class="scrollbar">
+    <div class="track">
+      <div class="thumb">
+        <div class="end">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="viewport">
+    <div class="overview">
+      <div style="padding-top:6px;">
+        <% @thread.each_with_index do |message, index| %>
+          <% if index.even? %>
+            <div class="dialogue_count">
+              <div class="inbox_section">
+                <span class="person_image">
+                  <%= image_tag message.user.user_image_url.to_s, :alt => message.user.full_name %>
+                </span>
+                <%= link_to message.user.full_name, user_path(message.user.id) %>
+              </div>
+              <div class="even">
+                <p>
+                  <%= message.message %>
+                </p>
+                <span class="dialogue_arrow"></span>
+              </div>
+              <span class="break"></span>
+            </div>
+          <% else %>
+            <div class="dialogue_count">
+              <div class="inbox_section odd_img">
+                <span class="person_image">
+                  <%= image_tag message.user.user_image_url.to_s, :alt => message.user.full_name %>
+                </span>
+                <%= link_to message.user.full_name, user_path(message.user.id) %>
+              </div>
+              <div class="even odd">
+                <div class="vertical_center">
+                  <p>
+                    <%= message.message %>
+                  </p>
+                </div>
+                <span class="odd_arrow"></span>
+              </div>
+              <span class="break"></span>
+            </div>
+          <% end %>
+        <% end %>
+
+      <%= form_for Message.new, :url => ride_message_path(@ride, req_id: @req_user) do |f| %>
+        <div class="dialogue_count">
+          <div class="inbox_section odd_img">
+            <span class="person_image">
+              <%= image_tag current_user.user_image_url.to_s %>
+            </span>
+            <%= link_to current_user.full_name, user_path(current_user.id) %>
+          </div>
+          <div class="even odd">
+            <%= f.text_area :message, :class => "send-message-inbox" %>
+            <%= f.hidden_field :owner_id, :value => (@req_user.id) %>
+            <span class="odd_arrow"></span>
+          </div> 
+          <span class="break"></span>
+        </div>
+        <a title="Submit" class="messages_submit">Submit</a>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
