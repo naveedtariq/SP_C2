@@ -2,6 +2,7 @@
 <script type="text/javascript">
 
   $(document).ready(function() {
+
   $(".newsticker-jcarousellite").jCarouselLite({
   vertical: true,
   hoverPause:true,
@@ -9,6 +10,16 @@
   auto:500,
   speed:1000
   });
+
+
+  $('#home_search').submit(function() {
+  if(isSameGroup()){
+    jAlert('Same group selected.', 'Error');
+  return false;
+  }
+  }
+  );
+
   });
 </script>
 
@@ -26,11 +37,11 @@
     <h1>Share a Direct Ride to the Airport.</h1>
     <h2>Find others from your neighborhood and take a taxi or black car together.</h2>
     <a href="/footers/how_it_works" class="HowItWorks">How it works &raquo;</a>
-    <%= form_for :ride, :url => search_rides_path, :method => "get" do |f| %>
+    <%= form_for(:ride, :url => search_rides_path, :method => "get", :html=>{:id=>'home_search'}) do |f| %>
       <fieldset>
-        <%= f.select :from_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {},:style => "width:310px", :class=>"chzn-select"%>
+        <%= f.select :from_location_id, (location_options_for_select), {},:style => "width:310px", :class=>"chzn-select"%>
         <a class="LocationSwitch">Switch</a>
-        <%= f.select :to_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {},:style => "width:310px", :class=>"chzn-select"%>
+        <%= f.select :to_location_id, (location_options_for_select), {},:style => "width:310px", :class=>"chzn-select"%>
         <%= hidden_field_tag :search_posted, "true" %>
         <%= f.submit "View Rides Now", :class => "SplashButton", :id => "btn-search"%>
       </fieldset>

@@ -2,204 +2,13 @@
 <%= javascript_include_tag 'tooltips' %>
 <script type="text/javascript">
   $(document).ready(function () {
-  $('#ride_to_location_id').change(function () {                          // here check to and from location ar not from same group
-  var A = [1,2,3];
-  var i = 0;
-  var j = 0;
-  var k = 0;
-  var IsFound = false;
-  var IsFound2 = false;
-  if ($(this).val() != "" && $('#ride_from_location_id').val() != "") {
-  while (i < A.length) {
-  if ($('#ride_to_location_id').val() == A[i]) {
-  IsFound = true;
-  break;
-  }
-  i = i + 1;
-  }
-  while (k < A.length) {
-  if ($('#ride_from_location_id').val() == A[k]) {
-  IsFound2 = true;
-  break;
-  }
-  k = k + 1;
-  }
-  if (IsFound) {
-  while (j < A.length) {
-  if ($('#ride_from_location_id').val() <= A[j]) {
-  $(".city-option-same").show();
-  $('#ride_to_location_id').addClass("validation-error");
-  $('#ride_from_location_id').addClass("validation-error");
-  $("#ride_departure_all").attr("disabled", "disabled");
-  $("#ride_departure_first_option").attr("disabled", "disabled");
-  $("#ride_departure_second_option").attr("disabled", "disabled");
-  $("#btnAll").attr("disabled", "disabled");
-  $("#btn14").attr("disabled", "disabled");
-  $("#btn30").attr("disabled", "disabled");
-  $("#RideSearch").attr("disabled", "disabled");
-  return false;
-  }
-  else {
-  $(".city-option-same").hide();
-  $('#ride_to_location_id').removeClass("validation-error");
-  $('#ride_from_location_id').removeClass("validation-error");
-  $("#ride_departure_all").removeAttr("disabled", "disabled");
-  $("#ride_departure_first_option").removeAttr("disabled", "disabled");
-  $("#ride_departure_second_option").removeAttr("disabled", "disabled");
-  $("#btnAll").removeAttr("disabled", "disabled");
-  $("#btn14").removeAttr("disabled", "disabled");
-  $("#btn30").removeAttr("disabled", "disabled");
-  //$("#RideSearch").submit();
-  }
-  j = j + 1;
-  }
-  $("#RideSearch").submit();
-  }
-  else {
-  if (!IsFound2) {
-  $(".city-option-same").show();
-  $('#ride_to_location_id').addClass("validation-error");
-  $('#ride_from_location_id').addClass("validation-error");
-  $("#ride_departure_all").attr("disabled", "disabled");
-  $("#ride_departure_first_option").attr("disabled", "disabled");
-  $("#ride_departure_second_option").attr("disabled", "disabled");
-  $("#btnAll").attr("disabled", "disabled");
-  $("#btn14").attr("disabled", "disabled");
-  $("#btn30").attr("disabled", "disabled");
-  $("#RideSearch").attr("disabled", "disabled");
-  return false;
-  }
-  else {
-  $(".city-option-same").hide();
-  $('#ride_to_location_id').removeClass("validation-error");
-  $('#ride_from_location_id').removeClass("validation-error");
-  $("#ride_departure_all").removeAttr("disabled", "disabled");
-  $("#ride_departure_first_option").removeAttr("disabled", "disabled");
-  $("#ride_departure_second_option").removeAttr("disabled", "disabled");
-  $("#btnAll").removeAttr("disabled", "disabled");
-  $("#btn14").removeAttr("disabled", "disabled");
-  $("#btn30").removeAttr("disabled", "disabled");
-  $("#RideSearch").submit();
-  }
-  }
-  }
-  });
 
-  $('#ride_from_location_id').change(function () {                        // here check for to and from location from same group
-  var A = [1,2,3];
-  var i = 0;
-  var j = 0;
-  var k = 0;
-  var IsFound = false;
-  var IsFound2 = false;
-  if ($(this).val() != "" && $('#ride_to_location_id').val() != "") {
-  while (i < A.length) {
-  if ($('#ride_from_location_id').val() == A[i]) {
-  IsFound = true;
-  break;
-  }
-  i = i + 1;
-  }
-  while (k < A.length) {
-  if ($('#ride_to_location_id').val() == A[k]) {
-  IsFound2 = true;
-  break;
-  }
-  k = k + 1;
-  }
-
-  if (IsFound) {
-  while (j < A.length) {
-  if ($('#ride_to_location_id').val() <= A[j]) {
-
-  $(".city-option-same").show();
-  $('#ride_to_location_id').addClass("validation-error");
-  $('#ride_from_location_id').addClass("validation-error");
-  $("#ride_departure_all").attr("disabled", "disabled");
-  $("#ride_departure_first_option").attr("disabled", "disabled");
-  $("#ride_departure_second_option").attr("disabled", "disabled");
-  $("#btnAll").attr("disabled", "disabled");
-  $("#btn14").attr("disabled", "disabled");
-  $("#btn30").attr("disabled", "disabled");
-  $("#RideSearch").attr("disabled", "disabled");
-  return false;
-  }
-  else {
-  $(".city-option-same").hide();
-  $('#ride_to_location_id').removeClass("validation-error");
-  $('#ride_from_location_id').removeClass("validation-error");
-  $("#ride_departure_all").removeAttr("disabled", "disabled");
-  $("#ride_departure_first_option").removeAttr("disabled", "disabled");
-  $("#ride_departure_second_option").removeAttr("disabled", "disabled");
-  $("#btnAll").removeAttr("disabled", "disabled");
-  $("#btn14").removeAttr("disabled", "disabled");
-  $("#btn30").removeAttr("disabled", "disabled");
-  //$("#RideSearch").submit();
-  }
-  j = j + 1;
-  }
-  $("#RideSearch").submit();
-  }
-  else {
-  if (!IsFound2) {
-  $(".city-option-same").show();
-  $('#ride_to_location_id').addClass("validation-error");
-  $('#ride_from_location_id').addClass("validation-error");
-  $("#ride_departure_all").attr("disabled", "disabled");
-  $("#ride_departure_first_option").attr("disabled", "disabled");
-  $("#ride_departure_second_option").attr("disabled", "disabled");
-  $("#btnAll").attr("disabled", "disabled");
-  $("#btn14").attr("disabled", "disabled");
-  $("#btn30").attr("disabled", "disabled");
-  !$("#RideSearch").attr("disabled", "disabled");
-  return false;
-  }
-  else {
-  $(".city-option-same").hide();
-  $('#ride_to_location_id').removeClass("validation-error");
-  $('#ride_from_location_id').removeClass("validation-error");
-  $("#ride_departure_all").removeAttr("disabled", "disabled");
-  $("#ride_departure_first_option").removeAttr("disabled", "disabled");
-  $("#ride_departure_second_option").removeAttr("disabled", "disabled");
-  $("#btnAll").removeAttr("disabled", "disabled");
-  $("#btn14").removeAttr("disabled", "disabled");
-  $("#btn30").removeAttr("disabled", "disabled");
-  $("#RideSearch").submit();
-  }
-  }
-  }
-  });
-
-
-
-
-  $("#btnAll").click(function () {
-  $("#ride_departure_all").attr("checked", "checked");
-  $("#RideSearch").submit();
-  return true;
-
-  });
-
-  $("#btn14").click(function () {
-  $("#ride_departure_first_option").attr("checked", "checked");
-  $("#RideSearch").submit();
-  return true;
-  });
-
-  $("#btn30").click(function () {
-  $("#ride_departure_second_option").attr("checked", "checked");
-  $("#RideSearch").submit();
-  return true;
-  });
-
-  if ($('#ride_departure_all').is(':checked'))
-  $('input#btnAll').addClass('Active');
-  else if ($('#ride_departure_first_option').is(':checked'))
-  $('input#btn14').addClass('Active');
-  else
-  $('input#btn30').addClass('Active');
-
-
+    $('#RideSearch').submit(function() {
+      if(isSameGroup()){
+        jAlert('Same group selected.', 'Error');
+        return false;
+      }
+    });
   });
 </script>
 
@@ -259,20 +68,20 @@
       <ul>
         <li>
           <label for="">From:</label>
-          <%= f.select :from_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {},:style => "width:310px", :class=>"chzn-select"%>
+          <%= f.select :from_location_id, (location_options_for_select), {},:style => "width:310px", :class=>"chzn-select"%>
         </li>
         <li><a class="LocationSwitch">Switch</a></li>
         <li>
           <label for="Select_Airlines">To:</label>
-          <%= f.select :to_location_id, (Location.all.collect {|p| [ p.name, p.id ] }), {},:style => "width:310px", :class=>"chzn-select"%>
+          <%= f.select :to_location_id, (location_options_for_select), {},:style => "width:310px", :class=>"chzn-select"%>
         </li>
         <li class="SearchButtons">
           <label>When:</label>
           <input type="hidden" id="SearchTime"/>
 
-          <input type="button" id="btnAll" value="All" name="ride[departure]" class="SearchTime"/>
-          <input type="button" id="btn14" value="Next 14 Days" class="SearchTime"/>
-          <input type="button" id="btn30" value="Next 30 Days" class="SearchTime" />
+          <input type="submit" id="btnAll" value="All" name="ride[departure]" class="SearchTime"/>
+          <input type="submit" id="btn14" value="Next 14 Days" class="SearchTime"/>
+          <input type="submit" id="btn30" value="Next 30 Days" class="SearchTime" />
 
 
           <table style="display: none;">

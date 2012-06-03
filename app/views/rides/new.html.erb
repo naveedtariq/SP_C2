@@ -1,16 +1,55 @@
 <script type="text/javascript" >
+
+  var loc_from_id = ".post_ride_window #ride_from_location_id"
+  var loc_to_id = ".post_ride_window #ride_to_location_id"
+
   function goto_what_time(){
-    $('#what-time').show(); $('#where-to').hide();return false;
+  if(isSameGroup(loc_from_id, loc_to_id)){
+  jAlert('Same group selected.', 'Error');
   }
+  else{
+  $('#what-time').show(); $('#where-to').hide();return false;
+  }
+  }
+
   function goto_what_else(){
-    $('#what-else').show(); $('#what-time').hide();return false;
+  if($('#ride_departure_date').val()==""){ jAlert('Please select Departing date.', 'Error'); }
+  else if( $('#ride_return_trip_checkbox').attr('checked') && $('#ride_return_trip_departure_date').val()=="" ) { jAlert('Please select Returning date.', 'Error'); }
+  else{ $('#what-else').show(); $('#what-time').hide();return false; }
   }
   function goback_where_to(){
-    $('#where-to').show(); $('#what-time').hide();return false;
+  $('#where-to').show(); $('#what-time').hide();return false;
   }
   function goback_what_time(){
-    $('#what-time').show(); $('#what-else').hide();return false;
+  $('#what-time').show(); $('#what-else').hide();return false;
   }
+
+  <% if @ride.to_location.present? && @ride.from_location.present? %>
+    $('#map_canvas').gmap('displayDirections', { 'origin':'<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination':'<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results') }, function (result, status) {                // google map change its map w.r.t to an from location
+        if (status === 'OK') {
+          var METERS_TO_MILES = 0.000621371192;
+          totalDistance = result.routes[0].legs[0].distance.value;
+          totalDistance = (Math.round(totalDistance * METERS_TO_MILES * 10) / 10)
+
+          $("#distance").text("distance: " + totalDistance + ' miles');
+          $("#duration").text("duration: " + result.routes[0].legs[0].duration.text);
+          if ("<%= @ride.to_location.name %>" == "(JFK) John F. Kennedy") {
+            $('#fare').text("Estimated Taxi Fare: $45");
+          }
+          else if ("<%=  @ride.to_location.name %>" == "(JFK) John F. Kennedy") {
+            $('#fare').text("Estimated Taxi Fare: $45");
+          }
+          else {
+            var fare = 3.0;
+            fare = (totalDistance * (0.4 / 0.2)) + fare;
+            $('#fare').text("Estimated Taxi Fare: $" + fare);
+          }
+        }
+    });
+  <% else %>
+    
+  <% end %>
+
 </script>
 <%= form_for(@ride, :url => create_ride_rides_path, :id => 'RideSearch') do |f| %>
 
