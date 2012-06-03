@@ -1,12 +1,12 @@
 <div class="ridesdetail_heading">
-  <h3>How was your ride with Benjamin B. & Thomas L.?</h3>
+  <% @active_participants = @ride.ride_participants.confirmed_or_owner_participants.where("user_id <> ? ", current_user.id) %>
+  <h3>How was your ride with <%= @active_participants.inject("") {|result, ele| result.to_s + ele.user.full_name.to_s } %>?</h3>
   <span class="break"></span>
 </div>
 <div id="scrollbar3">
   <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
   <div class="viewport">
     <div class="overview">
-      <% @active_participants = @ride.ride_participants.confirmed_or_owner_participants.where("user_id <> ? ", current_user.id) %>
       <% @active_participants.each do |ride_participant| %>
         <%= render "feedbacks/feedbacks", :owner => ride_participant.user %>        <!--render feedbacks partial here -->
       <%end%>

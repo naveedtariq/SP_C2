@@ -17,7 +17,9 @@ class MessagesController < ApplicationController
       #redirect_to ride_message_path(@ride, req_id: params[:req_id])
       redirect_to :back
     else
-      render :action => 'new'
+      flash[:notice] = "Errors while sending message"
+      redirect_to :back
+#      render :action => 'new'
     end
   end
 
@@ -31,9 +33,8 @@ class MessagesController < ApplicationController
       @req_user = @ride.owner
     end
     req_users << @req_user.id
-    @conversation = @ride.messages.where("user_id in (?) and owner_id in (?)", req_users, req_users).ordered  # show the message b/w sender and receiver
-    @user = current_user
-    @messages = current_user.owned_messages.rev_ordered
+    @thread = @ride.messages.where("user_id in (?) and owner_id in (?)", req_users, req_users).ordered  # show the message b/w sender and receiver
+    return render :partial => "message_thread", :layout => false
   end
 
   private
