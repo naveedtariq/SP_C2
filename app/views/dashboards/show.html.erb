@@ -1,0 +1,320 @@
+<%= javascript_include_tag 'jquery.tinyscrollbar.min' %>
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#scrollbar1').tinyscrollbar({ sizethumb: 15 });
+			$('#scrollbar2').tinyscrollbar({ sizethumb: 15 });
+			$('.dropdown-triger').click(function(){$('.login-dropdown').slideToggle(); $('.login').toggleClass('active');  });
+		});
+</script>
+
+
+
+<div id="banner">
+  <div class="wrapper">
+    <div class="banner-left" style="clear:both;">
+      <div class="heading-bar">
+        <h2>Alerts &amp; Updates</h2>
+      </div>
+      <div class="inner-col"> <a href="profile_view.html" class="person"><%= image_tag 'william_B.jpg' %></a>
+        <div class="person-content">
+          <h3>Welcome back Winston!</h3>
+          <p>Did you know that cabs are required to make multiple stops if a passenver requests it? Cabs can only charge additional city rate after a JFK flat rate on the second stop.<br />
+            <br />
+            See our <a href="#">recommended limo</a> companies for express service to the airports!</p>
+          <a class="button" href="#" title="Invite your friends!">Invite your friends!</a><span class="join">to join the Shairporter
+            community!</span> </div>
+      </div>
+    </div>
+    <div class="banner-right">
+      <div class="heading-bar">
+        <h2>My Inbox <a href="#">view all messages » </a></h2>
+      </div>
+      <div id="scrollbar1">
+        <div class="scrollbar">
+          <div class="track">
+            <div class="thumb">
+              <div class="end"></div>
+            </div>
+          </div>
+        </div>
+        <div class="viewport">
+          <div class="overview">
+            <ul>
+              <li class="firstchild"> <a class="person_image" href="profile_view.html"><%= image_tag 'william_B.jpg' %></a>
+                <div class="message"><a href="#">William B.</a> <span> wrote:</span>
+                  <h4>Hi Winston, I'd like to find out more about the ride!</h4>
+                  <p>sent 22 min ago for <strong>Chelsea > JFK on 4/23</strong></p>
+                </div>
+                <hr />
+                <span class="break"></span> </li>
+              <li> <a class="person_image" href="profile_view.html"><%= image_tag 'william_B.jpg' %></a>
+                <div class="message"><a href="#">William B.</a> <span> wrote:</span>
+                  <h4>Hi Winston, I'd like to find out more about the ride!</h4>
+                  <p>sent 22 min ago for <strong>Chelsea > JFK on 4/23</strong></p>
+                </div>
+                <hr />
+                <span class="break"></span> </li>
+              <li> <a class="person_image" href="profile_view.html"><%= image_tag 'william_B.jpg' %></a>
+                <div class="message"><a href="#">William B.</a> <span> wrote:</span>
+                  <h4>Hi Winston, I'd like to find out more about the ride!</h4>
+                  <p>sent 22 min ago for <strong>Chelsea > JFK on 4/23</strong></p>
+                </div>
+                <hr />
+                <span class="break"></span> </li>
+              <li> <a class="person_image" href="profile_view.html"><%= image_tag 'william_B.jpg' %></a>
+                <div class="message"><a href="#">William B.</a> <span> wrote:</span>
+                  <h4>Hi Winston, I'd like to find out more about the ride!</h4>
+                  <p>sent 22 min ago for <strong>Chelsea > JFK on 4/23</strong></p>
+                </div>
+                <hr />
+                <span class="break"></span> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="break"></span> </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div id="content">
+  <div class="wrapper">
+    <div class="heading-bar">
+      <h2>My Upcoming Rides</h2>
+    </div>
+    <div id="scrollbar2">
+      <div class="scrollbar">
+        <div class="track">
+          <div class="thumb">
+            <div class="end"></div>
+          </div>
+        </div>
+      </div>
+      <div class="viewport">
+        <div class="overview">
+          <ul class="RidesList">
+            <!-- END OF A RIDE -->
+            <!-- END OF A RIDE -->
+            <!-- END OF A RIDE -->
+            <li><a href="message.html" class="red-number"><span>3</span></a>
+              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span>November</span> <strong>23</strong> <span>Wed - 11:00pm</span> </p> <span class="Select">View Details</span> </a>
+              <!-- SelectRide -->
+              <div class="RideDetails text-col">
+                <div class="text"> <span class="leave">Leave:</span> <strong>New York University (NYU)</strong></div>
+                <div class="text"> <span class="arrive">Arrive:</span> <strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong>
+                  <div class="links"><a class="match" href="#">Matches</a><a class="modify" href="#">Modify</a><a class="cancel" href="#">Cancel</a></div>
+                </div>
+              </div>
+              <!-- RideDetails -->
+              <div class="li-text"> <img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+                <p>Total: <span>$50</span> Your Fare: <span>$25</span></p>
+              </div>
+              <ul class="UserList">
+                <li> <a href="#" class="UserPhoto"><img src="images/pending.jpg" alt="pending" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
+                  <p class="user-name"><a href="#"><strong>William B.</strong></a><strong> Pending</strong> (22h 08m)</p>
+                </li>
+                <li class="confirm"> <a href="#" class="UserPhoto"><img src="images/confirmed.jpg" alt="confirmed" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="mailto:winston.wu@gmail.com">winston.wu@gmail.com</a> <a href="tel:5555551212" >555-555-1212</a> <a href="#">prefers: SMS</a></div> <p class="user-name"><a href="#"><strong>William B.</strong></a> Confirmed</p> </li>
+                <li class="Arrow">Arrow</li>
+              </ul>
+              <span class="break"></span>
+              <!-- RiderList -->
+            </li>
+            <li><a href="message.html" class="red-number"><span>3</span></a>
+              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span>November</span> <strong>23</strong> <span>Wed - 11:00pm</span> </p> <span class="Select">View Details</span> </a>
+              <!-- SelectRide -->
+              <div class="RideDetails text-col">
+                <div class="text"> <span class="leave">Leave:</span> <strong>New York University (NYU)</strong></div>
+                <div class="text"> <span class="arrive">Arrive:</span> <strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong>
+                  <div class="links"><a class="match" href="#">Matches</a><a class="modify" href="#">Modify</a><a class="cancel" href="#">Cancel</a></div>
+                </div>
+              </div>
+              <!-- RideDetails -->
+              <div class="li-text"> <img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+                <p>Total: <span>$50</span> Your Fare: <span>$25</span></p>
+              </div>
+              <ul class="UserList">
+                <li> <a href="#" class="UserPhoto"><img src="images/pending.jpg" alt="pending" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
+                  <p class="user-name"><a href="#"><strong>William B.</strong></a><strong> Pending</strong> (22h 08m)</p>
+                </li>
+                <li class="confirm"> <a href="#" class="UserPhoto"><img src="images/confirmed.jpg" alt="confirmed" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="mailto:winston.wu@gmail.com">winston.wu@gmail.com</a> <a href="tel:5555551212" >555-555-1212</a> <a href="#">prefers: SMS</a></div> <p class="user-name"><a href="#"><strong>William B.</strong></a> Confirmed</p> </li>
+                <li class="Arrow">Arrow</li>
+              </ul>
+              <span class="break"></span>
+              <!-- RiderList -->
+            </li>
+            <li><a href="message.html" class="red-number"><span>3</span></a>
+              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span>November</span> <strong>23</strong> <span>Wed - 11:00pm</span> </p> <span class="Select">View Details</span> </a>
+              <!-- SelectRide -->
+              <div class="RideDetails text-col">
+                <div class="text"> <span class="leave">Leave:</span> <strong>New York University (NYU)</strong></div>
+                <div class="text"> <span class="arrive">Arrive:</span> <strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong>
+                  <div class="links"><a class="match" href="#">Matches</a><a class="modify" href="#">Modify</a><a class="cancel" href="#">Cancel</a></div>
+                </div>
+              </div>
+              <!-- RideDetails -->
+              <div class="li-text"> <img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+                <p>Total: <span>$50</span> Your Fare: <span>$25</span></p>
+              </div>
+              <ul class="UserList">
+                <li> <a href="#" class="UserPhoto"><img src="images/pending.jpg" alt="pending" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
+                  <p class="user-name"><a href="#"><strong>William B.</strong></a><strong> Pending</strong> (22h 08m)</p>
+                </li>
+                <li class="confirm"> <a href="#" class="UserPhoto"><img src="images/confirmed.jpg" alt="confirmed" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="mailto:winston.wu@gmail.com">winston.wu@gmail.com</a> <a href="tel:5555551212" >555-555-1212</a> <a href="#">prefers: SMS</a></div> <p class="user-name"><a href="#"><strong>William B.</strong></a> Confirmed</p> </li>
+                <li class="Arrow">Arrow</li>
+              </ul>
+              <span class="break"></span>
+              <!-- RiderList -->
+            </li>
+            <li><a href="message.html" class="red-number"><span>3</span></a>
+              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span>November</span> <strong>23</strong> <span>Wed - 11:00pm</span> </p> <span class="Select">View Details</span> </a>
+              <!-- SelectRide -->
+              <div class="RideDetails text-col">
+                <div class="text"> <span class="leave">Leave:</span> <strong>New York University (NYU)</strong></div>
+                <div class="text"> <span class="arrive">Arrive:</span> <strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong>
+                  <div class="links"><a class="match" href="#">Matches</a><a class="modify" href="#">Modify</a><a class="cancel" href="#">Cancel</a></div>
+                </div>
+              </div>
+              <!-- RideDetails -->
+              <div class="li-text"> <img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+                <p>Total: <span>$50</span> Your Fare: <span>$25</span></p>
+              </div>
+              <ul class="UserList">
+                <li> <a href="#" class="UserPhoto"><img src="images/pending.jpg" alt="pending" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
+                  <p class="user-name"><a href="#"><strong>William B.</strong></a><strong> Pending</strong> (22h 08m)</p>
+                </li>
+                <li class="confirm"> <a href="#" class="UserPhoto"><img src="images/confirmed.jpg" alt="confirmed" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="mailto:winston.wu@gmail.com">winston.wu@gmail.com</a> <a href="tel:5555551212" >555-555-1212</a> <a href="#">prefers: SMS</a></div> <p class="user-name"><a href="#"><strong>William B.</strong></a> Confirmed</p> </li>
+                <li class="Arrow">Arrow</li>
+              </ul>
+              <span class="break"></span>
+              <!-- RiderList -->
+            </li>
+            <!-- END OF A RIDE -->
+          </ul>
+          <div class="heading-bar inner-bar">
+            <h2>My Past Rides</h2>
+          </div>
+          <ul class="RidesList">
+            <!-- END OF A RIDE -->
+            <!-- END OF A RIDE -->
+            <!-- END OF A RIDE -->
+            <li><a href="message.html" class="red-number"><span>3</span></a>
+              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span>November</span> <strong>23</strong> <span>Wed - 11:00pm</span> </p> <span class="Select">View Details</span> </a>
+              <!-- SelectRide -->
+              <div class="RideDetails text-col">
+                <div class="text"> <span class="leave">Leave:</span> <strong>New York University (NYU)</strong></div>
+                <div class="text"> <span class="arrive">Arrive:</span> <strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong>
+                  <div class="links"><a class="match" href="#">Matches</a><a class="modify" href="#">Modify</a><a class="cancel" href="#">Cancel</a></div>
+                </div>
+              </div>
+              <!-- RideDetails -->
+              <div class="li-text"> <img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+                <p>Total: <span>$50</span> Your Fare: <span>$25</span></p>
+              </div>
+              <ul class="UserList">
+                <li> <a href="#" class="UserPhoto"><img src="images/pending.jpg" alt="pending" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
+                  <p class="user-name"><a href="#"><strong>William B.</strong></a><strong> Pending</strong> (22h 08m)</p>
+                </li>
+                <li class="confirm"> <a href="#" class="UserPhoto"><img src="images/confirmed.jpg" alt="confirmed" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="mailto:winston.wu@gmail.com">winston.wu@gmail.com</a> <a href="tel:5555551212" >555-555-1212</a> <a href="#">prefers: SMS</a></div> <p class="user-name"><a href="#"><strong>William B.</strong></a> Confirmed</p> </li>
+                <li class="Arrow">Arrow</li>
+              </ul>
+              <span class="break"></span>
+              <!-- RiderList -->
+            </li>
+            <li><a href="message.html" class="red-number"><span>3</span></a>
+              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span>November</span> <strong>23</strong> <span>Wed - 11:00pm</span> </p> <span class="Select">View Details</span> </a>
+              <!-- SelectRide -->
+              <div class="RideDetails text-col">
+                <div class="text"> <span class="leave">Leave:</span> <strong>New York University (NYU)</strong></div>
+                <div class="text"> <span class="arrive">Arrive:</span> <strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong>
+                  <div class="links"><a class="match" href="#">Matches</a><a class="modify" href="#">Modify</a><a class="cancel" href="#">Cancel</a></div>
+                </div>
+              </div>
+              <!-- RideDetails -->
+              <div class="li-text"> <img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+                <p>Total: <span>$50</span> Your Fare: <span>$25</span></p>
+              </div>
+              <ul class="UserList">
+                <li> <a href="#" class="UserPhoto"><img src="images/pending.jpg" alt="pending" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
+                  <p class="user-name"><a href="#"><strong>William B.</strong></a><strong> Pending</strong> (22h 08m)</p>
+                </li>
+                <li class="confirm"> <a href="#" class="UserPhoto"><img src="images/confirmed.jpg" alt="confirmed" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="mailto:winston.wu@gmail.com">winston.wu@gmail.com</a> <a href="tel:5555551212" >555-555-1212</a> <a href="#">prefers: SMS</a></div> <p class="user-name"><a href="#"><strong>William B.</strong></a> Confirmed</p> </li>
+                <li class="Arrow">Arrow</li>
+              </ul>
+              <span class="break"></span>
+              <!-- RiderList -->
+            </li>
+            <li><a href="message.html" class="red-number"><span>3</span></a>
+              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span>November</span> <strong>23</strong> <span>Wed - 11:00pm</span> </p> <span class="Select">View Details</span> </a>
+              <!-- SelectRide -->
+              <div class="RideDetails text-col">
+                <div class="text"> <span class="leave">Leave:</span> <strong>New York University (NYU)</strong></div>
+                <div class="text"> <span class="arrive">Arrive:</span> <strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong>
+                  <div class="links"><a class="match" href="#">Matches</a><a class="modify" href="#">Modify</a><a class="cancel" href="#">Cancel</a></div>
+                </div>
+              </div>
+              <!-- RideDetails -->
+              <div class="li-text"> <img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+                <p>Total: <span>$50</span> Your Fare: <span>$25</span></p>
+              </div>
+              <ul class="UserList">
+                <li> <a href="#" class="UserPhoto"><img src="images/pending.jpg" alt="pending" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
+                  <p class="user-name"><a href="#"><strong>William B.</strong></a><strong> Pending</strong> (22h 08m)</p>
+                </li>
+                <li class="confirm"> <a href="#" class="UserPhoto"><img src="images/confirmed.jpg" alt="confirmed" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="mailto:winston.wu@gmail.com">winston.wu@gmail.com</a> <a href="tel:5555551212" >555-555-1212</a> <a href="#">prefers: SMS</a></div> <p class="user-name"><a href="#"><strong>William B.</strong></a> Confirmed</p> </li>
+                <li class="Arrow">Arrow</li>
+              </ul>
+              <span class="break"></span>
+              <!-- RiderList -->
+            </li>
+            <li><a href="message.html" class="red-number"><span>3</span></a>
+              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span>November</span> <strong>23</strong> <span>Wed - 11:00pm</span> </p> <span class="Select">View Details</span> </a>
+              <!-- SelectRide -->
+              <div class="RideDetails text-col">
+                <div class="text"> <span class="leave">Leave:</span> <strong>New York University (NYU)</strong></div>
+                <div class="text"> <span class="arrive">Arrive:</span> <strong>JFK Terminal 5 <span class="SameLocationIcon">Check</span></strong>
+                  <div class="links"><a class="match" href="#">Matches</a><a class="modify" href="#">Modify</a><a class="cancel" href="#">Cancel</a></div>
+                </div>
+              </div>
+              <!-- RideDetails -->
+              <div class="li-text"> <img src="images/cartype_taxi.png" class="RideType" alt="Taxi" width="93" height="51" />
+                <p>Total: <span>$50</span> Your Fare: <span>$25</span></p>
+              </div>
+              <ul class="UserList">
+                <li> <a href="#" class="UserPhoto"><img src="images/pending.jpg" alt="pending" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
+                  <p class="user-name"><a href="#"><strong>William B.</strong></a><strong> Pending</strong> (22h 08m)</p>
+                </li>
+                <li class="confirm"> <a href="#" class="UserPhoto"><img src="images/confirmed.jpg" alt="confirmed" width="58" height="58" /></a>
+                  <div class="about-user"> <a href="mailto:winston.wu@gmail.com">winston.wu@gmail.com</a> <a href="tel:5555551212" >555-555-1212</a> <a href="#">prefers: SMS</a></div> <p class="user-name"><a href="#"><strong>William B.</strong></a> Confirmed</p> </li>
+                <li class="Arrow">Arrow</li>
+              </ul>
+              <span class="break"></span>
+              <!-- RiderList -->
+            </li>
+            <!-- END OF A RIDE -->
+          </ul>
+        </div></div></div>
+    <span class="break"></span>
+  </div>
+</div>
