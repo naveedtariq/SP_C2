@@ -3,12 +3,17 @@
 <script type="text/javascript">
   $(document).ready(function () {
 
-    $('#RideSearch').submit(function() {
-      if(isSameGroup()){
-        jAlert('Same group selected.', 'Error');
-        return false;
-      }
-    });
+  $('#RideSearch').submit(function() {
+  if(isSameGroup()){
+  jAlert('Same group selected.', 'Error');
+  return false;
+  }
+  });
+  $("#ride_departuredatetime").datepicker({
+    dateFormat: "yy-mm-dd",
+    minDate: 0, maxDate: "+1Y"
+  });
+
   });
 </script>
 
@@ -68,13 +73,19 @@
       <ul>
         <li>
           <label for="">From:</label>
-          <%= f.select :from_location_id, (location_options_for_select), {},:style => "width:310px", :class=>"chzn-select"%>
+          <%= f.select :from_location_id, (location_options_for_select), {},:style => "width:250px", :class=>"chzn-select"%>
         </li>
         <li><a class="LocationSwitch">Switch</a></li>
         <li>
           <label for="Select_Airlines">To:</label>
-          <%= f.select :to_location_id, (location_options_for_select), {},:style => "width:310px", :class=>"chzn-select"%>
+          <%= f.select :to_location_id, (location_options_for_select), {},:style => "width:250px", :class=>"chzn-select"%>
         </li>
+        <li>
+          <label for="Select_Airlines">Departure Time:</label>
+          <%= f.text_field :departuredatetime, :style=>'width: 103px; height: 26px;' %>
+          <%= image_tag 'icon_calendar.png',:style=>'margin-left:-25px' %>
+        </li>
+
         <li class="SearchButtons">
           <label>When:</label>
           <input type="hidden" id="SearchTime"/>
