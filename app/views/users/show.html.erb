@@ -44,7 +44,7 @@
     <div class="right-col-content">
       <div class="main-heading">
         <h2><%= @user.full_name %></h2>
-        <% if @user.id = current_user.id %>
+        <% if current_user and @user.id == current_user.id %>
           <%= link_to "Edit Profile", edit_user_path(current_user) %>
         <% end %>
       </div>
@@ -71,7 +71,7 @@
                   <strong><%= ride.departure_date.day %></strong>
                   <span><%= ride.departure_date.strftime('%a') %></span>
                 </a>
-                <a class="Select"><%= ride.departure_time.strftime("%I:%M%p") %></a>
+                <a class="Select"><%= ride.departuredatetime.strftime("%I:%M%p") %></a>
               </div> <!-- SelectRide -->
               <table class="RideDetails">
                 <tbody>
@@ -101,7 +101,7 @@
                         </div>
                         <ul>
                           <li>Facebook <em>(<a href="#"><%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}" %></a>)</em></li>
-                          <li><%= rider.user.ride_participants.past_rides(RequestLogger.sp_clock_time).active_rides.confirmed_or_owner_participants.count %> past rides, <a href="#"><%= rider.user.feedbacks.count %> feedback</a> (97%)</li>
+                          <li><%= rider.user.ride_participants.past_rides(SpClock.time).active_rides.confirmed_or_owner_participants.count %> past rides, <a href="#"><%= rider.user.feedbacks.count %> feedback</a> (97%)</li>
                           <li><strong>Networks: </strong>UC Berkely, Miramonte High</li>
                         </ul>
                       </div>
@@ -135,7 +135,7 @@
                   <strong><%= ride.departure_date.day %></strong>
                   <span><%= ride.departure_date.strftime('%a') %></span>
                 </a>
-                <a class="Select"><%= ride.departure_time.strftime("%I:%M%p") %></a>
+                <a class="Select"><%= ride.departuredatetime.strftime("%I:%M%p") %></a>
               </div> <!-- SelectRide -->
               <table class="RideDetails">
                 <tbody>
@@ -165,7 +165,7 @@
                         </div>
                         <ul>
                           <li>Facebook <em>(<a href="#"><%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}" %></a>)</em></li>
-                          <li><%= rider.user.ride_participants.past_rides(RequestLogger.sp_clock_time).active_rides.confirmed_or_owner_participants.count %> past rides, <a href="#"><%= rider.user.feedbacks.count %> feedback</a> (97%)</li>
+                          <li><%= rider.user.ride_participants.past_rides(SpClock.time).active_rides.confirmed_or_owner_participants.count %> past rides, <a href="#"><%= rider.user.feedbacks.count %> feedback</a> (97%)</li>
                           <li><strong>Networks: </strong>UC Berkely, Miramonte High</li>
                         </ul>
                       </div>
