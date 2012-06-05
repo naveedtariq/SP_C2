@@ -12,7 +12,7 @@
         <% mutual_friends = (@ride.friends_in_common.blank?) ? []:@ride.friends_in_common.flatten.uniq  %>
         <%  mutual_friends.each do |mf| %>
           <li jcarouselindex="1" style="float: left; list-style: none outside none;" class="jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal">
-            <img src="http://graph.facebook.com/<%=friend["id"]%>/picture" alt="" height="34" width="34" />
+            <img src="http://graph.facebook.com/<%=mf["id"]%>/picture" alt="" height="34" width="34" />
           </li>
         <% end %>
         <% if mutual_friends.count==0 %>

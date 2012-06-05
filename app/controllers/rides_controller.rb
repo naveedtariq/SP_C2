@@ -8,7 +8,7 @@ class RidesController < ApplicationController
 
   def new
     create_or_store_ride(Ride.new) # create new ride instance
-    @ride= Ride.new(retrieve_ride)
+    @ride= Ride.new(retrieve_ride.merge(:available_seats=>2))
     render :layout=>false
   end
 

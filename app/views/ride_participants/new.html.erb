@@ -8,7 +8,8 @@
   $(".chzn-select").chosen();
 
   $("#costtrip").tooltip({ effect: 'slide', tip: '#costtrip_tip' });
-	  $("#ques_mark").tooltip({ effect: 'slide', tip: '#ques_mark_tip'});
+	$("#ques_mark").tooltip({ effect: 'slide', tip: '#ques_mark_tip'});
+  $("input#ride_participant_phone").mask("999-999-9999");                 // jquery for phone number format
 
   <% if cookies[:contact] && cookies[:contact].to_i == @ride.id %>
     <% if current_user && current_user.messages.where("ride_id = ?", @ride).blank? %>
@@ -117,7 +118,7 @@
           <span class="trip_cost answer total_amount"><%= number_to_currency(@ride.price_per_seat) %></span>
         </div>
 
-<%#= render :partial=>'friend_in_common' %>
+<%= render :partial=>'friend_in_common' %>
       </div>
 
 
