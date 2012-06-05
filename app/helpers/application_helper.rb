@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+  def location_options_for_select
+    options_for_select(Location.all.collect{|l| [l.name, l.id, {:group=> l.group}]})
+  end
+
   def time_to_minutes(t)                                                        # function for time change to in minutes
     hours = t/60
     minutes = t%60

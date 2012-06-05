@@ -67,6 +67,13 @@ function enabletwowaytrip()
 	
 }
 
+function isSameGroup(from_id,to_id){
+   from_id = typeof from_id !== 'undefined' ? from_id : '#ride_from_location_id';
+   to_id = typeof to_id !== 'undefined' ? to_id : '#ride_to_location_id';
+
+  return $(from_id).find(":selected")[0].attributes[0]["nodeValue"] == $(to_id).find(":selected")[0].attributes[0]["nodeValue"]
+}
+
 
 
 
