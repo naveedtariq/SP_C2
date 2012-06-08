@@ -1,6 +1,8 @@
 <script type="text/javascript" >
   var loc_from_id = ".post_ride_window #ride_from_location_id"
   var loc_to_id = ".post_ride_window #ride_to_location_id"
+  var taxi_fare=""
+  var black_car_fare=""
 
   function goto_what_time(){
   if(isSameGroup(loc_from_id, loc_to_id)){
@@ -26,27 +28,42 @@
 
   function calculateDistance(from,from_ghelper,to,to_ghelper){
     $('#map_canvas').gmap('displayDirections', { 'origin':$.trim(from+' '+from_ghelper), 'destination':$.trim(to+' '+to_ghelper), 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results') }, function (result, status) {                // google map change its map w.r.t to an from location
-    alert(status);
+    
     if (status === 'OK') {
         var METERS_TO_MILES = 0.000621371192;
         totalDistance = result.routes[0].legs[0].distance.value;
-        totalDistance = (Math.round(totalDistance * METERS_TO_MILES * 10) / 10)
+        totalDistance = (Math.round(totalDistance * METERS_TO_MILES * 10) / 10);
 
-        alert("distance: " + totalDistance + ' miles');
-        alert("duration: " + result.routes[0].legs[0].duration.text);
 
+
+        result_html="<strong>Distance:</strong> "+totalDistance+" miles  &nbsp;";
+        result_html+="<strong>Duration:</strong> "+result.routes[0].legs[0].duration.text+" mins<br/>";
+        
         if (to == "(JFK) John F. Kennedy") {
-          alert("Estimated Taxi Fare: $45");
-        }
-        else if (to == "(JFK) John F. Kennedy") {
-          alert("Estimated Taxi Fare: $45");
+          result_html+="<strong>Estimated Fare:</strong> $45 (Taxi)  $68 (Black Car)<br/>";
+          taxi_fare=45;
+          blackcar_fare=68;
         }
         else {
           var fare = 3.0;
           fare = (totalDistance * (0.4 / 0.2)) + fare;
           alert("Estimated Taxi Fare: $" + fare);
+          result_html+="<strong>Estimated Fare:</strong> $"+fare+" (Taxi)  $"+(fare*1.5)+" (Black Car)<br/>";
+          taxi_fare=fare;
+          blackcar_fare=fare*1.5;
+
         }
+      result_html+="<span class='small_text'><i>*before tip and toll</i></span>";
+      $('#distance-update').html(result_html);
+
+      if( $('#ride_ride_type_blackcar').is(':checked') ){
+        $('#ride_total_price').val(blackcar_fare);
       }
+      else{
+        $('#ride_total_price').val(taxi_fare);
+      }
+      
+     }
     });
   }
 
@@ -93,7 +110,7 @@
         <fieldset class="radio_btn for_cab">
 
           <label style="opacity: 1;" class="selectride" id="taxi-box" onclick="$('#taxi-box').css('opacity','1');$('#black-car-box').css('opacity','0.4');">
-            <%= f.radio_button :ride_type, 'taxi',:class=>'radio-selectride',:checked=>"checked" %>
+            <%= f.radio_button :ride_type, 'taxi',:class=>'radio-selectride',:checked=>"checked", :onchange=>"$('#ride_total_price').val(taxi_fare);" %>
             <span class="ride_cab"></span>
             <span class="radio_text">I'm taking a cab</span>
           </label>
@@ -101,7 +118,7 @@
 
         <fieldset class="radio_btn for_car">
           <label class="selectride" id="black-car-box" onclick="$('#black-car-box').css('opacity','1');$('#taxi-box').css('opacity','0.4');" >
-            <%= f.radio_button :ride_type, 'blackcar', :class=> 'radio-selectride' %>
+            <%= f.radio_button :ride_type, 'blackcar', :class=> 'radio-selectride',:onchange=>"$('#ride_total_price').val(blackcar_fare);" %>
             <span class="ride_car"></span>
             <span class="radio_text">I'm taking a black<br/>   town car</span>
           </label>

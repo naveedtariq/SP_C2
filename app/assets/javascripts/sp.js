@@ -72,18 +72,4 @@ function isSameGroup(from_id,to_id){
    to_id = typeof to_id !== 'undefined' ? to_id : '#ride_to_location_id';
    return ($(from_id).find(":selected")[0].attributes[1]["nodeValue"] == $(to_id).find(":selected")[0].attributes[1]["nodeValue"]);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
