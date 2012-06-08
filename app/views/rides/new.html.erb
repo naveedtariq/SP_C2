@@ -23,30 +23,41 @@
   $('#what-time').show(); $('#what-else').hide();return false;
   }
 
-  <% if @ride.to_location.present? && @ride.from_location.present? %>
-    $('#map_canvas').gmap('displayDirections', { 'origin':'<%= "#{@ride.from_location.name} #{@ride.from_location.google_helper}".strip %>', 'destination':'<%= "#{@ride.to_location.name} #{@ride.to_location.google_helper}".strip %>', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results') }, function (result, status) {                // google map change its map w.r.t to an from location
-        if (status === 'OK') {
-          var METERS_TO_MILES = 0.000621371192;
-          totalDistance = result.routes[0].legs[0].distance.value;
-          totalDistance = (Math.round(totalDistance * METERS_TO_MILES * 10) / 10)
 
-          $("#distance").text("distance: " + totalDistance + ' miles');
-          $("#duration").text("duration: " + result.routes[0].legs[0].duration.text);
-          if ("<%= @ride.to_location.name %>" == "(JFK) John F. Kennedy") {
-            $('#fare').text("Estimated Taxi Fare: $45");
-          }
-          else if ("<%=  @ride.to_location.name %>" == "(JFK) John F. Kennedy") {
-            $('#fare').text("Estimated Taxi Fare: $45");
-          }
-          else {
-            var fare = 3.0;
-            fare = (totalDistance * (0.4 / 0.2)) + fare;
-            $('#fare').text("Estimated Taxi Fare: $" + fare);
-          }
+  function calculateDistance(from,from_ghelper,to,to_ghelper){
+    $('#map_canvas').gmap('displayDirections', { 'origin':$.trim(from+' '+from_ghelper), 'destination':$.trim(to+' '+to_ghelper), 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results') }, function (result, status) {                // google map change its map w.r.t to an from location
+    alert(status);
+    if (status === 'OK') {
+        var METERS_TO_MILES = 0.000621371192;
+        totalDistance = result.routes[0].legs[0].distance.value;
+        totalDistance = (Math.round(totalDistance * METERS_TO_MILES * 10) / 10)
+
+        alert("distance: " + totalDistance + ' miles');
+        alert("duration: " + result.routes[0].legs[0].duration.text);
+
+        if (to == "(JFK) John F. Kennedy") {
+          alert("Estimated Taxi Fare: $45");
         }
+        else if (to == "(JFK) John F. Kennedy") {
+          alert("Estimated Taxi Fare: $45");
+        }
+        else {
+          var fare = 3.0;
+          fare = (totalDistance * (0.4 / 0.2)) + fare;
+          alert("Estimated Taxi Fare: $" + fare);
+        }
+      }
     });
+  }
+
+  function updateDistance(){
+    calculateDistance($(loc_from_id).find(":selected")[0].text, $(loc_from_id).find(":selected")[0].attributes[1]["nodeValue"],$(loc_to_id).find(":selected")[0].text, $(loc_to_id).find(":selected")[0].attributes[1]["nodeValue"]);
+  }
+
+  <% if @ride.to_location.present? && @ride.from_location.present? %>
+    calculateDistance('<%= @ride.from_location.name%>', '<%= @ride.from_location.google_helper %>', '<%= @ride.to_location.name %>', '<%= @ride.to_location.google_helper %>');
   <% else %>
-    
+    $('#map_canvas').gmap('displayDirections', { 'origin':'', 'destination':'', 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results') });
   <% end %>
 
 </script>
@@ -61,7 +72,7 @@
       <fieldset>
         <label>From:</label>
         <div id="ridefrom">
-          <%= f.select :from_location_id, Location.all.collect { |p| [p.name, p.id] }, {}, :class => 'chzn-select', :style => 'width:250px;' %>
+          <%= f.select :from_location_id, (location_options_for_select(@ride.from_location_id)), {}, :class => 'chzn-select', :style => 'width:250px;', :onchange=>'updateDistance();' %>
         </div>
 
       </fieldset>
@@ -71,7 +82,7 @@
       <fieldset>
         <label>To:</label>
         <div id="rideto">
-          <%= f.select :to_location_id, Location.all.collect { |p| [p.name, p.id] }, {}, :style => "width:250px", :class=>'chzn-select' %>
+          <%= f.select :to_location_id, (location_options_for_select(@ride.to_location_id)), {}, :style => "width:250px", :class=>'chzn-select', :onchange=>'updateDistance();' %>
         </div>
       </fieldset>
 
@@ -92,7 +103,7 @@
           <label class="selectride" id="black-car-box" onclick="$('#black-car-box').css('opacity','1');$('#taxi-box').css('opacity','0.4');" >
             <%= f.radio_button :ride_type, 'blackcar', :class=> 'radio-selectride' %>
             <span class="ride_car"></span>
-            <span class="radio_text">I'm taking a black<br>   town car</span>
+            <span class="radio_text">I'm taking a black<br/>   town car</span>
           </label>
         </fieldset>
 
@@ -152,7 +163,7 @@
             <%= f.check_box :return_trip_checkbox, :class => "checkbox", :onchange => "$('#twowaytrip_details').toggleClass('fadeout');$('#twowaytrip_cover').toggleClass('cove_it');" %>
             <span class="small_text">This is a one-way trip</span></label>
         </fieldset>
-        <span class="break"></span><br>
+        <span class="break"></span><br/>
 
 
         <div id="twowaytrip_cover" class="cove_it"></div>
@@ -215,7 +226,7 @@
             <%= f.text_field :total_price, :class => "per_seat" %>
             <span class="small_text">one way</span>
           </fieldset>
-          <fieldset class="small"><br>
+          <fieldset class="small"><br/>
             <label>
               Number of available seats</label>
             <%  numbers = %w(zero one two three four five six seven eight nine) %>

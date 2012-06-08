@@ -1,7 +1,7 @@
 module ApplicationHelper
 
-  def location_options_for_select
-    options_for_select(Location.all.collect{|l| [l.name, l.id, {:group=> l.group}]})
+  def location_options_for_select(selected_key=nil)
+    options_for_select(Location.all.collect{|l| [l.name, l.id, {:group=> l.group,:loc=>l.google_helper}]},selected_key)
   end
 
   def time_to_minutes(t)                                                        # function for time change to in minutes
@@ -44,3 +44,5 @@ module ApplicationHelper
   end
 
 end
+
+

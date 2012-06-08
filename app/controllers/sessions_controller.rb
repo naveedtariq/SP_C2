@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   before_filter :require_not_loggedin, :only => [:new, :create]                 # no login require for login page
   #before_filter :require_login, :only => [:facebook_callback]                 # no login require for login page
   def new
+    render :layout=>false
   end
 
   def create
