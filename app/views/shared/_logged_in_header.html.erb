@@ -6,7 +6,7 @@
   <%= link_to feedback_users_path, :class => "text-link01 feedback" do %>
     Feedback<span class="number"><%= current_user.owned_feedbacks.count %></span>
   <% end %>
-  <a href="#" class="post"> Post Ride</a><span class="spretor"></span>
+  <a href="/rides/search?utf8=✓&popup=true&ride[from_location_id]=1&ride[to_location_id]=5&search_posted=true&commit=View+Rides+Now" class="post"> Post Ride</a><span class="spretor"></span>
   <p>
       <%= image_tag current_user.user_image_url, :width => "27px", :height => "27px" %>
       &nbsp;

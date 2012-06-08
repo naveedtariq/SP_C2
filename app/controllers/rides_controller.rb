@@ -13,6 +13,7 @@ class RidesController < ApplicationController
   end
 
   def search # function for search ride
+    @popup = params[:popup] if params[:popup]
     @ride = Ride.new(params[:ride])
     @ride.departure = params[:ride] && params[:ride]["departure"] || "all" # by default all rides show against search rides
     @rides = Ride.search_rides(params[:ride]).paginate(:page => params[:page], :per_page => SEARCH_RIDES_PER_PAGE) # Specific number of rides show in one page after search

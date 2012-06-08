@@ -2,6 +2,11 @@
 <%= javascript_include_tag 'tooltips' %>
 <script type="text/javascript">
   $(document).ready(function () {
+    
+    if($("#popup").val().length > 0)
+    {
+      $('#post-a-ride').click();
+    }
 
   $('#RideSearch').submit(function() {
     if(isSameGroup()){
@@ -72,6 +77,7 @@
     <h1>Find a Ride</h1>
     <h2>Find others from your neighborhood and take a taxi or black car together.</h2>
   </header>
+  <%= hidden_field_tag :popup, @popup %>
   <%= form_for :ride, :url => search_rides_path, :method => "get", :html => {:id => "RideSearch"} do |f| %>
     <fieldset>
       <ul>
