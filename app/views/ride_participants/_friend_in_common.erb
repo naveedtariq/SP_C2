@@ -6,7 +6,7 @@
         <% @ride.ride_participants.active_participants.role_wise.each do |rider| %>
           <% if @graph.present? && (rider.user_id != current_user.id) && (current_user.authentications.first.present?) && (rider.user.authentications.first.present?) %>     <!-- check if user login thorough facebook -->
             <% mutual_friends = @graph.get_connections(current_user.authentications.first.uid, "mutualfriends/#{rider.user.authentications.first.uid}") %>                  <!-- fetched mutual friends of current user w.r.t riders -->
-            <% @ride.friends_in_common << mutual_friends %>
+            <% @ride.friends_in_common << mutual_friends if @ride.friends_in_common %>
           <% end %>
         <% end %>
         <% mutual_friends = (@ride.friends_in_common.blank?) ? []:@ride.friends_in_common.flatten.uniq  %>

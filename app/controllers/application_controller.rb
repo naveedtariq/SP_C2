@@ -80,13 +80,15 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    @ride = Ride.new(retrieve_ride)
-    @ride.return_departuredatetime = @ride.return_departuredatetime.to_time rescue @ride.return_departuredatetime = nil
-    get_proper_attributes
-    unless params[:ride].blank?
-      @ride.attributes = params[:ride]
+    if params[:action] == "create_ride"
+      @ride = Ride.new(retrieve_ride)
+      @ride.return_departuredatetime = @ride.return_departuredatetime.to_time rescue @ride.return_departuredatetime = nil
+      get_proper_attributes
+      unless params[:ride].blank?
+        @ride.attributes = params[:ride]
+      end
+      store_ride(@ride)
     end
-    store_ride(@ride)
     super
   end
 
