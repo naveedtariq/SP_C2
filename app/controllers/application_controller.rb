@@ -70,11 +70,24 @@ class ApplicationController < ActionController::Base
     cookies[:ride] = nil
   end
 
-  def get_proper_attributes(params)
-    params[:ride][:departuredatetime] = "#{params[:ride][:departure_date]} #{params[:ride][:new_departure_time]} #{params[:ride][:ampm_time]}"
-    params[:ride].delete(:departure_date)
-    params[:ride].delete(:new_departure_time)
-    params[:ride].delete(:ampm_time)
+  def get_proper_attributes
+    unless params[:ride].blank?
+      params[:ride][:departuredatetime] = "#{params[:ride][:departure_date]} #{params[:ride][:new_departure_time]} #{params[:ride][:ampm_time]}"
+      params[:ride].delete(:departure_date)
+      params[:ride].delete(:new_departure_time)
+      params[:ride].delete(:ampm_time)
+    end
+  end
+
+  def require_login
+    @ride = Ride.new(retrieve_ride)
+    @ride.return_departuredatetime = @ride.return_departuredatetime.to_time rescue @ride.return_departuredatetime = nil
+    get_proper_attributes
+    unless params[:ride].blank?
+      @ride.attributes = params[:ride]
+    end
+    store_ride(@ride)
+    super
   end
 
   protected

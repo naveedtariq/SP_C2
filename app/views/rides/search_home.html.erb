@@ -3,22 +3,20 @@
 
   $(document).ready(function() {
 
-  $(".newsticker-jcarousellite").jCarouselLite({
-  vertical: true,
-  hoverPause:true,
-  visible: 3,
-  auto:500,
-  speed:1000
-  });
+    $(".newsticker-jcarousellite").jCarouselLite({
+      vertical: true,
+      hoverPause:true,
+      visible: 3,
+      auto:500,
+      speed:1000
+    });
 
-
-  $('#home_search').submit(function() {
-  if(isSameGroup()){
-    jAlert('Same group selected.', 'Error');
-  return false;
-  }
-  }
-  );
+    $('#home_search').submit(function() {
+      if(isSameGroup()){
+        jAlert('Same group selected.', 'Error');
+        return false;
+      }
+    });
 
   });
 </script>
@@ -63,6 +61,7 @@
         <ul>
           <% @rides.each do |ride| %>
             <li>
+              <%= puts ride.id %>
               <a href="<%= new_ride_ride_participant_path(ride) %>" class="UserIcon_50x50"><%= image_tag ride.owner.user_image_url %></a>
               <a href="<%= new_ride_ride_participant_path(ride) %>" class="Activity"><%= ride.owner.first_name %> just posted a new ride!</a>
               <span class="Notice"><%= (ride.remaining_seats > 0)? ('just matched!'):('Sold out') %></span>

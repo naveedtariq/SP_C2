@@ -1,13 +1,13 @@
 development:
   storage: file
   facebook_app_id: 405500709480319
-  facebook_app_key: 5a73e4923b9003f1e5e7b2d5d1dcb69e
+  facebook_app_key: e63518898abb5c88bfb6aea59b75e1a1
   facebook_return_url: http://beta.shairporter.com/oauth/callback?provider=facebook
 test:
   storage: file
-  facebook_app_id: 405500709480319
-  facebook_app_key: 5a73e4923b9003f1e5e7b2d5d1dcb69e
-  facebook_return_url: http://beta.shairporter.com/oauth/callback?provider=facebook
+  facebook_app_id: 381246895230803
+  facebook_app_key: e63518898abb5c88bfb6aea59b75e1a1
+  facebook_return_url: http://localhost.com/oauth/callback?provider=facebook
 production:
   storage: fog
   facebook_app_id: 405500709480319

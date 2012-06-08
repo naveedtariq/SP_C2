@@ -40,8 +40,8 @@
   <%= stylesheet_link_tag :skin %>
 <% end %>
 <section id="FindaRide" class="Main">
-  <%= hidden_field_tag "first_ride", @messages.first.ride_id %>
-  <%= hidden_field_tag "first_sender", @messages.first.user_id %>
+  <%#= hidden_field_tag "first_ride", @messages.count > 0 ? @messages.first.ride_id : "" %>
+  <%#= hidden_field_tag "first_sender", @messages.count > 0 ? @messages.first.user_id : "" %>
   <div class="messagesWrapper">
     <div class="ridesdetail_heading">
       <h3>Inbox</h3>
