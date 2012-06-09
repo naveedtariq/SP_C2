@@ -99,7 +99,7 @@
               <div class="RideDetails text-col">
                 <div class="text"> <span class="leave">Leave:</span> <strong><%= ride.from_location && ride.from_location.name %></strong></div>
                 <div class="text"> <span class="arrive">Arrive:</span> <strong><%= ride.to_location && ride.to_location.name %><span class="SameLocationIcon">Check</span></strong>
-                  <div class="links"><a class="match" href="#">Matches</a><%= link_to "Modify", edit_ride_path(ride), :class=> "modify" %><a class="cancel" href="#">Cancel</a></div>
+                  <div class="links"><a class="match" href="#">Matches</a><%= link_to "Modify", edit_ride_path(ride), :class="modify" %><a class="cancel" href="#">Cancel</a></div>
                 </div>
               </div>
               <!-- RideDetails -->
@@ -112,7 +112,7 @@
                 <li>
 		<%= link_to image_tag(participant.user.user_image_url, :width => "58px", :height => "58px"), user_path(participant.user), :class => "UserPhoto" %>
                   <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
-                  <p class="user-name"><a href="#"><strong><%=participant.user.full_name%></strong></a><strong> Pending</strong> (<%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>)</p>
+                  <p class="user-name"><a href="#"><strong>William B.</strong></a><strong> Pending</strong> (<%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>)</p>
                 </li>
 		<% end %>
 
