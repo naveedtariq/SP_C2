@@ -11,9 +11,17 @@
 	$("#ques_mark").tooltip({ effect: 'slide', tip: '#ques_mark_tip'});
   $("input#ride_participant_phone").mask("999-999-9999");                 // jquery for phone number format
 
+  $(".contact-me").click(function () {
+    $(".post_ride-popup").show();
+  });
+
+  $(".closed").click(function () {
+    $(".post_ride-popup").hide();
+  });
+
   <% if cookies[:contact] && cookies[:contact].to_i == @ride.id %>
     <% if current_user && current_user.messages.where("ride_id = ?", @ride).blank? %>
-      $(".message-box").dialog();                                             // jquery for message dailog box message appear
+      $(".post_ride-popup").show();                                             // jquery for message dailog box message appear
     <% end %>
   <% end %>
 
@@ -21,6 +29,7 @@
   });
 </script>
 
+<%= render "messages/conversations", contact_me: true %>
 
 <section id="FindaRide" class="Main">
 
@@ -85,8 +94,8 @@
           <fieldset>
             <label>Availability</label>
             <select style="width: 282px; float: left;" class="chzn-select" name="Select_From" id="selRW5" onchange='$(".total_amount").html($("#selRW5").val());$("#ride_participant_number_of_seats").val($("#selRW5").prop("selectedIndex")+1)'>
-              <% @ride.remaining_seats.times do |seat_count| %>
-                <option value="<%= number_to_currency(@ride.price_per_seat*(seat_count+1)) %>"><%= seat_count+1 %> seat - <%= number_to_currency(@ride.price_per_seat*(seat_count+1)) %> one-way</option>
+              <% (1..@ride.remaining_seats).each do |i| %>
+                <option value="<%= number_to_currency(@ride.price_per_seat(i)) %>"><%= i %> seat - <%= number_to_currency(@ride.price_per_seat(i)) %> one-way</option>
               <% end %>
             </select>
           </fieldset>
@@ -135,7 +144,7 @@
     <ul id="about_person">
       <% @ride.ride_participants.active_participants.role_wise.each_with_index do |rider,index| %>
         <li><span class="person_image"><%= image_tag rider.user.user_image_url %></span><p><strong><%= rider.user.full_name %></strong><span class="small_text"> (<%= (index==0)? "organizer" : "passenger" %>)</span><br>
-            <% if index==0 %><i><a href="#">contact me!</a></i><% end %> </p></li>
+            <% if index==0 %><i><a class="contact-me" href="#">contact me!</a></i><% end %> </p></li>
       <% end %>
 
 

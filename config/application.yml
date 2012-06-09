@@ -1,8 +1,8 @@
 development:
   storage: file
-  facebook_app_id: 405500709480319
+  facebook_app_id: 381246895230803
   facebook_app_key: e63518898abb5c88bfb6aea59b75e1a1
-  facebook_return_url: http://beta.shairporter.com/oauth/callback?provider=facebook
+  facebook_return_url: http://localhost.com/oauth/callback?provider=facebook
 test:
   storage: file
   facebook_app_id: 381246895230803

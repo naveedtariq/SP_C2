@@ -1,30 +1,28 @@
 <% if logged_in? %>
-    <% messages = @ride.messages.where("user_id = ? or owner_id = ?", current_user.id, current_user.id).ordered %>                 <!-- fetch all the messages of current_user who is owner or sender of message -->
-    <% receiver = [] %>
-    <% owner = @ride.owner %>
-    <% receiver << (owner && owner.id) %>                                           <!-- assign owner id to receiver -->
-    <% messages.each do |message| %>                                                <!-- fetch all messages -->
-        <% unless receiver.include? message.user_id %>
-            <% receiver << message.user.id %>
-        <% end %>
-        <%= image_tag message.user.user_image_url.to_s, :style => "width: 40px" %>
-        <%= message.created_at.strftime("%d/%m/%y") %>&nbsp;&nbsp;<%= time_ago_in_words(message.created_at) %><br/>
-        <%= message.message %><br/><br/>
-    <% end %>
-    <% receiver.delete(current_user.id) %>                                          <!-- check for not message to yourself -->
-    <% if receiver.blank? %>
-        Can't send messages to yourself
-    <% else %>
-        <div class="message-box11">
-          <%= form_for Message.new, :url => ride_message_path(contact_me: contact_me) do |f| %>
-              <%= image_tag current_user.user_image_url.to_s, :style => "width: 40px" %>
-              <div class="field">
-                <%= f.label :message %>
-                <%= f.text_area :message %>
-                <%= f.hidden_field :owner_id, :value => (receiver.first) %>              <!--hidden field for owner_id in message assign it to receiver-->
-              </div>
-              <%= f.submit "Send" %>
-          <% end %>
+  <div class="post_ride-popup" style="display: none;">
+    <div class="post_ride-popup-overlay"></div>
+    <div class="post_ride-popup-centered" style="height: 291px; width: 490px;">
+      <div class="post_ride_vertically-centered"> <a class="closed" href="#" title="Closed"> </a>
+        <div class="post_ride_window" style="overflow: hidden;">
+          <div class="heading-bar">
+            <h2 class="send-message-h2">Send a Message</h2>
+          </div>
+          <div class="popup-left-col">
+            <a class="popup-user" href="#">
+              <%= image_tag current_user.user_image_url.to_s, :alt => current_user.full_name %>
+            </a>
+            <span class="break"></span>
+            <a href="#"><%= current_user.full_name %></a>
+          </div>
+          <div class="popup-right-col">
+            <%= form_for Message.new, :url => ride_message_path(contact_me: contact_me) do |f| %>
+              <%= f.text_area :message, :cols => 30, :rows => 20, :class => "input-textarea", :placeholder => 'Type your message here... (example: Hi Winston, I would like to join your ride)' %>
+              <%= f.hidden_field :owner_id, :value => @ride.owner && @ride.owner.id %>              <!--hidden field for owner_id in message assign it to receiver-->
+              <input type="submit" name="submit" class="input-submit" value="Send Message" />
+            <% end %>
+          </div>
         </div>
-    <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>
