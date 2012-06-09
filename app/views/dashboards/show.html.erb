@@ -1,5 +1,10 @@
+<% body_css_class('FindaRide') %>
 <%= javascript_include_tag 'jquery.tinyscrollbar.min' %>
 <script type="text/javascript">
+    function show_discuss_popup(id)
+    {
+      $("#popup-"+id).show();
+    }
 		$(document).ready(function(){
 			$('#scrollbar1').tinyscrollbar({ sizethumb: 15 });
 			$('#scrollbar2').tinyscrollbar({ sizethumb: 15 });
@@ -7,8 +12,12 @@
 		});
 </script>
 
-
-
+<% @ride_participants.each do |rp| %>
+  <% ride = rp.ride %>
+  <% ride.ride_participants.pending_participants.each do |participant| %>
+    <%= render "messages/conversations_for_user", contact_me: true, ride: ride, participant: participant %>
+  <% end %>
+<% end %>
 <div id="banner">
   <div class="wrapper">
     <div class="banner-left" style="clear:both;">
@@ -27,7 +36,9 @@
     </div>
     <div class="banner-right">
       <div class="heading-bar">
-        <h2>My Inbox <a href="#">view all messages » </a></h2>
+        <h2>My Inbox 
+          <%= link_to "view all messages »", inbox_users_path %>
+        </h2>
       </div>
       <div id="scrollbar1">
         <div class="scrollbar">
@@ -40,21 +51,25 @@
         <div class="viewport">
           <div class="overview">
             <ul>
+              <% @messages.each do |msg| %>
+                <% sender=User.find(msg.user_id) %>
+                <% ride=Ride.find(msg.ride_id) %>
+                <li class="firstchild">
+                  <%= link_to image_tag(sender.user_image_url, :width => "58px", :height => "58px"), user_path(sender), :class => "person_image" %>
+                  <div class="message">
+                    <%= link_to sender.full_name, user_path(sender) %>
+                    <span>&nbsp;wrote:</span>
+                    <h4><%= msg.message %></h4>
+                    <p>sent <%= distance_of_time_in_words(Time.now, msg.created_at.to_date) %> ago for 
+                    <strong onclick="window.location.href = '<%= new_ride_ride_participant_path(ride, :return_url => dashboard_path) %>'; return false;">
+                      <%= "#{ride.from_location && ride.from_location.name} >> #{ride.to_location && ride.to_location.name} on #{ride.departuredatetime.strftime("%m/%d")}" %>
+                    </strong></p>
 
-		<% @messages.each do |msg| %>
-		      <% sender=User.find(msg.user_id) %>
-	              <% ride=Ride.find(msg.ride_id) %>
-
-              <li class="firstchild"><%= link_to image_tag(sender.user_image_url, :width => "58px", :height => "58px"), user_path(sender), :class => "person_image" %>
-                <div class="message"><%= link_to sender.full_name, user_path(sender) %><span> wrote:</span>
-                  <h4><%= msg.message %></h4>
-                  <p>sent <%= distance_of_time_in_words(Time.now, msg.created_at.to_date) %> ago for <strong><%= ride.from_location && ride.from_location.name  %> >> <%= ride.to_location && ride.to_location.name %> on <%= ride.departuredatetime.strftime("%m/%d")%></strong></p>
-                </div>
-                <hr />
-                <span class="break"></span> </li>
-
-		<% end %>
-
+                  </div>
+                  <hr />
+                  <span class="break"></span>
+                </li>
+              <% end %>
             </ul>
           </div>
         </div>
@@ -62,14 +77,6 @@
     </div>
     <span class="break"></span> </div>
 </div>
-
-
-
-
-
-
-
-
 
 <div id="content">
   <div class="wrapper">
@@ -87,109 +94,164 @@
       <div class="viewport">
         <div class="overview">
           <ul class="RidesList">
-
-
-
-	<% @ride_participants.each do |rp| %>
-	   <% ride = rp.ride %>
-
-		<li><a href="message.html" class="red-number"><span>3</span></a>
-              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span><%= ride.departure_date.strftime('%b') %></span> <strong><%= ride.departure_date.day %></strong> <span><%= ride.departure_date.strftime('%a') %> - <%= ride.departuredatetime.strftime("%I:%M%p") %></span> </p> <span class="Select">View Details</span> </a>
-              <!-- SelectRide -->
-              <div class="RideDetails text-col">
-                <div class="text"> <span class="leave">Leave:</span> <strong><%= ride.from_location && ride.from_location.name %></strong></div>
-                <div class="text"> <span class="arrive">Arrive:</span> <strong><%= ride.to_location && ride.to_location.name %><span class="SameLocationIcon">Check</span></strong>
-                  <div class="links"><a class="match" href="#">Matches</a><%= link_to "Modify", edit_ride_path(ride), :class=> "modify" %><a class="cancel" href="#">Cancel</a></div>
+            <% @ride_participants.each do |rp| %>
+            <% ride = rp.ride %>
+              <li>
+                <a href="message.html" class="red-number"><span>3</span></a>
+                <%= link_to new_ride_ride_participant_path(ride, :return_url => dashboard_path), :class => "SelectRide" do %>
+                  <p class="RideInfoBtn">
+                    <span><%= ride.departure_date.strftime('%b') %></span> 
+                    <strong><%= ride.departure_date.day %></strong> 
+                    <span><%= ride.departure_date.strftime('%a') %> - <%= ride.departuredatetime.strftime("%I:%M%p") %></span> 
+                  </p> 
+                  <span class="Select">View Details</span> 
+                <% end %>
+                <!-- SelectRide -->
+                <div class="RideDetails text-col">
+                  <div class="text"> <span class="leave">Leave:</span> <strong><%= ride.from_location && ride.from_location.name %></strong></div>
+                  <div class="text">
+                    <span class="arrive">Arrive:</span> 
+                    <strong>
+                      <%= ride.to_location && ride.to_location.name %>
+                      <span class="SameLocationIcon"></span>
+                    </strong>
+                    <div class="links">
+                      <a class="match" href="#">Matches</a>
+                      <%= link_to "Modify", edit_ride_path(ride), :class=> "modify" %>
+                      <%= link_to "Cancel", cancel_ride_ride_participant_path(ride, rp), :class => "cancel" %>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <!-- RideDetails -->
-              <div class="li-text"> <%= image_tag "cartype_#{ride.ride_type}.png", :class => "RideType", :alt => "#{ride.ride_type}", :width => 93, :height => 51 %>
-                <p>Total: <span>$<%= ride.total_price %></span> Your Fare: <span>$00</span></p>
-              </div>
-              <ul class="UserList">
-
-		<% ride.ride_participants.pending_participants.each do |participant| %>
-                <li>
-		<%= link_to image_tag(participant.user.user_image_url, :width => "58px", :height => "58px"), user_path(participant.user), :class => "UserPhoto" %>
-                  <div class="about-user"> <a href="#" class="accept">Accept</a> <a href="#" class="discuss">Discuss</a> <a href="#" class="decline">Decline</a></div>
-                  <p class="user-name"><a href="#"><strong><%=participant.user.full_name%></strong></a><strong> Pending</strong> (<%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>)</p>
-                </li>
-		<% end %>
-
-		<% ride.ride_participants.confirmed_participants.each do |participant| %>
-			<li class="confirm"><%= link_to image_tag(participant.user.user_image_url, :width => "58px", :height => "58px"), user_path(participant.user), :class => "UserPhoto" %>
-					  <div class="about-user"> <a href="mailto:<%= participant.user.email %>"><%= participant.user.email %></a> <a href="tel:<%= participant.phone %>" ><%= participant.phone %></a> <a href="#">prefers: <%= participant.mode_of_communications %></a></div> <p class="user-name"><a href="#"><strong>William B.</strong></a> Confirmed</p> </li>
-                          <% end %>
-
-                
-                <li class="Arrow">Arrow</li>
-              </ul>
-
-
-
-              <span class="break"></span>
-              <!-- RiderList -->
-            </li>
-
-
-	<% end %>
-
-
-
-            <!-- END OF A RIDE -->
-            <!-- END OF A RIDE -->
-            <!-- END OF A RIDE -->
-            
-            <!-- END OF A RIDE -->
+                <!-- RideDetails -->
+                <div class="li-text"> 
+                  <%= image_tag "cartype_#{ride.ride_type}.png", :class => "RideType", :alt => "#{ride.ride_type}", :width => 93, :height => 51 %>
+                  <p>Total: <span>$<%= ride.total_price %></span> Your Fare: <span>$<%= ride.price_per_seat %></span></p>
+                </div>
+                <% case rp.role %>
+                <% when ROLES_FOR_RIDES[:owner] %>
+                  <% if ride.ride_participants.pending_or_confirmed.blank? %>                   <!-- check for if no ride's pending and confirmed ride_participants  -->
+                    No requests so far.
+                  <% else %>
+                    <ul class="UserList">
+                      <% ride.ride_participants.pending_participants.each do |participant| %>
+                        <li>
+                          <%= link_to image_tag(participant.user.user_image_url, :width => "58px", :height => "58px"), user_path(participant.user), :class => "UserPhoto" %>
+                          <div class="about-user">
+                            <% if ride.ride_participants.confirmed_participants.count > 1 %>
+                              <%= link_to "Accept", accept_ride_ride_participant_path(ride, participant), :class => "accept" %>
+                            <% else %>
+                              <%= link_to "Accept", "#{contact_ride_ride_participant_path(ride, ride.ride_participants.owners.where(:user_id => current_user.id).first)}?accept=#{participant.id}", :class => 'accept' %>
+                            <% end %>
+                            <a href="#" class="discuss" onclick="show_discuss_popup(<%= ride.id %>);return false;">Discuss</a> 
+                            <%#= render "messages/conversations", contact_me: true, ride: ride %>
+                            <%= link_to "Decline", deny_ride_ride_participant_path(ride, participant), :class => "decline" %>
+                          </div>
+                          <p class="user-name">
+                            <%= link_to user_path(participant.user) do %>
+                              <strong><%=participant.user.full_name%></strong>
+                            <% end %>
+                            <strong> Pending</strong> 
+                            (<%= ((participant.created_at + SpClock.day)-SpClock.time.to_i).strftime("%H:%M") %>)
+                          </p>
+                        </li>
+                      <% end %>
+                      <% ride.ride_participants.confirmed_participants.each do |participant| %>
+                        <li class="confirm">
+                          <%= link_to image_tag(participant.user.user_image_url, :width => "58px", :height => "58px"), user_path(participant.user), :class => "UserPhoto" %>
+                          <div class="about-user"> 
+                            <a href="mailto:<%= participant.user.email %>" alt="<%= participant.user.email %>"><%= participant.user.email %></a> 
+                            <a href="tel:<%= participant.phone %>" ><%= participant.phone %></a> 
+                            <a href="#">prefers: <%= participant.mode_of_communications %></a>
+                          </div> 
+                          <p class="user-name">
+                            <%= link_to user_path(participant.user) do %>
+                              <strong><%=participant.user.full_name%></strong>
+                            <% end %>
+                            Confirmed
+                          </p> 
+                        </li>
+                      <% end %>
+                      <li class="Arrow">Arrow</li>
+                    </ul>
+                  <% end %>
+                <% end %>
+                <span class="break"></span>
+                <!-- RiderList -->
+              </li>
+            <% end %>
           </ul>
           <div class="heading-bar inner-bar">
             <h2>My Past Rides</h2>
           </div>
           <ul class="RidesList">
-
-	<% @past_rides.each do |rp| %>
-	   <% ride = rp.ride %>
-
-		<li><a href="message.html" class="red-number"><span>3</span></a>
-              <a class="SelectRide" href="#"> <p class="RideInfoBtn"> <span><%= ride.departure_date.strftime('%b') %></span> <strong><%= ride.departure_date.day %></strong> <span><%= ride.departure_date.strftime('%a') %> - <%= ride.departuredatetime.strftime("%I:%M%p") %></span> </p> <span class="Select">View Details</span> </a>
-              <!-- SelectRide -->
-              <div class="RideDetails text-col">
-                <div class="text"> <span class="leave">Leave:</span> <strong><%= ride.from_location && ride.from_location.name %></strong></div>
-                <div class="text"> <span class="arrive">Arrive:</span> <strong><%= ride.to_location && ride.to_location.name %><span class="SameLocationIcon">Check</span></strong>
-                  <div class="links"><a class="match" href="#">Matches</a><a class="modify" href="#">Modify</a><a class="cancel" href="#">Cancel</a></div>
+            <% @past_rides.each do |rp| %>
+              <% ride = rp.ride %>
+              <li><a href="message.html" class="red-number"><span>3</span></a>
+                <a class="SelectRide" href="#"> 
+                  <p class="RideInfoBtn"> 
+                    <span><%= ride.departure_date.strftime('%b') %></span>
+                    <strong><%= ride.departure_date.day %></strong> 
+                    <span><%= ride.departure_date.strftime('%a') %> - <%= ride.departuredatetime.strftime("%I:%M%p") %></span> 
+                  </p> 
+                  <span class="Select">View Details</span> 
+                </a>
+                <!-- SelectRide -->
+                <div class="RideDetails text-col">
+                  <div class="text"> 
+                    <span class="leave">Leave:</span> 
+                    <strong><%= ride.from_location && ride.from_location.name %></strong>
+                  </div>
+                  <div class="text"> 
+                    <span class="arrive">Arrive:</span> 
+                    <strong>
+                      <%= ride.to_location && ride.to_location.name %>
+                      <span class="SameLocationIcon"></span>
+                    </strong>
+     <!--               <div class="links">
+                      <a class="match" href="#">Matches</a>
+                      <a class="modify" href="#">Modify</a>
+                      <a class="cancel" href="#">Cancel</a> 
+                    </div>-->
+                  </div>
                 </div>
-              </div>
-              <!-- RideDetails -->
-              <div class="li-text"> <%= image_tag "cartype_#{ride.ride_type}.png", :class => "RideType", :alt => "#{ride.ride_type}", :width => 93, :height => 51 %>
-                <p>Total: <span>$<%= ride.total_price %></span> Your Fare: <span>$00</span></p>
-              </div>
-              <ul class="UserList">
-
-		<% ride.ride_participants.active_participants.role_wise.each do |rider| %>
-		 <li>
-		<%= link_to image_tag(rider.user.user_image_url, :width => "58px", :height => "58px"), user_path(rider.user), :class => "UserPhoto" %>
-
-                  <p class="user-name"><a href="#"><strong><%= rider.user.full_name %></strong></a></p>
-                </li>
-                <% end %>
-                <% ride.remaining_seats.times do %>
-                  <li>
-                    <a class="EmptySeat"><%= image_tag 'emptyseat_60x60.png' %></a>
-                  </li>
-                <% end %>
-                <li class="Arrow">Arrow</li>
-
-              </ul>
-              <span class="break"></span>
-              <!-- RiderList -->
-            </li>
-
-
-	<% end %>
-
+                <!-- RideDetails -->
+                <div class="li-text"> 
+                  <%= image_tag "cartype_#{ride.ride_type}.png", :class => "RideType", :alt => "#{ride.ride_type}", :width => 93, :height => 51 %>
+                  <p>Total: <span>$<%= ride.total_price %></span> Your Fare: <span>$<%= ride.price_per_seat %></span></p>
+                </div>
+                <ul class="UserList">
+                  <% ride.ride_participants.active_participants.role_wise.each do |rider| %>
+                    <li class="confirm">
+                      <%= link_to image_tag(rider.user.user_image_url, :width => "58px", :height => "58px"), user_path(rider.user), :class => "UserPhoto" %>
+                      <div class="about-user"> 
+                        <a href="mailto:<%= rider.user.email %>" alt="<%= rider.user.email %>"><%= rider.user.email %></a> 
+                        <a href="tel:<%= rider.phone %>" ><%= rider.phone %></a> 
+                        <a href="#">prefers: <%= rider.mode_of_communications %></a>
+                      </div> 
+                      <p class="user-name">
+                        <%= link_to user_path(rider.user) do %>
+                          <strong><%= rider.user.full_name%></strong>
+                        <% end %>
+                        Confirmed
+                      </p> 
+                    </li>
+                  <% end %>
+                  <%# ride.remaining_seats.times do %>
+<!--                    <li>
+                      <a class="EmptySeat"><%#= image_tag 'emptyseat_60x60.png' %></a>
+                    </li> -->
+                  <%# end %>
+                  <li class="Arrow">Arrow</li>
+                </ul>
+                <span class="break"></span>
+                <!-- RiderList -->
+              </li>
+            <% end %>
             <!-- END OF A RIDE -->
           </ul>
-        </div></div></div>
+        </div>
+      </div>
+    </div>
     <span class="break"></span>
   </div>
 </div>

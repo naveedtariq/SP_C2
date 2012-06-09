@@ -17,7 +17,7 @@
           <div class="popup-right-col">
             <%= form_for Message.new, :url => ride_message_path(ride,contact_me: contact_me) do |f| %>
               <%= f.text_area :message, :cols => 30, :rows => 20, :class => "input-textarea", :placeholder => 'Type your message here... (example: Hi Winston, I would like to join your ride)' %>
-              <%= f.hidden_field :owner_id, :value => ride.owner && ride.owner.id %>              <!--hidden field for owner_id in message assign it to receiver-->
+              <%= f.hidden_field :owner_id, :value => participant.user && participant.user.id %>              <!--hidden field for owner_id in message assign it to receiver-->
               <input type="submit" name="submit" class="input-submit" value="Send Message" />
             <% end %>
           </div>

@@ -11,9 +11,10 @@
 	$("#ques_mark").tooltip({ effect: 'slide', tip: '#ques_mark_tip'});
   $("input#ride_participant_phone").mask("999-999-9999");                 // jquery for phone number format
 
-  $(".contact-me").click(function () {
-    $(".post_ride-popup").show();
-  });
+  function show_discuss_popup(id)
+  {
+    $("#popup-"+id).show();
+  }
 
   $(".closed").click(function () {
     $(".post_ride-popup").hide();
@@ -29,7 +30,7 @@
   });
 </script>
 
-<%= render "messages/conversations", contact_me: true %>
+<%= render "messages/conversations", contact_me: true, ride: @ride %>
 
 <section id="FindaRide" class="Main">
 

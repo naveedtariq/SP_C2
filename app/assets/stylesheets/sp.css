@@ -2972,16 +2972,16 @@ border:1px solid #b75f00; color:#000; font-size:14px; height:28px; line-height:2
     padding: 3px;
 
 }
-.heading-bar h2 a{ font-size:14px; font-style: italic;}
+.heading-bar h2 a{ font-size:14px; font-style: italic; color: #fff;}
 .banner-right ul{ list-style:none; float:left;}
 .banner-right ul li{ width:460px; float:left; margin-top:5px;}
 .banner-right ul li .firstchild{ margin-top:11px; }
-.banner-right ul li .message{ width:355px; float:left; background:url(../images/inbox-arrow.gif) right center no-repeat;}
+.banner-right ul li .message{ width:355px; float:left; background:url(inbox-arrow.gif) right center no-repeat;}
 .banner-right ul li .message a{ font-size:12px; color:#056899; font-weight:bold; float:left; margin-top:4px;}
 .banner-right ul li .message span{ margin-top:4px; font-size:12px; color:#666666; display:block;}
 .banner-right ul li .message h4{ font-size:14px; color:#056899; padding-top:5px;}
 .banner-right ul li .message p{ padding-top:8px; font-size:11px; color:#666666;}
-.banner-right ul li .message p strong{ background:url(../images/link-icon.gif) right 3px no-repeat; padding-right:10px; font-weight:bold; color:#333333;}
+.banner-right ul li .message p strong{ background:url(link-icon.gif) right 3px no-repeat; padding-right:10px; font-weight:bold; color:#333333; cursor: pointer;}
 .banner-right ul li hr{ border:none; width:429px; height:1px; background:#9ac1d5; float:left; margin:10px 0 0 16px;}
 
 /* Tiny Scrollbar */
@@ -3173,11 +3173,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c8ec6', end
 #content .RidesList .RideDetails .text{ float:left; margin-bottom:10px;}
 
 #content .RidesList .RideDetails .leave {
-	background:url('../images/leave-icon.gif') no-repeat;
+	background:url('leave-icon.gif') no-repeat;
 	margin: 0 2px 0 0; font-size:14px; color:#666666; float:left; padding-left:14px;
 }
 #content .RidesList .RideDetails .arrive {
-	background:url('../images/arrive-icon.gif') no-repeat;
+	background:url('arrive-icon.gif') no-repeat;
 	margin: 0 2px 0 0; font-size:14px; color:#666666; float:left; padding-left:14px;
 }
 #content .RidesList .RideDetails strong { color: #000; font-weight:bold; }
@@ -3189,9 +3189,9 @@ border-radius:5px;
 -ms-border-radius:5px;
 -moz-border-radius:5px;
 -o-border-radius:5px;}
-#content .RidesList .RideDetails .links .match{ background:url(../images/match.gif) left center  no-repeat; font-size:11px; font-weight:bold; color:#026495; padding-left:15px; line-height:22px;}
-#content .RidesList .RideDetails .links .modify{ background:url(../images/modify.gif) left center no-repeat; font-size:11px; font-weight:bold; color:#026495; padding-left:15px; margin:0 15px; line-height:22px;}
-.RidesList .RideDetails .links .cancel{ background:url(../images/cancel.gif) left center no-repeat; font-size:11px; font-weight:bold; line-height:22px; color:#cc0000; padding-left:15px;}
+#content .RidesList .RideDetails .links .match{ background:url(match.gif) left center  no-repeat; font-size:11px; font-weight:bold; color:#026495; padding-left:15px; line-height:22px;}
+#content .RidesList .RideDetails .links .modify{ background:url(modify.gif) left center no-repeat; font-size:11px; font-weight:bold; color:#026495; padding-left:15px; margin:0 15px; line-height:22px;}
+.RidesList .RideDetails .links .cancel{ background:url(cancel.gif) left center no-repeat; font-size:11px; font-weight:bold; line-height:22px; color:#cc0000; padding-left:15px;}
 #content ul.RidesList > li .li-text{ float:left; width:140px; margin-left:-12px;}
 #content ul.RidesList > li p{ font-size:12px; float:left; color:#000000; padding-top:7px;}
 #content ul.RidesList > li p span{ font-weight:bold; color:#669900;}
@@ -3247,7 +3247,7 @@ border-radius:5px;
 	display: block;
 	text-decoration: none;
 }
-#content .RidesList .UserList .about-user{ background:#fff; width:132px; height:57px; border-top:1px solid #bfdeff; border-right:1px solid #bfdeff; border-bottom:1px solid #bfdeff; float:left; margin-top:4px; text-align:left;
+#content .RidesList .UserList .about-user{ overflow: hidden; background:#fff; width:132px; height:57px; border-top:1px solid #bfdeff; border-right:1px solid #bfdeff; border-bottom:1px solid #bfdeff; float:left; margin-top:4px; text-align:left;
 
 border-radius:0 1px 2px 0;
 -webkit-sborder-radius:0 1px 2px 0;
@@ -3255,9 +3255,9 @@ border-radius:0 1px 2px 0;
 -ms-border-radius:0 1px 2px 0;
 -o-border-radius:0 1px 2px 0;}
 #content .RidesList .UserList .about-user a{ font-size:11px; font-weight:bold; color:#056899; display:block; height:18px; line-height:18px; margin-left:4px;}
-#content .RidesList .UserList .about-user a.accept{ background:url(../images/accept.jpg) left center no-repeat;  padding-left:15px;}
-#content .RidesList .UserList .about-user a.discuss{ background:url(../images/discuss.jpg) left center no-repeat;  padding-left:15px;}
-#content .RidesList .UserList .about-user a.decline{ background:url(../images/decline.jpg) left center no-repeat;  padding-left:15px;}
+#content .RidesList .UserList .about-user a.accept{ background:url(accept.jpg) left center no-repeat;  padding-left:15px;}
+#content .RidesList .UserList .about-user a.discuss{ background:url(discuss.jpg) left center no-repeat;  padding-left:15px;}
+#content .RidesList .UserList .about-user a.decline{ background:url(decline.jpg) left center no-repeat;  padding-left:15px;}
 #content .RidesList .UserList li p.user-name{ font-size:11px; color:#cc0000 !important; font-style:italic}
 #content .RidesList .UserList li p.user-name a{ font-style:normal; color:#056899;}
 #content .RidesList .UserList li p.user-name strong{ font-style:italic; font-weight:bold;}
@@ -3267,7 +3267,7 @@ border-radius:0 1px 2px 0;
 	left: -13px;
 	top: 36px;
 	height: 27px; width: 13px;
-	background: url('../images/sp_sprites_24.png') -110px -10px no-repeat;
+	background: url('sp_sprites_24.png') -110px -10px no-repeat;
 	text-indent: -9999px; margin:0;
 }
 #content .inner-bar{ border-radius:0;}
