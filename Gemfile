@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'debugger'
 gem 'sorcery'
 gem 'rails', '3.2.1'
 gem "fog"

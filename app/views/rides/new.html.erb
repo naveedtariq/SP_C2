@@ -6,7 +6,7 @@
 
   function goto_what_time(){
   if(isSameGroup(loc_from_id, loc_to_id)){
-  jAlert('Same group selected.', 'Error');
+  $('#where-to-error').html('Same group selected.');
   }
   else{
   $('#what-time').show(); $('#where-to').hide();return false;
@@ -127,6 +127,7 @@
 
         <span class="break"></span>
       </div>
+      <span style="color:red" id="where-to-error"></span>
     </div>
 
     <div class="bank"></div>
@@ -209,7 +210,9 @@
   <%#*<p>(~7:30 pm arrival)</p>%>
           </fieldset>
         </div>
+
         <span class="break"></span>
+        <span style="color:red" id="what-time-error"></span>
       </div>                            <fieldset class="big">
         <input type="button" value="Previous Step" name="Previous_Step" class="Previous" onclick="return goback_where_to()" />
 
@@ -254,6 +257,7 @@
           <label>Notes</label>
           <%= f.text_area :notes, :size => "30x4", :class => "textarea", :placeholder => "Any other details?... (example:\nI prefer to meet at Starbuks..." %>
         </fieldset>
+        <span style="color:red" id="what-else-error"></span>
       </div>
       <span class="break"></span>
       <fieldset class="big">

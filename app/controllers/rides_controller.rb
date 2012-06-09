@@ -26,7 +26,7 @@ class RidesController < ApplicationController
     clone_ride = Ride.find(params[:id])
     store_ride(clone_ride)
     @ride = Ride.new(retrieve_ride)
-    render :action => "post_one"
+    render :action => :new
   end
 
   def update # update ride here

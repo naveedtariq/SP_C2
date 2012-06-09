@@ -248,7 +248,7 @@
                       <ul>
                         <li>Facebook <em>(<a href="<%=user_path(rider.user)%>"><%= "#{rider.user.number_of_friends} #{("friend".pluralize(rider.user.number_of_friends))}" %></a>)</em></li>
                         <li><%= rider.user.ride_participants.past_rides(SpClock.time).active_rides.confirmed_or_owner_participants.count %> past rides, <a href="<%=user_path(rider.user)%>"><%= rider.user.feedbacks.count %> feedback</a></li>
-                        <li><strong>Networks: </strong>UC Berkely, Miramonte High</li>
+                        <li><strong>Networks: </strong><%= "#{rider.user.work} #{rider.user.school}" %></li>
                       </ul>
                     </div>
                     <span class="TooltipArrow">Arrow</span>

@@ -3,13 +3,14 @@ class SessionsController < ApplicationController
   before_filter :require_not_loggedin, :only => [:new, :create]                 # no login require for login page
   #before_filter :require_login, :only => [:facebook_callback]                 # no login require for login page
   def new
-    render :layout=>false
+    render :layout => false  if request.xhr?
+    
   end
 
   def create
     user = login(params[:email], params[:password], params[:remember_me])       # build a session of a user here
     if user
-    user.last_login = Time.zone.now                                                # time of login save
+      user.last_login = Time.zone.now                                                # time of login save
       user.save(:validate => false)
       redirect_back_or_to dashboard_path
       #      end
