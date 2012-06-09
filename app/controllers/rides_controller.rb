@@ -1,5 +1,5 @@
 class RidesController < ApplicationController
-  before_filter :require_login, :only => [:create, :create_ride, :clone, :index, :update, :updated] # require the login to use that kind of functionality
+  before_filter :require_login, :only => [:create, :create_ride, :index, :update, :updated] # require the login to use that kind of functionality
   before_filter :secure_ride_load, :only => [:edit, :update]
 
   def index
@@ -26,7 +26,7 @@ class RidesController < ApplicationController
     clone_ride = Ride.find(params[:id])
     store_ride(clone_ride)
     @ride = Ride.new(retrieve_ride)
-    render :action => :new
+    render :layout => false,:action => :new
   end
 
   def update # update ride here

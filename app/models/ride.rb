@@ -1,6 +1,7 @@
 class Ride < ActiveRecord::Base
   after_find do |ride|
-    ride.new_departure_time = "01:00" if ride.new_departure_time.blank?
+    self.new_departure_time = ride.departuredatetime.strftime('%I:%M')
+    self.ampm_time = ride.departuredatetime.strftime('%p')
   end
   
   attr_accessor :friends_in_common

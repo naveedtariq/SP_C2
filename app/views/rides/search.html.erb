@@ -183,12 +183,12 @@
               </div>
             <% else %>
               <div class="SelectRide" >
-                <a class="RideInfoBtn" href="<%= clone_ride_path(ride) %>">
+                <a class="RideInfoBtn" href="<%= clone_ride_path(ride) %>" onclick="$('.post_ride-popup').show();$.ajax( { url: '<%= clone_ride_path(ride) %>', context: document.body, success: function(data){ $('#ajax-containers').html(data); } });return false;" >
                   <span>Sold Out!</span>
                   <strong>Full</strong>
                   <span>Ride</span>
                 </a>
-                <a class="PostSimilar" href="<%= clone_ride_path(ride) %>">Post Similar</a>
+                <a class="PostSimilar" href="<%= clone_ride_path(ride) %>" onclick="$('.post_ride-popup').show();$.ajax( { url: '<%= clone_ride_path(ride) %>', context: document.body, success: function(data){ $('#ajax-containers').html(data); } });return false;" >Post Similar</a>
               </div>
             <% end %>
     <%# end of Select a Ride widget %>

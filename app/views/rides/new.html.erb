@@ -2,7 +2,7 @@
   var loc_from_id = ".post_ride_window #ride_from_location_id"
   var loc_to_id = ".post_ride_window #ride_to_location_id"
   var taxi_fare=""
-  var black_car_fare=""
+  var blackcar_fare=""
 
   function goto_what_time(){
   if(isSameGroup(loc_from_id, loc_to_id)){
@@ -14,10 +14,34 @@
   }
 
   function goto_what_else(){
-  if($('#ride_departure_date').val()==""){ jAlert('Please select Departing date.', 'Error'); }
-  else if( $('#ride_return_trip_checkbox').attr('checked') && $('#ride_return_trip_departure_date').val()=="" ) { jAlert('Please select Returning date.', 'Error'); }
-  else{ $('#what-else').show(); $('#what-time').hide();return false; }
+
+
+    if($('#ride_departure_date').val()==""){
+      $('#what-time-error').html('Please select Departing date.');
+    }
+    else if( $('#ride_return_trip_checkbox').attr('checked') && $('#ride_return_trip_departure_date').val()=="" ) {
+      $('#what-time-error').html('Please select Returning date.');
+
+    }
+    else if($('#ride_return_trip_checkbox').attr('checked')=='checked'){
+      dep_date = $.datepicker.parseDate("yy-mm-dd",  $("#ride_departure_date").val());
+      rdep_date = $.datepicker.parseDate("yy-mm-dd",  $("#ride_return_trip_departure_date").val());
+      if(rdep_date<dep_date){
+        $('#what-time-error').html('Ruturn departure should after departure.');
+      }
+      else if( ($("#ride_departure_date").val()==$("#ride_return_trip_departure_date").val()) && ( $('#ride_return_new_ampm_time').prop('selectedIndex')>=$('#ride_ampm_time').prop('selectedIndex') ) && ( $('#ride_return_new_departure_time').prop('selectedIndex') - $('#ride_new_departure_time').prop('selectedIndex') )<4 ){
+        $('#what-time-error').html('Minimum difference should be one hour.');
+      }
+      else{
+        $('#what-else').show(); $('#what-time').hide();return false;
+      }
+    }
+    else{
+      $('#what-else').show(); $('#what-time').hide();return false;
+    }
   }
+
+
   function goback_where_to(){
   $('#where-to').show(); $('#what-time').hide();return false;
   }
@@ -27,48 +51,48 @@
 
 
   function calculateDistance(from,from_ghelper,to,to_ghelper){
-    $('#map_canvas').gmap('displayDirections', { 'origin':$.trim(from+' '+from_ghelper), 'destination':$.trim(to+' '+to_ghelper), 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results') }, function (result, status) {                // google map change its map w.r.t to an from location
-    
-    if (status === 'OK') {
-        var METERS_TO_MILES = 0.000621371192;
-        totalDistance = result.routes[0].legs[0].distance.value;
-        totalDistance = (Math.round(totalDistance * METERS_TO_MILES * 10) / 10);
+  $('#map_canvas').gmap('displayDirections', { 'origin':$.trim(from+' '+from_ghelper), 'destination':$.trim(to+' '+to_ghelper), 'travelMode':google.maps.DirectionsTravelMode.DRIVING }, { 'panel':document.getElementById('results') }, function (result, status) {                // google map change its map w.r.t to an from location
+
+  if (status === 'OK') {
+  var METERS_TO_MILES = 0.000621371192;
+  totalDistance = result.routes[0].legs[0].distance.value;
+  totalDistance = (Math.round(totalDistance * METERS_TO_MILES * 10) / 10);
 
 
 
-        result_html="<strong>Distance:</strong> "+totalDistance+" miles  &nbsp;";
-        result_html+="<strong>Duration:</strong> "+result.routes[0].legs[0].duration.text+" mins<br/>";
-        
-        if (to == "(JFK) John F. Kennedy") {
-          result_html+="<strong>Estimated Fare:</strong> $45 (Taxi)  $68 (Black Car)<br/>";
-          taxi_fare=45;
-          blackcar_fare=68;
-        }
-        else {
-          var fare = 3.0;
-          fare = (totalDistance * (0.4 / 0.2)) + fare;
-          alert("Estimated Taxi Fare: $" + fare);
-          result_html+="<strong>Estimated Fare:</strong> $"+fare+" (Taxi)  $"+(fare*1.5)+" (Black Car)<br/>";
-          taxi_fare=fare;
-          blackcar_fare=fare*1.5;
+  result_html="<strong>Distance:</strong> "+totalDistance+" miles  &nbsp;";
+  result_html+="<strong>Duration:</strong> "+result.routes[0].legs[0].duration.text+" mins<br/>";
 
-        }
-      result_html+="<span class='small_text'><i>*before tip and toll</i></span>";
-      $('#distance-update').html(result_html);
+  if (to == "(JFK) John F. Kennedy") {
+  result_html+="<strong>Estimated Fare:</strong> $45 (Taxi)  $68 (Black Car)<br/>";
+  taxi_fare=45;
+  blackcar_fare=68;
+  }
+  else {
+  var fare = 3.0;
+  fare = (totalDistance * (0.4 / 0.2)) + fare;
+  alert("Estimated Taxi Fare: $" + fare);
+  result_html+="<strong>Estimated Fare:</strong> $"+fare+" (Taxi)  $"+(fare*1.5)+" (Black Car)<br/>";
+  taxi_fare=fare;
+  blackcar_fare=fare*1.5;
 
-      if( $('#ride_ride_type_blackcar').is(':checked') ){
-        $('#ride_total_price').val(blackcar_fare);
-      }
-      else{
-        $('#ride_total_price').val(taxi_fare);
-      }
-      
-     }
-    });
+  }
+  result_html+="<span class='small_text'><i>*before tip and toll</i></span>";
+  $('#distance-update').html(result_html);
+
+  if( $('#ride_ride_type_blackcar').is(':checked') ){
+  $('#ride_total_price').val(blackcar_fare);
+  }
+  else{
+  $('#ride_total_price').val(taxi_fare);
+  }
+
+  }
+  });
   }
 
   function updateDistance(){
-    calculateDistance($(loc_from_id).find(":selected")[0].text, $(loc_from_id).find(":selected")[0].attributes[1]["nodeValue"],$(loc_to_id).find(":selected")[0].text, $(loc_to_id).find(":selected")[0].attributes[1]["nodeValue"]);
+  calculateDistance($(loc_from_id).find(":selected")[0].text, $(loc_from_id).find(":selected")[0].attributes[1]["nodeValue"],$(loc_to_id).find(":selected")[0].text, $(loc_to_id).find(":selected")[0].attributes[1]["nodeValue"]);
   }
 
   <% if @ride.to_location.present? && @ride.from_location.present? %>
@@ -160,19 +184,20 @@
         <fieldset class="mediam">
           <label>
             Time</label>
-          <%= f.select :new_departure_time, NEW_DEPARTURE_TIME, {}, {:class=>"chzn-select",:style=>"width:75px;"} %>
-          <%= f.select :ampm_time, AM_PM_TIME, {}, {:class=>"chzn-select",:style=>"width:59px;"} %>
+
+          <%= f.select :new_departure_time, NEW_DEPARTURE_TIME, {}, {:class=>"chzn-select",:style=>"width:75px; z-index:1002;"} %>
+          <%= f.select :ampm_time, AM_PM_TIME, {}, {:class=>"chzn-select",:style=>"width:59px;z-index:1002;"} %>
         </fieldset>
 
         <fieldset class="small">
           <label>
             Flexibility</label>
-          <%= f.select :flexibility_in_minutes, ((5..30).step(5).collect{|t| ["±#{t} mins", t]}), {}, {:style => "width:90px",:class=>"chzn-select"} %>
+          <%= f.select :flexibility_in_minutes, ((5..30).step(5).collect{|t| ["±#{t} mins", t]}), {}, {:style => "width:90px;z-index:1002;",:class=>"chzn-select"} %>
 
         </fieldset>
         <fieldset class="small duration">
           <label>Duration</label>
-          <%= f.select :duration_in_minutes, (5..90).step(5).collect{|t| [to_minutes(t), t]}, {}, {:class => "chzn-select", :style => "width:72px"} %>
+          <%= f.select :duration_in_minutes, (5..90).step(5).collect{|t| [to_minutes(t), t]}, {}, {:class => "chzn-select", :style => "width:72px;z-index:1002;"} %>
   <%#*<p id="arrival_time">(~2:30 pm arrival)</p>%>
         </fieldset>
 
@@ -257,7 +282,7 @@
           <label>Notes</label>
           <%= f.text_area :notes, :size => "30x4", :class => "textarea", :placeholder => "Any other details?... (example:\nI prefer to meet at Starbuks..." %>
         </fieldset>
-        <span style="color:red" id="what-else-error"></span>
+        <span style="color:red" id="what-time-error"></span>
       </div>
       <span class="break"></span>
       <fieldset class="big">
