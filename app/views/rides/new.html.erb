@@ -5,12 +5,15 @@
   var blackcar_fare=""
 
   function goto_what_time(){
-  if(isSameGroup(loc_from_id, loc_to_id)){
-  $('#where-to-error').html('Same group selected.');
-  }
+    if(isSameGroup(loc_from_id, loc_to_id)){
+      $('#where-to-error').html('Same group selected.');
+    }
   else{
-  $('#what-time').show(); $('#where-to').hide();return false;
-  }
+      $('#what-time').show(); $('#where-to').hide();
+      $('#where_to_heading').removeClass('current');
+      $('#what_time_heading').addClass('current');
+      return false;
+    }
   }
 
   function goto_what_else(){
@@ -37,16 +40,25 @@
       }
     }
     else{
-      $('#what-else').show(); $('#what-time').hide();return false;
+      $('#what-else').show(); $('#what-time').hide();
+      $('#what_else_heading').addClass('current');
+      $('#what_time_heading').removeClass('current');
+      return false;
     }
   }
 
 
   function goback_where_to(){
-  $('#where-to').show(); $('#what-time').hide();return false;
+    $('#where-to').show(); $('#what-time').hide();
+    $('#where_to_heading').addClass('current');
+    $('#what_time_heading').removeClass('current');
+    return false;
   }
   function goback_what_time(){
-  $('#what-time').show(); $('#what-else').hide();return false;
+  $('#what-time').show(); $('#what-else').hide();
+  $('#what_time_heading').addClass('current');
+  $('#what_else_heading').removeClass('current');
+  return false;
   }
 
 
